@@ -1,3 +1,0 @@
-# Ontwerpvoorstel: niet indexeren. Bij oplevering vervangen door Allow en een Sitemap-regel.
-User-agent: *
-Disallow: /

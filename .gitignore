@@ -3,3 +3,4 @@ dist/
 .astro/
 bron/
 shots/
+.seo/out/

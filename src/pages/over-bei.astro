@@ -1,0 +1,114 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Kop from '../components/Kop.astro';
+import Voet from '../components/Voet.astro';
+import Icoon from '../components/Icoon.astro';
+import Reviews from '../components/Reviews.astro';
+import Cta from '../components/Cta.astro';
+import Kruimels from '../components/Kruimels.astro';
+import Tijden from '../components/Tijden.astro';
+import { url, site, werkgebied } from '../data/site';
+import bei from '../assets/bei.jpg';
+import kant from '../assets/kant.jpg';
+
+const basis = new URL(url(''), Astro.site).href;
+const hier = new URL(Astro.url.pathname, Astro.site).href;
+---
+<Base
+  title="Over Bei, kleermaker in Rotterdam | Bei Couture"
+  description="Bei maakt sinds 1997 kleding in haar eigen atelier en is sinds 2009 gespecialiseerd in bruidsmode, aan de Hoogstraat in Rotterdam."
+  kruimels={[{ naam: 'Home', url: basis }, { naam: 'Over Bei', url: hier }]}
+  schema={[{
+    '@type': 'Person',
+    name: 'Bei',
+    jobTitle: 'Kleermaker en bruidsmodeontwerper',
+    worksFor: { '@id': `${basis}#bedrijf` },
+    knowsAbout: ['bruidsmode', 'bruidsjurken op maat', 'trouwjurken vermaken', 'gala- en avondkleding', 'kleding op maat'],
+  }]}
+>
+  <Kop />
+  <main id="inhoud">
+    <section class="bg-ivoor pb-16 pt-12 md:pb-20 md:pt-16">
+      <div class="wrap">
+        <Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Over Bei', href: url('over-bei/') }]} />
+        <div class="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div class="rijs lg:col-span-6">
+            <div class="relative">
+              <Picture src={bei} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(min-width: 1024px) 600px, 100vw" alt="Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier" loading="eager" fetchpriority="high" class="aspect-[4/5] w-full rounded-[2px] object-cover object-[50%_30%]" />
+              <div class="absolute -bottom-6 left-6 right-6 border border-dashed border-merk bg-wit px-6 py-5 md:left-auto md:right-[-1.5rem] md:w-72">
+                <p class="font-kop text-xl font-extrabold italic leading-tight text-merk">“Geen enkele opgave is teveel.”</p>
+                <p class="mt-1 text-sm text-steen">Bei, in haar eigen woorden</p>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-6 lg:pt-4">
+            <p class="eyebrow">Over Bei</p>
+            <h1 class="mt-5 text-4xl">Mijn naam is <em class="accent">Bei.</em></h1>
+            <div class="mt-8 space-y-5 text-lg text-steen">
+              <p>Ik ben geboren in China en woon nu al een lange tijd in Nederland. Vanaf kleins af aan ben ik dol op tekenen en naaien, zo is mijn liefde ontstaan om kleding te ontwerpen. Ik ben een perfectionist en wil het liefst alles zelf doen.</p>
+              <p>Ik ben in 1997 begonnen met een eigen atelier op Marconiplein. Daarna ben ik in 2009 mij gaan specialiseren in bruidsmode, dus ook voor bruidsjonkers en bruidsmeisjes. Het is echt mijn passie en ik krijg elke keer een glimlach op mijn gezicht als een klant weer super tevreden is.</p>
+              <p>Iedereen wil er stralend uitzien op haar grote dag. Daar werk ik met veel plezier aan, en geen enkele opgave is mij teveel.</p>
+            </div>
+            <div class="mt-9 flex flex-wrap gap-3">
+              <a href={url('contact/')} class="knop knop-merk">Afspraak maken <Icoon naam="pijl" /></a>
+              <a href={url('werkwijze/')} class="knop knop-rand">Zo werkt het</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIJDLIJN -->
+    <section class="bg-inkt py-20 text-wit md:py-28">
+      <div class="wrap">
+        <p class="eyebrow eyebrow-licht">Het atelier</p>
+        <h2 class="mt-5 text-4xl">Eigen handen, eigen <em class="accent-licht">atelier.</em></h2>
+        <ul class="mt-14 grid gap-px overflow-hidden rounded-[2px] border border-lijn bg-lijn md:grid-cols-3">
+          {[
+            ['1997', 'Eigen atelier', 'Bei begint voor zichzelf met een atelier op het Marconiplein in Rotterdam.'],
+            ['2009', 'Bruidsmode', 'Ze specialiseert zich in bruidsmode: bruidsjurken, bruidsmeisjes en bruidsjonkers.'],
+            ['Nu', 'Hoogstraat 89A', `Het atelier zit midden in Rotterdam, in het pand van ${site.inPand}.`],
+          ].map(([j, k, t]) => (
+            <li class="bg-inkt p-8">
+              <p class="num font-kop text-[2.8rem] font-extrabold italic leading-none text-strik">{j}</p>
+              <p class="mt-5 font-semibold text-wit">{k}</p>
+              <p class="mt-2 text-mist">{t}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- WAAROM -->
+    <section class="bg-ivoor py-20 md:py-28">
+      <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-7">
+          <h2 class="text-4xl">Waarom bruiden naar de <em class="accent">Hoogstraat</em> komen.</h2>
+          <ul class="mt-10 divide-y divide-dashed divide-ivoor-3 border-y border-dashed border-ivoor-3">
+            {[
+              ['Je zit bij de maakster zelf', 'Geen verkoper die het doorgeeft aan een atelier ergens anders. Bei voert het gesprek, meet je op en naait je jurk.'],
+              ['Alles is een keuze, niets staat vast', 'Model, hals, mouw, rug, kleur, stof en maat. Ook een gekleurde trouwjurk of een jurk in een grote maat is gewoon een keuze.'],
+              ['Er wordt echt de tijd genomen', 'Dat komt in bijna elke review terug. Je afspraak wordt voor jou vrijgehouden, ook buiten de openingstijden.'],
+              ['Je kunt altijd terugkomen', 'Veranderen je maten, trouw je nog een keer of wil je de jurk later anders dragen, dan wordt hij door dezelfde handen aangepast.'],
+            ].map(([k, t]) => (
+              <li class="flex gap-5 py-6">
+                <Icoon naam="naald" class="mt-1 h-6 w-6 flex-none text-merk" />
+                <span><strong class="block font-kop text-xl font-extrabold tracking-[-.015em]">{k}</strong><span class="mt-1 block text-steen">{t}</span></span>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-8 text-steen">Bruiden komen uit {site.plaats} en de hele omgeving: {werkgebied.slice(1, 9).join(', ')} en verder.</p>
+        </div>
+        <div class="lg:col-span-5">
+          <Picture src={kant} formats={['avif', 'webp']} widths={[480, 800]} sizes="(min-width: 1024px) 480px, 100vw" alt="Detail van een kanten jurk met stoffen knoopjes" class="aspect-[4/5] w-full rounded-[2px] object-cover" />
+          <Tijden class="mt-6" />
+        </div>
+      </div>
+    </section>
+
+    <Reviews donker />
+    <Cta />
+  </main>
+  <Voet />
+</Base>

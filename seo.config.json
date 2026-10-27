@@ -1,0 +1,93 @@
+{
+  "slug": "bei-couture",
+  "site": "https://michaelbeset-ops.github.io",
+  "base": "/sitefront/bei-couture",
+  "githubPagesUrl": "https://michaelbeset-ops.github.io/sitefront/bei-couture/",
+  "mode": "demo",
+  "language": "nl-NL",
+  "branche": "bruidsatelier",
+  "strategy": ["lokaal", "ai"],
+  "brandTerms": ["bei couture", "beicouture", "bruidsatelier bei", "bei rotterdam"],
+  "business": {
+    "schemaType": "ClothingStore",
+    "name": "Bei Couture",
+    "legalName": "",
+    "description": "Bei Couture is een bruidsatelier en kleermaker aan de Hoogstraat in Rotterdam. Bruidsjurken op maat, trouwjurken vermaken, jurken voor de bruidsmoeder, bruidsmeisjes en bruidsjonkers, gala- en avondkleding en kleding op maat.",
+    "kvk": "",
+    "vatID": "",
+    "foundingYear": "1997",
+    "founder": "Bei",
+    "showAddress": true,
+    "street": "Hoogstraat 89A",
+    "postalCode": "3011 PJ",
+    "city": "Rotterdam",
+    "region": "Zuid-Holland",
+    "country": "NL",
+    "geo": { "lat": 51.922307, "lng": 4.4914026 },
+    "phone": "+31653612543",
+    "phoneDisplay": "06 53 61 25 43",
+    "whatsapp": "+31653612543",
+    "email": "info@beicouture.nl",
+    "priceRange": "",
+    "openingHours": [
+      { "days": ["Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "11:00", "closes": "17:00" },
+      { "days": ["Sunday"], "opens": "12:00", "closes": "17:00" }
+    ],
+    "specialHours": [],
+    "areaServed": [
+      "Rotterdam", "Schiedam", "Vlaardingen", "Capelle aan den IJssel", "Krimpen aan den IJssel",
+      "Barendrecht", "Ridderkerk", "Spijkenisse", "Hoogvliet", "Rhoon", "Berkel en Rodenrijs",
+      "Bergschenhoek", "Nieuwerkerk aan den IJssel", "Maassluis", "Delft", "Dordrecht"
+    ],
+    "gbpUrl": "https://www.google.com/maps/place/Bei+Couture/@51.922307,4.4914026,17z/data=!4m6!3m5!1s0x47c4335ec636a273:0xd37342ba58cbe407!8m2!3d51.922307!4d4.4914026!16s%2Fg%2F11b67bk6v8",
+    "reviewLink": "",
+    "gbpPrimaryCategory": "Kleermaker",
+    "sameAs": ["https://www.instagram.com/beicouture/"],
+    "logo": "/logo.png",
+    "image": "/og.jpg",
+    "extra": {}
+  },
+  "services": [
+    {
+      "name": "Bruidsjurk op maat",
+      "path": "/bruidsjurk-op-maat/",
+      "summary": "Trouwjurk op maat laten maken, ook een gekleurde trouwjurk of een trouwjurk in een grote maat.",
+      "keywords": ["bruidsjurk op maat rotterdam", "trouwjurk op maat laten maken", "gekleurde trouwjurk", "trouwjurk grote maat", "bruid jurk"]
+    },
+    {
+      "name": "Trouwjurk vermaken",
+      "path": "/trouwjurk-vermaken/",
+      "summary": "Trouwjurk innemen, inkorten of ombouwen, ook de jurk van een eerdere trouwdag.",
+      "keywords": ["trouwjurk vermaken rotterdam", "bruidsjurk vermaken", "trouwjurk laten innemen", "trouwjurk aanpassen"]
+    },
+    {
+      "name": "Jurk voor de bruidsmoeder",
+      "path": "/bruidsmoeder-jurk/",
+      "summary": "Jurk voor de moeder van de bruid of bruidegom, op maat gemaakt of vermaakt.",
+      "keywords": ["bruidsmoeder jurk", "moeder van de bruid jurk", "bruidsmoeder kleding rotterdam"]
+    },
+    {
+      "name": "Bruidsmeisjes en bruidsjonkers",
+      "path": "/bruidsmeisjes-en-bruidsjonkers/",
+      "summary": "Bruidsmeisjesjurken en kleding voor bruidsjonkers, afgestemd op de bruidsjurk.",
+      "keywords": ["bruidsmeisjes jurk", "bruidsmeisjesjurk op maat", "bruidsjonker kleding", "bruidsjongens jurk"]
+    },
+    {
+      "name": "Gala- en avondkleding",
+      "path": "/gala-en-avondkleding/",
+      "summary": "Galajurk of avondjurk op maat gemaakt of vermaakt.",
+      "keywords": ["galajurk op maat rotterdam", "avondjurk laten maken", "galajurk vermaken"]
+    },
+    {
+      "name": "Kleding op maat en vermaken",
+      "path": "/kleding-op-maat/",
+      "summary": "Kleermaker voor kleding op maat, vermaakwerk en reparaties.",
+      "keywords": ["kleermaker rotterdam", "kleding op maat rotterdam", "kleding vermaken rotterdam"]
+    }
+  ],
+  "llmsPages": ["/", "/atelier/", "/werkwijze/", "/klantervaringen/", "/over-bei/", "/afspraak/"],
+  "ignorePaths": ["/privacy/", "/404.html"],
+  "gscProperty": "",
+  "psiUrls": ["/", "/bruidsjurk-op-maat/", "/afspraak/"],
+  "aiCrawlers": { "training": "allow" }
+}

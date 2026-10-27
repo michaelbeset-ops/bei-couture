@@ -3,7 +3,9 @@ Bei Couture: herkomst van beeld (15 oktober 2026)
 Eigen beeld
 kant.jpg      eigen website beicouture.nl, wp-content/uploads/2016/07/website-foto-bruidsjurk-details--e1587858514549.jpeg
               (via webarchief, origineel 4288x2026, verkleind naar 2000 px). Detail kanten jurk met stoffen knoopjes.
-Logo          nagemaakt in SVG/HTML naar hun logo (cropped-Naamloos2-1.png: gestippelde cirkel, "Bei", COUTURE, oudroze strik).
+logo.png      eigen logo van Bei Couture, aangeleverd door de klant (27 oktober 2026). Witte achtergrond weggehaald,
+              logo-licht.png is dezelfde tekening in ivoor voor op donkere vlakken.
+bei.jpg       eigen foto, aangeleverd door de klant (27 oktober 2026): Bei speldt een lijfje af op de paspop.
 
 Sfeerfoto's via Unsplash (Unsplash-licentie, images.unsplash.com, ter illustratie, niet "ons werk"):
 hero.jpg             https://images.unsplash.com/photo-1688742233287-d02508e25bf9  (zoekterm: wedding dress fitting; bruid wordt in jurk geholpen, geen gezichten)
@@ -11,7 +13,6 @@ s-maken.jpg          https://images.unsplash.com/photo-1665783126947-8c98c7b7ac7
 s-vermaken.jpg       https://images.unsplash.com/photo-1678830127443-12486e06aa2b  (wedding dress; handen aan de rug van een kanten jurk)
 s-gala.jpg           https://images.unsplash.com/photo-1765229280816-f8e55ac050e8  (evening gown; bordeauxrode avondjurk)
 s-bruidsmeisjes.jpg  https://images.unsplash.com/photo-1552221856-cd364b9822a0    (bridal shop dresses; bruid en bruidsmeisjes op de rug gezien)
-s-heren.jpg          https://images.unsplash.com/photo-1584184924103-e310d9dc82fc  (tailor workshop; kleermaker aan pakstof)
 s-meer.jpg           https://images.unsplash.com/photo-1710432103939-ba474632b9b3  (sewing; garenklosjes, vingerhoed, spelden)
 satijn.jpg           https://images.unsplash.com/photo-1674476307162-069b0e648879  (satin fabric; ivoor satijn)
 

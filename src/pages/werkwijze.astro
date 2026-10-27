@@ -1,0 +1,133 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Kop from '../components/Kop.astro';
+import Voet from '../components/Voet.astro';
+import Icoon from '../components/Icoon.astro';
+import PaginaKop from '../components/PaginaKop.astro';
+import Werkwijze from '../components/Werkwijze.astro';
+import Reviews from '../components/Reviews.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { url, site, stappen } from '../data/site';
+import { faqSchema } from '../lib/schema';
+import kant from '../assets/kant.jpg';
+import sMeer from '../assets/s-meer.jpg';
+
+const basis = new URL(url(''), Astro.site).href;
+const hier = new URL(Astro.url.pathname, Astro.site).href;
+
+const mee = [
+  { kop: 'Foto\'s', tekst: 'Van jurken die je mooi vindt, en net zo nuttig: van wat je juist niet wilt.' },
+  { kop: 'Je schoenen', tekst: 'De lengte van de jurk hangt af van je hak. Heb je ze nog niet, neem dan iets met dezelfde hoogte mee.' },
+  { kop: 'Je ondergoed', tekst: 'Het ondergoed dat je op de dag zelf draagt verandert de pasvorm van het lijfje.' },
+  { kop: 'Iemand die je vertrouwt', tekst: 'Je moeder, je zus of je getuige. Een tweede paar ogen helpt bij het kiezen.' },
+];
+
+const faq = [
+  { v: 'Hoe lang van tevoren moet ik beginnen met een trouwjurk op maat?', a: 'Hoe eerder je begint, hoe rustiger het verloopt. Er zijn meerdere pasafspraken nodig en daar zit telkens tijd tussen om door te werken. Zit je krap, bel of app dan even. Er wordt altijd eerlijk gezegd of het nog haalbaar is in plaats van ja te knikken en het daarna te moeten haasten.' },
+  { v: 'Hoeveel pasafspraken zijn er in totaal?', a: 'In de regel drie: de proefjurk, het proefmodel in de gekozen stof en de complete jurk. Bij vermaakwerk zijn het er vaak twee. Soms is er een extra pasbeurt nodig, bijvoorbeeld als je maten veranderen. Dat hoort erbij.' },
+  { v: 'Wat als mijn maten in de tussentijd veranderen?', a: 'Dat gebeurt vaker dan je denkt en het is geen probleem. De laatste pasbeurt wordt zo kort mogelijk voor de bruiloft ingepland, zodat de jurk klopt met je maten op dat moment.' },
+  { v: 'Kan ik buiten de openingstijden langskomen voor een pasbeurt?', a: 'Ja. Het atelier is dinsdag tot en met vrijdag open van 11:00 tot 17:00 en op zondag van 12:00 tot 17:00, maar een afspraak in de avond, op maandag of op zaterdag kan ook. Geef aan wat jou uitkomt, dan wordt er een moment gezocht.' },
+  { v: 'Moet ik al precies weten wat ik wil?', a: 'Nee. Veel bruiden komen binnen met één foto en een vaag gevoel. Juist in het eerste gesprek wordt dat samen scherp gemaakt. Er wordt geluisterd en meegedacht, en je mag van gedachten veranderen.' },
+  { v: 'Kan een jurk later nog aangepast worden?', a: 'Ja. Trouw je nog een keer, wil je de jurk later anders dragen of veranderen je maten, dan kun je altijd terugkomen. Dezelfde handen die hem gemaakt hebben passen hem ook weer aan.' },
+];
+---
+<Base
+  title="Zo werkt het, in vijf stappen | Bei Couture"
+  description="De werkwijze van bruidsatelier Bei Couture in Rotterdam in vijf stappen: je wens, het gesprek, de proefjurk, het proefmodel en de complete jurk."
+  kruimels={[{ naam: 'Home', url: basis }, { naam: 'Werkwijze', url: hier }]}
+  schema={[faqSchema(faq), {
+    '@type': 'HowTo',
+    name: 'Een bruidsjurk op maat laten maken bij Bei Couture',
+    description: 'Van je eerste foto tot de complete jurk, in vijf stappen met een eigen afspraak per stap.',
+    step: stappen.map((s) => ({ '@type': 'HowToStep', name: s.titel, text: s.tekst })),
+  }]}
+>
+  <Kop />
+  <main id="inhoud">
+    <PaginaKop
+      eyebrow="Zo gaat het"
+      h1="Van jouw foto tot"
+      accent="jouw jurk."
+      lead="Een jurk op maat is geen gok. Het gaat in vijf stappen, met een eigen afspraak per stap, zodat je op elk moment weet waar je staat en hoe de jurk eruit gaat zien."
+      img={kant}
+      alt="Detail van een kanten jurk met stoffen knoopjes"
+      pos="55% 45%"
+      kruimels={[{ naam: 'Home', href: url('') }, { naam: 'Werkwijze', href: url('werkwijze/') }]}
+    />
+
+    <section class="bg-ivoor py-16 md:py-20">
+      <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-7">
+          <p class="text-lg text-steen">Omdat er heel veel verschillende opties zijn als het aankomt op bruidsmode, vindt Bei het belangrijk om tijdens een persoonlijke afspraak eerst alles op een rijtje te zetten. Pas als jullie elkaar echt begrijpen, gaat de schaar in de stof.</p>
+          <p class="mt-5 text-lg text-steen">Dat kost een paar afspraken extra, en dat is precies de bedoeling. Zo komt er aan het einde niets uit dat je niet had zien aankomen.</p>
+        </div>
+        <ul class="grid gap-4 self-start lg:col-span-5">
+          {[
+            ['Je werkt rechtstreeks met Bei', 'Dezelfde persoon doet het gesprek, het meten en het naaien.'],
+            ['Alles kan aangepast worden', 'Model, hals, mouw, rug, kleur en stof zijn allemaal jouw keuze.'],
+            ['Je hoort het eerlijk', 'Als iets niet goed valt of niet haalbaar is, wordt dat gezegd.'],
+          ].map(([k, t]) => (
+            <li class="flex gap-4 rounded-[2px] border border-lijn-licht bg-wit p-5">
+              <Icoon naam="vink" class="mt-1 h-5 w-5 flex-none text-merk" />
+              <span><strong class="block font-semibold">{k}</strong><span class="text-steen">{t}</span></span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <Werkwijze vol />
+
+    <!-- WAT NEEM JE MEE -->
+    <section class="bg-inkt py-20 text-wit md:py-28">
+      <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-5">
+          <div class="relative">
+            <Picture src={sMeer} formats={['avif', 'webp']} widths={[480, 800]} sizes="(min-width: 1024px) 480px, 100vw" alt="Garenklosjes, een vingerhoed en spelden op de werktafel" class="aspect-[4/3] w-full rounded-[2px] object-cover" />
+          </div>
+        </div>
+        <div class="lg:col-span-7">
+          <p class="eyebrow eyebrow-licht">Eerste afspraak</p>
+          <h2 class="mt-5 text-4xl">Wat neem je <em class="accent-licht">mee?</em></h2>
+          <ul class="mt-10 divide-y divide-dashed divide-lijn border-y border-dashed border-lijn">
+            {mee.map((m) => (
+              <li class="flex gap-5 py-5">
+                <Icoon naam="vink" class="mt-1 h-5 w-5 flex-none text-strik" />
+                <span><strong class="block font-semibold text-wit">{m.kop}</strong><span class="text-mist">{m.tekst}</span></span>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-8 text-wit/85">Heb je niets van dit alles, kom dan toch. Er wordt goed naar je geluisterd en de rest komt vanzelf.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANDERE TRAJECTEN -->
+    <section class="bg-ivoor py-20 md:py-28">
+      <div class="wrap">
+        <p class="eyebrow">Ook mogelijk</p>
+        <h2 class="mt-5 text-4xl">Niet elk traject is <em class="accent">hetzelfde.</em></h2>
+        <ul class="mt-12 grid gap-6 md:grid-cols-3">
+          {[
+            { k: 'Vermaken', t: 'Heb je al een jurk, dan slaan we de ontwerpstappen over. Je past hem, alles wordt afgespeld en meestal is hij na twee pasbeurten klaar.', l: 'trouwjurk-vermaken', n: 'Trouwjurk vermaken' },
+            { k: 'Voor de tweede keer trouwen', t: 'Trouw je opnieuw, of draag je de jurk van je moeder, dan kan die jurk gemoderniseerd worden: een andere hals, mouwen eraf of een nieuw lijfje onder het oude kant.', l: 'trouwjurk-vermaken', n: 'Een jurk aanpassen' },
+            { k: 'Gewone kleding op maat', t: 'Buiten de bruidsmode maakt en vermaakt Bei ook alledaagse kleding. Dezelfde werkwijze, meestal in minder stappen.', l: 'kleding-op-maat', n: 'Kleding op maat' },
+          ].map((b) => (
+            <li class="flex h-full flex-col rounded-[2px] border border-ivoor-3 bg-wit p-7">
+              <h3 class="text-[1.6rem]">{b.k}</h3>
+              <p class="mt-4 flex-1 text-steen">{b.t}</p>
+              <a href={url(`${b.l}/`)} class="link mt-6 inline-flex items-center gap-2 font-semibold text-merk">{b.n} <Icoon naam="pijl" class="h-4 w-4" /></a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <Reviews donker />
+    <Faq vragen={faq} kop="Vragen over de werkwijze" achtergrond="bg-ivoor" />
+    <Cta kop="Benieuwd wat er mogelijk is met jouw" accent="jurk?" tekst={`Stuur een foto via WhatsApp of bel ${site.tel}. Je hoort meteen wat er kan.`} />
+  </main>
+  <Voet />
+</Base>

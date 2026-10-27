@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://michaelbeset-ops.github.io',
   base: '/sitefront/bei-couture',
-  trailingSlash: 'ignore',
+  trailingSlash: 'always',
   devToolbar: { enabled: false },
   build: { inlineStylesheets: 'always' },
   integrations: [sitemap()],

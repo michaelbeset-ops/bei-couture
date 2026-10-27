@@ -1,0 +1,154 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Kop from '../components/Kop.astro';
+import Voet from '../components/Voet.astro';
+import Icoon from '../components/Icoon.astro';
+import Reviews from '../components/Reviews.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import Tijden from '../components/Tijden.astro';
+import Kruimels from '../components/Kruimels.astro';
+import { diensten, dienstOp } from '../data/diensten';
+import { site, url, waMet, stappen, werkgebied } from '../data/site';
+import { dienstSchema, faqSchema } from '../lib/schema';
+
+export function getStaticPaths() {
+  return diensten.map((d) => ({ params: { dienst: d.slug }, props: { slug: d.slug } }));
+}
+
+const { slug } = Astro.props;
+const d = dienstOp(slug);
+const basis = new URL(url(''), Astro.site).href;
+const hier = new URL(Astro.url.pathname, Astro.site).href;
+const kruimels = [
+  { naam: 'Home', url: basis },
+  { naam: 'Atelier', url: new URL(url('atelier/'), Astro.site).href },
+  { naam: d.kaartTitel, url: hier },
+];
+const verwant = d.verwant.map(dienstOp);
+---
+<Base
+  title={d.title}
+  description={d.description}
+  kruimels={kruimels}
+  schema={[dienstSchema(d.kaartTitel, d.description, hier, basis), faqSchema(d.faq)]}
+>
+  <Kop />
+  <main id="inhoud">
+    <!-- KOP -->
+    <section class="relative isolate overflow-hidden bg-inkt text-wit">
+      <Picture src={d.img} formats={['avif', 'webp']} widths={[640, 960, 1400, 2000]} sizes="100vw" alt={d.alt} loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${d.pos}`} />
+      <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#1b1716f5_0%,#1b1716db_48%,#1b171680_100%)] max-md:bg-[linear-gradient(180deg,#1b1716cc_0%,#1b1716e6_62%,#1b1716_100%)]"></div>
+      <div class="wrap py-14 md:py-24">
+        <div class="text-mist"><Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Atelier', href: url('atelier/') }, { naam: d.kaartTitel, href: hier }]} /></div>
+        <p class="eyebrow eyebrow-licht mt-8">{d.eyebrow}</p>
+        <h1 class="mt-5 max-w-[16ch] text-4xl">{d.h1} <em class="accent-licht">{d.h1Accent}</em></h1>
+        <p class="mt-6 max-w-2xl text-lg text-wit/85 md:text-xl">{d.lead}</p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href={`${url('contact/')}?voor=${encodeURIComponent(d.kies)}`} class="knop knop-merk">Afspraak maken <Icoon naam="pijl" /></a>
+          <a href={site.telHref} class="knop knop-wit num"><Icoon naam="tel" />{site.tel}</a>
+        </div>
+        <p class="mt-6 flex items-center gap-2.5 text-[.95rem] text-wit/80"><Icoon naam="klok" class="h-4 w-4 flex-none text-strik" />Ook op afspraak buiten de openingstijden, ook 's avonds en op maandag of zaterdag.</p>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="bg-ivoor py-20 md:py-28">
+      <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-7">
+          <div class="space-y-6 text-lg text-steen">
+            {d.intro.map((p) => <p>{p}</p>)}
+          </div>
+          <hr class="naad mt-12" />
+          <div class="mt-12 space-y-14">
+            {d.blokken.map((b) => (
+              <div class="rijs">
+                <h2 class="text-3xl">{b.kop}</h2>
+                {b.tekst && <div class="mt-6 space-y-5 text-steen">{b.tekst.map((p) => <p>{p}</p>)}</div>}
+                {b.lijst && (
+                  <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+                    {b.lijst.map((l) => (
+                      <li class="flex items-start gap-3 rounded-[2px] border border-lijn-licht bg-wit p-4"><Icoon naam="vink" class="mt-1 h-4 w-4 flex-none text-merk" /><span class="text-steen">{l}</span></li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <aside class="lg:col-span-5">
+          <div class="lg:sticky lg:top-32">
+            <div class="kaart p-7 md:p-8">
+              <p class="eyebrow">Afspraak</p>
+              <p class="mt-4 font-kop text-[1.7rem] font-extrabold leading-tight tracking-[-.02em]">Stuur een foto van wat je in gedachten hebt</p>
+              <p class="mt-4 text-steen">Dan weet Bei meteen waar je aan denkt en kan ze bij de eerste afspraak al vertellen wat er mogelijk is.</p>
+              <div class="mt-6 flex flex-col gap-3">
+                <a href={waMet(`Hallo Bei, ik heb een vraag over: ${d.kaartTitel.toLowerCase()}.`)} class="knop knop-merk w-full"><Icoon naam="wa" />App je vraag of foto</a>
+                <a href={site.telHref} class="knop knop-rand num w-full"><Icoon naam="tel" />{site.tel}</a>
+              </div>
+              <hr class="naad mt-7" />
+              <ul class="mt-6 space-y-3 text-[.98rem] text-steen">
+                <li class="flex gap-3"><Icoon naam="pin" class="mt-1 h-4 w-4 flex-none text-merk" />{site.straat}, {site.plaats}</li>
+                <li class="flex gap-3"><Icoon naam="klok" class="mt-1 h-4 w-4 flex-none text-merk" />Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00</li>
+                <li class="flex gap-3"><Icoon naam="kalender" class="mt-1 h-4 w-4 flex-none text-merk" />Buiten die tijden op afspraak, ook 's avonds</li>
+                <li class="flex gap-3"><Icoon naam="ster" class="mt-1 h-4 w-4 flex-none text-merk" />{site.google.score} uit {site.google.aantal} reviews op Google</li>
+              </ul>
+            </div>
+
+            <div class="mt-5 rounded-[2px] border border-dashed border-ivoor-3 p-6">
+              <p class="font-semibold">In vijf stappen klaar</p>
+              <ol class="num mt-4 space-y-2 text-[.98rem] text-steen">
+                {stappen.map((s) => <li class="flex gap-3"><span class="font-kop font-extrabold italic text-merk">{s.nr}</span>{s.kort}</li>)}
+              </ol>
+              <a href={url('werkwijze/')} class="link mt-5 inline-flex items-center gap-2 font-semibold text-merk">Zo werkt het <Icoon naam="pijl" class="h-4 w-4" /></a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- WERKGEBIED -->
+    <section class="bg-inkt py-16 text-wit md:py-20">
+      <div class="wrap grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
+        <div class="lg:col-span-7">
+          <p class="eyebrow eyebrow-licht">Rotterdam en omgeving</p>
+          <h2 class="mt-5 text-3xl">Bruiden komen uit de hele <em class="accent-licht">regio.</em></h2>
+          <p class="mt-6 text-wit/85">Het atelier zit aan de {site.straat} in {site.plaats}, in het pand van {site.inPand}. Klanten komen onder meer uit {werkgebied.slice(1, 10).join(', ')} en verder.</p>
+        </div>
+        <div class="lg:col-span-5">
+          <a href={site.route} class="knop knop-wit"><Icoon naam="pin" />Route naar het atelier</a>
+        </div>
+      </div>
+    </section>
+
+    <Reviews />
+    <Faq vragen={d.faq} kop={`Vragen over ${d.kaartTitel.toLowerCase()}`} achtergrond="bg-ivoor" />
+
+    <!-- VERWANT -->
+    <section class="bg-ivoor-2 py-20 md:py-24">
+      <div class="wrap">
+        <h2 class="text-3xl">Misschien ook <em class="accent">interessant.</em></h2>
+        <ul class="mt-10 grid gap-5 md:grid-cols-3">
+          {verwant.map((v) => (
+            <li>
+              <a href={url(`${v.slug}/`)} class="group block h-full rounded-[2px] border border-ivoor-3 bg-wit p-7 no-underline transition-all duration-300 hover:-translate-y-1 hover:border-merk">
+                <h3 class="text-[1.5rem]">{v.kaartTitel}</h3>
+                <p class="mt-3 text-steen">{v.kaartTekst}</p>
+                <span class="mt-5 inline-flex items-center gap-2 border-b border-dashed border-merk pb-0.5 text-sm font-semibold text-merk">Bekijken <Icoon naam="pijl" class="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="bg-ivoor py-20 md:py-24">
+      <div class="wrap max-w-3xl"><Tijden /></div>
+    </section>
+
+    <Cta />
+  </main>
+  <Voet />
+</Base>

@@ -1,0 +1,53 @@
+---
+// De vijf stappen van het atelier. Het stiksel uit het logo loopt als draad langs de stappen.
+import { stappen, url } from '../data/site';
+import Icoon from './Icoon.astro';
+interface Props { vol?: boolean; achtergrond?: string }
+const { vol = false, achtergrond = 'bg-ivoor' } = Astro.props;
+---
+<section id="werkwijze" class={`${achtergrond} py-20 md:py-28`} aria-labelledby="werkwijze-kop">
+  <div class="wrap">
+    <div class="grid gap-8 md:grid-cols-12 md:items-end">
+      <div class="md:col-span-7">
+        <p class="eyebrow">Zo gaat het</p>
+        <h2 id="werkwijze-kop" class="mt-5 text-4xl">Van jouw foto tot <em class="accent">jouw jurk.</em></h2>
+      </div>
+      <p class="text-lg text-steen md:col-span-5">Vijf stappen, elk met een eigen afspraak. Zo weet je steeds waar je staat en kom je nooit voor verrassingen te staan.</p>
+    </div>
+
+    <ol class="mt-14 space-y-4 md:space-y-0">
+      {stappen.map((s, i) => (
+        <li class="rijs relative grid gap-5 md:grid-cols-[7rem_1fr] md:gap-8" style={`--d:${i * 0.07}s`}>
+          <div class="relative flex items-start gap-5 md:block">
+            <div class="relative z-10 grid h-16 w-16 flex-none place-items-center rounded-full border-[1.5px] border-dashed border-merk bg-wit md:h-[6.5rem] md:w-[6.5rem]">
+              <span class="num font-kop text-2xl font-extrabold italic text-merk md:text-[2.4rem]">{s.nr}</span>
+            </div>
+            {i < stappen.length - 1 && (
+              <span class="absolute left-8 top-16 hidden h-[calc(100%-4rem)] border-l-[1.5px] border-dashed border-ivoor-3 md:block md:left-[3.25rem] md:top-[6.5rem] md:h-[calc(100%-6.5rem)]" aria-hidden="true"></span>
+            )}
+            <p class="pt-4 font-kop text-xl font-extrabold tracking-[-.015em] md:hidden">{s.titel}</p>
+          </div>
+
+          <div class={`rounded-[2px] border border-lijn-licht bg-wit p-7 md:mb-4 md:p-9 ${vol ? '' : 'md:pb-8'}`}>
+            <div class="flex items-start gap-4">
+              <span class="grid h-11 w-11 flex-none place-items-center rounded-full bg-strik-zacht text-merk"><Icoon naam={s.icoon} class="h-6 w-6" /></span>
+              <div>
+                <h3 class="hidden text-[1.7rem] md:block">{s.titel}</h3>
+                <p class="font-semibold text-merk md:mt-1 md:font-normal md:text-steen">{s.kort}</p>
+              </div>
+            </div>
+            <hr class="naad mt-6" />
+            <p class="mt-6 text-steen">{s.tekst}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    {!vol && (
+      <div class="mt-10 flex flex-wrap items-center gap-4">
+        <a href={url('werkwijze/')} class="knop knop-rand">De werkwijze helemaal lezen <Icoon naam="pijl" /></a>
+        <a href={url('contact/')} class="knop knop-merk">Afspraak maken <Icoon naam="pijl" /></a>
+      </div>
+    )}
+  </div>
+</section>

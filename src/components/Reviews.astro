@@ -1,0 +1,86 @@
+---
+// Google-reviews als swipebare rij kaarten. Elke kaart linkt naar het Google-profiel.
+import { site, reviews, url } from '../data/site';
+import Icoon from './Icoon.astro';
+interface Props { donker?: boolean }
+const { donker = false } = Astro.props;
+---
+<section id="reviews" class={`${donker ? 'bg-inkt text-wit' : 'bg-ivoor-2'} py-20 md:py-28`} aria-labelledby="reviews-kop">
+  <div class="wrap">
+    <div class="flex flex-wrap items-end justify-between gap-8">
+      <div>
+        <p class={`eyebrow ${donker ? 'eyebrow-licht' : ''}`}>Google-reviews</p>
+        <h2 id="reviews-kop" class="mt-5 text-4xl">Wat bruiden <em class={donker ? 'accent-licht' : 'accent'}>zeggen.</em></h2>
+      </div>
+      <a href={site.reviews} target="_blank" rel="noopener" class={`flex items-center gap-4 rounded-[2px] border px-5 py-4 no-underline transition-colors ${donker ? 'border-lijn bg-inkt-2 hover:border-wit/50' : 'border-ivoor-3 bg-wit hover:border-merk'}`}>
+        <span class="grid h-11 w-11 place-items-center rounded-full bg-wit shadow-[0_1px_3px_#1b171626]"><Icoon naam="g" class="h-6 w-6" /></span>
+        <span>
+          <span class="flex items-center gap-2"><strong class="num font-kop text-2xl font-extrabold">{site.google.score}</strong><span class="flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span></span>
+          <span class={`block text-sm ${donker ? 'text-mist' : 'text-steen'}`}>{site.google.aantal} reviews op Google</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="relative mt-12">
+      <ul class="rij flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4" data-rij tabindex="0" aria-label="Reviews, horizontaal te scrollen">
+        {reviews.map((r) => (
+          <li class="w-[85vw] flex-none snap-start sm:w-[22rem]">
+            <a href={site.reviews} target="_blank" rel="noopener" class={`group flex h-full flex-col rounded-[2px] border p-7 no-underline transition-all duration-300 ${donker ? 'border-lijn bg-inkt-2 hover:border-strik' : 'border-ivoor-3 bg-wit hover:-translate-y-1 hover:shadow-[0_22px_45px_-28px_#1b171680]'}`}>
+              <div class="flex items-center gap-3">
+                <span class="grid h-10 w-10 flex-none place-items-center rounded-full bg-strik-zacht font-kop text-lg font-extrabold text-merk">{r.naam.charAt(0)}</span>
+                <span class="min-w-0">
+                  <span class="block truncate font-semibold">{r.naam}</span>
+                  <span class={`block text-sm ${donker ? 'text-mist' : 'text-steen'}`}>{r.wanneer}</span>
+                </span>
+                <Icoon naam="g" class="ml-auto h-5 w-5 flex-none" />
+              </div>
+              <span class="mt-5 flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-[1.05rem] w-[1.05rem]" />)}</span>
+              <p class={`mt-4 flex-1 text-[1.02rem] leading-relaxed ${donker ? 'text-wit/90' : 'text-steen'}`}>{r.tekst}</p>
+              <span class={`mt-6 inline-flex items-center gap-2 border-b border-dashed pb-0.5 text-sm font-semibold ${donker ? 'border-strik text-strik' : 'border-merk text-merk'}`}>
+                Lees op Google <Icoon naam="pijl" class="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </a>
+          </li>
+        ))}
+        <li class="w-[85vw] flex-none snap-start sm:w-[22rem]">
+          <a href={site.reviews} target="_blank" rel="noopener" class={`flex h-full flex-col items-start justify-center gap-4 rounded-[2px] p-7 no-underline ${donker ? 'bg-merk text-wit' : 'bg-inkt text-wit'}`}>
+            <Icoon naam="hart" class={`h-8 w-8 ${donker ? 'text-wit' : 'text-strik'}`} />
+            <p class="font-kop text-[1.7rem] font-extrabold leading-tight">Alle {site.google.aantal} reviews lezen?</p>
+            <p class="text-wit/85">Ze staan allemaal op het Google-profiel van het atelier, samen goed voor een {site.google.score}.</p>
+            <span class={`mt-2 inline-flex items-center gap-2 border-b border-dashed pb-0.5 text-sm font-semibold ${donker ? 'border-wit text-wit' : 'border-strik text-strik'}`}>Naar Google <Icoon naam="pijl" class="h-4 w-4" /></span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-6 flex items-center gap-3">
+        <button type="button" data-rij-vorige class={`grid h-11 w-11 place-items-center rounded-full border transition-colors disabled:opacity-30 ${donker ? 'border-lijn text-wit hover:border-wit' : 'border-ivoor-3 bg-wit text-inkt hover:border-merk hover:text-merk'}`} aria-label="Vorige reviews">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 6 9 12l6 6" /></svg>
+        </button>
+        <button type="button" data-rij-volgende class={`grid h-11 w-11 place-items-center rounded-full border transition-colors disabled:opacity-30 ${donker ? 'border-lijn text-wit hover:border-wit' : 'border-ivoor-3 bg-wit text-inkt hover:border-merk hover:text-merk'}`} aria-label="Volgende reviews">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+        </button>
+        <p class={`ml-2 text-sm ${donker ? 'text-mist' : 'text-steen'}`}>Swipe of sleep voor meer. Tik op een review om hem op Google te lezen.</p>
+      </div>
+    </div>
+
+    <p class="mt-10"><a href={url('klantervaringen/')} class={`link font-semibold ${donker ? 'text-strik' : 'text-merk'}`}>Lees de verhalen achter deze reviews</a></p>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-rij]').forEach((rij) => {
+    const hoofd = rij.closest('section');
+    const vorige = hoofd?.querySelector<HTMLButtonElement>('[data-rij-vorige]');
+    const volgende = hoofd?.querySelector<HTMLButtonElement>('[data-rij-volgende]');
+    const stap = () => rij.querySelector('li')?.getBoundingClientRect().width ?? 320;
+    const bij = () => {
+      if (!vorige || !volgende) return;
+      vorige.disabled = rij.scrollLeft < 8;
+      volgende.disabled = rij.scrollLeft > rij.scrollWidth - rij.clientWidth - 8;
+    };
+    vorige?.addEventListener('click', () => rij.scrollBy({ left: -(stap() + 20), behavior: 'smooth' }));
+    volgende?.addEventListener('click', () => rij.scrollBy({ left: stap() + 20, behavior: 'smooth' }));
+    rij.addEventListener('scroll', bij, { passive: true });
+    bij();
+  });
+</script>

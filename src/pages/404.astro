@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import Kop from '../components/Kop.astro';
+import Voet from '../components/Voet.astro';
+import Icoon from '../components/Icoon.astro';
+import { url, site } from '../data/site';
+import { diensten } from '../data/diensten';
+---
+<Base title={`Pagina niet gevonden | ${site.naam}`} description="Deze pagina bestaat niet of is verplaatst. Ga terug naar de homepage van bruidsatelier Bei Couture in Rotterdam.">
+  <Kop />
+  <main id="inhoud" class="bg-ivoor py-20 md:py-28">
+    <div class="wrap max-w-3xl">
+      <p class="eyebrow">Foutje in de naad</p>
+      <h1 class="mt-5 text-4xl">Deze pagina is er <em class="accent">niet.</em></h1>
+      <p class="mt-6 text-lg text-steen">Misschien is hij verplaatst, of klopt er iets niet in de link. Hieronder kom je alsnog waar je wilde zijn.</p>
+      <ul class="mt-10 grid gap-3 sm:grid-cols-2">
+        {[{ slug: '', t: 'Home' }, { slug: 'atelier/', t: 'Het atelier' }, { slug: 'werkwijze/', t: 'Werkwijze' }, { slug: 'klantervaringen/', t: 'Klantervaringen' }, ...diensten.map((d) => ({ slug: `${d.slug}/`, t: d.kaartTitel }))].map((l) => (
+          <li><a href={url(l.slug)} class="flex items-center justify-between gap-4 rounded-[2px] border border-ivoor-3 bg-wit px-5 py-4 no-underline transition-colors hover:border-merk">{l.t}<Icoon naam="pijl" class="h-4 w-4 text-merk" /></a></li>
+        ))}
+      </ul>
+      <a href={url('contact/')} class="knop knop-merk mt-10">Afspraak maken <Icoon naam="pijl" /></a>
+    </div>
+  </main>
+  <Voet />
+</Base>

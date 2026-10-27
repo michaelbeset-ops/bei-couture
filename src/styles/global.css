@@ -88,7 +88,7 @@
   .accent { font-style: italic; color: var(--color-merk); }
   .accent-licht { font-style: italic; color: var(--color-strik); }
 
-  .kaart { background: var(--color-wit); border: 1px solid var(--color-lijn-licht); border-radius: var(--radius-sm); box-shadow: 0 1px 2px #1b17160d; }
+  .kaart { background: var(--color-wit); color: var(--color-inkt); border: 1px solid var(--color-lijn-licht); border-radius: var(--radius-sm); box-shadow: 0 1px 2px #1b17160d; }
 
   .stap-nr { font-family: var(--font-kop); font-weight: 800; font-style: italic; font-size: 3.4rem; line-height: 1; letter-spacing: -.03em; color: var(--color-merk); }
 
@@ -123,6 +123,19 @@
   .veld:hover { border-color: var(--color-steen); }
   .veld:focus { outline: none; border-color: var(--color-merk); box-shadow: 0 0 0 1px var(--color-merk); }
   .veld-label { display: block; font-family: var(--font-kop); font-weight: 800; font-size: 1.3rem; letter-spacing: -.015em; margin-bottom: .85rem; }
+
+
+  /* Swipebare rij (reviews). Scrollbar subtiel, maar wel zichtbaar dat er meer is. */
+  .rij { scrollbar-width: thin; scrollbar-color: var(--color-ivoor-3) transparent; scroll-padding-inline: 1.25rem; }
+  .rij::-webkit-scrollbar { height: 6px; }
+  .rij::-webkit-scrollbar-thumb { background: var(--color-ivoor-3); border-radius: 999px; }
+  .rij::-webkit-scrollbar-track { background: transparent; }
+
+  /* FAQ-accordeon */
+  .vraag summary::-webkit-details-marker { display: none; }
+  .vraag summary::marker { content: ""; }
+  .vraag details[open] summary span { transform: rotate(45deg); border-color: var(--color-merk); }
+  .vraag summary:hover h3 { color: var(--color-merk); }
 
   .js .rijs { opacity: 0; transform: translateY(16px); transition: opacity .9s var(--ease-zacht), transform .9s var(--ease-zacht); transition-delay: var(--d, 0s); }
   .js .rijs.in { opacity: 1; transform: none; }

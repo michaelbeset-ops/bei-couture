@@ -1,0 +1,104 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Kop from '../components/Kop.astro';
+import Voet from '../components/Voet.astro';
+import Icoon from '../components/Icoon.astro';
+import PaginaKop from '../components/PaginaKop.astro';
+import Reviews from '../components/Reviews.astro';
+import Cta from '../components/Cta.astro';
+import { url, site, waMet } from '../data/site';
+import { ervaringen } from '../data/ervaringen';
+import { dienstOp } from '../data/diensten';
+import sVermaken from '../assets/s-vermaken.jpg';
+
+const basis = new URL(url(''), Astro.site).href;
+const hier = new URL(Astro.url.pathname, Astro.site).href;
+---
+<Base
+  title="Klantervaringen van bruiden | Bei Couture Rotterdam"
+  description="Verhalen van bruiden die bij bruidsatelier Bei Couture in Rotterdam geholpen zijn, met hun eigen woorden over de jurk en het atelier."
+  kruimels={[{ naam: 'Home', url: basis }, { naam: 'Klantervaringen', url: hier }]}
+>
+  <Kop />
+  <main id="inhoud">
+    <PaginaKop
+      eyebrow="Klantervaringen"
+      h1="De verhalen achter de"
+      accent="jurken."
+      lead="Hoe ging het precies, van de eerste afspraak tot de dag zelf? Hieronder staan de ervaringen van bruiden en klanten die in het atelier geholpen zijn, in hun eigen woorden."
+      img={sVermaken}
+      alt="Handen die de rug van een kanten trouwjurk innemen"
+      pos="50% 35%"
+      kruimels={[{ naam: 'Home', href: url('') }, { naam: 'Klantervaringen', href: url('klantervaringen/') }]}
+    />
+
+    <section class="bg-ivoor py-16 md:py-20">
+      <div class="wrap grid gap-10 md:grid-cols-12 md:items-center">
+        <p class="text-lg text-steen md:col-span-7">Alle citaten op deze pagina staan letterlijk op het Google-profiel van het atelier. Daar staan ze allemaal, samen goed voor een {site.google.score} uit {site.google.aantal} reviews.</p>
+        <div class="md:col-span-5 md:justify-self-end">
+          <a href={site.reviews} target="_blank" rel="noopener" class="flex items-center gap-4 rounded-[2px] border border-ivoor-3 bg-wit px-5 py-4 no-underline transition-colors hover:border-merk">
+            <span class="grid h-11 w-11 place-items-center rounded-full bg-wit shadow-[0_1px_3px_#1b171626]"><Icoon naam="g" class="h-6 w-6" /></span>
+            <span>
+              <span class="flex items-center gap-2"><strong class="num font-kop text-2xl font-extrabold">{site.google.score}</strong><span class="flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span></span>
+              <span class="block text-sm text-steen">{site.google.aantal} reviews op Google</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VERHALEN -->
+    <section class="bg-ivoor pb-20 md:pb-28">
+      <div class="wrap space-y-6">
+        {ervaringen.map((e, i) => (
+          <article class={`rijs grid overflow-hidden rounded-[2px] border border-ivoor-3 bg-wit ${e.foto ? 'lg:grid-cols-12' : ''}`} style={`--d:${(i % 2) * 0.08}s`}>
+            {e.foto && (
+              <div class={`relative min-h-64 bg-inkt lg:col-span-5 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+                <Picture src={e.foto} formats={['avif', 'webp']} widths={[480, 800]} sizes="(min-width: 1024px) 480px, 100vw" alt={e.fotoAlt ?? ''} class="absolute inset-0 h-full w-full object-cover" style={`object-position:${e.pos ?? '50% 50%'}`} />
+              </div>
+            )}
+            <div class={`p-7 md:p-10 ${e.foto ? 'lg:col-span-7' : ''}`}>
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+                <span class="grid h-11 w-11 flex-none place-items-center rounded-full bg-strik-zacht font-kop text-xl font-extrabold text-merk">{e.naam.charAt(0)}</span>
+                <span>
+                  <span class="block font-semibold">{e.naam}</span>
+                  <span class="block text-sm text-steen">{`${e.wanneer} · Google review`}</span>
+                </span>
+                <span class="ml-auto flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-[1.05rem] w-[1.05rem]" />)}</span>
+              </div>
+
+              <p class="eyebrow mt-7">{e.dienst}</p>
+              <h2 class={`mt-4 font-kop font-extrabold italic leading-snug tracking-[-.015em] ${e.citaat.length > 170 ? 'text-[1.35rem] md:text-[1.65rem]' : 'text-[1.6rem] md:text-[2rem]'}`}>“{e.citaat}”</h2>
+              <hr class="naad mt-7" />
+              <p class="mt-6 text-steen">{e.samenvatting}</p>
+              <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <a href={url(`${e.slug}/`)} class="link inline-flex items-center gap-2 font-semibold text-merk">{dienstOp(e.slug).kaartTitel} <Icoon naam="pijl" class="h-4 w-4" /></a>
+                <a href={site.reviews} target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm text-steen no-underline hover:text-merk"><Icoon naam="g" class="h-4 w-4" />Lees deze review op Google</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- ZELF VERTELLEN -->
+    <section class="bg-inkt py-20 text-wit md:py-28">
+      <div class="wrap grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
+        <div class="lg:col-span-7">
+          <p class="eyebrow eyebrow-licht">Jouw verhaal</p>
+          <h2 class="mt-5 text-4xl">Ben jij bij Bei <em class="accent-licht">geweest?</em></h2>
+          <p class="mt-6 text-lg text-wit/85">Bei ziet haar jurken zelden op de dag zelf. Een foto van je trouwdag is daarom altijd welkom, en als je hem met je verhaal meestuurt mag hij hier een plek krijgen. Alleen met jouw toestemming, en je bepaalt zelf of je naam erbij staat.</p>
+        </div>
+        <div class="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
+          <a href={waMet('Hallo Bei, ik wil graag mijn foto en ervaring met je delen voor op de website.')} class="knop knop-merk"><Icoon naam="wa" />Stuur je foto en verhaal</a>
+          <a href={site.reviews} target="_blank" rel="noopener" class="knop knop-wit"><Icoon naam="ster" />Review op Google</a>
+        </div>
+      </div>
+    </section>
+
+    <Reviews />
+    <Cta kop="Ook zo'n verhaal over jouw" accent="trouwdag?" />
+  </main>
+  <Voet />
+</Base>

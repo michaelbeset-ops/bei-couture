@@ -1,41 +1,78 @@
 ---
 import { url, waHoi, site } from '../data/site';
+import { diensten } from '../data/diensten';
 import Icoon from './Icoon.astro';
 import Merk from './Merk.astro';
-interface Props { thuis?: boolean }
-const { thuis = true } = Astro.props;
-const h = (id: string) => (thuis ? `#${id}` : url(`#${id}`));
-const nav = [['atelier', 'Atelier'], ['bei', 'Over Bei'], ['werkwijze', 'Werkwijze'], ['reviews', 'Reviews'], ['bezoek', 'Bezoek']];
-const usp = ['Eigen atelier sinds 1997', 'Bruidsmode op maat', 'Di t/m vr 11:00 tot 17:00, zo 12:00 tot 17:00'];
+
+const pad = Astro.url.pathname.replace(/\/+$/, '');
+const hier = (p: string) => pad === url(p).replace(/\/+$/, '');
+const dienstActief = diensten.some((d) => hier(`${d.slug}/`));
+
+const nav: { href: string; t: string; actief: boolean }[] = [
+  { href: url('werkwijze/'), t: 'Werkwijze', actief: hier('werkwijze/') },
+  { href: url('klantervaringen/'), t: 'Klantervaringen', actief: hier('klantervaringen/') },
+  { href: url('over-bei/'), t: 'Over Bei', actief: hier('over-bei/') },
+  { href: url('contact/'), t: 'Contact', actief: hier('contact/') },
+];
 ---
-<header class={thuis ? 'absolute inset-x-0 top-0 z-40' : 'relative z-40 bg-inkt'}>
-  <div class="hidden border-b border-lijn lg:block">
-    <div class="wrap flex h-11 items-center justify-between gap-6 text-[.875rem] text-wit/85">
-      <ul class="flex gap-7">
-        {usp.map((e) => <li class="flex items-center gap-2"><Icoon naam="vink" class="h-4 w-4 text-strik" />{e}</li>)}
-      </ul>
-      <a href={site.telHref} class="num flex items-center gap-2 text-wit/85 no-underline hover:text-wit"><Icoon naam="tel" class="h-4 w-4 text-strik" />{site.tel}</a>
-    </div>
+<div class="border-b border-ivoor-3 bg-ivoor-2 max-md:hidden">
+  <div class="wrap flex h-10 items-center justify-between gap-6 text-[.85rem] text-steen">
+    <ul class="flex gap-6">
+      <li class="flex items-center gap-2"><Icoon naam="pin" class="h-4 w-4 text-merk" />{site.straat}, {site.plaats}</li>
+      <li class="flex items-center gap-2"><Icoon naam="klok" class="h-4 w-4 text-merk" />Ook op afspraak buiten de openingstijden</li>
+    </ul>
+    <a href={site.telHref} class="num flex items-center gap-2 font-semibold text-inkt no-underline hover:text-merk"><Icoon naam="tel" class="h-4 w-4 text-merk" />{site.tel}</a>
   </div>
-  <div class="wrap flex h-20 items-center justify-between gap-3 md:h-24 md:gap-6">
+</div>
+
+<header class="sticky top-0 z-40 border-b border-dashed border-ivoor-3 bg-wit/95 backdrop-blur-sm">
+  <div class="wrap flex h-[5.5rem] items-center justify-between gap-3 md:h-32 md:gap-8">
     <Merk />
+
     <nav aria-label="Hoofdmenu" class="hidden lg:block">
-      <ul class="flex gap-8 text-[1.02rem] font-medium">
-        {nav.map(([id, t]) => <li><a href={h(id)} class="text-wit/90 no-underline transition-colors duration-200 hover:text-strik">{t}</a></li>)}
+      <ul class="flex items-center gap-7 text-[1.02rem] font-medium">
+        <li class="group relative">
+          <a href={url('atelier/')} class={`flex items-center gap-1.5 py-7 no-underline transition-colors hover:text-merk ${dienstActief ? 'text-merk' : 'text-inkt'}`} aria-haspopup="true">
+            Atelier
+            <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+          </a>
+          <div class="invisible absolute left-1/2 top-full z-50 w-[22rem] -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+            <ul class="kaart overflow-hidden p-2 shadow-[0_26px_60px_-30px_#1b171666]">
+              {diensten.map((d) => (
+                <li>
+                  <a href={url(`${d.slug}/`)} class={`block rounded-[2px] px-4 py-3 no-underline transition-colors hover:bg-ivoor ${hier(`${d.slug}/`) ? 'bg-strik-zacht' : ''}`}>
+                    <span class="font-kop text-lg font-extrabold tracking-[-.015em]">{d.kaartTitel}</span>
+                    <span class="mt-0.5 block text-sm leading-snug text-steen">{d.eyebrow}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </li>
+        {nav.map((n) => (
+          <li><a href={n.href} class={`py-7 no-underline transition-colors hover:text-merk ${n.actief ? 'text-merk' : 'text-inkt'}`}>{n.t}</a></li>
+        ))}
       </ul>
     </nav>
-    <div class="flex items-center gap-4">
-      <a href={h('afspraak')} class="knop knop-merk hidden min-h-11 px-5 md:inline-flex">Afspraak maken</a>
-      <button type="button" class="grid h-11 w-11 place-items-center text-wit lg:hidden" aria-expanded="false" aria-controls="menu-nav" data-menu-knop>
+
+    <div class="flex items-center gap-3">
+      <a href={url('contact/')} class="knop knop-merk hidden min-h-12 px-5 text-[1rem] md:inline-flex">Afspraak maken</a>
+      <button type="button" class="grid h-12 w-12 place-items-center text-inkt lg:hidden" aria-expanded="false" aria-controls="menu-nav" data-menu-knop>
         <span class="sr-only">Menu</span>
         <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg>
       </button>
     </div>
   </div>
-  <nav id="menu-nav" aria-label="Menu" class="hidden bg-inkt lg:hidden" data-menu>
-    <ul class="wrap pb-8 pt-2">
-      {[...nav, ['afspraak', 'Afspraak maken']].map(([id, t]) => <li><a href={h(id)} class="block border-b border-dashed border-lijn py-4 font-kop text-3xl font-extrabold tracking-[-.02em] text-wit no-underline">{t}</a></li>)}
-      <li class="pt-6"><a href={site.telHref} class="num font-medium text-mist no-underline">{site.tel}</a></li>
+
+  <nav id="menu-nav" aria-label="Menu" class="hidden border-t border-dashed border-ivoor-3 bg-wit lg:hidden" data-menu>
+    <ul class="wrap max-h-[70svh] overflow-y-auto pb-8 pt-2">
+      {[...diensten.map((d) => ({ href: url(`${d.slug}/`), t: d.kaartTitel })), ...nav.map((n) => ({ href: n.href, t: n.t }))].map((n) => (
+        <li><a href={n.href} class="block border-b border-dashed border-ivoor-3 py-4 font-kop text-2xl font-extrabold tracking-[-.02em] no-underline">{n.t}</a></li>
+      ))}
+      <li class="flex flex-wrap gap-3 pt-6">
+        <a href={url('contact/')} class="knop knop-merk">Afspraak maken</a>
+        <a href={site.telHref} class="knop knop-rand num"><Icoon naam="tel" />{site.tel}</a>
+      </li>
     </ul>
   </nav>
 </header>
