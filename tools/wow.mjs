@@ -1,0 +1,15 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const p = await (await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })).newPage();
+await p.goto('http://127.0.0.1:4536/sitefront/bei-couture/', { waitUntil: 'networkidle' });
+await p.click('a[data-kies="Gala- of avondkleding"]');
+await p.click('label:has-text("Bruidssatijn")');
+await p.selectOption('select[name=wanneer]', { label: 'Over 1 tot 3 maanden' });
+await p.selectOption('select[name=dag]', { label: 'Zondag' });
+await p.fill('#naam', 'Sanne');
+console.log(await p.textContent('#bericht'));
+console.log(decodeURIComponent(await p.getAttribute('#stuur', 'href')));
+await p.evaluate(() => document.querySelectorAll('.rijs').forEach(e => e.classList.add('in')));
+await p.locator('#stuur').scrollIntoViewIfNeeded(); await p.waitForTimeout(800);
+await p.screenshot({ path: 'shots/wow-390.png' });
+await b.close();

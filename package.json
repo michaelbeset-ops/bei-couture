@@ -1,0 +1,25 @@
+{
+  "name": "bei-couture",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "dev": "astro dev --port 4536",
+    "build": "astro build",
+    "preview": "astro preview --port 4536 --host 127.0.0.1",
+    "astro": "astro"
+  },
+  "allowScripts": { "esbuild": true },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/bodoni-moda": "^5.2.0",
+    "@fontsource/instrument-sans": "^5.2.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.5",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0",
+    "sharp": "^0.35.5"
+  }
+}

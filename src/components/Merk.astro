@@ -1,0 +1,17 @@
+---
+// Woordmerk naar hun logo: gestippelde (gestikte) cirkel, "Bei" cursief, COUTURE in kapitalen, strikje in oudroze.
+import { url } from '../data/site';
+interface Props { donker?: boolean; class?: string }
+const { donker = false, class: cls = '' } = Astro.props;
+---
+<a href={url('')} class={`group flex items-center gap-3 no-underline ${donker ? 'text-inkt' : 'text-wit'} ${cls}`}>
+  <svg viewBox="0 0 56 58" class="h-12 w-12 flex-none md:h-14 md:w-14" aria-hidden="true">
+    <circle cx="28" cy="27" r="24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-dasharray="2.4 2.4" />
+    <text x="28" y="34" text-anchor="middle" font-family="Bodoni Moda, Didot, Georgia, serif" font-style="italic" font-weight="800" font-size="21" fill="currentColor">Bei</text>
+    <path d="M28 51c-2.2-2.3-5.6-3.4-6.6-1.6-.8 1.6 2.6 2.6 6.6 1.6Zm0 0c2.2-2.3 5.6-3.4 6.6-1.6.8 1.6-2.6 2.6-6.6 1.6Zm0 0-3 5m3-5 3 5" fill="none" stroke="#e3bfb6" stroke-width="1.6" stroke-linecap="round" />
+  </svg>
+  <span class="leading-none">
+    <span class="block font-kop text-[1.65rem] font-extrabold italic tracking-[-.02em] md:text-[1.85rem]">Bei</span>
+    <span class="mt-1 block font-kop text-[.8rem] font-extrabold tracking-[.32em]">COUTURE</span>
+  </span>
+</a>
