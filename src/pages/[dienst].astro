@@ -32,6 +32,7 @@ const verwant = d.verwant.map(dienstOp);
   title={d.title}
   description={d.description}
   kruimels={kruimels}
+  og={`og-${d.slug}.jpg`}
   schema={[dienstSchema(d.kaartTitel, d.description, hier, basis), faqSchema(d.faq)]}
 >
   <Kop />

@@ -9,12 +9,19 @@ interface Props {
   description: string;
   kruimels?: { naam: string; url: string }[];
   schema?: Record<string, unknown>[];
+  noindex?: boolean;
+  og?: string;
 }
-const { title, description, kruimels = [], schema = [] } = Astro.props;
+const { title, description, kruimels = [], schema = [], noindex = false, og = 'og.jpg' } = Astro.props;
+
+// Pagina's die niet in Google horen: ook niet in de sitemap (zie astro.config.mjs).
+const geenIndex = ['/privacy/', '/404/'];
+const pad = Astro.url.pathname.replace(url(''), '/');
+const uitSearch = site.voorstel || noindex || geenIndex.includes(pad);
 
 const basis = new URL(url(''), Astro.site).href;
 const canoniek = new URL(Astro.url.pathname, Astro.site).href;
-const ogAfbeelding = new URL(url('og.jpg'), Astro.site).href;
+const ogAfbeelding = new URL(url(og), Astro.site).href;
 const logoUrl = new URL(url('logo.png'), Astro.site).href;
 
 const graaf = [
@@ -32,25 +39,30 @@ const graaf = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {!site.voorstel && <link rel="canonical" href={canoniek} />}
-    {site.voorstel ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />}
+    {!uitSearch && <link rel="canonical" href={canoniek} />}
+    {uitSearch ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />}
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="theme-color" content={site.themeColor} />
     <meta name="author" content={site.naam} />
     <meta name="geo.region" content="NL-ZH" />
     <meta name="geo.placename" content={site.plaats} />
     <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
+    <link rel="icon" type="image/png" sizes="48x48" href={url('favicon-48.png')} />
+    <link rel="apple-touch-icon" sizes="180x180" href={url('apple-touch-icon.png')} />
+    <link rel="manifest" href={url('site.webmanifest')} />
     <link rel="preload" as="font" type="font/woff2" href={kopUrl} crossorigin />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="nl_NL" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogAfbeelding} />
+    <meta property="og:image:alt" content={`${site.naam}, bruidsatelier in ${site.plaats}`} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:url" content={canoniek} />
     <meta property="og:site_name" content={site.naam} />
     <meta name="twitter:card" content="summary_large_image" />
-    {!site.voorstel && <script type="application/ld+json" is:inline set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graaf })} />}
+    {!uitSearch && <script type="application/ld+json" is:inline set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graaf })} />}
     <script is:inline>document.documentElement.classList.add('js')</script>
   </head>
   <body class="min-h-dvh">

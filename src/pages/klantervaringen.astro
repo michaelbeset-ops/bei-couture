@@ -18,6 +18,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
 <Base
   title="Klantervaringen van bruiden | Bei Couture Rotterdam"
   description="Verhalen van bruiden die bij bruidsatelier Bei Couture in Rotterdam geholpen zijn, met hun eigen woorden over de jurk en het atelier."
+  og="og-klantervaringen.jpg"
   kruimels={[{ naam: 'Home', url: basis }, { naam: 'Klantervaringen', url: hier }]}
 >
   <Kop />
@@ -65,7 +66,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
                   <span class="block font-semibold">{e.naam}</span>
                   <span class="block text-sm text-steen">{`${e.wanneer} · Google review`}</span>
                 </span>
-                <span class="ml-auto flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-[1.05rem] w-[1.05rem]" />)}</span>
+                <span class="flex text-[#fbbc05] max-sm:w-full sm:ml-auto">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-[1.05rem] w-[1.05rem]" />)}</span>
               </div>
 
               <p class="eyebrow mt-7">{e.dienst}</p>

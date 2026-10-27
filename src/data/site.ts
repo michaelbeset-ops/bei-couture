@@ -57,6 +57,21 @@ export const reviews = [
   { naam: 'Mariluz', wanneer: 'een jaar geleden', tekst: 'Mijn jurk was heel gedetailleerd en groot en toch heeft ze het jurk zo vermaakt dat het niet uitzag alsof het vermaakt is. … Echt super blij!' },
 ];
 
+// Concrete feiten over het atelier. Deze staan zichtbaar op de site (sectie "Goed om te weten")
+// en in llms.txt, zodat zoekmachines en AI-assistenten ze kunnen overnemen. Alleen wat klopt.
+export const kernfeiten = [
+  { vraag: 'Wat is Bei Couture?', antwoord: 'Een bruidsatelier en kleermakerij aan de Hoogstraat 89A in Rotterdam. Bei maakt en vermaakt er zelf bruidsjurken, jurken voor de bruidsmoeder, bruidsmeisjes en bruidsjonkers, gala- en avondkleding en gewone kleding op maat.' },
+  { vraag: 'Sinds wanneer?', antwoord: 'Bei heeft sinds 1997 een eigen atelier, begonnen op het Marconiplein, en legde zich in 2009 toe op bruidsmode.' },
+  { vraag: 'Wie maakt de jurk?', antwoord: 'Bei zelf. Zij voert het gesprek, meet op, knipt en naait. Je werkt dus van begin tot eind met dezelfde persoon.' },
+  { vraag: 'Welke stoffen?', antwoord: 'Taft, bruidssatijn, tule en kant, met applicaties, kraaltjes of borduursel waar je ze wilt.' },
+  { vraag: 'Hoeveel pasafspraken?', antwoord: 'Meestal drie bij een jurk op maat (proefjurk, proefmodel in de gekozen stof, complete jurk) en twee bij vermaakwerk. Een extra pasbeurt kan altijd.' },
+  { vraag: 'Welke talen?', antwoord: 'Nederlands, Engels en Chinees.' },
+  { vraag: 'Afspraak nodig?', antwoord: 'Voor bruidsmode wel, zodat de tijd voor jou wordt vrijgehouden. Voor een korte vraag of een kleine vermaking kun je tijdens de openingstijden binnenlopen.' },
+  { vraag: 'Buiten de openingstijden?', antwoord: 'Ja, een afspraak in de avond, op maandag of op zaterdag kan in overleg.' },
+  { vraag: 'Wat kost het?', antwoord: 'Dat hangt af van het model, de stof en het werk. Je hoort de prijs bij de eerste afspraak, voordat er iets gemaakt wordt.' },
+  { vraag: 'Beoordeling?', antwoord: '5,0 uit 51 reviews op Google.' },
+];
+
 // De vijf stappen van het atelier, zoals Bei ze zelf beschrijft (27 oktober 2026).
 export const stappen = [
   {

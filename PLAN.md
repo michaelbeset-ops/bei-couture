@@ -34,6 +34,21 @@ geo, plus Service, FAQPage, HowTo, BreadcrumbList en Person. Geen aggregateRatin
 niet). `robots.txt` en `llms.txt` worden gegenereerd; in voorstelmodus staat alles op noindex zonder schema en
 zonder canonical. Werkgebied: Rotterdam en omgeving, 16 plaatsen.
 
+## Beveiliging
+Content-Security-Policy als meta-tag (Astro hasht de eigen scripts, dus geen 'unsafe-inline' voor JavaScript),
+`default-src 'self'`, `object-src 'none'`, `form-action 'none'`, `frame-src 'none'` en `upgrade-insecure-requests`.
+Referrer-policy `strict-origin-when-cross-origin`. Geen externe scripts, geen trackers, geen cookies, geen embeds:
+alles wordt vanaf de eigen site geladen. Externe links met `rel="noopener"`. `/.well-known/security.txt` wijst naar
+Sitefront. Het afspraakformulier verstuurt niets en slaat niets op; het opent WhatsApp met een klaargezet bericht.
+
+## AI-zichtbaarheid
+`robots.txt` noemt de zoek- en AI-zoekcrawlers apart (Googlebot, Google-Extended, Google-Agent, Bingbot,
+OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot, Applebot, DuckAssistBot en meer) en staat ook de
+trainingscrawlers toe, zoals afgesproken in `seo.config.json` (`aiCrawlers.training: allow`). `llms.txt` bevat de
+gegevens, de openingstijden, de diensten, de vijf stappen en tien korte vraag-en-antwoorden. Diezelfde feiten staan
+zichtbaar op de site (sectie "Goed om te weten" en de FAQ's), want AI-antwoorden citeren alleen wat op de pagina
+staat. Eigen deelafbeelding per pagina (`public/og-*.jpg`, gemaakt met `node tools/og.mjs`).
+
 ## Openingstijden
 Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00, maandag en zaterdag op afspraak. Dat een afspraak buiten de
 openingstijden kan, staat op elke pagina: in de topbalk, in het openingstijdenblok, onder elke slotbalk en als

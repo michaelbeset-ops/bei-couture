@@ -14,7 +14,7 @@ const { achtergrond = 'bg-ivoor-2', kop = 'Vertel Bei wat je' } = Astro.props;
       <h2 id="afspraak-kop" class="mt-5 text-4xl">{kop} <em class="accent">droomt.</em></h2>
       <p class="mt-5 max-w-xl text-lg text-steen">Kies hieronder wat je wilt laten maken of vermaken. Er staat meteen een bericht klaar voor WhatsApp, dat je zelf verstuurt.</p>
 
-      <form id="wens" class="mt-10 space-y-10" onsubmit="return false">
+      <form id="wens" class="mt-10 space-y-10">
         <fieldset>
           <legend class="veld-label">Waarvoor kom je?</legend>
           <div class="grid gap-2.5 sm:grid-cols-2">
@@ -115,6 +115,7 @@ const { achtergrond = 'bg-ivoor-2', kop = 'Vertel Bei wat je' } = Astro.props;
     const r = f.querySelector<HTMLInputElement>(`input[name="wat"][value="${CSS.escape(voor)}"]`);
     if (r) r.checked = true;
   }
+  f?.addEventListener('submit', (e) => e.preventDefault());
   f?.addEventListener('input', maak);
   f?.addEventListener('change', maak);
   maak();
