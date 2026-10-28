@@ -3,14 +3,18 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
-// Pagina's die niet in Google horen en dus ook niet in de sitemap (zie src/data/site.ts: geenIndex).
+// Pagina's die niet in Google horen en dus ook niet in de sitemap (zie src/layouts/Base.astro).
 const geenIndex = ['/privacy/', '/404/'];
-const basis = '/sitefront/bei-couture';
 
-// Demo draait in een submap van de Sitefront-verzamelrepo (deployscript zet dit om naar voorstel.sitefront.nl/bei-couture/).
+// Waar de site draait. Standaard de voorstel-URL; bij oplevering op het eigen domein:
+//   PUBLIC_SITE=https://www.beicouture.nl PUBLIC_BASE= npm run build
+const domein = process.env.PUBLIC_SITE ?? 'https://voorstel.sitefront.nl';
+const basis = (process.env.PUBLIC_BASE ?? '/bei-couture').replace(/\/$/, '');
+
+// Voorstel draait op voorstel.sitefront.nl/bei-couture/ (map in de Sitefront-verzamelrepo).
 export default defineConfig({
-  site: 'https://michaelbeset-ops.github.io',
-  base: basis,
+  site: domein,
+  ...(basis ? { base: basis } : {}),
   trailingSlash: 'always',
   devToolbar: { enabled: false },
   build: { format: 'directory', inlineStylesheets: 'always' },

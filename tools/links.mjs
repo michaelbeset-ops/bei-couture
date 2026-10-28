@@ -1,5 +1,5 @@
 import { chromium } from 'playwright';
-const B='http://127.0.0.1:4536/sitefront/bei-couture/';
+const B=process.env.BASIS || 'http://127.0.0.1:4536/bei-couture/';
 const paden=['','atelier/','werkwijze/','klantervaringen/','over-bei/','contact/','privacy/','bruidsjurk-op-maat/','trouwjurk-vermaken/','bruidsmoeder-jurk/','bruidsmeisjes-en-bruidsjonkers/','gala-en-avondkleding/','kleding-op-maat/'];
 const b=await chromium.launch(); const p=await (await b.newContext()).newPage();
 const kapot=new Set();
