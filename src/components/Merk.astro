@@ -9,12 +9,12 @@ interface Props { donker?: boolean; class?: string; groot?: boolean; link?: bool
 const { donker = false, class: cls = '', groot = false, link = true } = Astro.props;
 
 const bron = donker ? logoLicht : logo;
-const maat = groot ? 'h-28 w-28 md:h-40 md:w-40' : 'h-[4.5rem] w-[4.5rem] md:h-28 md:w-28';
+const maat = groot ? 'h-24 w-24 md:h-32 md:w-32' : 'h-16 w-16 md:h-[5.25rem] md:w-[5.25rem]';
 const Tag = link ? 'a' : 'div';
 ---
 <Tag
   {...link ? { href: url(''), 'aria-label': `${site.naam}, naar de homepage` } : {}}
   class={`inline-flex flex-none items-center no-underline ${link ? 'transition-opacity duration-300 hover:opacity-80' : ''} ${cls}`}
 >
-  <Image src={bron} alt={`${site.naam}, bruidsatelier in Rotterdam`} widths={[144, 224, 320]} sizes={groot ? "(min-width: 768px) 160px, 112px" : "(min-width: 768px) 112px, 72px"} class={`${maat} object-contain`} loading="eager" fetchpriority="high" />
+  <Image src={bron} alt={`${site.naam}, bruidsatelier in Rotterdam`} widths={[128, 168, 256]} sizes={groot ? "(min-width: 768px) 128px, 96px" : "(min-width: 768px) 84px, 64px"} class={`${maat} object-contain`} loading="eager" fetchpriority="high" />
 </Tag>

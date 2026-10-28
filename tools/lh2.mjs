@@ -1,6 +1,6 @@
 import { chromium } from 'playwright'; import fs from 'node:fs';
 import lighthouse from 'file:///root/.npm/_npx/8003d8991b0d346b/node_modules/lighthouse/core/index.js';
-const url = process.argv[2] || 'http://127.0.0.1:4536/sitefront/bei-couture/';
+const url = process.argv[2] || 'http://127.0.0.1:4536/bei-couture/';
 const b = await chromium.launch({ args: ['--remote-debugging-port=9436'] });
 const r = await lighthouse(url, { port: 9436, output: 'json', logLevel: 'error' });
 fs.mkdirSync('.seo/out', { recursive: true });

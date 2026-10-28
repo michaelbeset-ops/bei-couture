@@ -1,5 +1,5 @@
 import { chromium } from 'playwright';
-const B='http://127.0.0.1:4536/sitefront/bei-couture/';
+const B='http://127.0.0.1:4536/bei-couture/';
 const b=await chromium.launch(); const p=await (await b.newContext()).newPage();
 const err=[]; p.on('console',m=>m.type()==='error'&&err.push(m.text())); p.on('pageerror',e=>err.push(String(e)));
 

@@ -1,5 +1,5 @@
 import { chromium } from 'playwright';
-const B = 'http://127.0.0.1:4536/sitefront/bei-couture/';
+const B = 'http://127.0.0.1:4536/bei-couture/';
 const paden = process.argv.slice(2);
 const b = await chromium.launch();
 for (const pad of paden) {

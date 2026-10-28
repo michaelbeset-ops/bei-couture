@@ -41,7 +41,7 @@ const verwant = d.verwant.map(dienstOp);
     <section class="relative isolate overflow-hidden bg-inkt text-wit">
       <Picture src={d.img} formats={['avif', 'webp']} widths={[640, 960, 1400, 2000]} sizes="100vw" alt={d.alt} loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${d.pos}`} />
       <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#1b1716f5_0%,#1b1716db_48%,#1b171680_100%)] max-md:bg-[linear-gradient(180deg,#1b1716cc_0%,#1b1716e6_62%,#1b1716_100%)]"></div>
-      <div class="wrap py-14 md:py-24">
+      <div class="wrap pb-14 pt-28 md:pb-24 md:pt-44">
         <div class="text-mist"><Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Atelier', href: url('atelier/') }, { naam: d.kaartTitel, href: hier }]} /></div>
         <p class="eyebrow eyebrow-licht mt-8">{d.eyebrow}</p>
         <h1 class="mt-5 max-w-[16ch] text-4xl">{d.h1} <em class="accent-licht">{d.h1Accent}</em></h1>
