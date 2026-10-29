@@ -86,7 +86,7 @@ export const stappen = [
     titel: 'In gesprek in het atelier',
     kort: 'Samen je wensen helder krijgen',
     tekst: 'Tijdens de eerste afspraak nemen we rustig de tijd. We brengen je wensen in kaart: model, hals, mouw, rug, kleur, stof en wat je vooral niet wilt. Bei denkt mee over wat bij jouw figuur en jouw dag past. Aan het einde van dit gesprek begrijpen we elkaar precies, en dat is de basis voor alles wat daarna komt.',
-    icoon: 'hart',
+    icoon: 'praat',
   },
   {
     nr: '03',
@@ -107,6 +107,6 @@ export const stappen = [
     titel: 'De complete jurk',
     kort: 'Laatste aanpassingen, dan is hij van jou',
     tekst: 'De jurk is af. Je past hem helemaal compleet en waar nodig wordt er nog een laatste keer aangepast, tot alles zit zoals het hoort. Daarna hangt hij klaar voor je grote dag. Verandert er daarna nog iets aan je maten, dan kun je altijd terugkomen.',
-    icoon: 'schaar',
+    icoon: 'jurk',
   },
 ];
