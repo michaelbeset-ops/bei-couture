@@ -1,14 +1,13 @@
 ---
 // Concrete feiten over het atelier, zichtbaar op de pagina en herbruikbaar in llms.txt.
 // Zoekmachines en AI-assistenten citeren dit soort korte, specifieke antwoorden.
-import Icoon from './Icoon.astro';
 import { site, werkgebied, url } from '../data/site';
 
 const feiten = [
-  { icoon: 'naald', kop: 'Stoffen in het atelier', tekst: 'Taft, bruidssatijn, tule en kant. Applicaties, kraaltjes of borduursel kunnen erbij, precies waar jij ze wilt.' },
-  { icoon: 'meet', kop: 'Meestal drie pasbeurten', tekst: 'Een proefjurk, een proefmodel in de gekozen stof en de complete jurk. Bij vermaakwerk zijn het er vaak twee.' },
-  { icoon: 'hart', kop: 'Alles door Bei zelf', tekst: 'Dezelfde persoon voert het gesprek, meet je op, knipt en naait. Geen tussenpersoon, geen atelier elders.' },
-  { icoon: 'praat', kop: 'Nederlands, Engels, Chinees', tekst: `Je kunt in drie talen terecht. Bruiden komen uit ${site.plaats} en de hele regio, van ${werkgebied[1]} tot ${werkgebied[15]}.` },
+  { kop: 'Stoffen in het atelier', tekst: 'Taft, bruidssatijn, tule en kant. Applicaties, kraaltjes of borduursel kunnen erbij, precies waar jij ze wilt.' },
+  { kop: 'Meestal drie pasbeurten', tekst: 'Een proefjurk, een proefmodel in de gekozen stof en de complete jurk. Bij vermaakwerk zijn het er vaak twee.' },
+  { kop: 'Alles door Bei zelf', tekst: 'Dezelfde persoon voert het gesprek, meet je op, knipt en naait. Geen tussenpersoon, geen atelier elders.' },
+  { kop: 'Nederlands, Engels, Chinees', tekst: `Je kunt in drie talen terecht. Bruiden komen uit ${site.plaats} en de hele regio, van ${werkgebied[1]} tot ${werkgebied[15]}.` },
 ];
 ---
 <section class="bg-ivoor-2 py-16 md:py-20" aria-labelledby="feiten-kop">
@@ -18,13 +17,12 @@ const feiten = [
         <p class="eyebrow">In het kort</p>
         <h2 id="feiten-kop" class="mt-5 text-3xl">Goed om te <em class="accent">weten.</em></h2>
       </div>
-      <a href={url('werkwijze/')} class="link font-semibold text-merk">Zo verloopt een traject <span aria-hidden="true">&rarr;</span></a>
+      <a href={url('werkwijze/')} class="tekstlink font-semibold text-merk">Zo verloopt een traject</a>
     </div>
-    <ul class="mt-10 grid gap-px overflow-hidden rounded-[2px] border border-ivoor-3 bg-ivoor-3 sm:grid-cols-2 lg:grid-cols-4">
+    <ul class="mt-10 grid gap-x-10 gap-y-9 border-t border-ivoor-3 pt-10 sm:grid-cols-2 lg:grid-cols-4">
       {feiten.map((f, i) => (
-        <li class="rijs bg-wit p-7" style={`--d:${i * 0.07}s`}>
-          <span class="grid h-11 w-11 place-items-center rounded-full bg-strik-zacht text-merk"><Icoon naam={f.icoon} class="h-6 w-6" /></span>
-          <h3 class="mt-5 text-[1.3rem]">{f.kop}</h3>
+        <li class="rijs" style={`--d:${i * 0.06}s`}>
+          <h3 class="text-[1.25rem]">{f.kop}</h3>
           <p class="mt-3 text-[.98rem] leading-relaxed text-steen">{f.tekst}</p>
         </li>
       ))}

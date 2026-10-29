@@ -74,8 +74,8 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
               <hr class="naad mt-7" />
               <p class="mt-6 text-steen">{e.samenvatting}</p>
               <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <a href={url(`${e.slug}/`)} class="link inline-flex items-center gap-2 font-semibold text-merk">{dienstOp(e.slug).kaartTitel} <Icoon naam="pijl" class="h-4 w-4" /></a>
-                <a href={site.reviews} target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm text-steen no-underline hover:text-merk"><Icoon naam="g" class="h-4 w-4" />Lees deze review op Google</a>
+                <a href={url(`${e.slug}/`)} class="tekstlink font-semibold text-merk">{dienstOp(e.slug).kaartTitel}</a>
+                <a href={site.reviews} target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm text-steen no-underline hover:text-merk"><Icoon naam="g" class="h-4 w-4" />Op Google</a>
               </div>
             </div>
           </article>

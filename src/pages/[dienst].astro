@@ -103,7 +103,7 @@ const verwant = d.verwant.map(dienstOp);
               <ol class="num mt-4 space-y-2 text-[.98rem] text-steen">
                 {stappen.map((s) => <li class="flex gap-3"><span class="font-kop font-extrabold italic text-merk">{s.nr}</span>{s.kort}</li>)}
               </ol>
-              <a href={url('werkwijze/')} class="link mt-5 inline-flex items-center gap-2 font-semibold text-merk">Zo werkt het <Icoon naam="pijl" class="h-4 w-4" /></a>
+              <a href={url('werkwijze/')} class="tekstlink mt-5 inline-block font-semibold text-merk">Zo werkt het, stap voor stap</a>
             </div>
           </div>
         </aside>
@@ -134,10 +134,9 @@ const verwant = d.verwant.map(dienstOp);
         <ul class="mt-10 grid gap-5 md:grid-cols-3">
           {verwant.map((v) => (
             <li>
-              <a href={url(`${v.slug}/`)} class="group block h-full rounded-[2px] border border-ivoor-3 bg-wit p-7 no-underline transition-all duration-300 hover:-translate-y-1 hover:border-merk">
+              <a href={url(`${v.slug}/`)} class="fotolink group block h-full border-t border-ivoor-3 pt-7">
                 <h3 class="text-[1.5rem]">{v.kaartTitel}</h3>
                 <p class="mt-3 text-steen">{v.kaartTekst}</p>
-                <span class="mt-5 inline-flex items-center gap-2 border-b border-dashed border-merk pb-0.5 text-sm font-semibold text-merk">Bekijken <Icoon naam="pijl" class="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
               </a>
             </li>
           ))}
