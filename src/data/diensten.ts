@@ -18,6 +18,8 @@ export interface Dienst {
   nav: string;
   kaartTitel: string;
   kaartTekst: string;
+  voorWie: string;
+  watJeKrijgt: string;
   kies: string;
   img: ImageMetadata;
   pos: string;
@@ -41,6 +43,8 @@ export const diensten: Dienst[] = [
     nav: 'Bruidsjurk op maat',
     kaartTitel: 'Bruidsjurk op maat',
     kaartTekst: 'Jouw trouwjurk, gemaakt naar jouw ontwerp, jouw kleur en jouw maat. Ook in een kleur of in een grote maat.',
+    voorWie: 'Voor de bruid die een jurk wil die nog niet bestaat.',
+    watJeKrijgt: 'Ontwerp, patroon, stof en drie pasbeurten. Ook gekleurd of in een grote maat.',
     kies: 'Bruidsjurk laten maken',
     img: sMaken,
     pos: '50% 40%',
@@ -99,6 +103,8 @@ export const diensten: Dienst[] = [
     nav: 'Trouwjurk vermaken',
     kaartTitel: 'Trouwjurk vermaken',
     kaartTekst: 'Je eigen jurk korter, passender of helemaal anders. Ook de jurk van je moeder of van een eerdere trouwdag.',
+    voorWie: 'Voor een gekochte jurk, of de jurk van je moeder.',
+    watJeKrijgt: 'Innemen, inkorten, uitleggen, bandjes of mouwen. Meestal twee pasbeurten.',
     kies: 'Trouwjurk laten vermaken',
     img: sVermaken,
     pos: '50% 35%',
@@ -153,6 +159,8 @@ export const diensten: Dienst[] = [
     nav: 'Bruidsmoeder',
     kaartTitel: 'Jurk voor de bruidsmoeder',
     kaartTekst: 'Moeder van de bruid of van de bruidegom. Een jurk die klopt bij de bruidsjurk en waarin je je de hele dag prettig voelt.',
+    voorWie: 'Voor de moeder van de bruid of de bruidegom.',
+    watJeKrijgt: 'Op maat gemaakt of aangepast, afgestemd op de kleur van de bruidsjurk.',
     kies: 'Jurk voor de bruidsmoeder',
     img: sGala,
     pos: '50% 30%',
@@ -204,6 +212,8 @@ export const diensten: Dienst[] = [
     nav: 'Bruidsmeisjes',
     kaartTitel: 'Bruidsmeisjes en bruidsjonkers',
     kaartTekst: 'Jurkjes voor de bruidsmeisjes en kleding voor de bruidsjonkers, in één lijn met jouw jurk.',
+    voorWie: 'Voor de meisjes en jongens naast de bruid.',
+    watJeKrijgt: 'Jurkjes en kleding in één lijn met jouw jurk, elk op eigen maat.',
     kies: 'Bruidsmeisjes of bruidsjonkers',
     img: sMeisjes,
     pos: '50% 45%',
@@ -254,6 +264,8 @@ export const diensten: Dienst[] = [
     nav: 'Gala en avond',
     kaartTitel: 'Gala- en avondkleding',
     kaartTekst: 'Een galajurk of avondjurk die alleen jij hebt, in jouw kleur en op jouw maat.',
+    voorWie: 'Voor een gala, feest of jubileum.',
+    watJeKrijgt: 'Een jurk die alleen jij hebt, of een gekochte jurk passend gemaakt.',
     kies: 'Gala- of avondkleding',
     img: satijn,
     pos: '50% 50%',
@@ -304,6 +316,8 @@ export const diensten: Dienst[] = [
     nav: 'Kleding op maat',
     kaartTitel: 'Kleding op maat en vermaken',
     kaartTekst: 'Ook buiten de bruidsmode. Eigen kleding op maat gemaakt, of je favoriete stuk weer passend.',
+    voorWie: 'Voor alles buiten de bruidsmode.',
+    watJeKrijgt: 'Jurken, rokken, blouses en jassen op maat; vermaken en herstellen.',
     kies: 'Kleding op maat of vermaken',
     img: sAtelier,
     pos: '40% 50%',

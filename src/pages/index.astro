@@ -76,24 +76,31 @@ const faq = [
         <div class="grid gap-8 md:grid-cols-12 md:items-end">
           <div class="md:col-span-7">
             <p class="eyebrow">Het atelier</p>
-            <h2 class="mt-5 text-4xl">Gemaakt en vermaakt, <em class="accent">op maat.</em></h2>
+            <h2 class="mt-5 text-4xl">Dit maakt en vermaakt <em class="accent">Bei.</em></h2>
           </div>
-          <p class="text-lg text-steen md:col-span-5">Van een bruidsjurk die vanaf nul wordt opgebouwd tot een gekochte jurk die eindelijk goed zit. En alles daartussenin.</p>
+          <p class="text-lg text-steen md:col-span-5">Zes dingen waarvoor je in het atelier terechtkunt. Alles op maat, alles door Bei zelf.</p>
         </div>
-        <ul class="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
+
+        <ol class="mt-14 grid border-t border-ivoor-3 lg:grid-cols-2 lg:gap-x-16">
           {diensten.map((d, i) => (
-            <li class="rijs" style={`--d:${(i % 3) * 0.08}s`}>
-              <a href={url(`${d.slug}/`)} class="fotolink group">
-                <span class="block overflow-hidden rounded-none bg-inkt">
-                  <Picture src={d.img} formats={['avif', 'webp']} widths={[400, 560, 800]} sizes="(min-width: 1024px) 380px, (min-width: 640px) 44vw, 92vw" alt={d.alt} class="aspect-[4/5] w-full object-cover" style={`object-position:${d.pos}`} />
+            <li class="rijs border-b border-ivoor-3" style={`--d:${i * 0.05}s`}>
+              <a href={url(`${d.slug}/`)} class="fotolink group grid grid-cols-[6rem_1fr] gap-6 py-7 md:grid-cols-[8rem_1fr] md:gap-8 md:py-8">
+                <span class="block aspect-[4/5] overflow-hidden bg-ivoor-2">
+                  <Picture src={d.img} formats={['avif', 'webp']} widths={[160, 256, 384]} sizes="(min-width: 768px) 128px, 96px" alt={d.alt} class="h-full w-full object-cover" style={`object-position:${d.pos}`} />
                 </span>
-                <h3 class="mt-6 text-[1.75rem] sm:min-h-[2.2em]">{d.kaartTitel}</h3>
-                <p class="mt-3 text-steen">{d.kaartTekst}</p>
+                <span class="block min-w-0">
+                  <span class="num font-kop text-[.95rem] font-extrabold italic text-merk">0{i + 1}</span>
+                  <h3 class="mt-1 text-[1.5rem] md:text-[1.7rem]">{d.kaartTitel}</h3>
+                  <span class="mt-2 block font-medium">{d.voorWie}</span>
+                  <span class="mt-1 block text-[.98rem] leading-relaxed text-steen">{d.watJeKrijgt}</span>
+                  <span class="tekstlink mt-3 inline-block text-sm font-semibold text-merk">Meer over {d.kaartTitel.toLowerCase()}</span>
+                </span>
               </a>
             </li>
           ))}
-        </ul>
-        <p class="mt-6 text-xs text-steen">Sfeerfoto's via Unsplash, ter illustratie.</p>
+        </ol>
+
+        <p class="mt-8 text-steen">Iets anders in gedachten, zoals carnavalskleding, een turnpakje of een kostuum? Dat kan ook. Bel of app <a href={site.telHref} class="tekstlink num font-semibold text-inkt">{site.tel}</a>.</p>
       </div>
     </section>
 
