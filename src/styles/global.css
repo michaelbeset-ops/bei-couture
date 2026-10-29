@@ -2,11 +2,10 @@
 
 @import "@fontsource/bodoni-moda/latin-800.css";
 @import "@fontsource/bodoni-moda/latin-800-italic.css";
-@import "@fontsource/bodoni-moda/latin-500.css";
-@import "@fontsource/bodoni-moda/latin-500-italic.css";
-@import "@fontsource/cormorant-garamond/latin-500.css";
-@import "@fontsource/cormorant-garamond/latin-500-italic.css";
-@import "@fontsource/cormorant-garamond/latin-600.css";
+@import "@fontsource/marcellus/latin-400.css";
+@import "@fontsource/jost/latin-300.css";
+@import "@fontsource/jost/latin-400.css";
+@import "@fontsource/jost/latin-500.css";
 @import "@fontsource/instrument-sans/latin-400.css";
 @import "@fontsource/instrument-sans/latin-500.css";
 @import "@fontsource/instrument-sans/latin-600.css";
@@ -22,38 +21,40 @@
   --color-merk: #8f4b4f;        /* rozenhout: knoppen, wit erop 6,4:1 */
   --color-merk-diep: #733a3e;   /* hover */
   --color-strik: #e3bfb6;       /* het strikje: merk als tekst/lijn op donker */
-  --color-strik-zacht: #f3e3de;
+  --color-strik-zacht: #f7ebe7;
   /* Warm, zoals Lunchroom Rosí: nooit puur wit of zwart. Crème als ondergrond, blush als wisselvlak,
      warm donkerbruin voor tekst en donkere vlakken. */
-  --color-ivoor: #f8f1ec;       /* crème: de basis */
-  --color-ivoor-2: #f1dfd9;     /* blush: wisselvlakken */
-  --color-ivoor-3: #e5d2ca;     /* haarlijnen */
-  --color-wit: #fdf9f6;         /* "wit" voor kaarten, iets warm */
-  --color-inkt: #3b2a28;        /* warm donkerbruin: tekst en donkere vlakken */
-  --color-inkt-2: #4a3634;
-  --color-steen: #6e5955;       /* bijtekst op licht */
-  --color-mist: #dcc8c1;        /* bijtekst op donker */
-  --color-lijn: #ffffff2e;
-  --color-lijn-licht: #3b2a2826;
+  --color-ivoor: #ffffff;       /* de basis is wit */
+  --color-ivoor-2: #f7f6f5;     /* heel licht neutraal, alleen voor velden en één wisselvlak */
+  --color-ivoor-3: #e7e3e0;     /* haarlijnen */
+  --color-wit: #ffffff;
+  --color-inkt: #1b1716;        /* zelfde zwart als de hero */
+  --color-inkt-2: #272121;
+  --color-steen: #5f5755;       /* bijtekst op licht */
+  --color-mist: #c4b9b5;        /* bijtekst op donker */
+  --color-lijn: #ffffff26;
+  --color-lijn-licht: #1b171624;
   --shadow-zacht: 0 10px 30px -22px rgb(59 42 40 / .35);
 
-  --font-kop: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
-  --font-tekst: "Cormorant Garamond", "Cormorant", Garamond, Georgia, serif;
+  /* Hero: Bodoni (zoals het logo). Rest van de site: Marcellus voor koppen, Jost voor tekst. */
+  --font-hero: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --font-kop: "Marcellus", "Cormorant", Georgia, serif;
+  --font-tekst: "Jost", "Futura", "Segoe UI", system-ui, sans-serif;
   /* Instrument Sans alleen nog in de hero (die blijft zoals hij was) en in heel kleine UI-tekst. */
   --font-sans: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
 
-  --text-xs: 0.95rem;
-  --text-sm: 1.05rem;
-  --text-base: 1.2rem;
-  --text-lg: 1.35rem;
-  --text-xl: 1.55rem;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.375rem;
   --text-2xl: clamp(1.5rem, 1vw + 1.2rem, 2rem);
   --text-3xl: clamp(2.1rem, 2.6vw + 1.1rem, 3.5rem);
   --text-4xl: clamp(2.3rem, 3.4vw + 1rem, 4.5rem);
   --text-hero: clamp(2.65rem, 5.2vw + .6rem, 6.2rem);
 
-  --radius-sm: 14px;
-  --radius-pil: 999px;
+  --radius-sm: 2px;
+  --radius-pil: 2px;
   --ease-zacht: cubic-bezier(.22, .61, .36, 1);
 }
 
@@ -63,15 +64,16 @@
     background-color: var(--color-ivoor);
     color: var(--color-inkt);
     font-family: var(--font-tekst);
+    font-weight: 400;
     font-size: var(--text-base);
-    line-height: 1.55;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  h1, h2, h3 { font-family: var(--font-kop); font-weight: 500; line-height: 1.05; letter-spacing: -.01em; text-wrap: balance; }
-  h3 { line-height: 1.12; }
-  /* De hero houdt de zware letter waar de klant voor koos. */
-  .hero-kop { font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+  h1, h2, h3 { font-family: var(--font-kop); font-weight: 400; line-height: 1.08; letter-spacing: .01em; text-wrap: balance; }
+  h3 { line-height: 1.15; }
+  /* De hero houdt de zware Bodoni waar de klant voor koos. */
+  .hero-kop { font-family: var(--font-hero); font-weight: 800; letter-spacing: -.03em; line-height: 1; }
   em { font-style: italic; }
   fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
   p { text-wrap: pretty; }
@@ -89,22 +91,24 @@
 
   .num { font-variant-numeric: lining-nums tabular-nums; }
 
-  .eyebrow { display: inline-block; font-family: var(--font-tekst); font-size: 1rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--color-merk); }
+  .eyebrow { display: inline-block; font-family: var(--font-tekst); font-size: .8rem; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: var(--color-merk); }
   .eyebrow-licht { color: var(--color-strik); }
 
   /* De naad: gestippelde lijn uit hun logo, als stiksel tussen onderdelen. */
   .naad { border: 0; border-top: 1px solid var(--color-ivoor-3); }
   .naad-donker { border-top-color: #ffffff2b; }
 
-  .accent { font-style: italic; color: var(--color-merk); }
-  .accent-licht { font-style: italic; color: var(--color-strik); }
+  /* Marcellus heeft geen cursief; het accentwoord krijgt alleen de kleur. De hero houdt zijn cursieve Bodoni via .accent-hero. */
+  .accent { font-style: normal; color: var(--color-merk); }
+  .accent-licht { font-style: normal; color: var(--color-strik); }
+  .accent-hero { font-style: italic; color: var(--color-strik); }
 
-  .kaart { background: var(--color-wit); color: var(--color-inkt); border-radius: var(--radius-sm); border: 1px solid var(--color-ivoor-3); }
-  .foto { border-radius: var(--radius-sm); box-shadow: var(--shadow-zacht); overflow: hidden; }
+  .kaart { background: var(--color-wit); color: var(--color-inkt); border-radius: 0; border: 1px solid var(--color-ivoor-3); }
+  .foto { border-radius: 0; overflow: hidden; }
 
   .stap-nr { font-family: var(--font-kop); font-weight: 800; font-style: italic; font-size: 3.4rem; line-height: 1; letter-spacing: -.03em; color: var(--color-merk); }
 
-  .knop { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 3.25rem; padding: 0 1.9rem; border-radius: var(--radius-pil); font-family: var(--font-tekst); font-size: 1.05rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .25s var(--ease-zacht), color .25s var(--ease-zacht), border-color .25s var(--ease-zacht), transform .25s var(--ease-zacht); }
+  .knop { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 3.25rem; padding: 0 1.9rem; border-radius: 2px; font-family: var(--font-tekst); font-size: .9rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .25s var(--ease-zacht), color .25s var(--ease-zacht), border-color .25s var(--ease-zacht), transform .25s var(--ease-zacht); }
   .knop svg { width: 1.2rem; height: 1.2rem; flex: none; }
   /* Op smalle telefoons mag een knop over twee regels, anders duwt hij de pagina breder dan het scherm. */
   @media (max-width: 420px) { .knop { white-space: normal; text-align: center; padding-block: .6rem; line-height: 1.25; max-width: 100%; } }
@@ -140,10 +144,10 @@
   }
 
   /* Uitspraak: grote letter, geen kader. */
-  .uitspraak { font-family: var(--font-kop); font-weight: 500; font-style: italic; letter-spacing: -.01em; line-height: 1.1; text-wrap: balance; }
+  .uitspraak { font-family: var(--font-kop); font-weight: 400; letter-spacing: .01em; line-height: 1.15; text-wrap: balance; }
 
   /* Wow: afspraak-kaartje. Keuzes als stoffen labels. */
-  .keuze { position: relative; display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .7rem 1rem; font-size: 1.15rem; border: 1px solid var(--color-ivoor-3); border-radius: 10px; background: var(--color-wit); cursor: pointer; font-weight: 500; line-height: 1.3; transition: border-color .2s, background-color .2s; }
+  .keuze { position: relative; display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .7rem 1rem; border: 1px solid var(--color-ivoor-3); border-radius: 2px; background: var(--color-wit); cursor: pointer; font-weight: 500; line-height: 1.3; transition: border-color .2s, background-color .2s; }
   .keuze input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
   .keuze:hover { border-color: var(--color-merk); }
   .keuze .bol { flex: none; width: 1.1rem; height: 1.1rem; border-radius: 999px; border: 1px solid var(--color-steen); transition: all .2s; }
@@ -153,11 +157,11 @@
   .keuze-vink .bol { border-radius: 2px; }
   .keuze-vink:has(input:checked) .bol { border: 0; background: var(--color-merk) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 80% no-repeat; }
 
-  .veld { display: block; width: 100%; min-height: 3.2rem; padding: .55rem .9rem; border: 1px solid var(--color-ivoor-3); border-radius: 10px; background: var(--color-wit); color: var(--color-inkt); font: inherit; transition: border-color .2s; }
+  .veld { display: block; width: 100%; min-height: 3.2rem; padding: .55rem .9rem; border: 1px solid var(--color-ivoor-3); border-radius: 2px; background: var(--color-wit); color: var(--color-inkt); font: inherit; transition: border-color .2s; }
   .veld::placeholder { color: #8b807d; }
   .veld:hover { border-color: var(--color-steen); }
   .veld:focus { outline: none; border-color: var(--color-merk); box-shadow: 0 0 0 1px var(--color-merk); }
-  .veld-label { display: block; font-family: var(--font-kop); font-weight: 500; font-size: 1.5rem; margin-bottom: .85rem; }
+  .veld-label { display: block; font-family: var(--font-kop); font-weight: 400; font-size: 1.35rem; margin-bottom: .85rem; }
 
 
   /* Swipebare rij (reviews). Scrollbar subtiel, maar wel zichtbaar dat er meer is. */

@@ -5,7 +5,7 @@ import { site, waHoi } from '../data/site';
 import { diensten } from '../data/diensten';
 import Icoon from './Icoon.astro';
 interface Props { achtergrond?: string; kop?: string }
-const { achtergrond = 'bg-ivoor', kop = 'Vertel Bei wat je' } = Astro.props;
+const { achtergrond = 'bg-ivoor-2', kop = 'Vertel Bei wat je' } = Astro.props;
 ---
 <section id="afspraak" class={`${achtergrond} py-20 md:py-28`} aria-labelledby="afspraak-kop">
   <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-14">

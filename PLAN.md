@@ -9,14 +9,15 @@ Wow: "Vertel Bei wat je droomt": kies waarvoor, stof, datum, dag, foto mee, naam
 live klaar. Vanaf een dienstpagina staat de juiste keuze al aangevinkt (/contact/?voor=...).
 
 ## Keuzes
-Bodoni Moda 800 (cursief voor het accentwoord, zoals "Bei" in hun logo), Instrument Sans tekst.
-Warm, naar het voorbeeld van lunchroomrosi.nl: nooit puur wit of zwart. Crème #f8f1ec als basis, blush #f1dfd9 als
-wisselvlak, warm donkerbruin #3b2a28 voor tekst en donkere vlakken, rozenhout #8f4b4f voor knoppen en accenten,
-strik #e3bfb6 voor het roze. Hoeken 14 px, knoppen als pil, foto's met een zachte bruine schaduw, een golfje in
-strik tussen secties, overlappende fotocollage bij Over Bei. Geen kaders, geen pijltjes-chips, geen icoontjes in
-cirkels; links zijn onderstreepte tekst. Diensten op de homepage als genummerde lijst met per dienst voor wie en
-wat je krijgt. Werkwijze als vijf stappen van links naar rechts op één lijn. Kop doorzichtig over de hero met het
-logo in ivoor; op lichte pagina's een donkere balk.
+Lichte site: wit als basis, geen crème of beige (die las de klant als "AI"), haarlijnen #e7e3e0, één heel licht
+neutraal vlak #f7f6f5 voor het afspraakformulier. Zwart #1b1716 zoals in de hero, rozenhout #8f4b4f voor knoppen en
+accentwoorden, strik #e3bfb6 als roze accent op donker.
+Letters: de hero houdt Bodoni Moda 800 (hun logo). Daarbuiten Marcellus voor koppen (Romeinse kapitaalvorm, geen
+cursief: accentwoorden krijgen alleen kleur) en Jost voor tekst, labels en knoppen (kapitalen met tracking).
+Hoeken 2 px, knoppen rechthoekig zoals in de hero, geen schaduwen, geen golfjes, geen nummering.
+Diensten op de homepage als zes staande foto's met de naam in kapitalen, voor wie het is, en "Bekijk".
+Werkwijze als vijf stappen van links naar rechts op één lijn. Kop doorzichtig over de hero met het logo in ivoor;
+op lichte pagina's een donkere balk.
 
 ## Paginastructuur
 - `/` home: hero > cijfers > 6 dienstkaarten > over Bei (eigen atelierfoto) > Google-reviews (swipebaar) >

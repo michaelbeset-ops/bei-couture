@@ -43,7 +43,7 @@ const faq = [
       <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#1b1716f2_0%,#1b1716c7_42%,#1b171640_80%,#1b171626_100%)] max-md:bg-[linear-gradient(180deg,#1b1716b3_0%,#1b171699_35%,#1b1716e6_78%,#1b1716_100%)]"></div>
       <div class="wrap flex flex-1 flex-col justify-end pb-[5.5rem] pt-28 md:pb-20 md:pt-36 lg:pt-44">
         <p class="eyebrow eyebrow-licht !font-sans !text-[.8125rem] !font-semibold !tracking-[.2em]">Bruidsatelier in Rotterdam</p>
-        <h1 class="hero-kop mt-4 max-w-[13ch] text-hero md:mt-6">Uw droom wordt werkelijkheid in ons <em class="accent-licht">atelier.</em></h1>
+        <h1 class="hero-kop mt-4 max-w-[13ch] text-hero md:mt-6">Uw droom wordt werkelijkheid in ons <em class="accent-hero">atelier.</em></h1>
         <p class="mt-5 max-w-xl text-[1.06rem] text-[#ffffffe6] md:mt-7 md:text-[1.375rem]">Bruidsjurken op maat, trouwjurken vermaakt en jurken voor de bruidsmoeder, de bruidsmeisjes en de bruidsjonkers. Gemaakt door Bei zelf, in haar atelier aan de Hoogstraat.</p>
         <div class="mt-7 flex flex-wrap gap-3 md:mt-9">
           <a href={url('contact/')} class="knop knop-merk !rounded-[2px] !font-sans !normal-case !tracking-[.01em] !text-[1.05rem] !font-semibold">Afspraak maken <Icoon naam="pijl" /></a>
@@ -82,36 +82,33 @@ const faq = [
           <p class="text-lg text-steen md:col-span-5">Zes dingen waarvoor je in het atelier terechtkunt. Alles op maat, alles door Bei zelf.</p>
         </div>
 
-        <ol class="mt-14 grid lg:grid-cols-2 lg:gap-x-16">
+        <ul class="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
           {diensten.map((d, i) => (
-            <li class="rijs border-t border-ivoor-3" style={`--d:${i * 0.05}s`}>
-              <a href={url(`${d.slug}/`)} class="fotolink group grid grid-cols-[6rem_1fr] gap-6 py-7 md:grid-cols-[8rem_1fr] md:gap-8 md:py-8">
-                <span class="foto block aspect-[4/5] bg-ivoor-2">
-                  <Picture src={d.img} formats={['avif', 'webp']} widths={[160, 256, 384]} sizes="(min-width: 768px) 128px, 96px" alt={d.alt} class="h-full w-full object-cover" style={`object-position:${d.pos}`} />
+            <li class="rijs" style={`--d:${(i % 3) * 0.07}s`}>
+              <a href={url(`${d.slug}/`)} class="fotolink group">
+                <span class="foto block aspect-[3/4] bg-ivoor-2">
+                  <Picture src={d.img} formats={['avif', 'webp']} widths={[400, 560, 800]} sizes="(min-width: 1024px) 380px, (min-width: 640px) 44vw, 92vw" alt={d.alt} class="h-full w-full object-cover" style={`object-position:${d.pos}`} />
                 </span>
-                <span class="block min-w-0">
-                  <h3 class="text-[1.7rem] md:text-[2rem]">{d.kaartTitel}</h3>
-                  <span class="mt-2 block font-medium">{d.voorWie}</span>
-                  <span class="mt-1 block text-[.98rem] leading-relaxed text-steen">{d.watJeKrijgt}</span>
-                  <span class="tekstlink mt-3 inline-block text-sm font-semibold text-merk">Meer over {d.kaartTitel.toLowerCase()}</span>
-                </span>
+                <h3 class="mt-6 text-[1.35rem] uppercase tracking-[.06em]">{d.kaartTitel}</h3>
+                <span class="mt-2 block text-steen">{d.voorWie}</span>
+                <span class="mt-4 inline-block text-[.8rem] font-medium uppercase tracking-[.25em] text-merk underline decoration-merk/40 underline-offset-[6px]">Bekijk</span>
               </a>
             </li>
           ))}
-        </ol>
+        </ul>
 
         <p class="mt-8 text-steen">Iets anders in gedachten, zoals carnavalskleding, een turnpakje of een kostuum? Dat kan ook. Bel of app <a href={site.telHref} class="tekstlink num font-semibold text-inkt">{site.tel}</a>.</p>
       </div>
     </section>
 
     <!-- OVER BEI -->
-    <section id="bei" class="bg-ivoor-2 py-24 md:py-32">
+    <section id="bei" class="bg-ivoor py-24 md:py-32">
       <div class="wrap grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-16">
         <div class="rijs relative mx-auto w-full max-w-[520px] lg:col-span-5">
-          <div class="foto relative aspect-[4/5] w-[64%] bg-inkt">
+          <div class="foto relative aspect-[4/5] w-[64%] bg-ivoor-2">
             <Picture src={bei} formats={['avif', 'webp']} widths={[480, 720]} sizes="(min-width: 1024px) 330px, 60vw" alt="Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier" class="block h-full w-full object-cover object-[50%_30%]" />
           </div>
-          <div class="foto relative -mt-[42%] ml-auto aspect-[4/5] w-[64%] bg-inkt">
+          <div class="foto relative -mt-[42%] ml-auto aspect-[4/5] w-[64%] bg-ivoor-2">
             <Picture src={kant} formats={['avif', 'webp']} widths={[480, 720]} sizes="(min-width: 1024px) 330px, 60vw" alt="Detail van een kanten jurk met stoffen knoopjes" class="block h-full w-full object-cover" />
           </div>
           <p class="mt-5 text-sm text-steen">Bei in haar atelier aan de Hoogstraat, en een van haar jurken.</p>
@@ -119,7 +116,7 @@ const faq = [
         <div class="lg:col-span-7 lg:pl-6">
           <p class="eyebrow">Over Bei</p>
           <blockquote class="mt-5">
-            <p class="uitspraak text-[2.2rem] text-merk md:text-[3.2rem]">“Geen enkele opgave is teveel.”</p>
+            <p class="uitspraak text-[2rem] text-merk md:text-[2.8rem]">“Geen enkele opgave is teveel.”</p>
           </blockquote>
           <div class="mt-8 max-w-xl space-y-5 text-lg">
             <p>Mijn naam is Bei. Ik ben geboren in China en woon nu al een lange tijd in Nederland. Vanaf kleins af aan ben ik dol op tekenen en naaien, zo is mijn liefde ontstaan om kleding te ontwerpen. Ik ben een perfectionist en wil het liefst alles zelf doen.</p>
