@@ -41,7 +41,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
           <a href={site.reviews} target="_blank" rel="noopener" class="flex items-center gap-4 rounded-sm border border-ivoor-3 bg-wit px-5 py-4 no-underline transition-colors hover:border-merk">
             <span class="grid h-11 w-11 place-items-center rounded-full bg-wit shadow-[0_1px_3px_#1b171626]"><Icoon naam="g" class="h-6 w-6" /></span>
             <span>
-              <span class="flex items-center gap-2"><strong class="num font-kop text-2xl font-extrabold">{site.google.score}</strong><span class="flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span></span>
+              <span class="flex items-center gap-2"><strong class="num font-kop text-2xl font-normal">{site.google.score}</strong><span class="flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span></span>
               <span class="block text-sm text-steen">{site.google.aantal} reviews op Google</span>
             </span>
           </a>
@@ -61,7 +61,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
             )}
             <div class={e.foto ? 'lg:col-span-7' : 'max-w-3xl'}>
               <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-                <span class="grid h-11 w-11 flex-none place-items-center rounded-full bg-strik-zacht font-kop text-xl font-extrabold text-merk">{e.naam.charAt(0)}</span>
+                <span class="grid h-11 w-11 flex-none place-items-center rounded-full bg-strik-zacht font-kop text-xl font-normal text-merk">{e.naam.charAt(0)}</span>
                 <span>
                   <span class="block font-semibold">{e.naam}</span>
                   <span class="block text-sm text-steen">{`${e.wanneer} · Google review`}</span>
@@ -70,7 +70,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
               </div>
 
               <p class="eyebrow mt-7">{e.dienst}</p>
-              <h2 class={`mt-4 font-kop font-extrabold italic leading-snug tracking-[-.015em] ${e.citaat.length > 170 ? 'text-[1.35rem] md:text-[1.65rem]' : 'text-[1.6rem] md:text-[2rem]'}`}>“{e.citaat}”</h2>
+              <h2 class={`mt-4 font-kop font-normal italic leading-snug ${e.citaat.length > 170 ? 'text-[1.35rem] md:text-[1.65rem]' : 'text-[1.6rem] md:text-[2rem]'}`}>“{e.citaat}”</h2>
               <hr class="naad mt-7" />
               <p class="mt-6 text-steen">{e.samenvatting}</p>
               <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">

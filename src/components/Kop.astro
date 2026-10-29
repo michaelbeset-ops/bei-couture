@@ -73,7 +73,7 @@ const nav: { href: string; t: string; actief: boolean }[] = [
   <nav id="menu-nav" aria-label="Menu" class="hidden bg-inkt lg:hidden" data-menu>
     <ul class="wrap max-h-[70svh] overflow-y-auto pb-8 pt-2">
       {[...diensten.map((d) => ({ href: url(`${d.slug}/`), t: d.kaartTitel })), ...nav.map((n) => ({ href: n.href, t: n.t }))].map((n) => (
-        <li><a href={n.href} class="block border-b border-lijn py-4 font-kop text-2xl font-extrabold tracking-[-.02em] text-wit no-underline">{n.t}</a></li>
+        <li><a href={n.href} class="block border-b border-lijn py-4 font-kop text-2xl font-normal text-wit no-underline">{n.t}</a></li>
       ))}
       <li class="flex flex-wrap gap-3 pt-6">
         <a href={url('contact/')} class="knop knop-merk">Afspraak maken</a>

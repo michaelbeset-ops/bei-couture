@@ -66,7 +66,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
             ['Nu', 'Hoogstraat 89A', `Het atelier zit midden in Rotterdam, in het pand van ${site.inPand}.`],
           ].map(([j, k, t]) => (
             <li>
-              <p class="num font-kop text-[2.8rem] font-extrabold italic leading-none text-strik">{j}</p>
+              <p class="num font-kop text-[2.8rem] font-normal italic leading-none text-strik">{j}</p>
               <p class="mt-5 font-semibold text-wit">{k}</p>
               <p class="mt-2 text-mist">{t}</p>
             </li>
@@ -89,7 +89,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
             ].map(([k, t]) => (
               <li class="flex gap-5 py-6">
                 <Icoon naam="naald" class="mt-1 h-6 w-6 flex-none text-merk" />
-                <span><strong class="block font-kop text-xl font-extrabold tracking-[-.015em]">{k}</strong><span class="mt-1 block text-steen">{t}</span></span>
+                <span><strong class="block font-kop text-xl font-normal">{k}</strong><span class="mt-1 block text-steen">{t}</span></span>
               </li>
             ))}
           </ul>

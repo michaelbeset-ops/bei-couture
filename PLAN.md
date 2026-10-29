@@ -12,8 +12,8 @@ live klaar. Vanaf een dienstpagina staat de juiste keuze al aangevinkt (/contact
 Lichte site: wit als basis, geen crème of beige (die las de klant als "AI"), haarlijnen #e7e3e0, één heel licht
 neutraal vlak #f7f6f5 voor het afspraakformulier. Zwart #1b1716 zoals in de hero, rozenhout #8f4b4f voor knoppen en
 accentwoorden, strik #e3bfb6 als roze accent op donker.
-Letters: de hero houdt Bodoni Moda 800 (hun logo). Daarbuiten Marcellus voor koppen (Romeinse kapitaalvorm, geen
-cursief: accentwoorden krijgen alleen kleur) en Jost voor tekst, labels en knoppen (kapitalen met tracking).
+Letters: de hero houdt Bodoni Moda 800 (hun logo). Daarbuiten Playfair Display 400 voor koppen (gekozen door de
+klant uit drie proeven, 29-10-2026) en DM Sans voor tekst, labels en knoppen (kapitalen met tracking).
 Hoeken 2 px, knoppen rechthoekig zoals in de hero, geen schaduwen, geen golfjes, geen nummering.
 Diensten op de homepage als zes staande foto's met de naam in kapitalen, voor wie het is, en "Bekijk".
 Werkwijze als vijf stappen van links naar rechts op één lijn. Kop doorzichtig over de hero met het logo in ivoor;
