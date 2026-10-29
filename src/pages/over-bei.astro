@@ -29,18 +29,13 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
 >
   <Kop opFoto={false} />
   <main id="inhoud">
-    <section class="bg-ivoor pb-16 pt-12 md:pb-20 md:pt-16">
+    <section class="bg-wit pb-20 pt-12 md:pb-28 md:pt-16">
       <div class="wrap">
         <Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Over Bei', href: url('over-bei/') }]} />
         <div class="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div class="rijs lg:col-span-6">
-            <div class="relative">
-              <Picture src={bei} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(min-width: 1024px) 600px, 100vw" alt="Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier" loading="eager" fetchpriority="high" class="aspect-[4/5] w-full rounded-[2px] object-cover object-[50%_30%]" />
-              <div class="absolute -bottom-6 left-6 right-6 border border-dashed border-merk bg-wit px-6 py-5 md:left-auto md:right-[-1.5rem] md:w-72">
-                <p class="font-kop text-xl font-extrabold italic leading-tight text-merk">“Geen enkele opgave is teveel.”</p>
-                <p class="mt-1 text-sm text-steen">Bei, in haar eigen woorden</p>
-              </div>
-            </div>
+            <Picture src={bei} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(min-width: 1024px) 600px, 100vw" alt="Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier" loading="eager" fetchpriority="high" class="aspect-[4/5] w-full object-cover object-[50%_30%]" />
+            <p class="mt-4 text-sm text-steen">Bei aan het werk in haar atelier aan de Hoogstraat.</p>
           </div>
           <div class="lg:col-span-6 lg:pt-4">
             <p class="eyebrow">Over Bei</p>
@@ -51,8 +46,8 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
               <p>Iedereen wil er stralend uitzien op haar grote dag. Daar werk ik met veel plezier aan, en geen enkele opgave is mij teveel.</p>
             </div>
             <div class="mt-9 flex flex-wrap gap-3">
-              <a href={url('contact/')} class="knop knop-merk">Afspraak maken <Icoon naam="pijl" /></a>
-              <a href={url('werkwijze/')} class="knop knop-rand">Zo werkt het</a>
+              <a href={url('contact/')} class="knop knop-merk">Afspraak maken</a>
+              <a href={url('werkwijze/')} class="tekstlink self-center font-semibold text-merk">Zo werkt het</a>
             </div>
           </div>
         </div>
@@ -64,13 +59,13 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
       <div class="wrap">
         <p class="eyebrow eyebrow-licht">Het atelier</p>
         <h2 class="mt-5 text-4xl">Eigen handen, eigen <em class="accent-licht">atelier.</em></h2>
-        <ul class="mt-14 grid gap-px overflow-hidden rounded-[2px] border border-lijn bg-lijn md:grid-cols-3">
+        <ul class="mt-14 grid gap-10 border-t border-lijn pt-10 md:grid-cols-3">
           {[
             ['1997', 'Eigen atelier', 'Bei begint voor zichzelf met een atelier op het Marconiplein in Rotterdam.'],
             ['2009', 'Bruidsmode', 'Ze specialiseert zich in bruidsmode: bruidsjurken, bruidsmeisjes en bruidsjonkers.'],
             ['Nu', 'Hoogstraat 89A', `Het atelier zit midden in Rotterdam, in het pand van ${site.inPand}.`],
           ].map(([j, k, t]) => (
-            <li class="bg-inkt p-8">
+            <li>
               <p class="num font-kop text-[2.8rem] font-extrabold italic leading-none text-strik">{j}</p>
               <p class="mt-5 font-semibold text-wit">{k}</p>
               <p class="mt-2 text-mist">{t}</p>
@@ -81,11 +76,11 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
     </section>
 
     <!-- WAAROM -->
-    <section class="bg-ivoor py-20 md:py-28">
+    <section class="bg-ivoor-2 py-24 md:py-32">
       <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div class="lg:col-span-7">
           <h2 class="text-4xl">Waarom bruiden naar de <em class="accent">Hoogstraat</em> komen.</h2>
-          <ul class="mt-10 divide-y divide-dashed divide-ivoor-3 border-y border-dashed border-ivoor-3">
+          <ul class="mt-10 divide-y divide-ivoor-3 border-y border-ivoor-3">
             {[
               ['Je zit bij de maakster zelf', 'Geen verkoper die het doorgeeft aan een atelier ergens anders. Bei voert het gesprek, meet je op en naait je jurk.'],
               ['Alles is een keuze, niets staat vast', 'Model, hals, mouw, rug, kleur, stof en maat. Ook een gekleurde trouwjurk of een jurk in een grote maat is gewoon een keuze.'],
@@ -101,7 +96,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
           <p class="mt-8 text-steen">Bruiden komen uit {site.plaats} en de hele omgeving: {werkgebied.slice(1, 9).join(', ')} en verder.</p>
         </div>
         <div class="lg:col-span-5">
-          <Picture src={kant} formats={['avif', 'webp']} widths={[480, 800]} sizes="(min-width: 1024px) 480px, 100vw" alt="Detail van een kanten jurk met stoffen knoopjes" class="aspect-[4/5] w-full rounded-[2px] object-cover" />
+          <Picture src={kant} formats={['avif', 'webp']} widths={[480, 800]} sizes="(min-width: 1024px) 480px, 100vw" alt="Detail van een kanten jurk met stoffen knoopjes" class="aspect-[4/5] w-full rounded-none object-cover" />
           <Tijden class="mt-6" />
         </div>
       </div>

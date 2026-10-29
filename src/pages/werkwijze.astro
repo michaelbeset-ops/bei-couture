@@ -58,7 +58,7 @@ const faq = [
       kruimels={[{ naam: 'Home', href: url('') }, { naam: 'Werkwijze', href: url('werkwijze/') }]}
     />
 
-    <section class="bg-ivoor py-16 md:py-20">
+    <section class="bg-wit py-16 md:py-20">
       <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-16">
         <div class="lg:col-span-7">
           <p class="text-lg text-steen">Omdat er heel veel verschillende opties zijn als het aankomt op bruidsmode, vindt Bei het belangrijk om tijdens een persoonlijke afspraak eerst alles op een rijtje te zetten. Pas als jullie elkaar echt begrijpen, gaat de schaar in de stof.</p>
@@ -70,7 +70,7 @@ const faq = [
             ['Alles kan aangepast worden', 'Model, hals, mouw, rug, kleur en stof zijn allemaal jouw keuze.'],
             ['Je hoort het eerlijk', 'Als iets niet goed valt of niet haalbaar is, wordt dat gezegd.'],
           ].map(([k, t]) => (
-            <li class="flex gap-4 rounded-[2px] border border-lijn-licht bg-wit p-5">
+            <li class="flex gap-4 border-t border-ivoor-3 pt-5">
               <Icoon naam="vink" class="mt-1 h-5 w-5 flex-none text-merk" />
               <span><strong class="block font-semibold">{k}</strong><span class="text-steen">{t}</span></span>
             </li>
@@ -86,13 +86,13 @@ const faq = [
       <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div class="lg:col-span-5">
           <div class="relative">
-            <Picture src={sMeer} formats={['avif', 'webp']} widths={[480, 800]} sizes="(min-width: 1024px) 480px, 100vw" alt="Garenklosjes, een vingerhoed en spelden op de werktafel" class="aspect-[4/3] w-full rounded-[2px] object-cover" />
+            <Picture src={sMeer} formats={['avif', 'webp']} widths={[480, 800]} sizes="(min-width: 1024px) 480px, 100vw" alt="Garenklosjes, een vingerhoed en spelden op de werktafel" class="aspect-[4/3] w-full rounded-none object-cover" />
           </div>
         </div>
         <div class="lg:col-span-7">
           <p class="eyebrow eyebrow-licht">Eerste afspraak</p>
           <h2 class="mt-5 text-4xl">Wat neem je <em class="accent-licht">mee?</em></h2>
-          <ul class="mt-10 divide-y divide-dashed divide-lijn border-y border-dashed border-lijn">
+          <ul class="mt-10 divide-y divide-lijn border-y border-lijn">
             {mee.map((m) => (
               <li class="flex gap-5 py-5">
                 <Icoon naam="vink" class="mt-1 h-5 w-5 flex-none text-strik" />
@@ -106,7 +106,7 @@ const faq = [
     </section>
 
     <!-- ANDERE TRAJECTEN -->
-    <section class="bg-ivoor py-20 md:py-28">
+    <section class="bg-ivoor-2 py-24 md:py-32">
       <div class="wrap">
         <p class="eyebrow">Ook mogelijk</p>
         <h2 class="mt-5 text-4xl">Niet elk traject is <em class="accent">hetzelfde.</em></h2>
@@ -116,7 +116,7 @@ const faq = [
             { k: 'Voor de tweede keer trouwen', t: 'Trouw je opnieuw, of draag je de jurk van je moeder, dan kan die jurk gemoderniseerd worden: een andere hals, mouwen eraf of een nieuw lijfje onder het oude kant.', l: 'trouwjurk-vermaken', n: 'Een jurk aanpassen' },
             { k: 'Gewone kleding op maat', t: 'Buiten de bruidsmode maakt en vermaakt Bei ook alledaagse kleding. Dezelfde werkwijze, meestal in minder stappen.', l: 'kleding-op-maat', n: 'Kleding op maat' },
           ].map((b) => (
-            <li class="flex h-full flex-col rounded-[2px] border border-ivoor-3 bg-wit p-7">
+            <li class="flex h-full flex-col border-t border-ivoor-3 pt-7">
               <h3 class="text-[1.6rem]">{b.k}</h3>
               <p class="mt-4 flex-1 text-steen">{b.t}</p>
               <a href={url(`${b.l}/`)} class="tekstlink mt-6 inline-block font-semibold text-merk">{b.n}</a>

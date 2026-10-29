@@ -34,11 +34,11 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
       kruimels={[{ naam: 'Home', href: url('') }, { naam: 'Klantervaringen', href: url('klantervaringen/') }]}
     />
 
-    <section class="bg-ivoor py-16 md:py-20">
+    <section class="bg-wit py-16 md:py-20">
       <div class="wrap grid gap-10 md:grid-cols-12 md:items-center">
         <p class="text-lg text-steen md:col-span-7">Alle citaten op deze pagina staan letterlijk op het Google-profiel van het atelier. Daar staan ze allemaal, samen goed voor een {site.google.score} uit {site.google.aantal} reviews.</p>
         <div class="md:col-span-5 md:justify-self-end">
-          <a href={site.reviews} target="_blank" rel="noopener" class="flex items-center gap-4 rounded-[2px] border border-ivoor-3 bg-wit px-5 py-4 no-underline transition-colors hover:border-merk">
+          <a href={site.reviews} target="_blank" rel="noopener" class="flex items-center gap-4 rounded-none border border-ivoor-3 bg-wit px-5 py-4 no-underline transition-colors hover:border-merk">
             <span class="grid h-11 w-11 place-items-center rounded-full bg-wit shadow-[0_1px_3px_#1b171626]"><Icoon naam="g" class="h-6 w-6" /></span>
             <span>
               <span class="flex items-center gap-2"><strong class="num font-kop text-2xl font-extrabold">{site.google.score}</strong><span class="flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span></span>
@@ -50,16 +50,16 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
     </section>
 
     <!-- VERHALEN -->
-    <section class="bg-ivoor pb-20 md:pb-28">
-      <div class="wrap space-y-6">
+    <section class="bg-wit pb-24 md:pb-32">
+      <div class="wrap space-y-16">
         {ervaringen.map((e, i) => (
-          <article class={`rijs grid overflow-hidden rounded-[2px] border border-ivoor-3 bg-wit ${e.foto ? 'lg:grid-cols-12' : ''}`} style={`--d:${(i % 2) * 0.08}s`}>
+          <article class={`rijs grid border-t border-ivoor-3 pt-10 ${e.foto ? 'lg:grid-cols-12 lg:gap-12' : ''}`} style={`--d:${(i % 2) * 0.08}s`}>
             {e.foto && (
-              <div class={`relative min-h-64 bg-inkt lg:col-span-5 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+              <div class={`relative min-h-72 lg:col-span-5 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
                 <Picture src={e.foto} formats={['avif', 'webp']} widths={[480, 800]} sizes="(min-width: 1024px) 480px, 100vw" alt={e.fotoAlt ?? ''} class="absolute inset-0 h-full w-full object-cover" style={`object-position:${e.pos ?? '50% 50%'}`} />
               </div>
             )}
-            <div class={`p-7 md:p-10 ${e.foto ? 'lg:col-span-7' : ''}`}>
+            <div class={e.foto ? 'lg:col-span-7' : 'max-w-3xl'}>
               <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
                 <span class="grid h-11 w-11 flex-none place-items-center rounded-full bg-strik-zacht font-kop text-xl font-extrabold text-merk">{e.naam.charAt(0)}</span>
                 <span>

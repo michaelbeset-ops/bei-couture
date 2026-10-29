@@ -12,7 +12,7 @@ const jaar = new Date().getFullYear();
       <p class="mt-6 max-w-xs">Bruidsatelier en kleermaker aan de Hoogstraat in Rotterdam. Uw droom wordt werkelijkheid in ons atelier.</p>
       <div class="mt-7 flex flex-wrap items-center gap-3">
         <a href={waHoi} class="knop knop-merk min-h-11 px-5"><Icoon naam="wa" />WhatsApp</a>
-        <a href={`mailto:${site.mail}`} class="grid h-11 w-11 place-items-center rounded-[2px] border border-lijn text-wit transition-colors hover:border-wit" aria-label="E-mail Bei Couture"><Icoon naam="mail" class="h-5 w-5" /></a>
+        <a href={`mailto:${site.mail}`} class="grid h-11 w-11 place-items-center rounded-none border border-lijn text-wit transition-colors hover:border-wit" aria-label="E-mail Bei Couture"><Icoon naam="mail" class="h-5 w-5" /></a>
       </div>
     </div>
 
@@ -41,18 +41,18 @@ const jaar = new Date().getFullYear();
         <li><a href={`mailto:${site.mail}`} class="no-underline hover:text-strik">{site.mail}</a></li>
         <li>{site.straat}<br />{site.postcode} {site.plaats}</li>
       </ul>
-      <ul class="num mt-5 space-y-1.5 border-t border-dashed border-lijn pt-5">
+      <ul class="num mt-5 space-y-1.5 border-t border-lijn pt-5">
         {volgorde.map((d) => { const t = site.tijden[d]; return <li class="flex justify-between gap-6"><span>{dagen[d]}</span><span class={t ? 'text-wit' : ''}>{t ? `${t[0]}:00 tot ${t[1]}:00` : 'Op afspraak'}</span></li>; })}
       </ul>
       <p class="mt-4 text-sm text-strik">Buiten deze tijden kan ook, gewoon even vragen.</p>
     </div>
   </div>
 
-  <div class="wrap border-t border-dashed border-lijn py-7 text-sm">
+  <div class="wrap border-t border-lijn py-7 text-sm">
     <p><span class="font-semibold text-wit">Werkgebied:</span> {werkgebied.join(' · ')}</p>
   </div>
 
-  <div class="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-t border-dashed border-lijn py-7 text-xs">
+  <div class="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-t border-lijn py-7 text-xs">
     <p>© {jaar} {site.naam} · {site.straat}, {site.plaats}</p>
     <p class="flex flex-wrap gap-x-6 gap-y-2"><a href={url('privacy/')} class="no-underline hover:text-wit">Privacyverklaring</a><span>Website door Sitefront</span></p>
   </div>

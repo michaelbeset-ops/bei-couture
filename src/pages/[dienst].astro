@@ -68,9 +68,9 @@ const verwant = d.verwant.map(dienstOp);
                 <h2 class="text-3xl">{b.kop}</h2>
                 {b.tekst && <div class="mt-6 space-y-5 text-steen">{b.tekst.map((p) => <p>{p}</p>)}</div>}
                 {b.lijst && (
-                  <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+                  <ul class="mt-6 divide-y divide-ivoor-3 border-y border-ivoor-3">
                     {b.lijst.map((l) => (
-                      <li class="flex items-start gap-3 rounded-[2px] border border-lijn-licht bg-wit p-4"><Icoon naam="vink" class="mt-1 h-4 w-4 flex-none text-merk" /><span class="text-steen">{l}</span></li>
+                      <li class="flex items-start gap-4 py-3.5 text-steen"><span class="mt-[.72em] h-px w-5 flex-none bg-merk" aria-hidden="true"></span>{l}</li>
                     ))}
                   </ul>
                 )}
@@ -98,7 +98,7 @@ const verwant = d.verwant.map(dienstOp);
               </ul>
             </div>
 
-            <div class="mt-5 rounded-[2px] border border-dashed border-ivoor-3 p-6">
+            <div class="mt-8 border-t border-ivoor-3 pt-6">
               <p class="font-semibold">In vijf stappen klaar</p>
               <ol class="num mt-4 space-y-2 text-[.98rem] text-steen">
                 {stappen.map((s) => <li class="flex gap-3"><span class="font-kop font-extrabold italic text-merk">{s.nr}</span>{s.kort}</li>)}

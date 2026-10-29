@@ -9,13 +9,13 @@ const { class: cls = '' } = Astro.props;
 <div class={`kaart p-6 md:p-9 ${cls}`}>
   <div class="flex flex-wrap items-center justify-between gap-3">
     <h2 class="text-2xl">Openingstijden</h2>
-    <p class="flex items-center gap-2 rounded-full bg-ivoor px-3.5 py-1.5 text-sm font-semibold"><span class="h-2 w-2 rounded-full bg-steen" data-stip></span><span data-status>Openingstijden</span></p>
+    <p class="flex items-center gap-2 text-sm font-semibold"><span class="h-2 w-2 rounded-full bg-steen" data-stip></span><span data-status>Openingstijden</span></p>
   </div>
   <hr class="naad mt-6" />
   <table class="num mt-2 w-full text-left">
     <tbody>
       {volgorde.map((d) => { const t = site.tijden[d]; return (
-        <tr data-dag={d} class="border-b border-dashed border-ivoor-3 last:border-0">
+        <tr data-dag={d} class="border-b border-ivoor-3 last:border-0">
           <th scope="row" class="py-3.5 pl-3 font-medium">{dagen[d]}</th>
           <td class={`py-3.5 pr-3 text-right ${t ? '' : 'text-steen'}`}>{t ? `${t[0]}:00 tot ${t[1]}:00` : 'Op afspraak'}</td>
         </tr>
@@ -23,7 +23,7 @@ const { class: cls = '' } = Astro.props;
     </tbody>
   </table>
 
-  <div class="mt-7 rounded-[2px] border-[1.5px] border-dashed border-merk bg-strik-zacht p-6">
+  <div class="mt-7 bg-strik-zacht p-6 md:p-7">
     <p class="flex items-center gap-3 font-kop text-[1.4rem] font-extrabold leading-tight tracking-[-.015em] text-merk">
       <Icoon naam="kalender" class="h-6 w-6 flex-none" />
       Ook buiten de openingstijden

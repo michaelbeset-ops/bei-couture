@@ -15,7 +15,7 @@ import { diensten } from '../data/diensten';
       <p class="mt-6 text-lg text-steen">Misschien is hij verplaatst, of klopt er iets niet in de link. Hieronder kom je alsnog waar je wilde zijn.</p>
       <ul class="mt-10 grid gap-3 sm:grid-cols-2">
         {[{ slug: '', t: 'Home' }, { slug: 'atelier/', t: 'Het atelier' }, { slug: 'werkwijze/', t: 'Werkwijze' }, { slug: 'klantervaringen/', t: 'Klantervaringen' }, ...diensten.map((d) => ({ slug: `${d.slug}/`, t: d.kaartTitel }))].map((l) => (
-          <li><a href={url(l.slug)} class="flex items-center justify-between gap-4 rounded-[2px] border border-ivoor-3 bg-wit px-5 py-4 no-underline transition-colors hover:border-merk">{l.t}<Icoon naam="pijl" class="h-4 w-4 text-merk" /></a></li>
+          <li><a href={url(l.slug)} class="flex items-center justify-between gap-4 rounded-none border border-ivoor-3 bg-wit px-5 py-4 no-underline transition-colors hover:border-merk">{l.t}<Icoon naam="pijl" class="h-4 w-4 text-merk" /></a></li>
         ))}
       </ul>
       <a href={url('contact/')} class="knop knop-merk mt-10">Afspraak maken <Icoon naam="pijl" /></a>

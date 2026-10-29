@@ -39,23 +39,18 @@ const faq = [
             <p class="eyebrow eyebrow-licht">Contact</p>
             <h1 class="mt-5 text-4xl">Kom langs in het <em class="accent-licht">atelier.</em></h1>
             <p class="mt-6 max-w-xl text-lg text-wit/85">Bellen, appen of mailen: alle drie komen ze bij Bei zelf terecht. Stuur gerust meteen een foto van de jurk die je in gedachten hebt, dan weet ze waar je aan denkt.</p>
-            <ul class="mt-10 grid gap-4 sm:grid-cols-2">
-              <li><a href={waHoi} class="flex h-full items-start gap-4 rounded-[2px] border border-lijn bg-inkt-2 p-6 no-underline transition-colors hover:border-strik">
-                <Icoon naam="wa" class="mt-1 h-6 w-6 flex-none text-strik" />
-                <span><strong class="block font-semibold text-wit">WhatsApp</strong><span class="num text-mist">{site.tel}</span><span class="mt-1 block text-sm text-mist">Het snelst, en je kunt een foto meesturen.</span></span>
-              </a></li>
-              <li><a href={site.telHref} class="flex h-full items-start gap-4 rounded-[2px] border border-lijn bg-inkt-2 p-6 no-underline transition-colors hover:border-strik">
-                <Icoon naam="tel" class="mt-1 h-6 w-6 flex-none text-strik" />
-                <span><strong class="block font-semibold text-wit">Bellen</strong><span class="num text-mist">{site.tel}</span><span class="mt-1 block text-sm text-mist">Even overleggen wat er mogelijk is.</span></span>
-              </a></li>
-              <li><a href={`mailto:${site.mail}`} class="flex h-full items-start gap-4 rounded-[2px] border border-lijn bg-inkt-2 p-6 no-underline transition-colors hover:border-strik">
-                <Icoon naam="mail" class="mt-1 h-6 w-6 flex-none text-strik" />
-                <span><strong class="block font-semibold text-wit">E-mail</strong><span class="text-mist">{site.mail}</span></span>
-              </a></li>
-              <li><a href={site.route} class="flex h-full items-start gap-4 rounded-[2px] border border-lijn bg-inkt-2 p-6 no-underline transition-colors hover:border-strik">
-                <Icoon naam="pin" class="mt-1 h-6 w-6 flex-none text-strik" />
-                <span><strong class="block font-semibold text-wit">{site.straat}</strong><span class="text-mist">{site.postcode} {site.plaats}</span><span class="mt-1 block text-sm text-mist">In het pand van {site.inPand}.</span></span>
-              </a></li>
+            <ul class="mt-10 divide-y divide-lijn border-y border-lijn">
+              {[
+                { href: waHoi, icoon: 'wa', kop: 'WhatsApp', tekst: site.tel, sub: 'Het snelst, en je kunt een foto meesturen.' },
+                { href: site.telHref, icoon: 'tel', kop: 'Bellen', tekst: site.tel, sub: 'Even overleggen wat er mogelijk is.' },
+                { href: `mailto:${site.mail}`, icoon: 'mail', kop: 'E-mail', tekst: site.mail, sub: '' },
+                { href: site.route, icoon: 'pin', kop: site.straat, tekst: `${site.postcode} ${site.plaats}`, sub: `In het pand van ${site.inPand}.` },
+              ].map((c) => (
+                <li><a href={c.href} class="group flex items-start gap-5 py-5 no-underline">
+                  <Icoon naam={c.icoon} class="mt-1 h-5 w-5 flex-none text-strik" />
+                  <span class="flex-1"><strong class="block font-semibold text-wit group-hover:underline group-hover:underline-offset-4">{c.kop}</strong><span class="num text-mist">{c.tekst}</span>{c.sub && <span class="mt-0.5 block text-sm text-mist">{c.sub}</span>}</span>
+                </a></li>
+              ))}
             </ul>
           </div>
           <div class="lg:col-span-5">
@@ -65,7 +60,7 @@ const faq = [
       </div>
     </section>
 
-    <Afspraak achtergrond="bg-ivoor" kop="Stel je bericht samen en vertel wat je" />
+    <Afspraak achtergrond="bg-wit" kop="Stel je bericht samen en vertel wat je" />
     <Faq vragen={faq} kop="Vragen over een afspraak" />
     <Reviews donker />
   </main>

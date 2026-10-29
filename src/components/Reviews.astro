@@ -12,7 +12,7 @@ const { donker = false } = Astro.props;
         <p class={`eyebrow ${donker ? 'eyebrow-licht' : ''}`}>Google-reviews</p>
         <h2 id="reviews-kop" class="mt-5 text-4xl">Wat bruiden <em class={donker ? 'accent-licht' : 'accent'}>zeggen.</em></h2>
       </div>
-      <a href={site.reviews} target="_blank" rel="noopener" class={`flex items-center gap-4 rounded-[2px] border px-5 py-4 no-underline transition-colors ${donker ? 'border-lijn bg-inkt-2 hover:border-wit/50' : 'border-ivoor-3 bg-wit hover:border-merk'}`}>
+      <a href={site.reviews} target="_blank" rel="noopener" class={`flex items-center gap-4 rounded-none border px-5 py-4 no-underline transition-colors ${donker ? 'border-lijn bg-inkt-2 hover:border-wit/50' : 'border-ivoor-3 bg-wit hover:border-merk'}`}>
         <span class="grid h-11 w-11 place-items-center rounded-full bg-wit shadow-[0_1px_3px_#1b171626]"><Icoon naam="g" class="h-6 w-6" /></span>
         <span>
           <span class="flex items-center gap-2"><strong class="num font-kop text-2xl font-extrabold">{site.google.score}</strong><span class="flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span></span>

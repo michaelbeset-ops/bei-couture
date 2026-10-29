@@ -58,7 +58,7 @@ const faq = [
     </section>
 
     <!-- FEITENREGEL -->
-    <section class="bg-ivoor" aria-label="Bei Couture in het kort">
+    <section class="bg-wit" aria-label="Bei Couture in het kort">
       <div class="wrap py-7 md:py-8">
         <ul class="flex flex-wrap items-center text-[.95rem] text-steen [&>li+li]:before:mx-4 [&>li+li]:before:text-ivoor-3 [&>li+li]:before:content-['·']">
           <li>Eigen atelier sinds <span class="num font-semibold text-inkt">1997</span></li>
@@ -71,7 +71,7 @@ const faq = [
     </section>
 
     <!-- ATELIER / DIENSTEN -->
-    <section id="atelier" class="bg-ivoor py-20 md:py-28">
+    <section id="atelier" class="bg-wit py-24 md:py-32">
       <div class="wrap">
         <div class="grid gap-8 md:grid-cols-12 md:items-end">
           <div class="md:col-span-7">
@@ -84,7 +84,7 @@ const faq = [
           {diensten.map((d, i) => (
             <li class="rijs" style={`--d:${(i % 3) * 0.08}s`}>
               <a href={url(`${d.slug}/`)} class="fotolink group">
-                <span class="block overflow-hidden rounded-[2px] bg-inkt">
+                <span class="block overflow-hidden rounded-none bg-inkt">
                   <Picture src={d.img} formats={['avif', 'webp']} widths={[400, 560, 800]} sizes="(min-width: 1024px) 380px, (min-width: 640px) 44vw, 92vw" alt={d.alt} class="aspect-[4/5] w-full object-cover" style={`object-position:${d.pos}`} />
                 </span>
                 <h3 class="mt-6 text-[1.75rem] sm:min-h-[2.2em]">{d.kaartTitel}</h3>
@@ -107,7 +107,7 @@ const faq = [
 
         <div class="mt-16 grid gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-16">
           <div class="rijs lg:col-span-5">
-            <Picture src={bei} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(min-width: 1024px) 480px, 100vw" alt="Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier" class="aspect-[4/5] w-full rounded-[2px] object-cover object-[50%_30%]" />
+            <Picture src={bei} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(min-width: 1024px) 480px, 100vw" alt="Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier" class="aspect-[4/5] w-full rounded-none object-cover object-[50%_30%]" />
             <p class="mt-4 text-sm text-mist">Bei aan het werk in haar atelier aan de Hoogstraat.</p>
           </div>
           <div class="lg:col-span-7">
@@ -139,7 +139,7 @@ const faq = [
     <Afspraak />
 
     <!-- BEZOEK -->
-    <section id="bezoek" class="bg-ivoor py-20 md:py-28">
+    <section id="bezoek" class="bg-wit py-24 md:py-32">
       <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-14">
         <div class="lg:col-span-5">
           <p class="eyebrow">Bezoek het atelier</p>
@@ -161,7 +161,7 @@ const faq = [
       </div>
     </section>
 
-    <Faq vragen={faq} kop="Vragen over het atelier" />
+    <Faq vragen={faq} kop="Vragen over het atelier" achtergrond="bg-ivoor-2" />
     <Cta />
   </main>
   <Voet />

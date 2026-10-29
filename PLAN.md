@@ -10,7 +10,11 @@ live klaar. Vanaf een dienstpagina staat de juiste keuze al aangevinkt (/contact
 
 ## Keuzes
 Bodoni Moda 800 (cursief voor het accentwoord, zoals "Bei" in hun logo), Instrument Sans tekst.
-Rozenhout #8f4b4f (knoppen), strik #e3bfb6 (accent op donker), inkt #1b1716, ivoor #f7f2ec. Hoeken 2px.
+Rozenhout #8f4b4f (knoppen), strik #e3bfb6 (accent op donker), inkt #1b1716. Basis is wit; de wisselvlakken
+#fbfaf8 en #f4f1ed zijn nauwelijks warm (de beige tinten van eerder maakten het muf). Haarlijnen #e4ded7, geen
+stippellijnen meer, hoeken 0, geen schaduwen. Stijl volgt de andere Sitefront-sites en de UI/UX Pro Max-skill
+(minimalisme, veel wit, hoog contrast, typografie doet het werk): geen kaders, geen pijltjes-chips, geen
+icoontjes in cirkels. Links zijn onderstreepte tekst. Werkwijze als vijf stappen van links naar rechts op één lijn.
 Kop: lichte, plakkende balk met hun eigen logo groot (72 px mobiel, 112 px desktop), daarboven een strip met adres,
 "ook op afspraak buiten de openingstijden" en het telefoonnummer.
 

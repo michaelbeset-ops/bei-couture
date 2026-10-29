@@ -32,13 +32,13 @@ const basis = new URL(url(''), Astro.site).href;
       kruimels={[{ naam: 'Home', href: url('') }, { naam: 'Atelier', href: url('atelier/') }]}
     />
 
-    <section class="bg-ivoor py-20 md:py-28">
+    <section class="bg-wit py-24 md:py-32">
       <div class="wrap">
         <ul class="grid gap-6 lg:grid-cols-2">
           {diensten.map((d, i) => (
             <li class="rijs" style={`--d:${(i % 2) * 0.08}s`}>
               <a href={url(`${d.slug}/`)} class="fotolink group grid h-full gap-6 sm:grid-cols-[15rem_1fr] sm:items-center">
-                <span class="relative block min-h-48 overflow-hidden rounded-[2px] bg-inkt">
+                <span class="relative block min-h-48 overflow-hidden rounded-none bg-inkt">
                   <Picture src={d.img} formats={['avif', 'webp']} widths={[320, 560]} sizes="(min-width: 640px) 240px, 100vw" alt={d.alt} class="absolute inset-0 h-full w-full object-cover" style={`object-position:${d.pos}`} />
                 </span>
                 <span class="block">
