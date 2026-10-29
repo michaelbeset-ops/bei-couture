@@ -5,7 +5,7 @@ import { site, waHoi } from '../data/site';
 import { diensten } from '../data/diensten';
 import Icoon from './Icoon.astro';
 interface Props { achtergrond?: string; kop?: string }
-const { achtergrond = 'bg-ivoor', kop = 'Vertel Bei wat je' } = Astro.props;
+const { achtergrond = 'bg-strik-zacht', kop = 'Vertel Bei wat je' } = Astro.props;
 ---
 <section id="afspraak" class={`${achtergrond} py-16 md:py-24`} aria-labelledby="afspraak-kop">
   <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-14">
@@ -54,7 +54,7 @@ const { achtergrond = 'bg-ivoor', kop = 'Vertel Bei wat je' } = Astro.props;
         <div class="grid gap-5 sm:grid-cols-2 sm:items-end">
           <label class="keuze keuze-vink"><input type="checkbox" name="foto" checked /><span class="bol"></span>Ik stuur een foto of ontwerp mee</label>
           <div>
-            <label for="naam" class="mb-2 block text-sm font-semibold">Je naam</label>
+            <label for="naam" class="veld-label">Je naam</label>
             <input id="naam" name="naam" type="text" autocomplete="given-name" placeholder="Voornaam" class="veld" />
           </div>
         </div>
@@ -63,16 +63,16 @@ const { achtergrond = 'bg-ivoor', kop = 'Vertel Bei wat je' } = Astro.props;
 
     <div class="min-w-0 lg:col-span-5">
       <div class="lg:sticky lg:top-32">
-        <div class="relative border border-merk/25 bg-strik-zacht p-2">
-          <div class="border border-merk/15 p-6 md:p-8">
+        <div class="relative bg-inkt p-2 text-wit">
+          <div class="border border-wit/15 p-6 md:p-8">
             <div class="flex items-center justify-between gap-4">
-              <p class="text-[.78rem] font-medium uppercase tracking-[.22em] text-merk">Je bericht aan Bei</p>
-              <Icoon naam="wa" class="h-6 w-6 text-[#1f9d55]" />
+              <p class="text-[.78rem] font-medium uppercase tracking-[.22em] text-strik">Je bericht aan Bei</p>
+              <Icoon naam="wa" class="h-6 w-6 text-strik" />
             </div>
-            <p id="bericht" class="mt-5 whitespace-pre-line font-kop text-[1.3rem] font-normal leading-snug" aria-live="polite">Hallo Bei, ik wil graag een afspraak maken in het atelier.</p>
-            <hr class="mt-7 border-merk/20" />
+            <p id="bericht" class="mt-5 whitespace-pre-line font-kop text-[1.3rem] font-normal leading-snug text-wit" aria-live="polite">Hallo Bei, ik wil graag een afspraak maken in het atelier.</p>
+            <hr class="mt-7 border-wit/15" />
             <a id="stuur" href={waHoi} class="knop knop-merk mt-7 w-full"><Icoon naam="wa" />Verstuur via WhatsApp</a>
-            <p class="mt-4 text-center text-sm text-steen">Liever bellen? <a href={site.telHref} class="link num font-semibold text-inkt">{site.tel}</a></p>
+            <p class="mt-4 text-center text-sm text-mist">Liever bellen? <a href={site.telHref} class="link num font-semibold text-wit">{site.tel}</a></p>
           </div>
         </div>
         <p class="mt-5 flex items-start gap-2.5 text-sm text-steen"><Icoon naam="foto" class="mt-0.5 h-5 w-5 flex-none text-merk" />Een foto van de jurk die je in gedachten hebt kun je in WhatsApp direct meesturen. Hoe meer je laat zien, hoe sneller duidelijk is waar we naartoe werken.</p>

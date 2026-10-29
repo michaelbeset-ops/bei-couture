@@ -149,17 +149,17 @@
   .uitspraak { font-family: var(--font-kop); font-weight: 400; letter-spacing: -.005em; line-height: 1.15; text-wrap: balance; }
 
   /* Wow: afspraak-kaartje. Keuzes als stoffen labels. */
-  .keuze { position: relative; display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .7rem 1rem; border: 1px solid var(--color-ivoor-3); border-radius: 2px; background: var(--color-wit); cursor: pointer; font-weight: 500; line-height: 1.3; transition: border-color .2s, background-color .2s; }
+  .keuze { position: relative; display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .7rem 1rem; border: 1px solid #8f4b4f33; border-radius: 2px; background: var(--color-wit); cursor: pointer; font-weight: 500; line-height: 1.3; transition: border-color .2s, background-color .2s; }
   .keuze input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
   .keuze:hover { border-color: var(--color-merk); }
   .keuze .bol { flex: none; width: 1.1rem; height: 1.1rem; border-radius: 999px; border: 1px solid var(--color-steen); transition: all .2s; }
-  .keuze:has(input:checked) { border-color: var(--color-merk); background: var(--color-strik-zacht); }
-  .keuze:has(input:checked) .bol { border: 4px solid var(--color-merk); }
+  .keuze:has(input:checked) { border-color: var(--color-merk); background: var(--color-merk); color: var(--color-wit); }
+  .keuze:has(input:checked) .bol { border: 4px solid var(--color-wit); background: var(--color-merk); }
   .keuze:has(input:focus-visible) { outline: 2px solid var(--color-merk); outline-offset: 2px; }
   .keuze-vink .bol { border-radius: 2px; }
-  .keuze-vink:has(input:checked) .bol { border: 0; background: var(--color-merk) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 80% no-repeat; }
+  .keuze-vink:has(input:checked) .bol { border: 0; background: var(--color-merk-diep) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 80% no-repeat; }
 
-  .veld { display: block; width: 100%; min-height: 3.2rem; padding: .55rem .9rem; border: 1px solid var(--color-ivoor-3); border-radius: 2px; background: var(--color-wit); color: var(--color-inkt); font: inherit; transition: border-color .2s; }
+  .veld { display: block; width: 100%; min-height: 3.2rem; padding: .55rem .9rem; border: 1px solid #8f4b4f33; border-radius: 2px; background: var(--color-wit); color: var(--color-inkt); font: inherit; transition: border-color .2s; }
   .veld::placeholder { color: #8b807d; }
   .veld:hover { border-color: var(--color-steen); }
   .veld:focus { outline: none; border-color: var(--color-merk); box-shadow: 0 0 0 1px var(--color-merk); }
