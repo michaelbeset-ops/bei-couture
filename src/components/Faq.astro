@@ -3,11 +3,11 @@ import Icoon from './Icoon.astro';
 interface Props { vragen: { v: string; a: string }[]; kop?: string; achtergrond?: string }
 const { vragen, kop = 'Veelgestelde vragen', achtergrond = 'bg-ivoor-2' } = Astro.props;
 ---
-<section class={`${achtergrond} py-20 md:py-28`} aria-labelledby="faq-kop">
+<section class={`${achtergrond} py-16 md:py-24`} aria-labelledby="faq-kop">
   <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-16">
     <div class="lg:col-span-4">
       <p class="eyebrow">Vragen</p>
-      <h2 id="faq-kop" class="mt-5 text-4xl">{kop}</h2>
+      <h2 id="faq-kop" class="mt-5 text-[2.2rem] md:text-[2.6rem]">{kop}</h2>
       <p class="mt-6 text-steen">Staat je vraag er niet bij? Bel of app gerust, je krijgt altijd een eerlijk antwoord over wat er wel en niet kan.</p>
     </div>
     <div class="lg:col-span-8">
