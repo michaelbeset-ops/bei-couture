@@ -100,29 +100,34 @@ const faq = [
       </div>
     </section>
 
-    <!-- OVER BEI: één grote foto, daarnaast het citaat en haar verhaal. Strak, zonder opsmuk. -->
-    <section id="bei" class="bg-ivoor py-20 md:py-28">
-      <div class="wrap grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-20">
-        <div class="rijs lg:col-span-6">
-          <div class="foto aspect-[4/5] bg-ivoor-2">
-            <Picture src={bei} formats={['avif', 'webp']} widths={[600, 900, 1200]} sizes="(min-width: 1024px) 600px, 100vw" alt="Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier" class="h-full w-full object-cover object-[50%_30%]" />
-          </div>
-          <p class="mt-4 text-[.78rem] uppercase tracking-[.22em] text-steen">Bei in haar atelier aan de Hoogstraat</p>
+    <!-- OVER BEI: foto tot de rand links, rechts op zacht roze haar verhaal, drie beloftes en een knop. -->
+    <section id="bei" class="bg-strik-zacht">
+      <div class="grid lg:grid-cols-2">
+        <div class="relative min-h-[26rem] lg:min-h-[44rem]">
+          <Picture src={bei} formats={['avif', 'webp']} widths={[640, 960, 1400]} sizes="(min-width: 1024px) 50vw, 100vw" alt="Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier" class="absolute inset-0 h-full w-full object-cover object-[50%_30%]" />
         </div>
-        <div class="lg:col-span-6">
+        <div class="flex flex-col justify-center px-5 py-16 md:px-12 lg:px-16 lg:py-24 xl:px-24">
           <p class="eyebrow">Over Bei</p>
-          <h2 class="mt-5 text-[2rem] md:text-[2.4rem]">Mijn naam is Bei</h2>
-          <blockquote class="mt-8 border-l border-merk pl-6">
-            <p class="uitspraak text-[1.5rem] text-merk md:text-[1.75rem]">“Geen enkele opgave is teveel.”</p>
-          </blockquote>
-          <div class="mt-8 max-w-xl space-y-5 text-steen">
-            <p>Ik ben geboren in China en woon nu al een lange tijd in Nederland. Vanaf kleins af aan ben ik dol op tekenen en naaien, zo is mijn liefde ontstaan om kleding te ontwerpen. Ik ben een perfectionist en wil het liefst alles zelf doen.</p>
-            <p>In 1997 ben ik begonnen met een eigen atelier op het Marconiplein. Sinds 2009 ben ik gespecialiseerd in bruidsmode, dus ook voor bruidsjonkers en bruidsmeisjes. Ik krijg elke keer een glimlach op mijn gezicht als een klant weer super tevreden is.</p>
+          <h2 class="mt-5 text-[2.2rem] md:text-[2.8rem]">De vrouw achter <span class="text-merk">de jurk</span></h2>
+          <p class="mt-7 max-w-xl text-steen">Bei Couture, dat is Bei. Geboren in China, al een lange tijd in Nederland, en sinds 1997 met een eigen atelier. Ze is een perfectionist en wil het liefst alles zelf doen: het gesprek, het meten, het knippen en het naaien. Sinds 2009 is bruidsmode haar specialisme, en ze krijgt nog steeds een glimlach op haar gezicht als een bruid weer super tevreden is.</p>
+
+          <ul class="mt-10 max-w-xl divide-y divide-merk/20 border-y border-merk/20 bg-wit/60">
+            {[
+              ['Alles door Bei zelf', 'Dezelfde persoon doet het gesprek, meet je op, knipt en naait. Geen tussenpersoon, geen atelier elders.'],
+              ['De tijd die het nodig heeft', 'Meestal drie pasbeurten: een proefjurk, een proefmodel in de gekozen stof en de complete jurk.'],
+              ['Geen enkele opgave is teveel', 'Haar eigen woorden. Een gekleurde trouwjurk, een grote maat, de jurk van je moeder: het kan.'],
+            ].map(([k, t]) => (
+              <li class="px-6 py-5">
+                <p class="text-[.82rem] font-medium uppercase tracking-[.2em]">{k}</p>
+                <p class="mt-1.5 text-[.98rem] text-steen">{t}</p>
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <a href={waHoi} class="knop knop-merk"><Icoon naam="wa" />Plan een kennismaking</a>
+            <a href={url('over-bei/')} class="text-[.8rem] font-medium uppercase tracking-[.25em] text-merk underline decoration-merk/40 underline-offset-[6px]">Lees meer over Bei</a>
           </div>
-          <p class="mt-9 flex flex-wrap gap-x-8 gap-y-3 text-[.8rem] font-medium uppercase tracking-[.25em]">
-            <a href={url('over-bei/')} class="text-merk underline decoration-merk/40 underline-offset-[6px]">Lees meer over Bei</a>
-            <a href={url('klantervaringen/')} class="text-merk underline decoration-merk/40 underline-offset-[6px]">Verhalen van bruiden</a>
-          </p>
         </div>
       </div>
     </section>
