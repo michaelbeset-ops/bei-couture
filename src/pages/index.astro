@@ -17,7 +17,6 @@ import { faqSchema } from '../lib/schema';
 
 import hero from '../assets/hero.jpg';
 import bei from '../assets/bei.jpg';
-import kant from '../assets/kant.jpg';
 
 const faq = [
   { v: 'Waar zit bruidsatelier Bei Couture?', a: `Aan de ${site.straat} in ${site.plaats}, in het pand van ${site.inPand}. Het atelier ligt midden in de stad en is goed bereikbaar met het openbaar vervoer.` },
@@ -101,30 +100,28 @@ const faq = [
       </div>
     </section>
 
-    <!-- OVER BEI -->
-    <section id="bei" class="bg-ivoor py-24 md:py-32">
-      <div class="wrap grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-16">
-        <div class="rijs relative mx-auto w-full max-w-[520px] lg:col-span-5">
-          <div class="foto relative aspect-[4/5] w-[64%] bg-ivoor-2">
-            <Picture src={bei} formats={['avif', 'webp']} widths={[480, 720]} sizes="(min-width: 1024px) 330px, 60vw" alt="Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier" class="block h-full w-full object-cover object-[50%_30%]" />
+    <!-- OVER BEI: één grote foto, daarnaast het citaat en haar verhaal. Strak, zonder opsmuk. -->
+    <section id="bei" class="bg-ivoor py-20 md:py-28">
+      <div class="wrap grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-20">
+        <div class="rijs lg:col-span-6">
+          <div class="foto aspect-[4/5] bg-ivoor-2">
+            <Picture src={bei} formats={['avif', 'webp']} widths={[600, 900, 1200]} sizes="(min-width: 1024px) 600px, 100vw" alt="Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier" class="h-full w-full object-cover object-[50%_30%]" />
           </div>
-          <div class="foto relative -mt-[42%] ml-auto aspect-[4/5] w-[64%] bg-ivoor-2">
-            <Picture src={kant} formats={['avif', 'webp']} widths={[480, 720]} sizes="(min-width: 1024px) 330px, 60vw" alt="Detail van een kanten jurk met stoffen knoopjes" class="block h-full w-full object-cover" />
-          </div>
-          <p class="mt-5 text-sm text-steen">Bei in haar atelier aan de Hoogstraat, en een van haar jurken.</p>
+          <p class="mt-4 text-[.78rem] uppercase tracking-[.22em] text-steen">Bei in haar atelier aan de Hoogstraat</p>
         </div>
-        <div class="lg:col-span-7 lg:pl-6">
+        <div class="lg:col-span-6">
           <p class="eyebrow">Over Bei</p>
-          <blockquote class="mt-5">
-            <p class="uitspraak text-[2rem] text-merk md:text-[2.8rem]">“Geen enkele opgave is teveel.”</p>
+          <h2 class="mt-5 text-[2rem] md:text-[2.4rem]">Mijn naam is Bei</h2>
+          <blockquote class="mt-8 border-l border-merk pl-6">
+            <p class="uitspraak text-[1.5rem] text-merk md:text-[1.75rem]">“Geen enkele opgave is teveel.”</p>
           </blockquote>
-          <div class="mt-8 max-w-xl space-y-5 text-lg">
-            <p>Mijn naam is Bei. Ik ben geboren in China en woon nu al een lange tijd in Nederland. Vanaf kleins af aan ben ik dol op tekenen en naaien, zo is mijn liefde ontstaan om kleding te ontwerpen. Ik ben een perfectionist en wil het liefst alles zelf doen.</p>
+          <div class="mt-8 max-w-xl space-y-5 text-steen">
+            <p>Ik ben geboren in China en woon nu al een lange tijd in Nederland. Vanaf kleins af aan ben ik dol op tekenen en naaien, zo is mijn liefde ontstaan om kleding te ontwerpen. Ik ben een perfectionist en wil het liefst alles zelf doen.</p>
             <p>In 1997 ben ik begonnen met een eigen atelier op het Marconiplein. Sinds 2009 ben ik gespecialiseerd in bruidsmode, dus ook voor bruidsjonkers en bruidsmeisjes. Ik krijg elke keer een glimlach op mijn gezicht als een klant weer super tevreden is.</p>
           </div>
-          <p class="mt-9 flex flex-wrap gap-x-8 gap-y-3">
-            <a href={url('over-bei/')} class="tekstlink font-semibold text-merk">Lees meer over Bei</a>
-            <a href={url('klantervaringen/')} class="tekstlink font-semibold text-merk">Verhalen van bruiden</a>
+          <p class="mt-9 flex flex-wrap gap-x-8 gap-y-3 text-[.8rem] font-medium uppercase tracking-[.25em]">
+            <a href={url('over-bei/')} class="text-merk underline decoration-merk/40 underline-offset-[6px]">Lees meer over Bei</a>
+            <a href={url('klantervaringen/')} class="text-merk underline decoration-merk/40 underline-offset-[6px]">Verhalen van bruiden</a>
           </p>
         </div>
       </div>
