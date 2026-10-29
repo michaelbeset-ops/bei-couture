@@ -1,34 +1,34 @@
 ---
-// De vijf stappen van het atelier, van links naar rechts op één doorlopende lijn.
-// Op kleine schermen wordt het een verticale lijn met dezelfde punten.
+// De vijf stappen van het atelier, van links naar rechts in vijf lichte panelen op het zachte roze.
+// Op kleine schermen staan ze onder elkaar.
 import { stappen, url } from '../data/site';
 interface Props { vol?: boolean; achtergrond?: string }
-const { vol = false, achtergrond = 'bg-ivoor' } = Astro.props;
+const { vol = false, achtergrond = 'bg-strik-zacht' } = Astro.props;
 ---
-<section id="werkwijze" class={`${achtergrond} py-24 md:py-32`} aria-labelledby="werkwijze-kop">
+<section id="werkwijze" class={`${achtergrond} py-16 md:py-24`} aria-labelledby="werkwijze-kop">
   <div class="wrap">
-    <div class="grid gap-8 md:grid-cols-12 md:items-end">
+    <div class="grid gap-6 md:grid-cols-12 md:items-end">
       <div class="md:col-span-7">
         <p class="eyebrow">Zo gaat het</p>
-        <h2 id="werkwijze-kop" class="mt-5 text-4xl">Van jouw foto tot <em class="accent">jouw jurk.</em></h2>
+        <h2 id="werkwijze-kop" class="mt-5 text-[2.2rem] md:text-[2.8rem]">Van jouw foto tot <span class="text-merk">jouw jurk</span></h2>
       </div>
-      <p class="text-lg text-steen md:col-span-5">Vijf stappen, elk met een eigen afspraak. Je weet steeds waar je staat en komt nooit voor verrassingen te staan.</p>
+      <p class="text-steen md:col-span-5">Vijf stappen, elk met een eigen afspraak. Je weet steeds waar je staat en komt nooit voor verrassingen te staan.</p>
     </div>
 
-    <ol class="mt-16 lg:grid lg:grid-cols-5">
+    <ol class="mt-10 grid gap-3 border-y border-merk/20 py-3 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0 lg:divide-x lg:divide-merk/20">
       {stappen.map((s, i) => (
-        <li class="stap rijs lg:pr-8" style={`--d:${i * 0.07}s`}>
-          <h3 class="text-[1.6rem] md:text-[1.75rem]">{s.titel}</h3>
-          <p class="mt-3 text-[.98rem] font-medium leading-snug">{s.kort}</p>
-          <p class={`mt-3 text-[.95rem] leading-relaxed text-steen ${vol ? '' : 'lg:line-clamp-4'}`}>{s.tekst}</p>
+        <li class="rijs flex flex-col bg-wit/60 px-6 py-7 lg:px-5 xl:px-6" style={`--d:${i * 0.07}s`}>
+          <h3 class="text-[1.45rem] leading-tight">{s.titel}</h3>
+          <p class="mt-3 text-[.95rem] font-medium leading-snug text-merk">{s.kort}</p>
+          <p class={`mt-4 text-[.95rem] leading-relaxed text-steen ${vol ? '' : 'line-clamp-3 lg:line-clamp-4'}`}>{s.tekst}</p>
         </li>
       ))}
     </ol>
 
     {!vol && (
-      <div class="mt-14 flex flex-wrap items-center gap-6">
+      <div class="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
         <a href={url('contact/')} class="knop knop-merk">Afspraak maken</a>
-        <a href={url('werkwijze/')} class="tekstlink font-semibold text-merk">De werkwijze helemaal lezen</a>
+        <a href={url('werkwijze/')} class="text-[.8rem] font-medium uppercase tracking-[.25em] text-merk underline decoration-merk/40 underline-offset-[6px]">De werkwijze helemaal lezen</a>
       </div>
     )}
   </div>

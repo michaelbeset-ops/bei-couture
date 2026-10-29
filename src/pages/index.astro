@@ -57,21 +57,18 @@ const faq = [
       <p class="absolute bottom-3 right-4 hidden text-[.7rem] text-wit/55 md:block">Sfeerfoto (Unsplash)</p>
     </section>
 
-    <!-- FEITENREGEL -->
-    <section class="bg-ivoor" aria-label="Bei Couture in het kort">
-      <div class="wrap py-5 md:py-6">
-        <ul class="flex flex-wrap items-center text-[.95rem] text-steen gap-y-1 max-sm:flex-col sm:[&>li+li]:before:mx-4 sm:[&>li+li]:before:text-ivoor-3 sm:[&>li+li]:before:content-['·']">
-          <li>Eigen atelier sinds <span class="num font-semibold text-inkt">1997</span></li>
-          <li>Bruidsmode sinds <span class="num font-semibold text-inkt">2009</span></li>
-          <li><span class="num font-semibold text-inkt">{site.google.score}</span> uit {site.google.aantal} Google-reviews</li>
-          <li>Ook op zondag open</li>
-        </ul>
-      </div>
-      <div class="wrap"><hr class="naad" /></div>
+    <!-- FEITENREGEL: zacht roze lint onder de hero, één rustige regel over de hele breedte. -->
+    <section class="bg-strik-zacht" aria-label="Bei Couture in het kort">
+      <ul class="wrap flex flex-wrap items-center justify-center gap-x-10 gap-y-2 py-4 text-[.95rem] text-inkt-2 md:justify-between md:py-5 lg:gap-x-6">
+        <li>Eigen atelier sinds <span class="num font-kop text-[1.35rem] leading-none text-merk">1997</span></li>
+        <li>Bruidsmode sinds <span class="num font-kop text-[1.35rem] leading-none text-merk">2009</span></li>
+        <li>Ook op <span class="font-kop text-[1.35rem] leading-none text-merk">zondag</span> open</li>
+        <li>Alles door <span class="font-kop text-[1.35rem] leading-none text-merk">Bei</span> zelf gemaakt</li>
+      </ul>
     </section>
 
     <!-- ATELIER / DIENSTEN: een rij hoge foto's, alleen de naam eronder. Swipen op de telefoon, pijl op desktop. -->
-    <section id="atelier" class="bg-ivoor pb-14 pt-10 md:pb-20 md:pt-12">
+    <section id="atelier" class="bg-ivoor pb-14 pt-14 md:pb-20 md:pt-20">
       <div class="wrap">
         <div class="flex items-end justify-between gap-6">
           <h2 class="text-[2rem] md:text-[2.4rem]">Het atelier</h2>

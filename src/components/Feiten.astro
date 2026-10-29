@@ -10,19 +10,19 @@ const feiten = [
   { kop: 'Nederlands, Engels, Chinees', tekst: `Je kunt in drie talen terecht. Bruiden komen uit ${site.plaats} en de hele regio, van ${werkgebied[1]} tot ${werkgebied[15]}.` },
 ];
 ---
-<section class="bg-ivoor py-20 md:py-24 border-t border-ivoor-3" aria-labelledby="feiten-kop">
+<section class="bg-ivoor py-16 md:py-20" aria-labelledby="feiten-kop">
   <div class="wrap">
     <div class="flex flex-wrap items-end justify-between gap-6">
       <div>
         <p class="eyebrow">In het kort</p>
-        <h2 id="feiten-kop" class="mt-5 text-3xl">Goed om te <em class="accent">weten.</em></h2>
+        <h2 id="feiten-kop" class="mt-5 text-[2rem] md:text-[2.4rem]">Goed om te <span class="text-merk">weten</span></h2>
       </div>
-      <a href={url('werkwijze/')} class="tekstlink font-semibold text-merk">Zo verloopt een traject</a>
+      <a href={url('werkwijze/')} class="text-[.8rem] font-medium uppercase tracking-[.25em] text-merk underline decoration-merk/40 underline-offset-[6px]">Zo verloopt een traject</a>
     </div>
-    <ul class="mt-10 grid gap-x-10 gap-y-9 border-t border-ivoor-3 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+    <ul class="mt-8 grid gap-x-10 gap-y-8 border-t border-ivoor-3 pt-8 sm:grid-cols-2 lg:grid-cols-4">
       {feiten.map((f, i) => (
         <li class="rijs" style={`--d:${i * 0.06}s`}>
-          <h3 class="text-[1.25rem]">{f.kop}</h3>
+          <h3 class="text-[1.35rem]">{f.kop}</h3>
           <p class="mt-3 text-[.98rem] leading-relaxed text-steen">{f.tekst}</p>
         </li>
       ))}

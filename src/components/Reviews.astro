@@ -1,64 +1,51 @@
 ---
-// Google-reviews als swipebare rij kaarten. Elke kaart linkt naar het Google-profiel.
+// Google-reviews: links een sfeerfoto, rechts één citaat per keer. Swipen op de telefoon, pijlen op desktop.
+// Elk citaat linkt naar het Google-profiel. Compact: de foto bepaalt de hoogte.
+import { Picture } from 'astro:assets';
 import { site, reviews, url } from '../data/site';
 import Icoon from './Icoon.astro';
+import satijn from '../assets/satijn.jpg';
 interface Props { donker?: boolean }
 const { donker = false } = Astro.props;
 ---
-<section id="reviews" class={`${donker ? 'bg-inkt text-wit' : 'bg-ivoor'} py-20 md:py-28`} aria-labelledby="reviews-kop">
-  <div class="wrap">
-    <div class="flex flex-wrap items-end justify-between gap-8">
-      <div>
-        <p class={`eyebrow ${donker ? 'eyebrow-licht' : ''}`}>Google-reviews</p>
-        <h2 id="reviews-kop" class="mt-5 text-4xl">Wat bruiden <em class={donker ? 'accent-licht' : 'accent'}>zeggen.</em></h2>
-      </div>
-      <a href={site.reviews} target="_blank" rel="noopener" class={`flex items-center gap-4 rounded-sm border px-5 py-4 no-underline transition-colors ${donker ? 'border-lijn bg-inkt-2 hover:border-wit/50' : 'border-ivoor-3 bg-wit hover:border-merk'}`}>
-        <span class="grid h-11 w-11 place-items-center rounded-full bg-wit shadow-[0_1px_3px_#1b171626]"><Icoon naam="g" class="h-6 w-6" /></span>
-        <span>
-          <span class="flex items-center gap-2"><strong class="num font-kop text-2xl font-normal">{site.google.score}</strong><span class="flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span></span>
-          <span class={`block text-sm ${donker ? 'text-mist' : 'text-steen'}`}>{site.google.aantal} reviews op Google</span>
-        </span>
-      </a>
+<section id="reviews" class={`${donker ? 'bg-inkt text-wit' : 'bg-ivoor'} py-16 md:py-24`} aria-labelledby="reviews-kop">
+  <div class="wrap grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+    <div class="lg:col-span-5">
+      <Picture src={satijn} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(min-width: 1024px) 480px, 100vw" alt="Satijnen stof van een trouwjurk, van dichtbij" class="foto aspect-[4/5] w-full object-cover max-lg:aspect-[16/10]" />
     </div>
 
-    <div class="relative mt-12">
-      <ul class="rij flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4" data-rij tabindex="0" aria-label="Reviews, horizontaal te scrollen">
+    <div class="min-w-0 lg:col-span-7 lg:pl-4 xl:pl-10">
+      <p class={`eyebrow ${donker ? 'eyebrow-licht' : ''}`}>Google-reviews</p>
+      <h2 id="reviews-kop" class="mt-5 text-[2.2rem] md:text-[2.8rem]">Wat bruiden <span class={donker ? 'text-strik' : 'text-merk'}>zeggen</span></h2>
+
+      <ul class="rij mt-8 flex snap-x snap-mandatory overflow-x-auto" data-rij tabindex="0" aria-label="Reviews, horizontaal te scrollen">
         {reviews.map((r) => (
-          <li class="w-[85vw] flex-none snap-start sm:w-[22rem]">
-            <a href={site.reviews} target="_blank" rel="noopener" aria-label={`Review van ${r.naam} op Google lezen`} class={`flex h-full flex-col p-7 no-underline transition-colors duration-300 rounded-sm ${donker ? 'bg-inkt-2 hover:bg-[#574241]' : 'kaart hover:bg-strik-zacht/60'}`}>
-              <span class="flex items-center gap-3">
-                <span class="flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-[1.05rem] w-[1.05rem]" />)}</span>
-                <Icoon naam="g" class="ml-auto h-5 w-5 flex-none" />
-              </span>
-              <p class={`mt-5 flex-1 text-[1.05rem] leading-relaxed ${donker ? 'text-wit/90' : 'text-steen'}`}>{r.tekst}</p>
-              <span class={`mt-7 block border-t pt-5 text-sm ${donker ? 'border-lijn' : 'border-ivoor-3'}`}>
-                <strong class={`font-semibold ${donker ? 'text-wit' : 'text-inkt'}`}>{r.naam}</strong>
-                <span class={donker ? 'text-mist' : 'text-steen'}>{` · Google-review, ${r.wanneer}`}</span>
-              </span>
+          <li class="w-full flex-none snap-start pr-6">
+            <a href={site.reviews} target="_blank" rel="noopener" aria-label={`Review van ${r.naam} op Google lezen`} class="group block no-underline">
+              <span class={`flex gap-1 ${donker ? 'text-strik' : 'text-merk'}`}>{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span>
+              <p class={`uitspraak mt-5 max-w-2xl text-[1.45rem] md:text-[1.7rem] ${donker ? 'text-wit' : 'text-inkt'}`}>“{r.tekst}”</p>
+              <span class={`mt-6 block text-[.78rem] font-medium uppercase tracking-[.22em] ${donker ? 'text-mist' : 'text-steen'}`}>{r.naam}<span class="normal-case tracking-normal">{` · Google, ${r.wanneer}`}</span></span>
             </a>
           </li>
         ))}
-        <li class="w-[85vw] flex-none snap-start sm:w-[22rem]">
-          <a href={site.reviews} target="_blank" rel="noopener" class={`flex h-full flex-col items-start justify-center p-7 no-underline ${donker ? 'bg-merk text-wit' : 'bg-inkt text-wit'}`}>
-            <p class="font-kop text-[1.9rem] font-normal leading-tight">Alle {site.google.aantal} reviews</p>
-            <p class="mt-3 text-wit/85">Ze staan allemaal op het Google-profiel van het atelier, samen goed voor een {site.google.score}.</p>
-            <span class="tekstlink mt-5 font-semibold">Naar Google</span>
-          </a>
-        </li>
       </ul>
 
-      <div class="mt-6 flex items-center gap-3">
-        <button type="button" data-rij-vorige class={`grid h-11 w-11 place-items-center rounded-full border transition-colors disabled:opacity-30 ${donker ? 'border-lijn text-wit hover:border-wit' : 'border-ivoor-3 bg-wit text-inkt hover:border-merk hover:text-merk'}`} aria-label="Vorige reviews">
-          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 6 9 12l6 6" /></svg>
-        </button>
-        <button type="button" data-rij-volgende class={`grid h-11 w-11 place-items-center rounded-full border transition-colors disabled:opacity-30 ${donker ? 'border-lijn text-wit hover:border-wit' : 'border-ivoor-3 bg-wit text-inkt hover:border-merk hover:text-merk'}`} aria-label="Volgende reviews">
-          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
-        </button>
-        <p class={`ml-2 text-sm ${donker ? 'text-mist' : 'text-steen'}`}>Swipe of sleep voor meer. Tik op een review om hem op Google te lezen.</p>
+      <div class={`mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 border-t pt-6 ${donker ? 'border-lijn' : 'border-ivoor-3'}`}>
+        <div class="flex items-center gap-2">
+          <button type="button" data-rij-vorige class={`grid h-10 w-10 place-items-center border transition-colors disabled:opacity-30 ${donker ? 'border-lijn text-wit hover:border-wit' : 'border-ivoor-3 text-inkt hover:border-merk hover:text-merk'}`} aria-label="Vorige review">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 6 9 12l6 6" /></svg>
+          </button>
+          <button type="button" data-rij-volgende class={`grid h-10 w-10 place-items-center border transition-colors disabled:opacity-30 ${donker ? 'border-lijn text-wit hover:border-wit' : 'border-ivoor-3 text-inkt hover:border-merk hover:text-merk'}`} aria-label="Volgende review">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+          </button>
+        </div>
+        <a href={site.reviews} target="_blank" rel="noopener" class={`flex items-center gap-2.5 text-[.95rem] no-underline ${donker ? 'text-wit' : 'text-inkt'}`}>
+          <Icoon naam="g" class="h-5 w-5" />
+          <span><strong class="num font-semibold">{site.google.score}</strong> uit {site.google.aantal} reviews op Google</span>
+        </a>
+        <a href={url('klantervaringen/')} class={`text-[.8rem] font-medium uppercase tracking-[.25em] underline underline-offset-[6px] sm:ml-auto ${donker ? 'text-strik decoration-strik/40' : 'text-merk decoration-merk/40'}`}>Alle klantervaringen</a>
       </div>
     </div>
-
-    <p class="mt-10"><a href={url('klantervaringen/')} class={`tekstlink font-semibold ${donker ? 'text-strik' : 'text-merk'}`}>Lees de verhalen achter deze reviews</a></p>
   </div>
 </section>
 
