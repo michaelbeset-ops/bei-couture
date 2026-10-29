@@ -100,9 +100,9 @@ const verwant = d.verwant.map(dienstOp);
 
             <div class="mt-8 border-t border-ivoor-3 pt-6">
               <p class="font-semibold">In vijf stappen klaar</p>
-              <ol class="num mt-4 space-y-2 text-[.98rem] text-steen">
-                {stappen.map((s) => <li class="flex gap-3"><span class="font-kop font-extrabold italic text-merk">{s.nr}</span>{s.kort}</li>)}
-              </ol>
+              <ul class="mt-4 space-y-2 text-steen">
+                {stappen.map((s) => <li class="flex gap-3"><span class="mt-[.8em] h-px w-4 flex-none bg-merk" aria-hidden="true"></span>{s.kort}</li>)}
+              </ul>
               <a href={url('werkwijze/')} class="tekstlink mt-5 inline-block font-semibold text-merk">Zo werkt het, stap voor stap</a>
             </div>
           </div>

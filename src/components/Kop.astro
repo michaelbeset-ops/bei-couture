@@ -22,7 +22,7 @@ const nav: { href: string; t: string; actief: boolean }[] = [
 ---
 <header class={opFoto ? 'absolute inset-x-0 top-0 z-40' : 'relative z-40 bg-inkt'}>
   <div class="hidden border-b border-lijn lg:block">
-    <div class="wrap flex h-11 items-center justify-between gap-6 text-[.875rem] text-wit/85">
+    <div class="wrap flex h-11 items-center justify-between gap-6 font-sans text-[.875rem] text-wit/85">
       <ul class="flex gap-7">
         <li class="flex items-center gap-2"><Icoon naam="pin" class="h-4 w-4 text-strik" />{site.straat}, {site.plaats}</li>
         <li class="flex items-center gap-2"><Icoon naam="klok" class="h-4 w-4 text-strik" />Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00</li>
@@ -36,7 +36,7 @@ const nav: { href: string; t: string; actief: boolean }[] = [
     <Merk donker />
 
     <nav aria-label="Hoofdmenu" class="hidden lg:block">
-      <ul class="flex items-center gap-7 text-[1.02rem] font-medium">
+      <ul class="flex items-center gap-7 font-sans text-[1.02rem] font-medium">
         <li class="group relative">
           <a href={url('atelier/')} class={`flex items-center gap-1.5 py-6 no-underline transition-colors hover:text-strik ${dienstActief ? 'text-strik' : 'text-wit/90'}`} aria-haspopup="true">
             Atelier
@@ -62,7 +62,7 @@ const nav: { href: string; t: string; actief: boolean }[] = [
     </nav>
 
     <div class="flex items-center gap-3">
-      <a href={url('contact/')} class="knop knop-merk hidden min-h-11 px-5 text-[1rem] !rounded-[2px] md:inline-flex">Afspraak maken</a>
+      <a href={url('contact/')} class="knop knop-merk hidden min-h-11 px-5 !rounded-[2px] !font-sans !normal-case !tracking-[.01em] !text-[1rem] !font-semibold md:inline-flex">Afspraak maken</a>
       <button type="button" class="grid h-11 w-11 place-items-center text-wit lg:hidden" aria-expanded="false" aria-controls="menu-nav" data-menu-knop>
         <span class="sr-only">Menu</span>
         <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg>

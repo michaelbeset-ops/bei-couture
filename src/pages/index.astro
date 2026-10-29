@@ -38,16 +38,16 @@ const faq = [
   <main id="inhoud">
 
     <!-- HERO -->
-    <section class="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-[#1b1716] text-[#ffffff]">
+    <section class="font-sans relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-[#1b1716] text-[#ffffff]">
       <Picture src={hero} formats={['avif', 'webp']} widths={[640, 960, 1400, 2000]} sizes="100vw" alt="Een bruid wordt in haar kanten trouwjurk geholpen in het atelier" loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover object-[62%_40%] max-md:object-[60%_62%]" />
       <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#1b1716f2_0%,#1b1716c7_42%,#1b171640_80%,#1b171626_100%)] max-md:bg-[linear-gradient(180deg,#1b1716b3_0%,#1b171699_35%,#1b1716e6_78%,#1b1716_100%)]"></div>
       <div class="wrap flex flex-1 flex-col justify-end pb-[5.5rem] pt-28 md:pb-20 md:pt-36 lg:pt-44">
-        <p class="eyebrow eyebrow-licht">Bruidsatelier in Rotterdam</p>
-        <h1 class="mt-4 max-w-[13ch] text-hero md:mt-6">Uw droom wordt werkelijkheid in ons <em class="accent-licht">atelier.</em></h1>
-        <p class="mt-5 max-w-xl text-[1.06rem] text-[#ffffffe6] md:mt-7 md:text-xl">Bruidsjurken op maat, trouwjurken vermaakt en jurken voor de bruidsmoeder, de bruidsmeisjes en de bruidsjonkers. Gemaakt door Bei zelf, in haar atelier aan de Hoogstraat.</p>
+        <p class="eyebrow eyebrow-licht !font-sans !text-[.8125rem] !font-semibold !tracking-[.2em]">Bruidsatelier in Rotterdam</p>
+        <h1 class="hero-kop mt-4 max-w-[13ch] text-hero md:mt-6">Uw droom wordt werkelijkheid in ons <em class="accent-licht">atelier.</em></h1>
+        <p class="mt-5 max-w-xl text-[1.06rem] text-[#ffffffe6] md:mt-7 md:text-[1.375rem]">Bruidsjurken op maat, trouwjurken vermaakt en jurken voor de bruidsmoeder, de bruidsmeisjes en de bruidsjonkers. Gemaakt door Bei zelf, in haar atelier aan de Hoogstraat.</p>
         <div class="mt-7 flex flex-wrap gap-3 md:mt-9">
-          <a href={url('contact/')} class="knop knop-merk !rounded-[2px]">Afspraak maken <Icoon naam="pijl" /></a>
-          <a href={site.telHref} class="knop knop-wit num !rounded-[2px] !border-[1.5px]"><Icoon naam="tel" />{site.tel}</a>
+          <a href={url('contact/')} class="knop knop-merk !rounded-[2px] !font-sans !normal-case !tracking-[.01em] !text-[1.05rem] !font-semibold">Afspraak maken <Icoon naam="pijl" /></a>
+          <a href={site.telHref} class="knop knop-wit num !rounded-[2px] !border-[1.5px] !font-sans !normal-case !tracking-[.01em] !text-[1.05rem] !font-semibold"><Icoon naam="tel" />{site.tel}</a>
         </div>
         <ul class="mt-6 flex flex-wrap items-center gap-x-7 gap-y-2 text-[.95rem] text-[#ffffffd9] md:mt-9">
           <li class="flex items-center gap-2"><span class="flex text-strik">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span><strong class="font-semibold text-[#ffffff]">{site.google.score}</strong> op Google, {site.google.aantal} reviews</li>
@@ -90,8 +90,7 @@ const faq = [
                   <Picture src={d.img} formats={['avif', 'webp']} widths={[160, 256, 384]} sizes="(min-width: 768px) 128px, 96px" alt={d.alt} class="h-full w-full object-cover" style={`object-position:${d.pos}`} />
                 </span>
                 <span class="block min-w-0">
-                  <span class="num font-kop text-[.95rem] font-extrabold italic text-merk">0{i + 1}</span>
-                  <h3 class="mt-1 text-[1.5rem] md:text-[1.7rem]">{d.kaartTitel}</h3>
+                  <h3 class="text-[1.7rem] md:text-[2rem]">{d.kaartTitel}</h3>
                   <span class="mt-2 block font-medium">{d.voorWie}</span>
                   <span class="mt-1 block text-[.98rem] leading-relaxed text-steen">{d.watJeKrijgt}</span>
                   <span class="tekstlink mt-3 inline-block text-sm font-semibold text-merk">Meer over {d.kaartTitel.toLowerCase()}</span>

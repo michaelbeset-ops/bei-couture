@@ -2,7 +2,11 @@
 
 @import "@fontsource/bodoni-moda/latin-800.css";
 @import "@fontsource/bodoni-moda/latin-800-italic.css";
+@import "@fontsource/bodoni-moda/latin-500.css";
 @import "@fontsource/bodoni-moda/latin-500-italic.css";
+@import "@fontsource/cormorant-garamond/latin-500.css";
+@import "@fontsource/cormorant-garamond/latin-500-italic.css";
+@import "@fontsource/cormorant-garamond/latin-600.css";
 @import "@fontsource/instrument-sans/latin-400.css";
 @import "@fontsource/instrument-sans/latin-500.css";
 @import "@fontsource/instrument-sans/latin-600.css";
@@ -34,13 +38,15 @@
   --shadow-zacht: 0 10px 30px -22px rgb(59 42 40 / .35);
 
   --font-kop: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --font-tekst: "Cormorant Garamond", "Cormorant", Garamond, Georgia, serif;
+  /* Instrument Sans alleen nog in de hero (die blijft zoals hij was) en in heel kleine UI-tekst. */
   --font-sans: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
 
-  --text-xs: 0.8125rem;
-  --text-sm: 0.9375rem;
-  --text-base: 1.0625rem;
-  --text-lg: 1.1875rem;
-  --text-xl: 1.375rem;
+  --text-xs: 0.95rem;
+  --text-sm: 1.05rem;
+  --text-base: 1.2rem;
+  --text-lg: 1.35rem;
+  --text-xl: 1.55rem;
   --text-2xl: clamp(1.5rem, 1vw + 1.2rem, 2rem);
   --text-3xl: clamp(2.1rem, 2.6vw + 1.1rem, 3.5rem);
   --text-4xl: clamp(2.3rem, 3.4vw + 1rem, 4.5rem);
@@ -56,14 +62,16 @@
   body {
     background-color: var(--color-ivoor);
     color: var(--color-inkt);
-    font-family: var(--font-sans);
+    font-family: var(--font-tekst);
     font-size: var(--text-base);
-    line-height: 1.6;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  h1, h2, h3 { font-family: var(--font-kop); font-weight: 800; line-height: 1; letter-spacing: -.03em; text-wrap: balance; }
-  h3 { letter-spacing: -.015em; line-height: 1.08; }
+  h1, h2, h3 { font-family: var(--font-kop); font-weight: 500; line-height: 1.05; letter-spacing: -.01em; text-wrap: balance; }
+  h3 { line-height: 1.12; }
+  /* De hero houdt de zware letter waar de klant voor koos. */
+  .hero-kop { font-weight: 800; letter-spacing: -.03em; line-height: 1; }
   em { font-style: italic; }
   fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
   p { text-wrap: pretty; }
@@ -81,7 +89,7 @@
 
   .num { font-variant-numeric: lining-nums tabular-nums; }
 
-  .eyebrow { display: inline-block; font-size: .8125rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--color-merk); }
+  .eyebrow { display: inline-block; font-family: var(--font-tekst); font-size: 1rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--color-merk); }
   .eyebrow-licht { color: var(--color-strik); }
 
   /* De naad: gestippelde lijn uit hun logo, als stiksel tussen onderdelen. */
@@ -96,7 +104,7 @@
 
   .stap-nr { font-family: var(--font-kop); font-weight: 800; font-style: italic; font-size: 3.4rem; line-height: 1; letter-spacing: -.03em; color: var(--color-merk); }
 
-  .knop { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 3.25rem; padding: 0 1.9rem; border-radius: var(--radius-pil); font-family: var(--font-sans); font-size: 1rem; font-weight: 600; letter-spacing: .01em; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .25s var(--ease-zacht), color .25s var(--ease-zacht), border-color .25s var(--ease-zacht), transform .25s var(--ease-zacht); }
+  .knop { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 3.25rem; padding: 0 1.9rem; border-radius: var(--radius-pil); font-family: var(--font-tekst); font-size: 1.05rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .25s var(--ease-zacht), color .25s var(--ease-zacht), border-color .25s var(--ease-zacht), transform .25s var(--ease-zacht); }
   .knop svg { width: 1.2rem; height: 1.2rem; flex: none; }
   /* Op smalle telefoons mag een knop over twee regels, anders duwt hij de pagina breder dan het scherm. */
   @media (max-width: 420px) { .knop { white-space: normal; text-align: center; padding-block: .6rem; line-height: 1.25; max-width: 100%; } }
@@ -126,18 +134,16 @@
 
   /* Werkwijze: vijf stappen van links naar rechts op één doorlopende lijn. */
   .stap { position: relative; border-top: 1px solid var(--color-ivoor-3); padding-top: 2rem; }
-  .stap::before { content: ""; position: absolute; top: -4px; left: 0; width: 7px; height: 7px; border-radius: 999px; background: var(--color-merk); }
   @media (max-width: 1023px) {
     .stap { border-top: 0; border-left: 1px solid var(--color-ivoor-3); padding-top: 0; padding-left: 1.75rem; padding-bottom: 2.5rem; }
-    .stap::before { top: .55rem; left: -4px; }
     .stap:last-child { padding-bottom: 0; }
   }
 
   /* Uitspraak: grote letter, geen kader. */
-  .uitspraak { font-family: var(--font-kop); font-weight: 800; letter-spacing: -.025em; line-height: 1.08; text-wrap: balance; }
+  .uitspraak { font-family: var(--font-kop); font-weight: 500; font-style: italic; letter-spacing: -.01em; line-height: 1.1; text-wrap: balance; }
 
   /* Wow: afspraak-kaartje. Keuzes als stoffen labels. */
-  .keuze { position: relative; display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .7rem 1rem; border: 1px solid var(--color-ivoor-3); border-radius: 10px; background: var(--color-wit); cursor: pointer; font-weight: 500; line-height: 1.3; transition: border-color .2s, background-color .2s; }
+  .keuze { position: relative; display: flex; align-items: center; gap: .75rem; min-height: 3.4rem; padding: .7rem 1rem; font-size: 1.15rem; border: 1px solid var(--color-ivoor-3); border-radius: 10px; background: var(--color-wit); cursor: pointer; font-weight: 500; line-height: 1.3; transition: border-color .2s, background-color .2s; }
   .keuze input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
   .keuze:hover { border-color: var(--color-merk); }
   .keuze .bol { flex: none; width: 1.1rem; height: 1.1rem; border-radius: 999px; border: 1px solid var(--color-steen); transition: all .2s; }
@@ -151,7 +157,7 @@
   .veld::placeholder { color: #8b807d; }
   .veld:hover { border-color: var(--color-steen); }
   .veld:focus { outline: none; border-color: var(--color-merk); box-shadow: 0 0 0 1px var(--color-merk); }
-  .veld-label { display: block; font-family: var(--font-kop); font-weight: 800; font-size: 1.3rem; letter-spacing: -.015em; margin-bottom: .85rem; }
+  .veld-label { display: block; font-family: var(--font-kop); font-weight: 500; font-size: 1.5rem; margin-bottom: .85rem; }
 
 
   /* Swipebare rij (reviews). Scrollbar subtiel, maar wel zichtbaar dat er meer is. */
