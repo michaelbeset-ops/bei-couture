@@ -1,32 +1,39 @@
 ---
-// De vijf stappen van het atelier, van links naar rechts in vijf lichte panelen op het zachte roze.
-// Op kleine schermen staan ze onder elkaar.
+// De vijf stappen: links een foto uit het atelier, rechts de stappen als rustige lijst met haarlijnen.
+// Zelfde opzet als "Over Bei", zodat de homepage één geheel blijft.
+import { Picture } from 'astro:assets';
 import { stappen, url } from '../data/site';
+import kant from '../assets/kant.jpg';
 interface Props { vol?: boolean; achtergrond?: string }
-const { vol = false, achtergrond = 'bg-strik-zacht' } = Astro.props;
+const { vol = false, achtergrond = 'bg-ivoor' } = Astro.props;
+// Op de homepage alleen de eerste twee zinnen; de volledige tekst staat op /werkwijze/.
+const kort = (t: string) => t.split(/(?<=\.)\s+/).slice(0, 2).join(' ');
 ---
 <section id="werkwijze" class={`${achtergrond} py-16 md:py-24`} aria-labelledby="werkwijze-kop">
-  <div class="wrap">
-    <div class="grid gap-6 md:grid-cols-12 md:items-end">
-      <div class="md:col-span-7">
+  <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-14">
+    <div class="lg:col-span-5">
+      <div class="lg:sticky lg:top-28">
         <p class="eyebrow">Zo gaat het</p>
         <h2 id="werkwijze-kop" class="mt-5 text-[2.2rem] md:text-[2.8rem]">Van jouw foto tot <span class="text-merk">jouw jurk</span></h2>
+        <p class="mt-6 max-w-md text-steen">Vijf stappen, elk met een eigen afspraak. Je weet steeds waar je staat en komt nooit voor verrassingen te staan.</p>
+        <Picture src={kant} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(min-width: 1024px) 480px, 100vw" alt="Detail van een kanten jurk met stoffen knoopjes" class="foto mt-8 aspect-[4/3] w-full object-cover max-lg:hidden" />
       </div>
-      <p class="text-steen md:col-span-5">Vijf stappen, elk met een eigen afspraak. Je weet steeds waar je staat en komt nooit voor verrassingen te staan.</p>
     </div>
 
-    <ol class="mt-10 grid gap-3 border-y border-merk/20 py-3 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0 lg:divide-x lg:divide-merk/20">
+    <ol class="divide-y divide-merk/20 border-y border-merk/20 lg:col-span-7 lg:pl-4 xl:pl-10">
       {stappen.map((s, i) => (
-        <li class="rijs flex flex-col bg-wit/60 px-6 py-7 lg:px-5 xl:px-6" style={`--d:${i * 0.07}s`}>
-          <h3 class="text-[1.45rem] leading-tight">{s.titel}</h3>
-          <p class="mt-3 text-[.95rem] font-medium leading-snug text-merk">{s.kort}</p>
-          <p class={`mt-4 text-[.95rem] leading-relaxed text-steen ${vol ? '' : 'line-clamp-3 lg:line-clamp-4'}`}>{s.tekst}</p>
+        <li class="rijs grid gap-2 py-6 sm:grid-cols-12 sm:gap-6 md:py-7" style={`--d:${i * 0.07}s`}>
+          <div class="sm:col-span-5">
+            <h3 class="text-[1.45rem] leading-tight">{s.titel}</h3>
+            <p class="mt-1.5 text-[.9rem] font-medium text-merk">{s.kort}</p>
+          </div>
+          <p class="text-[.95rem] leading-relaxed text-steen sm:col-span-7">{vol ? s.tekst : kort(s.tekst)}</p>
         </li>
       ))}
     </ol>
 
     {!vol && (
-      <div class="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+      <div class="flex flex-wrap items-center gap-x-8 gap-y-4 lg:col-span-7 lg:col-start-6 lg:pl-4 xl:pl-10">
         <a href={url('contact/')} class="knop knop-merk">Afspraak maken</a>
         <a href={url('werkwijze/')} class="text-[.8rem] font-medium uppercase tracking-[.25em] text-merk underline decoration-merk/40 underline-offset-[6px]">De werkwijze helemaal lezen</a>
       </div>

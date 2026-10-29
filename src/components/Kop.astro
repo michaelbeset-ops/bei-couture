@@ -21,17 +21,6 @@ const nav: { href: string; t: string; actief: boolean }[] = [
 ];
 ---
 <header class={opFoto ? 'absolute inset-x-0 top-0 z-40' : 'relative z-40 bg-inkt'}>
-  <div class="hidden border-b border-lijn lg:block">
-    <div class="wrap flex h-11 items-center justify-between gap-6 font-sans text-[.875rem] text-wit/85">
-      <ul class="flex gap-7">
-        <li class="flex items-center gap-2"><Icoon naam="pin" class="h-4 w-4 text-strik" />{site.straat}, {site.plaats}</li>
-        <li class="flex items-center gap-2"><Icoon naam="klok" class="h-4 w-4 text-strik" />Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00</li>
-        <li class="flex items-center gap-2"><Icoon naam="kalender" class="h-4 w-4 text-strik" />Ook op afspraak buiten de openingstijden</li>
-      </ul>
-      <a href={site.telHref} class="num flex items-center gap-2 text-wit/85 no-underline hover:text-wit"><Icoon naam="tel" class="h-4 w-4 text-strik" />{site.tel}</a>
-    </div>
-  </div>
-
   <div class="wrap flex h-20 items-center justify-between gap-3 md:h-24 md:gap-8">
     <Merk donker />
 
