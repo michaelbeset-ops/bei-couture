@@ -32,30 +32,27 @@ const basis = new URL(url(''), Astro.site).href;
       kruimels={[{ naam: 'Home', href: url('') }, { naam: 'Atelier', href: url('atelier/') }]}
     />
 
-    <section class="bg-ivoor py-24 md:py-32">
+    <section class="bg-ivoor py-16 md:py-24">
       <div class="wrap">
-        <ul class="grid gap-6 lg:grid-cols-2">
+        <ul class="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {diensten.map((d, i) => (
-            <li class="rijs" style={`--d:${(i % 2) * 0.08}s`}>
-              <a href={url(`${d.slug}/`)} class="fotolink group grid h-full gap-6 sm:grid-cols-[15rem_1fr] sm:items-center">
-                <span class="relative block min-h-48 overflow-hidden rounded-sm bg-inkt">
-                  <Picture src={d.img} formats={['avif', 'webp']} widths={[320, 560]} sizes="(min-width: 640px) 240px, 100vw" alt={d.alt} class="absolute inset-0 h-full w-full object-cover" style={`object-position:${d.pos}`} />
+            <li class="rijs" style={`--d:${(i % 3) * 0.07}s`}>
+              <a href={url(`${d.slug}/`)} class="fotolink group block">
+                <span class="foto block aspect-[3/4]">
+                  <Picture src={d.img} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw" alt={d.alt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" style={`object-position:${d.pos}`} />
                 </span>
-                <span class="block">
-                  <span class="eyebrow">{d.eyebrow}</span>
-                  <h2 class="mt-4 text-[1.7rem]">{d.kaartTitel}</h2>
-                  <span class="mt-3 block text-steen">{d.kaartTekst}</span>
-                </span>
+                <h2 class="mt-5 text-[.8rem] font-medium uppercase tracking-[.22em] text-inkt" style="font-family: var(--font-tekst)">{d.kaartTitel}</h2>
+                <span class="mt-2 block text-[.95rem] text-steen">{d.kaartTekst}</span>
               </a>
             </li>
           ))}
         </ul>
-        <p class="mt-8 text-steen">Staat jouw vraag er niet tussen? Het atelier maakt ook carnavalskleding, turnpakjes en kostuums. Bel of app gerust: <a href={site.telHref} class="link num font-semibold">{site.tel}</a>.</p>
+        <p class="mt-12 text-steen">Staat jouw vraag er niet tussen? Het atelier maakt ook carnavalskleding, turnpakjes en kostuums. Bel of app gerust: <a href={site.telHref} class="link num font-semibold">{site.tel}</a>.</p>
       </div>
     </section>
 
     <Werkwijze />
-    <Reviews donker />
+    <Reviews />
     <Cta />
   </main>
   <Voet />

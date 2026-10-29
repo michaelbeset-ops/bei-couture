@@ -7,10 +7,10 @@ import Icoon from '../components/Icoon.astro';
 import Reviews from '../components/Reviews.astro';
 import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
-import Tijden from '../components/Tijden.astro';
+import Bezoek from '../components/Bezoek.astro';
 import Kruimels from '../components/Kruimels.astro';
 import { diensten, dienstOp } from '../data/diensten';
-import { site, url, waMet, stappen, werkgebied } from '../data/site';
+import { site, url, waMet, werkgebied } from '../data/site';
 import { dienstSchema, faqSchema } from '../lib/schema';
 
 export function getStaticPaths() {
@@ -54,59 +54,56 @@ const verwant = d.verwant.map(dienstOp);
       </div>
     </section>
 
-    <!-- INTRO -->
-    <section class="bg-ivoor py-20 md:py-28">
+    <!-- INTRO: kort, met rechts het afspraakpaneel -->
+    <section class="bg-ivoor py-16 md:py-24">
       <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div class="lg:col-span-7">
-          <div class="space-y-6 text-lg text-steen">
+          <div class="space-y-5 text-lg text-steen">
             {d.intro.map((p) => <p>{p}</p>)}
           </div>
-          <hr class="naad mt-12" />
-          <div class="mt-12 space-y-14">
-            {d.blokken.map((b) => (
-              <div class="rijs">
-                <h2 class="text-3xl">{b.kop}</h2>
-                {b.tekst && <div class="mt-6 space-y-5 text-steen">{b.tekst.map((p) => <p>{p}</p>)}</div>}
+        </div>
+        <aside class="lg:col-span-5">
+          <div class="border border-merk/20 bg-strik-zacht p-7 md:p-8">
+            <p class="eyebrow">Afspraak</p>
+            <p class="mt-4 font-kop text-[1.6rem] font-normal leading-tight">Stuur een foto van wat je in gedachten hebt</p>
+            <p class="mt-3 text-steen">Dan weet Bei meteen waar je aan denkt en kan ze bij de eerste afspraak al vertellen wat er mogelijk is.</p>
+            <div class="mt-6 flex flex-col gap-3">
+              <a href={waMet(`Hallo Bei, ik heb een vraag over: ${d.kaartTitel.toLowerCase()}.`)} class="knop knop-merk w-full"><Icoon naam="wa" />App je vraag of foto</a>
+              <a href={site.telHref} class="knop knop-rand num w-full bg-wit"><Icoon naam="tel" />{site.tel}</a>
+            </div>
+            <ul class="mt-6 space-y-2 border-t border-merk/20 pt-5 text-[.95rem] text-steen">
+              <li class="flex gap-3"><Icoon naam="klok" class="mt-1 h-4 w-4 flex-none text-merk" />Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00</li>
+              <li class="flex gap-3"><Icoon naam="kalender" class="mt-1 h-4 w-4 flex-none text-merk" />Buiten die tijden op afspraak, ook 's avonds</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- UITLEG: elk onderdeel als rij, kop links en tekst rechts, zodat het geen lap tekst wordt -->
+    <section class="bg-strik-zacht py-16 md:py-24">
+      <div class="wrap">
+        <div class="divide-y divide-merk/20 border-y border-merk/20">
+          {d.blokken.map((b) => (
+            <div class="rijs grid gap-4 py-9 lg:grid-cols-12 lg:gap-12 md:py-11">
+              <h2 class="text-[1.7rem] leading-tight lg:col-span-4 md:text-[1.9rem]">{b.kop}</h2>
+              <div class="lg:col-span-8">
+                {b.tekst && <div class="space-y-4 text-steen">{b.tekst.map((p) => <p>{p}</p>)}</div>}
                 {b.lijst && (
-                  <ul class="mt-6 divide-y divide-ivoor-3 border-y border-ivoor-3">
+                  <ul class="grid gap-x-8 gap-y-3 sm:grid-cols-2">
                     {b.lijst.map((l) => (
-                      <li class="flex items-start gap-4 py-3.5 text-steen"><span class="mt-[.72em] h-px w-5 flex-none bg-merk" aria-hidden="true"></span>{l}</li>
+                      <li class="flex items-start gap-3 text-steen"><Icoon naam="vink" class="mt-1.5 h-4 w-4 flex-none text-merk" />{l}</li>
                     ))}
                   </ul>
                 )}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-
-        <aside class="lg:col-span-5">
-          <div class="lg:sticky lg:top-32">
-            <div class="kaart p-7 md:p-8">
-              <p class="eyebrow">Afspraak</p>
-              <p class="mt-4 font-kop text-[1.7rem] font-normal leading-tight">Stuur een foto van wat je in gedachten hebt</p>
-              <p class="mt-4 text-steen">Dan weet Bei meteen waar je aan denkt en kan ze bij de eerste afspraak al vertellen wat er mogelijk is.</p>
-              <div class="mt-6 flex flex-col gap-3">
-                <a href={waMet(`Hallo Bei, ik heb een vraag over: ${d.kaartTitel.toLowerCase()}.`)} class="knop knop-merk w-full"><Icoon naam="wa" />App je vraag of foto</a>
-                <a href={site.telHref} class="knop knop-rand num w-full"><Icoon naam="tel" />{site.tel}</a>
-              </div>
-              <hr class="naad mt-7" />
-              <ul class="mt-6 space-y-3 text-[.98rem] text-steen">
-                <li class="flex gap-3"><Icoon naam="pin" class="mt-1 h-4 w-4 flex-none text-merk" />{site.straat}, {site.plaats}</li>
-                <li class="flex gap-3"><Icoon naam="klok" class="mt-1 h-4 w-4 flex-none text-merk" />Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00</li>
-                <li class="flex gap-3"><Icoon naam="kalender" class="mt-1 h-4 w-4 flex-none text-merk" />Buiten die tijden op afspraak, ook 's avonds</li>
-                <li class="flex gap-3"><Icoon naam="ster" class="mt-1 h-4 w-4 flex-none text-merk" />{site.google.score} uit {site.google.aantal} reviews op Google</li>
-              </ul>
-            </div>
-
-            <div class="mt-8 border-t border-ivoor-3 pt-6">
-              <p class="font-semibold">In vijf stappen klaar</p>
-              <ul class="mt-4 space-y-2 text-steen">
-                {stappen.map((s) => <li class="flex gap-3"><span class="mt-[.8em] h-px w-4 flex-none bg-merk" aria-hidden="true"></span>{s.kort}</li>)}
-              </ul>
-              <a href={url('werkwijze/')} class="tekstlink mt-5 inline-block font-semibold text-merk">Zo werkt het, stap voor stap</a>
-            </div>
-          </div>
-        </aside>
+        <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+          <a href={`${url('contact/')}?voor=${encodeURIComponent(d.kies)}`} class="knop knop-merk">Afspraak maken</a>
+          <a href={url('werkwijze/')} class="text-[.8rem] font-medium uppercase tracking-[.25em] text-merk underline decoration-merk/40 underline-offset-[6px]">Zo werkt het, stap voor stap</a>
+        </div>
       </div>
     </section>
 
@@ -115,7 +112,7 @@ const verwant = d.verwant.map(dienstOp);
       <div class="wrap grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
         <div class="lg:col-span-7">
           <p class="eyebrow eyebrow-licht">Rotterdam en omgeving</p>
-          <h2 class="mt-5 text-3xl">Bruiden komen uit de hele <em class="accent-licht">regio.</em></h2>
+          <h2 class="mt-5 text-[2.2rem] md:text-[2.6rem]">Bruiden komen uit de hele <span class="text-strik">regio</span></h2>
           <p class="mt-6 text-wit/85">Het atelier zit aan de {site.straat} in {site.plaats}, in het pand van {site.inPand}. Klanten komen onder meer uit {werkgebied.slice(1, 10).join(', ')} en verder.</p>
         </div>
         <div class="lg:col-span-5">
@@ -128,15 +125,17 @@ const verwant = d.verwant.map(dienstOp);
     <Faq vragen={d.faq} kop={`Vragen over ${d.kaartTitel.toLowerCase()}`} achtergrond="bg-ivoor" />
 
     <!-- VERWANT -->
-    <section class="bg-ivoor-2 py-20 md:py-24">
+    <section class="bg-ivoor py-16 md:py-24">
       <div class="wrap">
-        <h2 class="text-3xl">Misschien ook <em class="accent">interessant.</em></h2>
-        <ul class="mt-10 grid gap-5 md:grid-cols-3">
+        <h2 class="text-[2rem] md:text-[2.4rem]">Misschien ook <span class="text-merk">interessant</span></h2>
+        <ul class="mt-8 grid gap-x-8 gap-y-10 sm:grid-cols-3">
           {verwant.map((v) => (
             <li>
-              <a href={url(`${v.slug}/`)} class="fotolink group block h-full border-t border-ivoor-3 pt-7">
-                <h3 class="text-[1.5rem]">{v.kaartTitel}</h3>
-                <p class="mt-3 text-steen">{v.kaartTekst}</p>
+              <a href={url(`${v.slug}/`)} class="fotolink group block">
+                <span class="foto block aspect-[3/4]">
+                  <Picture src={v.img} formats={['avif', 'webp']} widths={[480, 720]} sizes="(min-width: 640px) 33vw, 100vw" alt={v.alt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" style={`object-position:${v.pos}`} />
+                </span>
+                <h3 class="mt-4 text-[.8rem] font-medium uppercase tracking-[.22em] text-inkt" style="font-family: var(--font-tekst)">{v.kaartTitel}</h3>
               </a>
             </li>
           ))}
@@ -144,9 +143,7 @@ const verwant = d.verwant.map(dienstOp);
       </div>
     </section>
 
-    <section class="bg-ivoor py-20 md:py-24">
-      <div class="wrap max-w-3xl"><Tijden /></div>
-    </section>
+    <Bezoek />
 
     <Cta />
   </main>
