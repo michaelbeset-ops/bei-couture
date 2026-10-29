@@ -5,8 +5,8 @@ import { url, site } from '../data/site';
 import logo from '../assets/logo.png';
 import logoLicht from '../assets/logo-licht.png';
 
-interface Props { donker?: boolean; class?: string; groot?: boolean; link?: boolean }
-const { donker = false, class: cls = '', groot = false, link = true } = Astro.props;
+interface Props { donker?: boolean; class?: string; groot?: boolean; link?: boolean; prioriteit?: boolean }
+const { donker = false, class: cls = '', groot = false, link = true, prioriteit = false } = Astro.props;
 
 const bron = donker ? logoLicht : logo;
 const maat = groot ? 'h-24 w-24 md:h-32 md:w-32' : 'h-16 w-16 md:h-[5.25rem] md:w-[5.25rem]';
@@ -16,5 +16,5 @@ const Tag = link ? 'a' : 'div';
   {...link ? { href: url(''), 'aria-label': `${site.naam}, naar de homepage` } : {}}
   class={`inline-flex flex-none items-center no-underline ${link ? 'transition-opacity duration-300 hover:opacity-80' : ''} ${cls}`}
 >
-  <Image src={bron} alt={`${site.naam}, bruidsatelier in Rotterdam`} widths={[128, 168, 256]} sizes={groot ? "(min-width: 768px) 128px, 96px" : "(min-width: 768px) 84px, 64px"} class={`${maat} object-contain`} loading="eager" fetchpriority="high" />
+  <Image src={bron} alt={`${site.naam}, bruidsatelier in Rotterdam`} widths={[128, 168, 256]} sizes={groot ? "(min-width: 768px) 128px, 96px" : "(min-width: 768px) 84px, 64px"} class={`${maat} object-contain`} loading={prioriteit ? 'eager' : 'lazy'} fetchpriority={prioriteit ? 'high' : 'auto'} quality={75} />
 </Tag>

@@ -20,7 +20,6 @@ export function bedrijf(basis: string, logoUrl: string, afbeelding: string) {
     image: afbeelding,
     telephone: site.telE164,
     email: site.mail,
-    priceRange: '$$',
     currenciesAccepted: 'EUR',
     foundingDate: '1997',
     founder: { '@type': 'Person', name: 'Bei' },
@@ -41,8 +40,10 @@ export function bedrijf(basis: string, logoUrl: string, afbeelding: string) {
   };
 }
 
-export const dienstSchema = (naam: string, beschrijving: string, paginaUrl: string, basis: string) => ({
+export const dienstSchema = (naam: string, beschrijving: string, paginaUrl: string, basis: string, afbeelding?: string) => ({
   '@type': 'Service',
+  '@id': `${paginaUrl}#dienst`,
+  ...(afbeelding ? { image: afbeelding } : {}),
   name: naam,
   description: beschrijving,
   serviceType: naam,

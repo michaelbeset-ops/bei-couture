@@ -1,25 +1,26 @@
 ---
 import Icoon from './Icoon.astro';
+import { site, waHoi } from '../data/site';
 interface Props { vragen: { v: string; a: string }[]; kop?: string; achtergrond?: string }
 const { vragen, kop = 'Veelgestelde vragen', achtergrond = 'bg-ivoor-2' } = Astro.props;
 ---
-<section class={`${achtergrond} py-16 md:py-24`} aria-labelledby="faq-kop">
-  <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-16">
+<section class={`${achtergrond} py-12 md:py-24`} aria-labelledby="faq-kop">
+  <div class="wrap grid gap-8 lg:grid-cols-12 lg:gap-16">
     <div class="lg:col-span-4">
       <p class="eyebrow">Vragen</p>
-      <h2 id="faq-kop" class="mt-5 text-[2.2rem] md:text-[2.6rem]">{kop}</h2>
-      <p class="mt-6 text-steen">Staat je vraag er niet bij? Bel of app gerust, je krijgt altijd een eerlijk antwoord over wat er wel en niet kan.</p>
+      <h2 id="faq-kop" class="mt-4 text-[2rem] md:mt-5 md:text-[2.6rem]">{kop}</h2>
+      <p class="mt-5 text-steen">Staat je vraag er niet bij? <a href={site.telHref} class="link num">Bel</a> of <a href={waHoi} class="link">app</a> gerust, je krijgt altijd een eerlijk antwoord over wat er wel en niet kan.</p>
     </div>
     <div class="lg:col-span-8">
       <ul class="divide-y divide-ivoor-3 border-y border-ivoor-3">
         {vragen.map((q) => (
           <li class="vraag">
             <details name="faq">
-              <summary class="flex cursor-pointer list-none items-start justify-between gap-6 py-6">
-                <h3 class="text-[1.35rem] md:text-[1.5rem]">{q.v}</h3>
-                <span class="mt-1 grid h-8 w-8 flex-none place-items-center rounded-full border border-ivoor-3 text-merk transition-transform duration-300"><Icoon naam="plus" class="h-4 w-4" /></span>
+              <summary class="flex cursor-pointer list-none items-start justify-between gap-4 py-5 md:gap-6 md:py-6">
+                <span class="vraag-tekst font-kop text-[1.2rem] leading-[1.2] md:text-[1.5rem]">{q.v}</span>
+                <span class="vraag-plus mt-0.5 grid h-9 w-9 flex-none place-items-center rounded-full border border-ivoor-3 text-merk transition-transform duration-300"><Icoon naam="plus" class="h-4 w-4" /></span>
               </summary>
-              <p class="pb-7 pr-12 text-steen">{q.a}</p>
+              <p class="pb-6 text-steen md:pr-12">{q.a}</p>
             </details>
           </li>
         ))}

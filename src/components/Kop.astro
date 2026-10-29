@@ -6,8 +6,8 @@ import Merk from './Merk.astro';
 
 // opFoto: de kop staat over de donkere hero van de pagina (doorzichtig).
 // Staat de pagina bovenaan licht, dan krijgt de kop zelf de donkere achtergrond.
-interface Props { opFoto?: boolean }
-const { opFoto = true } = Astro.props;
+interface Props { opFoto?: boolean; wa?: string }
+const { opFoto = true, wa = waHoi } = Astro.props;
 
 const pad = Astro.url.pathname.replace(/\/+$/, '');
 const hier = (p: string) => pad === url(p).replace(/\/+$/, '');
@@ -22,12 +22,12 @@ const nav: { href: string; t: string; actief: boolean }[] = [
 ---
 <header class={opFoto ? 'absolute inset-x-0 top-0 z-40' : 'relative z-40 bg-inkt'}>
   <div class="wrap flex h-20 items-center justify-between gap-3 md:h-24 md:gap-8">
-    <Merk donker />
+    <Merk donker prioriteit />
 
     <nav aria-label="Hoofdmenu" class="hidden lg:block">
-      <ul class="flex items-center gap-7 font-sans text-[1.02rem] font-medium">
+      <ul class="flex items-center gap-7 text-[1.02rem] font-medium">
         <li class="group relative">
-          <a href={url('atelier/')} class={`flex items-center gap-1.5 py-6 no-underline transition-colors hover:text-strik ${dienstActief ? 'text-strik' : 'text-wit/90'}`} aria-haspopup="true">
+          <a href={url('atelier/')} class={`flex items-center gap-1.5 py-6 no-underline transition-colors hover:text-strik ${dienstActief ? 'text-strik' : 'text-wit/90'}`} >
             Atelier
             <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
           </a>
@@ -51,7 +51,7 @@ const nav: { href: string; t: string; actief: boolean }[] = [
     </nav>
 
     <div class="flex items-center gap-3">
-      <a href={url('contact/')} class="knop knop-merk hidden min-h-11 px-5 !rounded-[2px] !font-sans !normal-case !tracking-[.01em] !text-[1rem] !font-semibold md:inline-flex">Afspraak maken</a>
+      <a href={url('contact/')} class="knop knop-merk hidden min-h-11 px-5 !rounded-[2px] !normal-case !tracking-[.01em] !text-[1rem] !font-semibold md:inline-flex">Afspraak maken</a>
       <button type="button" class="grid h-11 w-11 place-items-center text-wit lg:hidden" aria-expanded="false" aria-controls="menu-nav" data-menu-knop>
         <span class="sr-only">Menu</span>
         <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg>
@@ -60,28 +60,28 @@ const nav: { href: string; t: string; actief: boolean }[] = [
   </div>
 
   <nav id="menu-nav" aria-label="Menu" class="hidden bg-inkt lg:hidden" data-menu>
-    <ul class="wrap max-h-[70svh] overflow-y-auto pb-8 pt-2">
+    <ul class="wrap max-h-[calc(100svh-5rem)] overflow-y-auto pb-24 pt-2">
       {[...diensten.map((d) => ({ href: url(`${d.slug}/`), t: d.kaartTitel })), ...nav.map((n) => ({ href: n.href, t: n.t }))].map((n) => (
         <li><a href={n.href} class="block border-b border-lijn py-4 font-kop text-2xl font-normal text-wit no-underline">{n.t}</a></li>
       ))}
-      <li class="flex flex-wrap gap-3 pt-6">
-        <a href={url('contact/')} class="knop knop-merk">Afspraak maken</a>
-        <a href={site.telHref} class="knop knop-wit num"><Icoon naam="tel" />{site.tel}</a>
+      <li class="flex flex-col gap-3 pt-6">
+        <a href={url('contact/')} class="knop knop-merk w-full">Afspraak maken</a>
+        <a href={site.telHref} class="knop knop-wit num w-full"><Icoon naam="tel" />{site.tel}</a>
       </li>
     </ul>
   </nav>
 </header>
 
-<div class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 bg-inkt md:hidden">
+<nav aria-label="Direct contact" class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 bg-inkt pb-[env(safe-area-inset-bottom)] md:hidden">
   <a href={site.telHref} class="flex min-h-14 items-center justify-center gap-2.5 border-r border-lijn text-[1rem] font-semibold text-wit no-underline"><Icoon naam="tel" class="h-5 w-5 text-strik" />Bellen</a>
-  <a href={waHoi} class="flex min-h-14 items-center justify-center gap-2.5 bg-merk text-[1rem] font-semibold text-wit no-underline"><Icoon naam="wa" class="h-5 w-5" />WhatsApp</a>
-</div>
+  <a href={wa} class="flex min-h-14 items-center justify-center gap-2.5 bg-merk text-[1rem] font-semibold text-wit no-underline"><Icoon naam="wa" class="h-5 w-5" />App een foto</a>
+</nav>
 
 <script>
   const k = document.querySelector<HTMLButtonElement>('[data-menu-knop]');
   const m = document.querySelector<HTMLElement>('[data-menu]');
   if (k && m) {
-    k.addEventListener('click', () => { const o = k.getAttribute('aria-expanded') !== 'true'; k.setAttribute('aria-expanded', String(o)); m.classList.toggle('hidden', !o); });
-    m.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { k.setAttribute('aria-expanded', 'false'); m.classList.add('hidden'); }));
+    k.addEventListener('click', () => { const o = k.getAttribute('aria-expanded') !== 'true'; k.setAttribute('aria-expanded', String(o)); m.classList.toggle('hidden', !o); k.closest('header')?.classList.toggle('bg-inkt', o); document.documentElement.classList.toggle('overflow-hidden', o); });
+    m.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { k.setAttribute('aria-expanded', 'false'); m.classList.add('hidden'); k.closest('header')?.classList.remove('bg-inkt'); document.documentElement.classList.remove('overflow-hidden'); }));
   }
 </script>

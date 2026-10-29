@@ -1,23 +1,25 @@
 ---
 import { url, waHoi, site } from '../data/site';
 import Icoon from './Icoon.astro';
-interface Props { kop?: string; accent?: string; tekst?: string }
+interface Props { kop?: string; accent?: string; tekst?: string; href?: string; wa?: string }
 const {
   kop = 'Iedereen wil er stralend uitzien op haar',
   accent = 'grote dag.',
   tekst = 'Kom langs in het atelier aan de Hoogstraat, of app eerst een foto van de jurk die je in gedachten hebt.',
+  href = url('contact/'),
+  wa = waHoi,
 } = Astro.props;
 ---
 <section class="bg-merk text-wit">
-  <div class="wrap flex flex-col gap-7 py-14 md:flex-row md:items-center md:justify-between md:py-16">
+  <div class="wrap flex flex-col gap-7 py-12 md:flex-row md:items-center md:justify-between md:py-16">
     <div class="max-w-2xl">
-      <p class="font-kop text-3xl font-normal leading-tight md:text-[2.6rem]">{kop} <em>{accent}</em></p>
+      <p class="font-kop text-3xl font-normal leading-tight md:text-[2.6rem]">{kop} <span class="text-strik">{accent}</span></p>
       <p class="mt-4 text-wit/85">{tekst}</p>
     </div>
-    <div class="flex flex-none flex-wrap gap-3">
-      <a href={url('contact/')} class="knop bg-wit text-inkt hover:bg-ivoor">Afspraak maken <Icoon naam="pijl" /></a>
-      <a href={waHoi} class="knop border border-wit/70 text-wit hover:bg-wit hover:text-merk"><Icoon naam="wa" />WhatsApp</a>
+    <div class="flex flex-none flex-col gap-3 sm:flex-row sm:flex-wrap">
+      <a href={href} class="knop bg-wit text-inkt hover:bg-ivoor">Afspraak maken <Icoon naam="pijl" /></a>
+      <a href={wa} class="knop border border-wit/70 text-wit hover:bg-wit hover:text-merk max-md:hidden"><Icoon naam="wa" />App een foto</a>
     </div>
   </div>
-  <p class="wrap pb-10 text-sm text-wit/80 md:pb-12"><Icoon naam="klok" class="mr-2 inline h-4 w-4 align-[-2px]" />Een afspraak buiten de openingstijden kan ook. Bel of app {site.tel}.</p>
+  <p class="wrap pb-10 text-sm text-wit/85 md:pb-12"><Icoon naam="klok" class="mr-2 inline h-4 w-4 align-[-2px]" />Een afspraak buiten de openingstijden kan ook. Bel of app {site.tel}.</p>
 </section>

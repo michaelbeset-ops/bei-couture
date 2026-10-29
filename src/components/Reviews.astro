@@ -1,27 +1,30 @@
 ---
 // Google-reviews zoals op de andere Sitefront-sites: een rij kleine kaartjes, swipebaar, pijltjes rechtsboven,
 // één link naar Google. Elk kaartje linkt naar het Google-profiel.
-import { site, reviews } from '../data/site';
+import { site, reviews, url } from '../data/site';
 import Icoon from './Icoon.astro';
-interface Props { donker?: boolean }
-const { donker = false } = Astro.props;
+interface Props { donker?: boolean; kop?: string; eerst?: string[] }
+const { donker = false, kop = 'Wat bruiden zeggen', eerst = [] } = Astro.props;
+// Reviews die bij deze pagina passen vooraan, de rest in de gewone volgorde.
+const lijst = [...reviews].sort((a, b) => (eerst.includes(b.naam) ? 1 : 0) - (eerst.includes(a.naam) ? 1 : 0));
+const [kopStart, kopAccent] = kop.split(/ (?=\S+$)/);
 ---
 <section id="reviews" class={`${donker ? 'bg-inkt text-wit' : 'bg-ivoor'} py-14 md:py-20`} aria-labelledby="reviews-kop">
   <div class="wrap">
     <div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
       <div>
         <p class={`eyebrow ${donker ? 'eyebrow-licht' : ''}`}>Google-reviews</p>
-        <h2 id="reviews-kop" class="mt-4 text-[2rem] md:text-[2.4rem]">Wat bruiden <span class={donker ? 'text-strik' : 'text-merk'}>zeggen</span></h2>
+        <h2 id="reviews-kop" class="mt-4 text-[2rem] md:text-[2.4rem]">{kopStart} <span class={donker ? 'text-strik' : 'text-merk'}>{kopAccent}</span></h2>
       </div>
       <div class="flex flex-wrap items-center gap-5">
         <a href={site.reviews} target="_blank" rel="noopener" class={`flex items-center gap-3 border px-4 py-2.5 no-underline ${donker ? 'border-lijn bg-inkt-2 text-wit' : 'border-merk/20 bg-wit text-inkt'}`}>
           <Icoon naam="g" class="h-5 w-5" />
           <span class="leading-tight">
             <span class="flex items-center gap-1.5 text-[.95rem]"><strong class="num font-semibold">{site.google.score}</strong><span class="flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-3 w-3" />)}</span></span>
-            <span class={`block text-[.78rem] ${donker ? 'text-mist' : 'text-steen'}`}>{site.google.aantal} reviews op Google</span>
+            <span class={`block text-[.78rem] ${donker ? 'text-mist' : 'text-steen'}`}>{site.google.aantal} reviews op Google<span class="sr-only"> (opent in een nieuw tabblad)</span></span>
           </span>
         </a>
-        <div class="hidden gap-2 md:flex">
+        <div class="flex gap-2">
         <button type="button" data-rij-vorige class={`grid h-10 w-10 place-items-center border transition-colors disabled:opacity-30 ${donker ? 'border-lijn text-wit hover:border-wit' : 'border-merk/30 text-inkt hover:border-merk hover:text-merk'}`} aria-label="Vorige reviews">
           <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 6 9 12l6 6" /></svg>
         </button>
@@ -33,20 +36,21 @@ const { donker = false } = Astro.props;
     </div>
 
     <ul class="rij mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2" data-rij tabindex="0" aria-label="Reviews, horizontaal te scrollen">
-      {reviews.map((r) => (
+      {lijst.map((r) => (
         <li class="w-[82%] max-w-[340px] flex-none snap-start sm:w-[340px]">
-          <a href={site.reviews} target="_blank" rel="noopener" aria-label={`Review van ${r.naam} op Google lezen`} class={`relative flex h-full flex-col p-6 no-underline transition-colors ${donker ? 'bg-inkt-2 hover:bg-[#3a2f2e]' : 'bg-strik-zacht hover:bg-[#f3e2dc]'}`}>
+          <a href={site.reviews} target="_blank" rel="noopener" class={`relative flex h-full flex-col p-5 no-underline md:p-6 transition-colors ${donker ? 'bg-inkt-2 hover:bg-[#3a2f2e]' : 'bg-strik-zacht hover:bg-[#f3e2dc]'}`}>
             <span class={`absolute right-5 top-5 font-kop text-[4rem] leading-[.6] ${donker ? 'text-strik/50' : 'text-strik'}`} aria-hidden="true">”</span>
             <span class={`flex gap-0.5 ${donker ? 'text-strik' : 'text-merk'}`}>{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-3.5 w-3.5" />)}</span>
             <p class={`mt-4 flex-1 text-[.95rem] leading-relaxed ${donker ? 'text-wit/90' : 'text-inkt-2'}`}>{r.tekst}</p>
-            <span class={`mt-5 block text-[.74rem] font-medium uppercase tracking-[.2em] ${donker ? 'text-mist' : 'text-merk-diep'}`}>{r.naam}</span>
+            <span class={`mt-5 block text-[.8rem] font-medium uppercase tracking-[.2em] ${donker ? 'text-mist' : 'text-merk-diep'}`}>{r.naam}<span class="sr-only">, lees deze review op Google (opent in een nieuw tabblad)</span></span>
           </a>
         </li>
       ))}
     </ul>
 
-    <p class="mt-6 text-sm">
-      <a href={site.reviews} target="_blank" rel="noopener" class={`font-semibold underline decoration-2 underline-offset-[5px] transition-colors ${donker ? 'text-wit decoration-strik hover:text-strik' : 'text-inkt decoration-merk hover:text-merk'}`}>Lees alle {site.google.aantal} reviews op Google</a>
+    <p class="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-sm">
+      <a href={site.reviews} target="_blank" rel="noopener" class={`font-semibold underline decoration-2 underline-offset-[5px] transition-colors ${donker ? 'text-wit decoration-strik hover:text-strik' : 'text-inkt decoration-merk hover:text-merk'}`}>Lees alle {site.google.aantal} reviews op Google<span class="sr-only"> (opent in een nieuw tabblad)</span></a>
+      <a href={url('klantervaringen/')} class={`inline-block py-1 font-semibold underline decoration-2 underline-offset-[5px] ${donker ? 'text-wit decoration-strik hover:text-strik' : 'text-inkt decoration-merk hover:text-merk'}`}>De verhalen achter de reviews</a>
     </p>
   </div>
 </section>
@@ -65,6 +69,6 @@ const { donker = false } = Astro.props;
     vorige?.addEventListener('click', () => rij.scrollBy({ left: -(stap() + 20), behavior: 'smooth' }));
     volgende?.addEventListener('click', () => rij.scrollBy({ left: stap() + 20, behavior: 'smooth' }));
     rij.addEventListener('scroll', bij, { passive: true });
-    bij();
+    requestAnimationFrame(bij);
   });
 </script>

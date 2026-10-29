@@ -23,7 +23,11 @@ op lichte pagina's een donkere balk.
 - `/` home: hero > cijfers > 6 dienstkaarten > over Bei (eigen atelierfoto) > Google-reviews (swipebaar) >
   werkwijze > afspraak (wow) > bezoek met openingstijden > FAQ > slotbalk
 - `/atelier/` overzicht van alles wat gemaakt en vermaakt wordt
-- 6 dienstpagina's: `/bruidsjurk-op-maat/` (ook gekleurde trouwjurk en grote maten), `/trouwjurk-vermaken/`
+- 6 dienstpagina's (29-10-2026 herbouwd na review door zes invalshoeken: ontwerp, mobiel, tekst, SEO, conversie,
+  toegankelijkheid): hero met WhatsApp als eerste knop, roze feitenlint, groot citaat met afspraakpaneel (portret Bei,
+  prijs bij de eerste afspraak), eerste onderdeel als foto plus tekst op roze, de rest als raster met figuurtjes,
+  werkwijze, donkere reviews, FAQ met prijsvraag, verwante diensten, slotbalk met de dienst voorgevuld.
+  `/bruidsjurk-op-maat/` (ook gekleurde trouwjurk en grote maten), `/trouwjurk-vermaken/`
   (ook de jurk van een eerdere trouwdag of van moeder), `/bruidsmoeder-jurk/`, `/bruidsmeisjes-en-bruidsjonkers/`,
   `/gala-en-avondkleding/`, `/kleding-op-maat/`
 - `/werkwijze/` de vijf stappen, visueel als draad langs genummerde cirkels, plus wat je meeneemt

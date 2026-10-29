@@ -41,7 +41,7 @@ const basis = new URL(url(''), Astro.site).href;
                 <span class="foto block aspect-[3/4]">
                   <Picture src={d.img} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw" alt={d.alt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" style={`object-position:${d.pos}`} />
                 </span>
-                <h2 class="mt-5 text-[.8rem] font-medium uppercase tracking-[.22em] text-inkt" style="font-family: var(--font-tekst)">{d.kaartTitel}</h2>
+                <h2 class="mt-5 font-tekst text-[.8rem] font-medium uppercase tracking-[.22em] text-inkt">{d.kaartTitel}</h2>
                 <span class="mt-2 block text-[.95rem] text-steen">{d.kaartTekst}</span>
               </a>
             </li>

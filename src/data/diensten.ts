@@ -6,9 +6,13 @@ import sGala from '../assets/s-gala.jpg';
 import sMeisjes from '../assets/s-bruidsmeisjes.jpg';
 import sAtelier from '../assets/s-meer.jpg';
 import satijn from '../assets/satijn.jpg';
+import kant from '../assets/kant.jpg';
+import bei from '../assets/bei.jpg';
+import hero from '../assets/hero.jpg';
 
 export interface Blok {
   kop: string;
+  icoon: string;
   tekst?: string[];
   lijst?: string[];
 }
@@ -21,9 +25,13 @@ export interface Dienst {
   voorWie: string;
   watJeKrijgt: string;
   kies: string;
+  wie: 'Bruiden' | 'Klanten';
   img: ImageMetadata;
   pos: string;
   alt: string;
+  foto2: ImageMetadata;
+  foto2Pos: string;
+  foto2Alt: string;
   eigenFoto?: boolean;
   h1: string;
   h1Accent: string;
@@ -32,6 +40,7 @@ export interface Dienst {
   description: string;
   lead: string;
   intro: string[];
+  feiten: string[];
   blokken: Blok[];
   faq: { v: string; a: string }[];
   verwant: string[];
@@ -46,55 +55,66 @@ export const diensten: Dienst[] = [
     voorWie: 'Voor de bruid die een jurk wil die nog niet bestaat.',
     watJeKrijgt: 'Ontwerp, patroon, stof en drie pasbeurten. Ook gekleurd of in een grote maat.',
     kies: 'Bruidsjurk laten maken',
+    wie: 'Bruiden',
     img: sMaken,
     pos: '50% 40%',
     alt: 'Kanten lijfje van een bruidsjurk op een paspop in het atelier',
+    foto2: kant,
+    foto2Pos: '55% 45%',
+    foto2Alt: 'Detail van een kanten jurk met stoffen knoopjes',
     h1: 'Bruidsjurk op maat in',
     h1Accent: 'Rotterdam.',
     eyebrow: 'Bruidsjurk op maat',
     title: 'Bruidsjurk op maat laten maken in Rotterdam | Bei Couture',
     description: 'Trouwjurk op maat laten maken in Rotterdam. Ook een gekleurde trouwjurk of een trouwjurk in een grote maat. Bruidsatelier Bei Couture, Hoogstraat 89A.',
-    lead: 'Een trouwjurk die precies past, in het model dat jij voor je ziet en in de kleur die jij wilt. Bei maakt hem van begin tot eind zelf in haar atelier aan de Hoogstraat.',
+    lead: 'Een trouwjurk op maat die precies past, in het model en de kleur die jij voor je ziet. Bei maakt hem van begin tot eind zelf, in haar atelier aan de Hoogstraat.',
     intro: [
-      'Je hoeft geen rek met jurken door te passen en te hopen dat er eentje bij zit. In het atelier begint het bij jouw idee. Je laat een foto zien van een jurk die je mooi vindt, of je vertelt wat je voor je ziet, en vanaf daar wordt er een jurk gemaakt die alleen van jou is.',
-      'Bei naait sinds 1997 in haar eigen atelier en heeft zich in 2009 helemaal toegelegd op bruidsmode. Ze werkt alleen, dus de vrouw met wie je aan tafel zit is ook de vrouw die jouw jurk maakt.',
+      'Je hoeft geen rek met jurken door te passen en te hopen dat er eentje bij zit. Hier begint het bij jouw idee.',
+      'Laat een foto zien van een jurk die je mooi vindt, of vertel wat je voor je ziet. Vanaf daar wordt een trouwjurk op maat gemaakt die alleen van jou is.',
+      'Bei naait sinds 1997 in haar eigen atelier en legt zich sinds 2009 helemaal toe op bruidsmode. Ze werkt alleen, dus de vrouw met wie je aan tafel zit is ook de vrouw die jouw jurk maakt.',
     ],
+    feiten: ['Drie pasbeurten', 'Stof kies je in het atelier', 'Ook een gekleurde trouwjurk', 'Ook in grote maten'],
     blokken: [
       {
-        kop: 'Alles kan anders dan op de foto',
+        kop: 'De foto is het beginpunt',
+        icoon: 'foto',
         tekst: [
-          'Een foto is een beginpunt, geen eindpunt. De hals open of juist dicht, mouwtjes erbij, de rug laag uitgesneden, een sleep langer of korter, een andere rok onder hetzelfde lijfje: het kan allemaal, want de jurk wordt toch vanaf nul opgebouwd.',
-          'Je kiest zelf de stof. Taft, bruidssatijn, tule en kant liggen klaar in het atelier, en applicaties, kraaltjes of borduursel kunnen toegevoegd worden waar jij ze wilt.',
+          'De hals open of dicht, mouwtjes erbij, de rug laag, de sleep langer of korter, een andere rok onder hetzelfde lijfje. Het kan allemaal, want de jurk wordt vanaf nul opgebouwd.',
+          'Je kiest zelf de stof. Taft, bruidssatijn, tule en kant liggen klaar in het atelier. Applicaties, kraaltjes of borduursel komen precies waar jij ze wilt.',
         ],
       },
       {
-        kop: 'Een gekleurde trouwjurk',
+        kop: 'Gekleurde trouwjurk',
+        icoon: 'jurk',
         tekst: [
-          'Niet iedere bruid wil wit of ivoor. Een gekleurde trouwjurk hoort er net zo goed bij: zacht poederroze, champagne, blauw, bordeaux of een jurk met kleur in de onderrok of in het kant. Omdat de jurk vanaf de stof wordt opgebouwd, is kleur gewoon een keuze die je maakt, geen uitzondering waar je lang naar moet zoeken.',
+          'Niet iedere bruid wil wit of ivoor. Zacht poederroze, champagne, blauw, bordeaux, of kleur alleen in de onderrok of het kant. Omdat de jurk vanaf de stof wordt opgebouwd, is kleur gewoon een keuze.',
         ],
       },
       {
-        kop: 'Een trouwjurk in een grote maat',
+        kop: 'Trouwjurk in grote maat',
+        icoon: 'meet',
         tekst: [
-          'In de winkel is de keuze in grote maten vaak klein, en wat er hangt moet meestal alsnog flink vermaakt worden. Op maat werkt andersom: er wordt gemeten aan jouw lijf en daar wordt het patroon omheen gebouwd. Geen standaardmaat die je moet zien te benaderen.',
-          'Bei denkt daarbij mee over steun en pasvorm, zodat het lijfje blijft zitten waar het hoort en je de hele dag vrij kunt bewegen, dansen en ademhalen.',
+          'In de winkel is de keuze in grote maten klein, en wat er hangt moet vaak alsnog flink vermaakt worden. Op maat werkt andersom: er wordt gemeten aan jouw lijf en het patroon wordt daaromheen gebouwd, met steun waar het lijfje dat nodig heeft.',
         ],
       },
       {
-        kop: 'Waar je rekening mee houdt',
+        kop: 'Goed om te weten',
+        icoon: 'kalender',
         lijst: [
-          'Kom op tijd langs. Er zijn meerdere pasafspraken nodig en die wil je niet samenpersen.',
+          'Kom op tijd. Er zijn drie pasbeurten nodig en die wil je niet samenpersen.',
           'Neem je trouwschoenen mee naar de pasbeurten, want die bepalen de lengte.',
           'Neem gerust je moeder, zus of getuige mee. Een tweede paar ogen helpt.',
-          'Foto\'s van jurken die je mooi vindt, maar ook van wat je juist niet wilt, zijn welkom.',
+          'Foto\'s van wat je mooi vindt, en van wat je juist niet wilt, zijn welkom.',
         ],
       },
     ],
     faq: [
       { v: 'Kan ik een trouwjurk laten maken naar een foto?', a: 'Ja. Een foto van een jurk die je mooi vindt is het handigste beginpunt. Tijdens de afspraak bespreken we wat je precies van die jurk aanspreekt en wat je anders wilt. De jurk wordt daarna naar jouw maten gemaakt, dus het hoeft geen kopie te worden.' },
+      { v: 'Wat kost een bruidsjurk op maat?', a: 'Dat hangt af van het model, de stof en het werk. Je hoort de prijs bij de eerste afspraak, voordat er iets gemaakt wordt. Zo weet je waar je aan toe bent.' },
+      { v: 'Moet ik al weten wat ik wil?', a: 'Nee. Een foto van een jurk die je mooi vindt is handig, maar een kleur, een gevoel of alleen "geen kant" is ook genoeg. In het eerste gesprek wordt het samen duidelijk.' },
       { v: 'Maken jullie ook een gekleurde trouwjurk?', a: 'Ja. Omdat elke jurk vanaf de stof wordt opgebouwd, is elke kleur mogelijk. Van ivoor en champagne tot poederroze, blauw of bordeaux, of kleur alleen in de onderrok of het kant.' },
       { v: 'Ik heb een grote maat, kan dat ook?', a: 'Zeker. Er wordt gemeten aan jouw lijf en het patroon wordt daar omheen gemaakt, dus er is geen standaardmaat waar je in moet passen. Bei denkt mee over pasvorm en steun zodat de jurk de hele dag goed blijft zitten.' },
-      { v: 'Hoeveel pasafspraken zijn er?', a: 'In de regel pas je eerst een proefjurk, daarna een proefmodel in de gekozen stof en ten slotte de complete jurk. Soms is er een extra pasbeurt nodig, bijvoorbeeld als je maten veranderen. Dat hoort erbij.' },
+      { v: 'Hoeveel pasafspraken zijn er?', a: 'Meestal drie. Je past eerst een proefjurk, daarna een proefmodel in de gekozen stof en ten slotte de complete jurk. Soms is er een extra pasbeurt nodig, bijvoorbeeld als je maten veranderen. Dat hoort erbij.' },
     ],
     verwant: ['trouwjurk-vermaken', 'bruidsmeisjes-en-bruidsjonkers', 'bruidsmoeder-jurk'],
   },
@@ -104,26 +124,33 @@ export const diensten: Dienst[] = [
     kaartTitel: 'Trouwjurk vermaken',
     kaartTekst: 'Je eigen jurk korter, passender of helemaal anders. Ook de jurk van je moeder of van een eerdere trouwdag.',
     voorWie: 'Voor een gekochte jurk, of de jurk van je moeder.',
-    watJeKrijgt: 'Innemen, inkorten, uitleggen, bandjes of mouwen. Meestal twee pasbeurten.',
+    watJeKrijgt: 'Innemen, inkorten, uitleggen, bandjes of mouwen. Meestal twee pasbeurten, soms een derde.',
     kies: 'Trouwjurk laten vermaken',
+    wie: 'Bruiden',
     img: sVermaken,
     pos: '50% 35%',
     alt: 'Handen die de rug van een kanten trouwjurk innemen',
+    foto2: bei,
+    foto2Pos: '50% 30%',
+    foto2Alt: 'Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier',
+    eigenFoto: true,
     h1: 'Trouwjurk vermaken in',
     h1Accent: 'Rotterdam.',
-    eyebrow: 'Vermaken',
+    eyebrow: 'Trouwjurk vermaken',
     title: 'Trouwjurk vermaken Rotterdam | Bruidsatelier Bei Couture',
-    description: 'Trouwjurk of bruidsjurk laten vermaken in Rotterdam. Innemen, uitleggen, inkorten of een jurk opnieuw passend maken. Bruidsatelier Bei Couture, Hoogstraat 89A.',
-    lead: 'Je jurk is bijna goed, maar nog niet helemaal van jou. In het atelier wordt hij ingenomen, uitgelegd, ingekort of omgebouwd tot hij zit alsof hij voor jou gemaakt is.',
+    description: 'Trouwjurk of bruidsjurk laten vermaken in Rotterdam: innemen, uitleggen, inkorten of opnieuw passend maken. Bruidsatelier Bei Couture, Hoogstraat 89A.',
+    lead: 'Je jurk is bijna goed, maar nog niet helemaal van jou. In het atelier wordt hij ingenomen, uitgelegd of ingekort tot hij zit alsof hij voor jou gemaakt is.',
     intro: [
-      'Een jurk uit de winkel is gemaakt op een standaardmaat. Vrijwel niemand heeft die maat precies. Vermaken is daarom geen noodgreep maar de normale laatste stap, en juist die stap bepaalt of een jurk er duur uitziet of niet.',
-      'Bei vermaakt al jaren bruidsjurken en krijgt van bruiden vaak te horen dat niemand meer kan zien dat er iets aan gedaan is. Dat is precies het doel.',
+      'Een jurk uit de winkel is gemaakt op een standaardmaat, en vrijwel niemand heeft die maat precies. Je bruidsjurk laten vermaken is daarom geen noodgreep, maar de normale laatste stap.',
+      'Juist die stap bepaalt of een jurk er duur uitziet of niet. Bei vermaakt al jaren bruidsjurken. Bruiden zeggen vaak dat niemand meer ziet dat er iets aan gedaan is, en dat is precies de bedoeling.',
     ],
+    feiten: ['Meestal twee pasbeurten', 'Niemand ziet het', 'Ook de jurk van je moeder', 'Ook het hele gezelschap'],
     blokken: [
       {
-        kop: 'Wat er mogelijk is',
+        kop: 'Trouwjurk laten innemen, inkorten of aanpassen',
+        icoon: 'schaar',
         lijst: [
-          'Innemen of uitleggen in taille, heup, lijfje of cup',
+          'Je trouwjurk laten innemen of uitleggen in taille, heup, lijfje of cup',
           'Inkorten op de lengte van jouw trouwschoenen',
           'Bandjes, mouwen of een bolero toevoegen of juist weghalen',
           'De rug of hals aanpassen, bijvoorbeeld hoger of juist opener',
@@ -133,21 +160,24 @@ export const diensten: Dienst[] = [
         ],
       },
       {
-        kop: 'De jurk van een eerdere trouwdag of van je moeder',
+        kop: 'De jurk van je moeder',
+        icoon: 'hart',
         tekst: [
-          'Trouw je voor de tweede keer, of wil je de jurk van je moeder dragen, dan hoeft die jurk niet te blijven zoals hij is. Een jurk kan gemoderniseerd worden: mouwen eraf, een andere hals, de rok smaller, of alleen het kant bewaren en er een nieuw lijfje onder bouwen.',
-          'Zulke jurken hebben vaak een verhaal. Dat wordt met zorg behandeld, en we bespreken eerst goed wat je wel en vooral niet wilt veranderen voordat er geknipt wordt.',
+          'Trouw je voor de tweede keer, of wil je de jurk van je moeder dragen, dan hoeft die niet te blijven zoals hij is. Mouwen eraf, een andere hals, de rok smaller, of alleen het kant bewaren en er een nieuw lijfje onder bouwen.',
+          'Zulke jurken hebben een verhaal. We bespreken eerst goed wat je wel en vooral niet wilt veranderen, en pas dan wordt er geknipt.',
         ],
       },
       {
-        kop: 'Ook voor de rest van het gezelschap',
+        kop: 'Ook voor je gezelschap',
+        icoon: 'jurk',
         tekst: [
-          'De jurk van de bruidsmoeder, de jurkjes van de bruidsmeisjes en de kleding van de bruidsjonkers kunnen in dezelfde ronde meegenomen worden. Dan sluit alles op elkaar aan en loop je niet op de dag zelf nog met een te lange zoom.',
+          'De jurk van de bruidsmoeder en de jurkjes van de bruidsmeisjes en bruidsjonkers kunnen in dezelfde ronde mee. Dan sluit alles op elkaar aan en loop je op de dag zelf niet met een te lange zoom.',
         ],
       },
     ],
     faq: [
-      { v: 'Hoe lang van tevoren moet ik langskomen om mijn trouwjurk te laten vermaken?', a: 'Hoe eerder hoe rustiger. Voor vermaken zijn meestal twee of drie pasbeurten nodig. Zit je krap in de tijd, bel of app dan even. Er wordt altijd eerlijk gezegd of het nog haalbaar is.' },
+      { v: 'Hoe lang van tevoren moet ik langskomen om mijn trouwjurk te laten vermaken?', a: 'Hoe eerder hoe rustiger. Voor vermaken zijn meestal twee pasbeurten nodig, soms een derde. Zit je krap in de tijd, bel of app dan even. Er wordt altijd eerlijk gezegd of het nog haalbaar is.' },
+      { v: 'Wat kost het vermaken van een trouwjurk?', a: 'Dat hangt af van wat er aan de jurk moet gebeuren. Bij de eerste afspraak kijkt Bei in de jurk en hoor je de prijs, voordat er iets aan gedaan wordt.' },
       { v: 'Neem ik mijn schoenen mee?', a: 'Ja, graag. De lengte van de jurk wordt bepaald door de schoenen die je op je trouwdag draagt. Heb je ze nog niet, neem dan schoenen mee met een vergelijkbare hak.' },
       { v: 'Kan een jurk ook uitgelegd worden?', a: 'Vaak wel. Hoeveel ruimte er is, hangt af van de naden en de stof. Bij de eerste afspraak kijkt Bei in de jurk en vertelt ze meteen wat er mogelijk is.' },
       { v: 'Kan de trouwjurk van mijn moeder aangepast worden?', a: 'Ja. Een oudere jurk kan ingenomen, ingekort en gemoderniseerd worden, en soms wordt alleen het kant of het borduursel bewaard en de rest nieuw gemaakt. We bespreken van tevoren precies wat er wel en niet verandert.' },
@@ -162,46 +192,55 @@ export const diensten: Dienst[] = [
     voorWie: 'Voor de moeder van de bruid of de bruidegom.',
     watJeKrijgt: 'Op maat gemaakt of aangepast, afgestemd op de kleur van de bruidsjurk.',
     kies: 'Jurk voor de bruidsmoeder',
+    wie: 'Bruiden',
     img: sGala,
     pos: '50% 30%',
     alt: 'Avondjurk in diep bordeauxrood',
-    h1: 'Een jurk voor de',
-    h1Accent: 'bruidsmoeder.',
-    eyebrow: 'Moeder van de bruid',
+    foto2: satijn,
+    foto2Pos: '50% 50%',
+    foto2Alt: 'Ivoorkleurig satijn in plooien',
+    h1: 'Jurk voor de bruidsmoeder in',
+    h1Accent: 'Rotterdam.',
+    eyebrow: 'Moeder van de bruid of bruidegom',
     title: 'Bruidsmoeder jurk op maat in Rotterdam | Bei Couture',
-    description: 'Jurk voor de moeder van de bruid of bruidegom, op maat gemaakt of vermaakt in Rotterdam. Bruidsatelier Bei Couture, Hoogstraat 89A. Afspraak: 06 53 61 25 43.',
-    lead: 'Als moeder van de bruid sta je de hele dag op de foto. Dan wil je een jurk die bij de bruid past, bij jou past en waarin je kunt zitten, dansen en huilen zonder er steeds aan te hoeven trekken.',
+    description: 'Jurk voor de moeder van de bruid of bruidegom, op maat gemaakt of vermaakt in Rotterdam, afgestemd op de bruidsjurk. Bei Couture, Hoogstraat 89A.',
+    lead: 'Als moeder van de bruid sta je de hele dag op de foto. Dan wil je een jurk die bij de bruid past, bij jou past en waarin je kunt zitten en dansen zonder er steeds aan te trekken.',
     intro: [
-      'Bruidsmoeders lopen vaak tegen hetzelfde aan. In de winkel is het of te jong, of te saai, of de kleur klopt net niet bij de jurk van de bruid. En wat wel mooi is, zit zelden meteen goed.',
-      'In het atelier draai je dat om. Je begint bij de kleur en de sfeer van de bruiloft en bij wat jij zelf prettig vindt om te dragen, en daar wordt een jurk omheen gemaakt of een bestaande jurk op aangepast.',
+      'Bruidsmoeders lopen vaak tegen hetzelfde aan. In de winkel is het te jong, te saai, of de kleur klopt net niet bij de jurk van de bruid. En wat wel mooi is, zit zelden meteen goed.',
+      'In het atelier draai je dat om. Je begint bij de kleur van de bruiloft en bij wat jij prettig draagt. Daar wordt een jurk omheen gemaakt, of een gekochte jurk op aangepast.',
     ],
+    feiten: ['Afgestemd op de bruidsjurk', 'Op maat of vermaakt', 'Ook de moeder van de bruidegom', 'Elke kleur, elke maat'],
     blokken: [
       {
         kop: 'Afgestemd op de bruid',
+        icoon: 'hart',
         tekst: [
-          'Neem gerust een foto van de bruidsjurk mee, of kom samen met je dochter langs. Dan kunnen we de kleur, de stof en de lengte naast elkaar leggen, zodat je op de foto\'s van die dag bij elkaar past in plaats van met elkaar vloekt.',
-          'Ook de moeder van de bruidegom is welkom. Het is heel gewoon dat beide moeders in hetzelfde atelier geholpen worden, dan weet je zeker dat de twee jurken naast elkaar kloppen.',
+          'Neem een foto van de bruidsjurk mee, of kom samen met je dochter. Dan leggen we kleur, stof en lengte naast elkaar, zodat jullie op de foto\'s bij elkaar passen.',
+          'Ook de moeder van de bruidegom is welkom. Beide moeders in hetzelfde atelier gebeurt vaak, dan weet je zeker dat de twee jurken naast elkaar kloppen.',
         ],
       },
       {
-        kop: 'Comfortabel en bedekt waar jij dat wilt',
+        kop: 'Bedekt waar jij dat wilt',
+        icoon: 'jurk',
         lijst: [
           'Mouwtjes, een cape of een bijpassend jasje voor je bovenarmen',
           'Een lijfje met steun, zodat je zelf niets hoeft te corrigeren',
           'Een rok die mooi valt als je zit, niet alleen als je staat',
-          'Een lengte die werkt op jouw schoenen, ook op het gras of de dansvloer',
+          'Een lengte die werkt op jouw schoenen, ook op het gras',
           'Elke kleur, ook de kleuren die in de winkel zelden te vinden zijn',
         ],
       },
       {
         kop: 'Op maat of vermaakt',
+        icoon: 'naald',
         tekst: [
-          'Heb je al een jurk gekocht die bijna goed is, dan kan die aangepast worden. Wil je liever iets dat er nog niet is, dan wordt hij gemaakt. Beide kan, en bij de eerste afspraak hoor je welke weg voor jou de verstandigste is.',
+          'Heb je al een jurk gekocht die bijna goed is, dan kan die aangepast worden. Wil je liever iets dat er nog niet is, dan wordt hij gemaakt. Bij de eerste afspraak hoor je welke weg voor jou de verstandigste is.',
         ],
       },
     ],
     faq: [
       { v: 'Welke kleur draag ik als bruidsmoeder?', a: 'Dat is helemaal vrij, zolang je niet in het wit of ivoor verschijnt. Het werkt het prettigst om een kleur te kiezen die aansluit bij het kleurenpalet van de bruiloft. Neem een foto van de bruidsjurk en van de bloemen mee, dan leggen we de stoffen ernaast.' },
+      { v: 'Wat kost een bruidsmoederjurk op maat?', a: 'Dat hangt af van het model, de stof en of er een bestaande jurk wordt aangepast of een nieuwe gemaakt. Je hoort de prijs bij de eerste afspraak, voordat er iets gebeurt.' },
       { v: 'Kunnen beide moeders bij jullie terecht?', a: 'Ja, dat gebeurt vaak. Het voordeel is dat de twee jurken dan op elkaar afgestemd worden in kleur, lengte en stijl.' },
       { v: 'Ik wil mijn bovenarmen bedekken, kan dat mooi?', a: 'Zeker. Mouwtjes, een cape, een los jasje of een laagje tule over de arm kan allemaal, en het wordt zo ontworpen dat het bij de rest van de jurk hoort in plaats van er los overheen te hangen.' },
     ],
@@ -215,45 +254,54 @@ export const diensten: Dienst[] = [
     voorWie: 'Voor de meisjes en jongens naast de bruid.',
     watJeKrijgt: 'Jurkjes en kleding in één lijn met jouw jurk, elk op eigen maat.',
     kies: 'Bruidsmeisjes of bruidsjonkers',
+    wie: 'Bruiden',
     img: sMeisjes,
     pos: '50% 45%',
     alt: 'Bruid met haar bruidsmeisjes, op de rug gezien',
-    h1: 'Bruidsmeisjes en',
-    h1Accent: 'bruidsjonkers.',
-    eyebrow: 'Het hele gezelschap',
+    foto2: hero,
+    foto2Pos: '62% 40%',
+    foto2Alt: 'Een bruid wordt in haar kanten trouwjurk geholpen',
+    h1: 'Bruidsmeisjesjurken en bruidsjonkers in',
+    h1Accent: 'Rotterdam.',
+    eyebrow: 'Bruidsmeisjesjurk op maat',
     title: 'Bruidsmeisjesjurk op maat in Rotterdam | Bei Couture',
     description: 'Bruidsmeisjesjurken en kleding voor bruidsjonkers op maat in Rotterdam, afgestemd op de bruidsjurk. Bruidsatelier Bei Couture, Hoogstraat 89A.',
-    lead: 'De bruidsmeisjes en bruidsjonkers staan de hele dag naast je. In het atelier worden hun jurkjes en kleding afgestemd op jouw jurk, in dezelfde kleur, stof of detaillering.',
+    lead: 'Je bruidsmeisjes en bruidsjonkers staan de hele dag naast je. Hun jurkjes en kleding worden afgestemd op jouw jurk, in dezelfde kleur, stof of details.',
     intro: [
-      'Bruidsmeisjes hebben zelden dezelfde maat en zelden dezelfde smaak. Online een set jurken bestellen levert daarom vaak een stapel teleurstellingen op: de een vindt het te kort, de ander zit klem in de taille en de kleuren blijken op de foto anders dan in het echt.',
-      'Bei is zich sinds 2009 gaan specialiseren in bruidsmode, en juist ook voor bruidsjonkers en bruidsmeisjes. Iedereen wordt afzonderlijk opgemeten, maar alles komt uit hetzelfde ontwerp, zodat de groep bij elkaar hoort.',
+      'Bruidsmeisjes hebben zelden dezelfde maat en zelden dezelfde smaak. Online een set jurken bestellen levert dan een stapel teleurstellingen op: de een vindt het te kort, de ander zit klem in de taille en de kleur blijkt in het echt anders dan op de foto.',
+      'In het atelier wordt iedereen apart opgemeten, ook de bruidsjonkers. Alles komt uit hetzelfde ontwerp, zodat de groep bij elkaar hoort.',
     ],
+    feiten: ['Elk op eigen maat', 'Eén lijn met jouw jurk', 'Ook voor kinderen', 'Gekochte jurkjes vermaken kan ook'],
     blokken: [
       {
-        kop: 'Eén lijn, verschillende lijven',
+        kop: 'Eén lijn, elk op eigen maat',
+        icoon: 'jurk',
         tekst: [
-          'Hetzelfde model staat niet iedereen even goed. Daarom kan het model per meisje iets verschillen, terwijl de stof, de kleur en de details hetzelfde blijven. De een draagt bandjes, de ander mouwtjes, en op de foto ziet het er toch uit als één geheel.',
+          'Hetzelfde model staat niet iedereen even goed. Daarom mag het model per meisje verschillen, terwijl stof, kleur en details gelijk blijven. De een draagt bandjes, de ander mouwtjes, en op de foto is het toch één geheel.',
           'Dat geldt ook voor kinderen. Een jurkje voor een klein bruidsmeisje mag mooi zijn en tegelijk iets waarin gespeeld en gerend kan worden.',
         ],
       },
       {
-        kop: 'Bruidsjonkers',
+        kop: 'Kleding voor bruidsjonkers',
+        icoon: 'naald',
         tekst: [
-          'Voor de bruidsjonkers kan de kleding gemaakt of aangepast worden in dezelfde kleurlijn, bijvoorbeeld met een vestje, een strik of een band in de stof van de bruidsmeisjesjurken. Zo loopt de stijl door het hele gezelschap.',
+          'Voor de bruidsjonkers, ook wel bruidsjongens genoemd, kan de kleding gemaakt of aangepast worden in dezelfde kleurlijn. Bijvoorbeeld met een vestje, een strik of een band in de stof van de bruidsmeisjesjurken. Zo loopt de stijl door het hele gezelschap.',
         ],
       },
       {
-        kop: 'Handig om te weten',
+        kop: 'Goed om te weten',
+        icoon: 'kalender',
         lijst: [
           'Kom bij voorkeur samen langs, dan kunnen de kleuren naast elkaar beoordeeld worden.',
           'Bij kinderen wordt er ruimte ingebouwd, want ze groeien tussen de pasbeurten door.',
           'Al gekochte jurkjes kunnen ook gewoon vermaakt worden, dat hoeft niet nieuw.',
-          'Plan dit samen met jouw eigen jurk in, dan scheelt dat afspraken.',
+          'Plan dit samen met je eigen pasbeurten in, dat scheelt afspraken.',
         ],
       },
     ],
     faq: [
       { v: 'Kunnen bruidsmeisjes verschillende modellen dragen?', a: 'Ja, en dat werkt vaak zelfs mooier. Door de stof, de kleur en de details gelijk te houden en het model per persoon aan te passen, staat het iedereen goed en blijft het één geheel.' },
+      { v: 'Wat kosten bruidsmeisjesjurken op maat?', a: 'Dat hangt af van het aantal jurkjes, het model en de stof. Je hoort de prijs bij de eerste afspraak, voordat er iets gemaakt wordt.' },
       { v: 'Maken jullie ook jurkjes voor kinderen?', a: 'Ja. Voor kleine bruidsmeisjes wordt er ruimte in het jurkje gelaten, omdat kinderen tussen de pasbeurten door groeien, en er wordt gekozen voor stoffen waarin ze zich kunnen bewegen.' },
       { v: 'Wij hebben de jurkjes al gekocht, kunnen die vermaakt worden?', a: 'Dat kan. Innemen, inkorten en bandjes of mouwtjes aanpassen zijn allemaal mogelijk, zodat de jurkjes alsnog goed zitten.' },
     ],
@@ -267,22 +315,28 @@ export const diensten: Dienst[] = [
     voorWie: 'Voor een gala, feest of jubileum.',
     watJeKrijgt: 'Een jurk die alleen jij hebt, of een gekochte jurk passend gemaakt.',
     kies: 'Gala- of avondkleding',
+    wie: 'Klanten',
     img: satijn,
     pos: '50% 50%',
     alt: 'Ivoorkleurig satijn in plooien',
-    h1: 'Gala- en',
-    h1Accent: 'avondkleding.',
+    foto2: sGala,
+    foto2Pos: '50% 30%',
+    foto2Alt: 'Avondjurk in diep bordeauxrood',
+    h1: 'Galajurk of avondjurk op maat in',
+    h1Accent: 'Rotterdam.',
     eyebrow: 'Gala en avond',
     title: 'Galajurk op maat laten maken in Rotterdam | Bei Couture',
-    description: 'Galajurk of avondjurk op maat laten maken of vermaken in Rotterdam. Atelier van Bei Couture aan de Hoogstraat 89A. Afspraak: 06 53 61 25 43.',
-    lead: 'Voor een gala, een jubileum, een feest of een gelegenheid waar je er echt wilt staan. Een jurk die niemand anders heeft, in jouw kleur en op jouw maat.',
+    description: 'Galajurk of avondjurk op maat laten maken of vermaken in Rotterdam. Bruidsatelier Bei Couture, Hoogstraat 89A. Ook op afspraak in de avond of op zaterdag.',
+    lead: 'Voor een gala, een jubileum of een feest waar je er echt wilt staan. Een jurk die niemand anders heeft, in jouw kleur en op jouw maat.',
     intro: [
-      'Niet elke mooie avond is een bruiloft. Bei maakt ook galajurken en avondkleding, met dezelfde aandacht als voor bruidsmode: opgemeten, gepast en afgewerkt tot het klopt.',
+      'Niet elke mooie avond is een bruiloft. Bei maakt ook galajurken en avondjurken, met dezelfde aandacht als voor bruidsmode: opgemeten, gepast en afgewerkt tot het klopt.',
       'Dat kan een lange jurk zijn in zware stof, iets korters met beweging, of een jurk die je later met een andere ceintuur of een ander jasje opnieuw kunt dragen.',
     ],
+    feiten: ['Galajurk of avondjurk', 'In jouw kleur en maat', 'Gekochte jurk passend maken', 'Stoffen voel je in het atelier'],
     blokken: [
       {
-        kop: 'Waar je aan kunt denken',
+        kop: 'Waarvoor je komt',
+        icoon: 'ster',
         lijst: [
           'Galajurk voor een eindexamengala of een studentengala',
           'Avondjurk voor een feest, een jubileum of een gala-avond',
@@ -293,19 +347,22 @@ export const diensten: Dienst[] = [
       },
       {
         kop: 'Stof maakt het verschil',
+        icoon: 'naald',
         tekst: [
-          'Satijn valt zwaar en glanst, tule geeft volume, taft houdt zijn vorm en kant geeft richting aan het hele ontwerp. Tijdens de afspraak voel je de stoffen en houd je ze bij je gezicht, want een kleur die op een schermpje mooi is, is dat op jouw huid niet altijd.',
+          'Satijn valt zwaar en glanst, tule geeft volume, taft houdt zijn vorm en kant geeft richting aan het ontwerp. Tijdens de afspraak voel je de stoffen en houd je ze bij je gezicht. Een kleur die op een schermpje mooi is, is dat op jouw huid niet altijd.',
         ],
       },
       {
-        kop: 'Ook als je een jurk al hebt',
+        kop: 'Galajurk vermaken',
+        icoon: 'schaar',
         tekst: [
-          'Een galajurk die je online besteld hebt zit bijna nooit meteen goed. Innemen, inkorten, bandjes verzetten of cups inzetten tilt zo\'n jurk vaak in één pasbeurt naar een heel ander niveau.',
+          'Een galajurk die je online hebt besteld zit bijna nooit meteen goed. Innemen, inkorten, bandjes verzetten of cups inzetten maakt vaak in één pasbeurt het verschil.',
         ],
       },
     ],
     faq: [
       { v: 'Hoe lang van tevoren moet ik een galajurk laten maken?', a: 'Reken op meerdere pasafspraken en houd daar ruim de tijd voor. Is je gala al snel, bel of app dan even, dan hoor je meteen of het nog lukt of dat vermaken van een bestaande jurk slimmer is.' },
+      { v: 'Wat kost een galajurk op maat?', a: 'Dat hangt af van het model, de stof en het werk. Je hoort de prijs bij de eerste afspraak, voordat er iets gemaakt wordt.' },
       { v: 'Kan ik een galajurk laten vermaken?', a: 'Ja. Innemen, inkorten, bandjes verzetten en steun inzetten kan allemaal, ook bij jurken die je online hebt gekocht.' },
       { v: 'Maken jullie ook een tweede jurk voor het avondfeest?', a: 'Dat kan. Sommige bruiden willen voor het feest iets korters of makkelijkers, in dezelfde sfeer als de trouwjurk. Dat wordt dan in dezelfde lijn ontworpen.' },
     ],
@@ -319,22 +376,29 @@ export const diensten: Dienst[] = [
     voorWie: 'Voor alles buiten de bruidsmode.',
     watJeKrijgt: 'Jurken, rokken, blouses en jassen op maat; vermaken en herstellen.',
     kies: 'Kleding op maat of vermaken',
+    wie: 'Klanten',
     img: sAtelier,
     pos: '40% 50%',
     alt: 'Garenklosjes, een vingerhoed en spelden op de werktafel van het atelier',
-    h1: 'Kleding op maat en',
+    foto2: bei,
+    foto2Pos: '50% 30%',
+    foto2Alt: 'Bei aan het werk in haar atelier aan de Hoogstraat',
+    eigenFoto: true,
+    h1: 'Kleermaker in Rotterdam voor kleding op maat en',
     h1Accent: 'vermaken.',
-    eyebrow: 'Kleermaker',
+    eyebrow: 'Kleding op maat en vermaken',
     title: 'Kleermaker in Rotterdam: kleding op maat | Bei Couture',
-    description: 'Kleermaker in Rotterdam voor kleding op maat en vermaakwerk. Jurken, rokken, blouses en jassen, innemen, inkorten en herstellen. Bei Couture, Hoogstraat 89A.',
-    lead: 'Bei is kleermaker. Naast bruidsmode maakt en vermaakt ze gewoon kleding, voor vrouwen die iets willen dat echt past.',
+    description: 'Kleermaker in Rotterdam voor kleding op maat en vermaakwerk: jurken, rokken, blouses en jassen, innemen, inkorten en herstellen. Bei Couture, Hoogstraat 89A.',
+    lead: 'Bei is kleermaker. Naast bruidsmode maakt en vermaakt ze gewone kleding, voor vrouwen die iets willen dat echt past.',
     intro: [
-      'Er zijn kledingstukken waar je maar geen goede versie van kunt vinden. Een rok die altijd te kort of te lang is, een jurk in precies die ene kleur, een blouse die op jouw schouders klopt. Dat kan hier gemaakt worden.',
-      'En er zijn kledingstukken waar je aan gehecht bent en die net niet meer zitten. Die hoef je niet weg te doen.',
+      'Sommige kledingstukken vind je nergens goed. Een rok die altijd te kort of te lang is, een jurk in precies die ene kleur, een blouse die op jouw schouders klopt. Dat kan hier gemaakt worden.',
+      'En er is kleding waar je aan gehecht bent en die net niet meer zit. Die hoef je niet weg te doen.',
     ],
+    feiten: ['Kleermaker sinds 1997', 'Op maat of vermaakt', 'Ook kleine reparaties', 'Loop binnen tijdens de openingstijden'],
     blokken: [
       {
-        kop: 'Op maat gemaakt',
+        kop: 'Kleding op maat',
+        icoon: 'naald',
         lijst: [
           'Jurken, rokken, blouses en pantalons naar jouw ontwerp',
           'Een mantel of jas, afgestemd op jouw lengte en schouders',
@@ -343,7 +407,8 @@ export const diensten: Dienst[] = [
         ],
       },
       {
-        kop: 'Vermaken en herstellen',
+        kop: 'Kleding vermaken en herstellen',
+        icoon: 'schaar',
         lijst: [
           'Innemen en uitleggen in taille, heup, cup of schouder',
           'Inkorten van rokken, jurken, mouwen en broekspijpen',
@@ -352,14 +417,16 @@ export const diensten: Dienst[] = [
         ],
       },
       {
-        kop: 'Ook carnaval, turnpakjes en kostuums',
+        kop: 'Carnaval, turnpakjes en kostuums',
+        icoon: 'ster',
         tekst: [
-          'Het atelier maakt ook carnavalskleding, turnpakjes en kostuums. Juist dat soort werk vraagt om maatwerk, omdat het moet kunnen rekken, zitten en bewegen. Noem het maar op en het wordt in het atelier gemaakt.',
+          'Het atelier maakt ook carnavalskleding, turnpakjes en kostuums. Juist dat werk vraagt om maatwerk, omdat het moet rekken, zitten en meebewegen.',
         ],
       },
     ],
     faq: [
       { v: 'Maakt Bei Couture ook gewone kleding, dus geen bruidsmode?', a: 'Ja. Bei is kleermaker en maakt en vermaakt ook alledaagse kleding, van rokken en jurken tot jassen. Bruidsmode is haar specialisme, maar niet het enige wat ze doet.' },
+      { v: 'Wat kost kleding op maat of vermaken?', a: 'Dat hangt af van het kledingstuk en het werk. Je hoort de prijs bij de eerste afspraak of nadat Bei het kledingstuk heeft gezien, voordat er iets gebeurt.' },
       { v: 'Kan ik een kledingstuk laten namaken?', a: 'Vaak wel. Breng het kledingstuk mee naar de afspraak, dan kijkt Bei hoe het in elkaar zit en welke stof erbij past.' },
       { v: 'Doen jullie ook kleine reparaties?', a: 'Ja, zoals ritsen vervangen, voeringen herstellen, naden en zomen. Loop even binnen tijdens de openingstijden of app een foto, dan hoor je wat er mogelijk is.' },
     ],
