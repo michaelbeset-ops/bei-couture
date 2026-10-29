@@ -71,33 +71,33 @@ const faq = [
       <div class="wrap"><hr class="naad" /></div>
     </section>
 
-    <!-- ATELIER / DIENSTEN -->
-    <section id="atelier" class="bg-ivoor py-24 md:py-32">
+    <!-- ATELIER / DIENSTEN: een rij hoge foto's, alleen de naam eronder. Swipen op de telefoon, pijl op desktop. -->
+    <section id="atelier" class="bg-ivoor py-20 md:py-28">
       <div class="wrap">
-        <div class="grid gap-8 md:grid-cols-12 md:items-end">
-          <div class="md:col-span-7">
-            <p class="eyebrow">Het atelier</p>
-            <h2 class="mt-5 text-4xl">Dit maakt en vermaakt <em class="accent">Bei.</em></h2>
+        <div class="flex items-end justify-between gap-6">
+          <h2 class="text-[2rem] md:text-[2.4rem]">Het atelier</h2>
+          <div class="hidden gap-2 md:flex">
+            <button type="button" data-rij-vorige class="grid h-11 w-11 place-items-center rounded-full border border-ivoor-3 text-inkt transition-colors hover:border-inkt disabled:opacity-30" aria-label="Vorige diensten">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M15 6 9 12l6 6" /></svg>
+            </button>
+            <button type="button" data-rij-volgende class="grid h-11 w-11 place-items-center rounded-full border border-ivoor-3 text-inkt transition-colors hover:border-inkt disabled:opacity-30" aria-label="Volgende diensten">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+            </button>
           </div>
-          <p class="text-lg text-steen md:col-span-5">Zes dingen waarvoor je in het atelier terechtkunt. Alles op maat, alles door Bei zelf.</p>
         </div>
 
-        <ul class="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
-          {diensten.map((d, i) => (
-            <li class="rijs" style={`--d:${(i % 3) * 0.07}s`}>
-              <a href={url(`${d.slug}/`)} class="fotolink group">
+        <ul class="rij mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:mt-10 md:gap-5" data-rij tabindex="0" aria-label="Diensten, horizontaal te scrollen">
+          {diensten.map((d) => (
+            <li class="w-[72vw] flex-none snap-start sm:w-[44vw] lg:w-[calc((100%-3.75rem)/4)]">
+              <a href={url(`${d.slug}/`)} class="fotolink group block">
                 <span class="foto block aspect-[3/4] bg-ivoor-2">
-                  <Picture src={d.img} formats={['avif', 'webp']} widths={[400, 560, 800]} sizes="(min-width: 1024px) 380px, (min-width: 640px) 44vw, 92vw" alt={d.alt} class="h-full w-full object-cover" style={`object-position:${d.pos}`} />
+                  <Picture src={d.img} formats={['avif', 'webp']} widths={[400, 560, 800]} sizes="(min-width: 1024px) 24vw, (min-width: 640px) 44vw, 72vw" alt={d.alt} class="h-full w-full object-cover" style={`object-position:${d.pos}`} />
                 </span>
-                <h3 class="mt-6 text-[1.35rem] uppercase tracking-[.06em]">{d.kaartTitel}</h3>
-                <span class="mt-2 block text-steen">{d.voorWie}</span>
-                <span class="mt-4 inline-block text-[.8rem] font-medium uppercase tracking-[.25em] text-merk underline decoration-merk/40 underline-offset-[6px]">Bekijk</span>
+                <span class="mt-4 block text-[.78rem] font-medium uppercase tracking-[.22em] text-inkt transition-colors group-hover:text-merk">{d.kaartTitel}</span>
               </a>
             </li>
           ))}
         </ul>
-
-        <p class="mt-8 text-steen">Iets anders in gedachten, zoals carnavalskleding, een turnpakje of een kostuum? Dat kan ook. Bel of app <a href={site.telHref} class="tekstlink num font-semibold text-inkt">{site.tel}</a>.</p>
       </div>
     </section>
 
