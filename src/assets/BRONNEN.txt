@@ -17,3 +17,4 @@ s-meer.jpg           https://images.unsplash.com/photo-1710432103939-ba474632b9b
 satijn.jpg           https://images.unsplash.com/photo-1674476307162-069b0e648879  (satin fabric; ivoor satijn)
 
 Niet gebruikt: klantfoto's op Google en Instagram (gezichten van klanten, foto's van fotografen), Street View van het pand.
+bei-origineel-480.jpg  het aangeleverde origineel (480x640). bei.jpg is daarvan 2x vergroot en verscherpt; vervang door een scherp origineel zodra Bei dat aanlevert.
