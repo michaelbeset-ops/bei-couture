@@ -10,13 +10,13 @@ live klaar. Vanaf een dienstpagina staat de juiste keuze al aangevinkt (/contact
 
 ## Keuzes
 Bodoni Moda 800 (cursief voor het accentwoord, zoals "Bei" in hun logo), Instrument Sans tekst.
-Rozenhout #8f4b4f (knoppen), strik #e3bfb6 (accent op donker), inkt #1b1716. Basis is wit; de wisselvlakken
-#fbfaf8 en #f4f1ed zijn nauwelijks warm (de beige tinten van eerder maakten het muf). Haarlijnen #e4ded7, geen
-stippellijnen meer, hoeken 0, geen schaduwen. Stijl volgt de andere Sitefront-sites en de UI/UX Pro Max-skill
-(minimalisme, veel wit, hoog contrast, typografie doet het werk): geen kaders, geen pijltjes-chips, geen
-icoontjes in cirkels. Links zijn onderstreepte tekst. Werkwijze als vijf stappen van links naar rechts op één lijn.
-Kop: lichte, plakkende balk met hun eigen logo groot (72 px mobiel, 112 px desktop), daarboven een strip met adres,
-"ook op afspraak buiten de openingstijden" en het telefoonnummer.
+Warm, naar het voorbeeld van lunchroomrosi.nl: nooit puur wit of zwart. Crème #f8f1ec als basis, blush #f1dfd9 als
+wisselvlak, warm donkerbruin #3b2a28 voor tekst en donkere vlakken, rozenhout #8f4b4f voor knoppen en accenten,
+strik #e3bfb6 voor het roze. Hoeken 14 px, knoppen als pil, foto's met een zachte bruine schaduw, een golfje in
+strik tussen secties, overlappende fotocollage bij Over Bei. Geen kaders, geen pijltjes-chips, geen icoontjes in
+cirkels; links zijn onderstreepte tekst. Diensten op de homepage als genummerde lijst met per dienst voor wie en
+wat je krijgt. Werkwijze als vijf stappen van links naar rechts op één lijn. Kop doorzichtig over de hero met het
+logo in ivoor; op lichte pagina's een donkere balk.
 
 ## Paginastructuur
 - `/` home: hero > cijfers > 6 dienstkaarten > over Bei (eigen atelierfoto) > Google-reviews (swipebaar) >

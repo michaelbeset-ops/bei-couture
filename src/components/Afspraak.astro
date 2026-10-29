@@ -5,7 +5,7 @@ import { site, waHoi } from '../data/site';
 import { diensten } from '../data/diensten';
 import Icoon from './Icoon.astro';
 interface Props { achtergrond?: string; kop?: string }
-const { achtergrond = 'bg-ivoor-2', kop = 'Vertel Bei wat je' } = Astro.props;
+const { achtergrond = 'bg-ivoor', kop = 'Vertel Bei wat je' } = Astro.props;
 ---
 <section id="afspraak" class={`${achtergrond} py-20 md:py-28`} aria-labelledby="afspraak-kop">
   <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-14">
@@ -63,8 +63,8 @@ const { achtergrond = 'bg-ivoor-2', kop = 'Vertel Bei wat je' } = Astro.props;
 
     <div class="min-w-0 lg:col-span-5">
       <div class="lg:sticky lg:top-32">
-        <div class="relative rounded-none bg-wit p-3 shadow-[0_24px_60px_-28px_#1b171659]">
-          <div class="border border-ivoor-3 p-6 md:p-8">
+        <div class="kaart relative p-3">
+          <div class="rounded-[10px] border border-ivoor-3 p-6 md:p-8">
             <div class="flex items-center justify-between gap-4">
               <p class="text-xs font-semibold uppercase tracking-[.2em] text-merk">Je bericht aan Bei</p>
               <Icoon naam="wa" class="h-6 w-6 text-[#1f9d55]" />

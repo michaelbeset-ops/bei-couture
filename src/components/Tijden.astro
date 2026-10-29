@@ -23,13 +23,13 @@ const { class: cls = '' } = Astro.props;
     </tbody>
   </table>
 
-  <div class="mt-7 bg-strik-zacht p-6 md:p-7">
+  <div class="mt-7 rounded-[10px] bg-strik-zacht p-6 md:p-7">
     <p class="flex items-center gap-3 font-kop text-[1.4rem] font-extrabold leading-tight tracking-[-.015em] text-merk">
       <Icoon naam="kalender" class="h-6 w-6 flex-none" />
       Ook buiten de openingstijden
     </p>
     <p class="mt-3 text-steen">{site.opAfspraak}</p>
-    <div class="mt-5 flex flex-wrap gap-3">
+    <div class="mt-5 flex flex-wrap gap-3 max-sm:flex-col">
       <a href={waMet('Hallo Bei, ik kan niet tijdens de openingstijden. Kunnen we een afspraak buiten de openingstijden inplannen?')} class="knop knop-merk min-h-12 px-5 text-[1rem]"><Icoon naam="wa" />Afspraak buiten de tijden</a>
       <a href={site.telHref} class="knop knop-rand num min-h-12 px-5 text-[1rem]"><Icoon naam="tel" />{site.tel}</a>
     </div>

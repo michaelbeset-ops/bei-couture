@@ -17,6 +17,7 @@ import { faqSchema } from '../lib/schema';
 
 import hero from '../assets/hero.jpg';
 import bei from '../assets/bei.jpg';
+import kant from '../assets/kant.jpg';
 
 const faq = [
   { v: 'Waar zit bruidsatelier Bei Couture?', a: `Aan de ${site.straat} in ${site.plaats}, in het pand van ${site.inPand}. Het atelier ligt midden in de stad en is goed bereikbaar met het openbaar vervoer.` },
@@ -37,19 +38,19 @@ const faq = [
   <main id="inhoud">
 
     <!-- HERO -->
-    <section class="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-inkt text-wit">
+    <section class="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-[#1b1716] text-[#ffffff]">
       <Picture src={hero} formats={['avif', 'webp']} widths={[640, 960, 1400, 2000]} sizes="100vw" alt="Een bruid wordt in haar kanten trouwjurk geholpen in het atelier" loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover object-[62%_40%] max-md:object-[60%_62%]" />
       <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#1b1716f2_0%,#1b1716c7_42%,#1b171640_80%,#1b171626_100%)] max-md:bg-[linear-gradient(180deg,#1b1716b3_0%,#1b171699_35%,#1b1716e6_78%,#1b1716_100%)]"></div>
       <div class="wrap flex flex-1 flex-col justify-end pb-[5.5rem] pt-28 md:pb-20 md:pt-36 lg:pt-44">
         <p class="eyebrow eyebrow-licht">Bruidsatelier in Rotterdam</p>
         <h1 class="mt-4 max-w-[13ch] text-hero md:mt-6">Uw droom wordt werkelijkheid in ons <em class="accent-licht">atelier.</em></h1>
-        <p class="mt-5 max-w-xl text-[1.06rem] text-wit/90 md:mt-7 md:text-xl">Bruidsjurken op maat, trouwjurken vermaakt en jurken voor de bruidsmoeder, de bruidsmeisjes en de bruidsjonkers. Gemaakt door Bei zelf, in haar atelier aan de Hoogstraat.</p>
+        <p class="mt-5 max-w-xl text-[1.06rem] text-[#ffffffe6] md:mt-7 md:text-xl">Bruidsjurken op maat, trouwjurken vermaakt en jurken voor de bruidsmoeder, de bruidsmeisjes en de bruidsjonkers. Gemaakt door Bei zelf, in haar atelier aan de Hoogstraat.</p>
         <div class="mt-7 flex flex-wrap gap-3 md:mt-9">
-          <a href={url('contact/')} class="knop knop-merk">Afspraak maken <Icoon naam="pijl" /></a>
-          <a href={site.telHref} class="knop knop-wit num"><Icoon naam="tel" />{site.tel}</a>
+          <a href={url('contact/')} class="knop knop-merk !rounded-[2px]">Afspraak maken <Icoon naam="pijl" /></a>
+          <a href={site.telHref} class="knop knop-wit num !rounded-[2px] !border-[1.5px]"><Icoon naam="tel" />{site.tel}</a>
         </div>
-        <ul class="mt-6 flex flex-wrap items-center gap-x-7 gap-y-2 text-[.95rem] text-wit/85 md:mt-9">
-          <li class="flex items-center gap-2"><span class="flex text-strik">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span><strong class="font-semibold text-wit">{site.google.score}</strong> op Google, {site.google.aantal} reviews</li>
+        <ul class="mt-6 flex flex-wrap items-center gap-x-7 gap-y-2 text-[.95rem] text-[#ffffffd9] md:mt-9">
+          <li class="flex items-center gap-2"><span class="flex text-strik">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span><strong class="font-semibold text-[#ffffff]">{site.google.score}</strong> op Google, {site.google.aantal} reviews</li>
           <li class="flex items-center gap-2"><Icoon naam="klok" class="h-4 w-4 text-strik" /><span data-nu>Di t/m vr en zondag open</span></li>
           <li class="flex items-center gap-2"><Icoon naam="kalender" class="h-4 w-4 text-strik" />Ook buiten de openingstijden op afspraak</li>
         </ul>
@@ -58,9 +59,9 @@ const faq = [
     </section>
 
     <!-- FEITENREGEL -->
-    <section class="bg-wit" aria-label="Bei Couture in het kort">
+    <section class="bg-ivoor" aria-label="Bei Couture in het kort">
       <div class="wrap py-7 md:py-8">
-        <ul class="flex flex-wrap items-center text-[.95rem] text-steen [&>li+li]:before:mx-4 [&>li+li]:before:text-ivoor-3 [&>li+li]:before:content-['·']">
+        <ul class="flex flex-wrap items-center text-[.95rem] text-steen gap-y-1 max-sm:flex-col sm:[&>li+li]:before:mx-4 sm:[&>li+li]:before:text-ivoor-3 sm:[&>li+li]:before:content-['·']">
           <li>Eigen atelier sinds <span class="num font-semibold text-inkt">1997</span></li>
           <li>Bruidsmode sinds <span class="num font-semibold text-inkt">2009</span></li>
           <li><span class="num font-semibold text-inkt">{site.google.score}</span> uit {site.google.aantal} Google-reviews</li>
@@ -71,7 +72,7 @@ const faq = [
     </section>
 
     <!-- ATELIER / DIENSTEN -->
-    <section id="atelier" class="bg-wit py-24 md:py-32">
+    <section id="atelier" class="bg-ivoor py-24 md:py-32">
       <div class="wrap">
         <div class="grid gap-8 md:grid-cols-12 md:items-end">
           <div class="md:col-span-7">
@@ -81,11 +82,11 @@ const faq = [
           <p class="text-lg text-steen md:col-span-5">Zes dingen waarvoor je in het atelier terechtkunt. Alles op maat, alles door Bei zelf.</p>
         </div>
 
-        <ol class="mt-14 grid border-t border-ivoor-3 lg:grid-cols-2 lg:gap-x-16">
+        <ol class="mt-14 grid lg:grid-cols-2 lg:gap-x-16">
           {diensten.map((d, i) => (
-            <li class="rijs border-b border-ivoor-3" style={`--d:${i * 0.05}s`}>
+            <li class="rijs border-t border-ivoor-3" style={`--d:${i * 0.05}s`}>
               <a href={url(`${d.slug}/`)} class="fotolink group grid grid-cols-[6rem_1fr] gap-6 py-7 md:grid-cols-[8rem_1fr] md:gap-8 md:py-8">
-                <span class="block aspect-[4/5] overflow-hidden bg-ivoor-2">
+                <span class="foto block aspect-[4/5] bg-ivoor-2">
                   <Picture src={d.img} formats={['avif', 'webp']} widths={[160, 256, 384]} sizes="(min-width: 768px) 128px, 96px" alt={d.alt} class="h-full w-full object-cover" style={`object-position:${d.pos}`} />
                 </span>
                 <span class="block min-w-0">
@@ -105,30 +106,30 @@ const faq = [
     </section>
 
     <!-- OVER BEI -->
-    <section id="bei" class="bg-inkt py-20 text-wit md:py-32">
-      <div class="wrap">
-        <blockquote class="rijs max-w-4xl">
-          <p class="uitspraak text-[2.4rem] md:text-[4rem]">“Geen enkele opgave is teveel.”</p>
-          <footer class="mt-6 text-strik">Bei, in haar eigen woorden</footer>
-        </blockquote>
-
-        <div class="mt-16 grid gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-16">
-          <div class="rijs lg:col-span-5">
-            <Picture src={bei} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(min-width: 1024px) 480px, 100vw" alt="Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier" class="aspect-[4/5] w-full rounded-none object-cover object-[50%_30%]" />
-            <p class="mt-4 text-sm text-mist">Bei aan het werk in haar atelier aan de Hoogstraat.</p>
+    <section id="bei" class="bg-ivoor-2 py-24 md:py-32">
+      <div class="wrap grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-16">
+        <div class="rijs relative mx-auto w-full max-w-[520px] lg:col-span-5">
+          <div class="foto relative aspect-[4/5] w-[64%] bg-inkt">
+            <Picture src={bei} formats={['avif', 'webp']} widths={[480, 720]} sizes="(min-width: 1024px) 330px, 60vw" alt="Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier" class="block h-full w-full object-cover object-[50%_30%]" />
           </div>
-          <div class="lg:col-span-7">
-            <p class="eyebrow eyebrow-licht">Over Bei</p>
-            <h2 class="mt-5 text-4xl">Mijn naam is <em class="accent-licht">Bei.</em></h2>
-            <div class="mt-8 max-w-2xl space-y-5 text-lg text-wit/85">
-              <p>Ik ben geboren in China en woon nu al een lange tijd in Nederland. Vanaf kleins af aan ben ik dol op tekenen en naaien, zo is mijn liefde ontstaan om kleding te ontwerpen. Ik ben een perfectionist en wil het liefst alles zelf doen.</p>
-              <p>Ik ben in 1997 begonnen met een eigen atelier op Marconiplein. Daarna ben ik in 2009 mij gaan specialiseren in bruidsmode, dus ook voor bruidsjonkers en bruidsmeisjes. Het is echt mijn passie en ik krijg elke keer een glimlach op mijn gezicht als een klant weer super tevreden is.</p>
-            </div>
-            <p class="mt-10 flex flex-wrap gap-x-8 gap-y-3">
-              <a href={url('over-bei/')} class="tekstlink font-semibold text-wit">Lees meer over Bei</a>
-              <a href={url('klantervaringen/')} class="tekstlink font-semibold text-strik">Verhalen van bruiden</a>
-            </p>
+          <div class="foto relative -mt-[42%] ml-auto aspect-[4/5] w-[64%] bg-inkt">
+            <Picture src={kant} formats={['avif', 'webp']} widths={[480, 720]} sizes="(min-width: 1024px) 330px, 60vw" alt="Detail van een kanten jurk met stoffen knoopjes" class="block h-full w-full object-cover" />
           </div>
+          <p class="mt-5 text-sm text-steen">Bei in haar atelier aan de Hoogstraat, en een van haar jurken.</p>
+        </div>
+        <div class="lg:col-span-7 lg:pl-6">
+          <p class="eyebrow">Over Bei</p>
+          <blockquote class="mt-5">
+            <p class="uitspraak text-[2.2rem] text-merk md:text-[3.2rem]">“Geen enkele opgave is teveel.”</p>
+          </blockquote>
+          <div class="mt-8 max-w-xl space-y-5 text-lg">
+            <p>Mijn naam is Bei. Ik ben geboren in China en woon nu al een lange tijd in Nederland. Vanaf kleins af aan ben ik dol op tekenen en naaien, zo is mijn liefde ontstaan om kleding te ontwerpen. Ik ben een perfectionist en wil het liefst alles zelf doen.</p>
+            <p>In 1997 ben ik begonnen met een eigen atelier op het Marconiplein. Sinds 2009 ben ik gespecialiseerd in bruidsmode, dus ook voor bruidsjonkers en bruidsmeisjes. Ik krijg elke keer een glimlach op mijn gezicht als een klant weer super tevreden is.</p>
+          </div>
+          <p class="mt-9 flex flex-wrap gap-x-8 gap-y-3">
+            <a href={url('over-bei/')} class="tekstlink font-semibold text-merk">Lees meer over Bei</a>
+            <a href={url('klantervaringen/')} class="tekstlink font-semibold text-merk">Verhalen van bruiden</a>
+          </p>
         </div>
       </div>
     </section>
@@ -146,9 +147,9 @@ const faq = [
     <Afspraak />
 
     <!-- BEZOEK -->
-    <section id="bezoek" class="bg-wit py-24 md:py-32">
+    <section id="bezoek" class="bg-ivoor py-24 md:py-32">
       <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-14">
-        <div class="lg:col-span-5">
+        <div class="min-w-0 lg:col-span-5">
           <p class="eyebrow">Bezoek het atelier</p>
           <h2 class="mt-5 text-4xl">Hoogstraat <em class="accent">89A.</em></h2>
           <p class="mt-6 text-lg text-steen">Het atelier zit midden in Rotterdam, in het pand van {site.inPand}. Bruiden komen uit de hele regio: {werkgebied.slice(1, 7).join(', ')} en verder.</p>

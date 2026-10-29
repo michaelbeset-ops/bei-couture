@@ -5,14 +5,14 @@ import Icoon from './Icoon.astro';
 interface Props { donker?: boolean }
 const { donker = false } = Astro.props;
 ---
-<section id="reviews" class={`${donker ? 'bg-inkt text-wit' : 'bg-ivoor-2'} py-20 md:py-28`} aria-labelledby="reviews-kop">
+<section id="reviews" class={`${donker ? 'bg-inkt text-wit' : 'bg-ivoor'} py-20 md:py-28`} aria-labelledby="reviews-kop">
   <div class="wrap">
     <div class="flex flex-wrap items-end justify-between gap-8">
       <div>
         <p class={`eyebrow ${donker ? 'eyebrow-licht' : ''}`}>Google-reviews</p>
         <h2 id="reviews-kop" class="mt-5 text-4xl">Wat bruiden <em class={donker ? 'accent-licht' : 'accent'}>zeggen.</em></h2>
       </div>
-      <a href={site.reviews} target="_blank" rel="noopener" class={`flex items-center gap-4 rounded-none border px-5 py-4 no-underline transition-colors ${donker ? 'border-lijn bg-inkt-2 hover:border-wit/50' : 'border-ivoor-3 bg-wit hover:border-merk'}`}>
+      <a href={site.reviews} target="_blank" rel="noopener" class={`flex items-center gap-4 rounded-sm border px-5 py-4 no-underline transition-colors ${donker ? 'border-lijn bg-inkt-2 hover:border-wit/50' : 'border-ivoor-3 bg-wit hover:border-merk'}`}>
         <span class="grid h-11 w-11 place-items-center rounded-full bg-wit shadow-[0_1px_3px_#1b171626]"><Icoon naam="g" class="h-6 w-6" /></span>
         <span>
           <span class="flex items-center gap-2"><strong class="num font-kop text-2xl font-extrabold">{site.google.score}</strong><span class="flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span></span>
@@ -25,7 +25,7 @@ const { donker = false } = Astro.props;
       <ul class="rij flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4" data-rij tabindex="0" aria-label="Reviews, horizontaal te scrollen">
         {reviews.map((r) => (
           <li class="w-[85vw] flex-none snap-start sm:w-[22rem]">
-            <a href={site.reviews} target="_blank" rel="noopener" aria-label={`Review van ${r.naam} op Google lezen`} class={`flex h-full flex-col p-7 no-underline transition-colors duration-300 ${donker ? 'bg-inkt-2 hover:bg-[#2f2726]' : 'bg-wit hover:bg-strik-zacht/40'}`}>
+            <a href={site.reviews} target="_blank" rel="noopener" aria-label={`Review van ${r.naam} op Google lezen`} class={`flex h-full flex-col p-7 no-underline transition-colors duration-300 rounded-sm ${donker ? 'bg-inkt-2 hover:bg-[#574241]' : 'kaart hover:bg-strik-zacht/60'}`}>
               <span class="flex items-center gap-3">
                 <span class="flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-[1.05rem] w-[1.05rem]" />)}</span>
                 <Icoon naam="g" class="ml-auto h-5 w-5 flex-none" />
