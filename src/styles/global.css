@@ -167,10 +167,8 @@
 
 
   /* Swipebare rij (reviews). Scrollbar subtiel, maar wel zichtbaar dat er meer is. */
-  .rij { scrollbar-width: thin; scrollbar-color: var(--color-ivoor-3) transparent; scroll-padding-inline: 1.25rem; }
-  .rij::-webkit-scrollbar { height: 6px; }
-  .rij::-webkit-scrollbar-thumb { background: var(--color-ivoor-3); border-radius: 999px; }
-  .rij::-webkit-scrollbar-track { background: transparent; }
+  .rij { scrollbar-width: none; scroll-padding-inline: 1.25rem; }
+  .rij::-webkit-scrollbar { display: none; }
 
   /* FAQ-accordeon */
   .vraag summary::-webkit-details-marker { display: none; }
