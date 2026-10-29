@@ -77,8 +77,7 @@
 
   .num { font-variant-numeric: lining-nums tabular-nums; }
 
-  .eyebrow { display: inline-flex; align-items: center; gap: .75rem; font-size: .8125rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--color-merk); }
-  .eyebrow::before { content: ""; width: 2rem; border-top: 1px solid currentColor; flex: none; }
+  .eyebrow { display: inline-block; font-size: .8125rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--color-merk); }
   .eyebrow-licht { color: var(--color-strik); }
 
   /* De naad: gestippelde lijn uit hun logo, als stiksel tussen onderdelen. */
