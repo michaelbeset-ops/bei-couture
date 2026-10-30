@@ -1,5 +1,5 @@
 ---
-import { site, url, waHoi, dagen, volgorde, werkgebied } from '../data/site';
+import { site, url, waHoi, dagen, volgorde } from '../data/site';
 import { diensten } from '../data/diensten';
 import Merk from './Merk.astro';
 import Icoon from './Icoon.astro';
@@ -46,10 +46,6 @@ const jaar = new Date().getFullYear();
       </ul>
       <p class="mt-4 text-sm text-strik">Buiten deze tijden kan ook, gewoon even vragen.</p>
     </div>
-  </div>
-
-  <div class="wrap border-t border-lijn py-7 text-sm">
-    <p><span class="font-semibold text-wit">Werkgebied:</span> {werkgebied.join(' · ')}</p>
   </div>
 
   <div class="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-t border-lijn py-7 text-xs">
