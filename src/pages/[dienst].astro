@@ -52,7 +52,7 @@ const reviewsEerst = d.slug === 'trouwjurk-vermaken' ? ['Çanci A.', 'Mariluz', 
   <main id="inhoud">
     <!-- KOP -->
     <section class="relative isolate overflow-hidden bg-inkt text-wit">
-      <Picture src={d.kopFoto ?? d.img} formats={['avif', 'webp']} quality={78} widths={[640, 960, 1400, 2000]} sizes="100vw" alt={d.kopAlt ?? d.alt} loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${d.kopPos ?? d.pos}`} />
+      <Picture src={d.kopFoto ?? d.img} formats={['avif', 'webp']} quality={68} widths={[640, 960, 1400, 2000]} sizes="100vw" alt={d.kopAlt ?? d.alt} loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${d.kopPos ?? d.pos}`} />
       <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#1b1716f2_0%,#1b1716c7_42%,#1b171659_80%,#1b171640_100%)] max-md:bg-[linear-gradient(180deg,#1b1716b3_0%,#1b1716e0_55%,#1b1716_100%)]"></div>
       <div class="wrap pb-10 pt-24 md:pb-24 md:pt-40">
         <div class="text-sm text-mist"><Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Atelier', href: url('atelier/') }, { naam: d.kaartTitel, href: hier }]} /></div>
