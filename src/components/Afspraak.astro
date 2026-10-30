@@ -1,148 +1,43 @@
 ---
-// Je stelt je bericht aan Bei samen; rechts staat het WhatsApp-bericht live klaar.
-// Verstuurd wordt er pas als je zelf op de knop drukt, dus er gaat hier niets de deur uit.
-import { site, waHoi } from '../data/site';
-import { diensten } from '../data/diensten';
+// Afspraak maken op de homepage en de contactpagina: dezelfde enquête als op /afspraak/,
+// één vraag per keer met voortgang. Rechts (op desktop) wie je te spreken krijgt.
+import { Picture } from 'astro:assets';
+import { site } from '../data/site';
 import Icoon from './Icoon.astro';
+import Enquete from './Enquete.astro';
+import bei from '../assets/bei-atelier.jpg';
 interface Props { achtergrond?: string; kop?: string }
 const { achtergrond = 'bg-strik-zacht', kop = 'Vertel Bei wat je' } = Astro.props;
 ---
 <section id="afspraak" class={`${achtergrond} scroll-mt-24 py-12 md:py-24`} aria-labelledby="afspraak-kop">
-  <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-14">
+  <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-14">
     <div class="min-w-0 lg:col-span-7">
       <p class="eyebrow">Afspraak in het atelier</p>
-      <h2 id="afspraak-kop" class="mt-5 text-[2.2rem] md:text-[2.8rem]">{kop} <span class="text-merk">droomt</span></h2>
-      <p class="mt-5 max-w-xl text-lg text-steen">Vier korte vragen. Na elk antwoord verschijnt de volgende, en je bericht aan Bei groeit mee. Versturen doe je zelf via WhatsApp.</p>
-
-      <form id="wens" class="mt-10 space-y-10">
-        <fieldset data-stap="1">
-          <legend class="veld-label"><span class="mr-3 font-tekst text-[.78rem] font-medium uppercase tracking-[.22em] text-merk">Stap 1 van 4</span>Waarvoor kom je?</legend>
-          <div class="grid gap-2.5 sm:grid-cols-2">
-            {diensten.map((d, i) => (
-              <label class="keuze"><input type="radio" name="wat" value={d.kies} /><span class="bol"></span>{d.kies}</label>
-            ))}
-          </div>
-        </fieldset>
-        <fieldset data-stofblok data-stap="2" hidden>
-          <legend class="veld-label"><span class="mr-3 font-tekst text-[.78rem] font-medium uppercase tracking-[.22em] text-merk">Stap 2 van 4</span>Welke stof heb je in gedachten?</legend>
-          <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-            {['Taft', 'Bruidssatijn', 'Tule', 'Weet ik nog niet'].map((s, i) => (
-              <label class="keuze"><input type="radio" name="stof" value={s} checked={i === 3} /><span class="bol"></span>{s}</label>
-            ))}
-          </div>
-        </fieldset>
-        <div class="grid gap-10 sm:grid-cols-2" data-stap="3" hidden>
-          <fieldset>
-            <legend class="veld-label"><span class="mr-3 font-tekst text-[.78rem] font-medium uppercase tracking-[.22em] text-merk">Stap 3 van 4</span>Wanneer is de grote dag?</legend>
-            <select name="wanneer" class="veld" aria-label="Wanneer is de grote dag?">
-              <option>Nog geen datum</option>
-              <option>Binnen een maand</option>
-              <option>Over 1 tot 3 maanden</option>
-              <option>Over 3 tot 6 maanden</option>
-              <option>Over meer dan een half jaar</option>
-            </select>
-          </fieldset>
-          <fieldset>
-            <legend class="veld-label">Liefst langs op</legend>
-            <select name="dag" class="veld" aria-label="Liefst langs op">
-              <option>Maakt niet uit</option>
-              <option>Dinsdag</option><option>Woensdag</option><option>Donderdag</option><option>Vrijdag</option><option>Zondag</option>
-              <option>Buiten de openingstijden</option>
-            </select>
-          </fieldset>
-        </div>
-        <div data-stap="4" hidden>
-          <p class="veld-label"><span class="mr-3 font-tekst text-[.78rem] font-medium uppercase tracking-[.22em] text-merk">Stap 4 van 4</span>Bijna klaar</p>
-          <div class="grid gap-5 sm:grid-cols-2 sm:items-end">
-          <label class="keuze keuze-vink"><input type="checkbox" name="foto" checked /><span class="bol"></span>Ik stuur een foto of ontwerp mee</label>
-          <div>
-            <label for="naam" class="mb-2 block text-sm font-semibold">Je naam</label>
-            <input id="naam" name="naam" type="text" autocomplete="given-name" placeholder="Voornaam" class="veld" />
-          </div>
-          </div>
-          <p class="mt-5 text-sm text-steen lg:hidden">Je bericht staat hieronder klaar. Klik op de groene knop om hem via WhatsApp te versturen.</p>
-        </div>
-      </form>
-    </div>
-
-    <div class="min-w-0 lg:col-span-5">
-      <div class="lg:sticky lg:top-32">
-        <div class="relative bg-inkt p-2 text-wit">
-          <div class="border border-wit/15 p-6 md:p-8">
-            <div class="flex items-center justify-between gap-4">
-              <p class="text-[.78rem] font-medium uppercase tracking-[.22em] text-strik">Je bericht aan Bei</p>
-              <Icoon naam="wa" class="h-6 w-6 text-strik" />
-            </div>
-            <p id="bericht" class="mt-5 whitespace-pre-line font-kop text-[1.3rem] font-normal leading-snug text-wit" aria-live="polite">Hallo Bei, ik wil graag een afspraak maken in het atelier.</p>
-            <hr class="mt-7 border-wit/15" />
-            <a id="stuur" href={waHoi} class="knop knop-merk mt-7 w-full"><Icoon naam="wa" />Verstuur via WhatsApp</a>
-            <p class="mt-4 text-center text-sm text-mist">Liever bellen? <a href={site.telHref} class="link num font-semibold text-wit">{site.tel}</a></p>
-          </div>
-        </div>
-        <p class="mt-5 flex items-start gap-2.5 text-sm text-steen"><Icoon naam="foto" class="mt-0.5 h-5 w-5 flex-none text-merk" />Een foto van de jurk die je in gedachten hebt kun je in WhatsApp direct meesturen. Hoe meer je laat zien, hoe sneller duidelijk is waar we naartoe werken.</p>
-        <p class="mt-3 flex items-start gap-2.5 text-sm text-steen"><Icoon naam="kalender" class="mt-0.5 h-5 w-5 flex-none text-merk" />Kun je overdag niet? Zet dat erbij, dan wordt er een moment buiten de openingstijden gezocht.</p>
+      <h2 id="afspraak-kop" class="mt-4 text-[2.2rem] md:mt-5 md:text-[2.8rem]">{kop} <span class="text-merk">droomt</span></h2>
+      <p class="mt-4 max-w-xl text-steen md:text-lg">Een paar korte vragen, dan staat je bericht klaar voor WhatsApp. Je hoeft nog niets zeker te weten.</p>
+      <div class="mt-7 border border-merk/20 bg-wit p-4 sm:p-7 md:mt-9 md:p-8">
+        <Enquete />
       </div>
     </div>
+
+    <aside class="min-w-0 lg:col-span-5">
+      <div class="lg:sticky lg:top-32">
+        <div class="border border-merk/20 bg-wit p-6 md:p-7">
+          <div class="flex items-center gap-4">
+            <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[128, 256]} sizes="64px" alt="Bei, kleermaker van Bei Couture" class="foto h-16 w-16 flex-none object-cover object-[62%_32%]" />
+            <div>
+              <p class="eyebrow">Je afspraak is met Bei</p>
+              <p class="mt-1 font-kop text-[1.35rem] leading-tight">Dezelfde handen van gesprek tot jurk</p>
+            </div>
+          </div>
+          <ul class="mt-5 space-y-2.5 border-t border-merk/20 pt-5 text-[.95rem] text-steen">
+            <li class="flex gap-3"><Icoon naam="vink" class="mt-1 h-4 w-4 flex-none text-merk" />Nog geen foto of idee? Ook prima, dan begint het gesprek in het atelier.</li>
+            <li class="flex gap-3"><Icoon naam="vink" class="mt-1 h-4 w-4 flex-none text-merk" />Je hoort de prijs bij de eerste afspraak, voordat er iets gemaakt wordt.</li>
+            <li class="flex gap-3"><Icoon naam="klok" class="mt-1 h-4 w-4 flex-none text-merk" />Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00. Buiten die tijden op afspraak, ook 's avonds.</li>
+            <li class="flex gap-3"><Icoon naam="tel" class="mt-1 h-4 w-4 flex-none text-merk" />Liever bellen? <a href={site.telHref} class="link num">{site.tel}</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
   </div>
 </section>
-
-<script>
-  import { site } from '../data/site';
-  const f = document.querySelector<HTMLFormElement>('#wens');
-  const out = document.querySelector('#bericht');
-  const knop = document.querySelector<HTMLAnchorElement>('#stuur');
-  const stofblok = document.querySelector<HTMLElement>('[data-stofblok]');
-
-  // Stap voor stap: de volgende vraag verschijnt zodra de vorige beantwoord is.
-  const stap = (n: number) => f?.querySelector<HTMLElement>(`[data-stap="${n}"]`);
-  let bereikt = 1;
-  function toon(n: number) {
-    for (let i = 2; i <= n; i++) { const el = stap(i); if (el && el.hidden && !(i === 2 && el.dataset.stofblok !== undefined && stofUit)) { el.hidden = false; el.classList.add('rijs', 'in'); } }
-    bereikt = Math.max(bereikt, n);
-  }
-  let stofUit = false;
-
-  function maak() {
-    if (!f || !out || !knop) return;
-    const v = new FormData(f);
-    const wat = String(v.get('wat') || '');
-    const maken = wat === 'Bruidsjurk laten maken' || wat === 'Gala- of avondkleding' || wat === 'Jurk voor de bruidsmoeder';
-    stofUit = !maken;
-    if (stofblok) stofblok.hidden = !maken || bereikt < 2;
-    if (!wat) { out.textContent = 'Hallo Bei, ik wil graag een afspraak maken in het atelier.'; knop.href = `${site.wa}?text=${encodeURIComponent(out.textContent)}`; return; }
-    const regels = ['Hallo Bei, ik wil graag een afspraak maken in het atelier.', `Waarvoor: ${wat.charAt(0).toLowerCase() + wat.slice(1)}.`];
-    if (maken && v.get('stof') !== 'Weet ik nog niet') regels.push(`Stof: ${String(v.get('stof')).toLowerCase()}.`);
-    if (v.get('wanneer') !== 'Nog geen datum') regels.push(`De grote dag: ${String(v.get('wanneer')).toLowerCase()}.`);
-    const dag = String(v.get('dag') || '');
-    if (dag === 'Buiten de openingstijden') regels.push('Ik kan niet tijdens de openingstijden, mag het buiten die tijden?');
-    else if (dag !== 'Maakt niet uit') regels.push(`Liefst op een ${dag.toLowerCase()}.`);
-    if (v.get('foto')) regels.push('Ik stuur een foto of ontwerp mee.');
-    const naam = String(v.get('naam') || '').trim();
-    if (naam) regels.push(`Groetjes, ${naam}`);
-    const tekst = regels.join('\n');
-    out.textContent = tekst;
-    knop.href = `${site.wa}?text=${encodeURIComponent(tekst)}`;
-  }
-
-  // Vooraf ingevuld vanaf een dienstpagina: /contact/?voor=...
-  const voor = new URLSearchParams(location.search).get('voor');
-  if (voor && f) {
-    const r = f.querySelector<HTMLInputElement>(`input[name="wat"][value="${CSS.escape(voor)}"]`);
-    if (r) r.checked = true;
-  }
-  f?.addEventListener('submit', (e) => e.preventDefault());
-  f?.addEventListener('input', maak);
-  f?.addEventListener('change', (e) => {
-    const t = e.target as HTMLInputElement | HTMLSelectElement;
-    const wat = String(new FormData(f).get('wat') || '');
-    const maken = wat === 'Bruidsjurk laten maken' || wat === 'Gala- of avondkleding' || wat === 'Jurk voor de bruidsmoeder';
-    if (t.name === 'wat') toon(maken ? 2 : 3);
-    if (t.name === 'stof') toon(3);
-    if (t.name === 'wanneer' || t.name === 'dag') toon(4);
-    maak();
-    const volgende = stap(Math.min(bereikt, 4));
-    if (t.name !== 'naam' && volgende && window.innerWidth < 1024) volgende.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  });
-  if (voor && f?.querySelector<HTMLInputElement>('input[name="wat"]:checked')) { const wat = voor; const maken = wat === 'Bruidsjurk laten maken' || wat === 'Gala- of avondkleding' || wat === 'Jurk voor de bruidsmoeder'; toon(maken ? 2 : 3); }
-  maak();
-</script>

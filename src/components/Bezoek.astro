@@ -1,11 +1,9 @@
 ---
 // Bezoekblok: foto van het atelier met adres en contact, rechts de openingstijden met het blok
 // voor afspraken buiten de tijden. Zelfde blok op de homepage en onderaan de dienstpagina's.
-import { Picture } from 'astro:assets';
 import { site, werkgebied, waHoi, url } from '../data/site';
 import Icoon from './Icoon.astro';
 import Tijden from './Tijden.astro';
-import hanger from '../assets/e-hanger.jpg';
 ---
 <section id="bezoek" class="bg-strik-zacht py-12 md:py-24">
   <!-- Desktop: de eenvoudige versie, links kop, tekst, gegevens en knoppen, rechts de tijden. -->
@@ -27,34 +25,22 @@ import hanger from '../assets/e-hanger.jpg';
     <div class="lg:col-span-7"><Tijden /></div>
   </div>
 
-  <!-- Mobiel en tablet: kop, korte tekst, de kaart met foto en gegevens, daaronder de tijden. -->
+  <!-- Mobiel en tablet: kop, korte tekst, witte kaart met gegevens en knoppen, daaronder de tijden. -->
   <div class="wrap lg:hidden">
-    <div class="grid gap-5 md:grid-cols-12 md:items-end">
-      <div class="md:col-span-7">
-        <p class="eyebrow">Bezoek het atelier</p>
-        <h2 class="mt-4 text-[2.2rem] md:text-[2.8rem]">Hoogstraat <span class="text-merk">89A</span>, Rotterdam</h2>
-      </div>
-      <p class="text-steen md:col-span-5">Midden in de stad, in het pand van {site.inPand}. Bruiden komen uit de hele regio: {werkgebied.slice(1, 5).join(', ')} en verder.</p>
-    </div>
-
-    <div class="mt-8 grid gap-6 lg:grid-cols-12 lg:gap-8 md:mt-10">
-      <div class="lg:col-span-5">
-        <div class="border border-merk/20 bg-wit">
-          <Picture src={hanger} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 480px, 100vw" alt="Kanten bruidsjurk aan een hanger in het pashokje van het atelier" class="aspect-[4/3] w-full object-cover object-[50%_40%]" />
-          <ul class="divide-y divide-merk/10 px-5 py-2 sm:px-6">
-            <li class="flex items-center gap-4 py-3.5"><Icoon naam="pin" class="h-5 w-5 flex-none text-merk" /><span>{site.straat}, {site.postcode} {site.plaats}<span class="block text-sm text-steen">Gevestigd in {site.inPand}</span></span></li>
-            <li class="flex items-center gap-4 py-3.5"><Icoon naam="tel" class="h-5 w-5 flex-none text-merk" /><a href={site.telHref} class="link num">{site.tel}</a><span class="text-sm text-steen">ook WhatsApp</span></li>
-            <li class="flex items-center gap-4 py-3.5"><Icoon naam="mail" class="h-5 w-5 flex-none text-merk" /><a href={`mailto:${site.mail}`} class="link">{site.mail}</a></li>
-          </ul>
-          <div class="flex flex-col gap-3 p-5 pt-3 sm:flex-row sm:px-6">
-            <a href={site.route} class="knop knop-inkt"><Icoon naam="pin" />Route plannen</a>
-            <a href={url('afspraak/')} class="knop knop-rand">Afspraak maken</a>
-          </div>
-        </div>
-      </div>
-      <div class="lg:col-span-7">
-        <Tijden />
+    <p class="eyebrow">Bezoek het atelier</p>
+    <h2 class="mt-4 text-[2.2rem]">Hoogstraat <span class="text-merk">89A</span>, Rotterdam</h2>
+    <p class="mt-4 text-steen">Midden in de stad, in het pand van {site.inPand}. Bruiden komen uit de hele regio: {werkgebied.slice(1, 5).join(', ')} en verder.</p>
+    <div class="mt-7 border border-merk/20 bg-wit">
+      <ul class="divide-y divide-merk/10 px-5 py-1">
+        <li class="flex items-center gap-4 py-3.5"><Icoon naam="pin" class="h-5 w-5 flex-none text-merk" /><span>{site.straat}, {site.postcode} {site.plaats}<span class="block text-sm text-steen">Gevestigd in {site.inPand}</span></span></li>
+        <li class="flex items-center gap-4 py-3.5"><Icoon naam="tel" class="h-5 w-5 flex-none text-merk" /><a href={site.telHref} class="link num">{site.tel}</a><span class="text-sm text-steen">ook WhatsApp</span></li>
+        <li class="flex items-center gap-4 py-3.5"><Icoon naam="mail" class="h-5 w-5 flex-none text-merk" /><a href={`mailto:${site.mail}`} class="link">{site.mail}</a></li>
+      </ul>
+      <div class="flex flex-col gap-3 border-t border-merk/10 p-5 sm:flex-row">
+        <a href={site.route} class="knop knop-inkt"><Icoon naam="pin" />Route plannen</a>
+        <a href={url('afspraak/')} class="knop knop-rand">Afspraak maken</a>
       </div>
     </div>
+    <div class="mt-6"><Tijden /></div>
   </div>
 </section>
