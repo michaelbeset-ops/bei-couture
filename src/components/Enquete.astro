@@ -144,8 +144,9 @@ const stappen = ['Waarvoor', 'Stof', 'Wanneer', 'Dag', 'Jij'];
     if (balk) balk.style.width = `${Math.round(((i + 1) / r.length) * 100)}%`;
     if (terug) terug.disabled = i === 0;
     if (verder) verder.hidden = n >= 5 || !beantwoord(n);
-    const kop = alle.find((el) => Number(el.dataset.stap) === n);
-    kop?.querySelector<HTMLElement>('legend, p')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Niet springen: alleen terugscrollen als de vraag boven het scherm is verdwenen.
+    const vak = document.querySelector<HTMLElement>('[data-enquete]');
+    if (vak && vak.getBoundingClientRect().top < 0) vak.scrollIntoView({ behavior: 'smooth', block: 'start' });
     maak();
   }
   const beantwoord = (n: number) => {
