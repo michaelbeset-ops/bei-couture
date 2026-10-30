@@ -15,7 +15,7 @@ import Kruimels from '../components/Kruimels.astro';
 import { diensten, dienstOp } from '../data/diensten';
 import { site, url, waMet } from '../data/site';
 import { dienstSchema, faqSchema } from '../lib/schema';
-import bei from '../assets/bei.jpg';
+import bei from '../assets/bei-atelier.jpg';
 
 export function getStaticPaths() {
   return diensten.map((d) => ({ params: { dienst: d.slug }, props: { slug: d.slug } }));
@@ -51,7 +51,7 @@ const reviewsEerst = d.slug === 'trouwjurk-vermaken' ? ['Çanci A.', 'Mariluz', 
   <main id="inhoud">
     <!-- KOP -->
     <section class="relative isolate overflow-hidden bg-inkt text-wit">
-      <Picture src={d.img} formats={['avif', 'webp']} widths={[640, 960, 1400, 2000]} sizes="100vw" alt={d.alt} loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${d.pos}`} />
+      <Picture src={d.kopFoto ?? d.img} formats={['avif', 'webp']} widths={[640, 960, 1400, 2000]} sizes="100vw" alt={d.kopAlt ?? d.alt} loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${d.kopPos ?? d.pos}`} />
       <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#1b1716f2_0%,#1b1716c7_42%,#1b171659_80%,#1b171640_100%)] max-md:bg-[linear-gradient(180deg,#1b1716b3_0%,#1b1716e0_55%,#1b1716_100%)]"></div>
       <div class="wrap pb-10 pt-24 md:pb-24 md:pt-40">
         <div class="text-sm text-mist"><Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Atelier', href: url('atelier/') }, { naam: d.kaartTitel, href: hier }]} /></div>
@@ -90,7 +90,7 @@ const reviewsEerst = d.slug === 'trouwjurk-vermaken' ? ['Çanci A.', 'Mariluz', 
         <aside class="lg:col-span-5">
           <div class="border border-merk/20 bg-strik-zacht p-6 md:p-7">
             <div class="flex items-center gap-4">
-              <Picture src={bei} formats={['avif', 'webp']} widths={[128, 256]} sizes="64px" alt="Bei, kleermaker van Bei Couture" class="foto h-16 w-16 flex-none object-cover object-[50%_20%]" />
+              <Picture src={bei} formats={['avif', 'webp']} widths={[128, 256]} sizes="64px" alt="Bei, kleermaker van Bei Couture" class="foto h-16 w-16 flex-none object-cover object-[62%_32%]" />
               <div>
                 <p class="eyebrow">Afspraak met Bei</p>
                 <p class="mt-1 font-kop text-[1.45rem] leading-tight">Stuur een foto van wat je in gedachten hebt</p>

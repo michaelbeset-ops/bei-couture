@@ -1,20 +1,40 @@
-Bei Couture: herkomst van beeld (15 oktober 2026)
+Bei Couture: herkomst van beeld (bijgewerkt 30 oktober 2026)
 
-Eigen beeld
+Eigen beeld, via WhatsApp aangeleverd door Bei op 30-10-2026 (origineel en ongewijzigd gekopieerd uit
+aanlevering/whatsapp/, waar ook overzicht.md staat met per foto de beoordeling). WhatsApp heeft de foto's
+gecomprimeerd tot 1600 px aan de lange zijde; voor de hero is een origineel van minimaal 2000 px breed nodig.
+bruidsjurk.jpg          diensten/bruidsjurk-op-maat-01.jpg (chat a1-022), 1536x2048. Kanten lijfje met hoge hals, lange mouwen.
+bruidsjurk-rug.jpg      foto2/bruidsjurk-op-maat-01.jpg (a1-023), 1536x2048. Kanten rug met stoffen knoopjes.
+lijfje-paspop.jpg       diensten/bruidsjurk-op-maat-02.jpg (a2-007), 1200x1599. Lijfje met kant en pailletten op de paspop. Kop van /atelier/.
+vermaken.jpg            diensten/trouwjurk-vermaken-01.jpg (a2-001), 1200x1599. Bei past een bruidsjurk met tule sleep.
+vermaken-rug.jpg        foto2/trouwjurk-vermaken-01.jpg (a2-022), 1200x1599. Bei bij de open kanten rug van een zeemeerminjurk.
+vermaken-tule.jpg       diensten/trouwjurk-vermaken-02.jpg (a2-020), 1200x1599. Bei werkt aan de rug van een tule jurk. Kop van /klantervaringen/.
+bruidsmoeder.jpg        diensten/bruidsmoeder-jurk-01.jpg (a1-095), 718x1600. Blauwgrijze jurk met wit lijfje en jasje.
+bruidsmoeder-zwart.jpg  diensten/bruidsmoeder-jurk-02.jpg (a1-111), 1200x1600. Zwarte jurk met wit borduursel. Kop van /bruidsmoeder-jurk/.
+bruidsmoeder-detail.jpg foto2/bruidsmoeder-jurk-01.jpg (a2-010), 1200x1599. Gouden applicaties met parels op een lijfje.
+bruidsmeisje.jpg        diensten/bruidsmeisjes-en-bruidsjonkers-01.jpg (a1-019), 1200x1600. Roze tule kinderjurkje aan een hanger.
+gala.jpg                diensten/gala-en-avondkleding-01.jpg (a2-026), 1200x1599. Rode kanten avondjurk met sleep.
+gala-detail.jpg         foto2/gala-en-avondkleding-01.jpg (a2-011), 1200x1599. Gouden kanten applicatie over een schouder.
+kant-patroon.jpg        foto2/kleding-op-maat-01.jpg (a2-008), 1200x1599. Kant op een papieren patroon met schaar.
+lijfje-tafel.jpg        atelier/atelier-02.jpg (a2-013), 1200x1599. Geplisseerd lijfje in wording op de tafel.
+snijtafel.jpg           atelier/atelier-01.jpg (a2-016), 1599x1200. Stof en patroondelen op de snijtafel. /werkwijze/, "Wat neem je mee".
+bei-atelier.jpg         over-bei/bei-01.jpg (a2-014), 1200x1599. Bei schikt geplooide stof op de paspop en kijkt in de camera.
+                        Vervangt de eerdere bei.jpg (480x640, aangeleverd 27-10-2026).
+applicaties.jpg         reviews/review-01.jpg (a2-009), 1200x1599. Gouden kanten applicaties met parels. Bij een klantervaring.
+
+Eerder eigen beeld
 kant.jpg      eigen website beicouture.nl, wp-content/uploads/2016/07/website-foto-bruidsjurk-details--e1587858514549.jpeg
               (via webarchief, origineel 4288x2026, verkleind naar 2000 px). Detail kanten jurk met stoffen knoopjes.
 logo.png      eigen logo van Bei Couture, aangeleverd door de klant (27 oktober 2026). Witte achtergrond weggehaald,
               logo-licht.png is dezelfde tekening in ivoor voor op donkere vlakken.
-bei.jpg       eigen foto, aangeleverd door de klant (27 oktober 2026): Bei speldt een lijfje af op de paspop.
 
-Sfeerfoto's via Unsplash (Unsplash-licentie, images.unsplash.com, ter illustratie, niet "ons werk"):
-hero.jpg             https://images.unsplash.com/photo-1688742233287-d02508e25bf9  (zoekterm: wedding dress fitting; bruid wordt in jurk geholpen, geen gezichten)
-s-maken.jpg          https://images.unsplash.com/photo-1665783126947-8c98c7b7ac72  (bridal shop; kanten lijfje op paspop voor spiegel)
-s-vermaken.jpg       https://images.unsplash.com/photo-1678830127443-12486e06aa2b  (wedding dress; handen aan de rug van een kanten jurk)
-s-gala.jpg           https://images.unsplash.com/photo-1765229280816-f8e55ac050e8  (evening gown; bordeauxrode avondjurk)
-s-bruidsmeisjes.jpg  https://images.unsplash.com/photo-1552221856-cd364b9822a0    (bridal shop dresses; bruid en bruidsmeisjes op de rug gezien)
-s-meer.jpg           https://images.unsplash.com/photo-1710432103939-ba474632b9b3  (sewing; garenklosjes, vingerhoed, spelden)
-satijn.jpg           https://images.unsplash.com/photo-1674476307162-069b0e648879  (satin fabric; ivoor satijn)
+Sfeerfoto via Unsplash (Unsplash-licentie, images.unsplash.com, ter illustratie, niet "ons werk"):
+hero.jpg      https://images.unsplash.com/photo-1688742233287-d02508e25bf9  (zoekterm: wedding dress fitting; bruid wordt in jurk
+              geholpen, geen gezichten). Nog in gebruik voor de hero op de homepage en als tweede foto bij
+              /bruidsmeisjes-en-bruidsjonkers/, tot Bei een liggend origineel van minimaal 2000 px breed aanlevert.
 
-Niet gebruikt: klantfoto's op Google en Instagram (gezichten van klanten, foto's van fotografen), Street View van het pand.
-bei-origineel-480.jpg  het aangeleverde origineel (480x640). bei.jpg is daarvan 2x vergroot en verscherpt; vervang door een scherp origineel zodra Bei dat aanlevert.
+Verwijderd op 30-10-2026 (vervangen door eigen beeld): s-maken.jpg, s-vermaken.jpg, s-gala.jpg, s-bruidsmeisjes.jpg,
+s-meer.jpg, satijn.jpg (Unsplash), bei.jpg en bei-origineel-480.jpg.
+
+Niet gebruikt: klantfoto's op Google en Instagram, de trouwfoto's in aanlevering/whatsapp/klantervaringen/ en alle
+foto's met een herkenbaar klantgezicht (toestemming nodig), Street View van het pand.

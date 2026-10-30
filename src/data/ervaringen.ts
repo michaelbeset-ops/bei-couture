@@ -4,8 +4,8 @@
 // Foto's: alleen eigen beeld van het atelier. Zodra klanten hun eigen trouwfoto's aanleveren,
 // kan `foto` per verhaal gevuld worden.
 import kant from '../assets/kant.jpg';
-import bei from '../assets/bei.jpg';
-import satijn from '../assets/satijn.jpg';
+import bei from '../assets/bei-atelier.jpg';
+import applicaties from '../assets/applicaties.jpg';
 
 export interface Ervaring {
   naam: string;
@@ -30,7 +30,7 @@ export const ervaringen: Ervaring[] = [
     citaat:
       'Wat een topervaring hebben wij gehad bij lieve Bei, een warme vrouw die super mooi onze trouwjurk en pak heeft vermaakt. Het lijkt net alsof je bij een familielid bent zodra je bij Bei binnenkomt. … Dankbaar voor jouw werk Bei, je hebt gouden handen.',
     foto: bei,
-    fotoAlt: 'Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier',
+    fotoAlt: 'Bei schikt geplooide stof op de paspop in haar atelier',
     pos: '50% 35%',
   },
   {
@@ -74,8 +74,8 @@ export const ervaringen: Ervaring[] = [
       'Een jurk met veel detail en veel volume is zo vermaakt dat er aan het resultaat niets meer te zien was. Juist bij kant, kraaltjes en lagen stof komt het daarop aan.',
     citaat:
       'Mijn jurk was heel gedetailleerd en groot en toch heeft ze het jurk zo vermaakt dat het niet uitzag alsof het vermaakt is. … Echt super blij!',
-    foto: satijn,
-    fotoAlt: 'Ivoorkleurig satijn in zachte plooien',
+    foto: applicaties,
+    fotoAlt: 'Gouden kanten applicaties met parels op een lijfje op de paspop',
     pos: '50% 50%',
   },
 ];

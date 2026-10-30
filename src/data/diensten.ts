@@ -1,13 +1,18 @@
 // Diensten van het atelier. Inhoud komt van Bei zelf (gesprek 27 oktober 2026) en van hun eigen
 // teksten uit het webarchief. Geen prijzen en geen levertijden: die verschillen per jurk.
-import sMaken from '../assets/s-maken.jpg';
-import sVermaken from '../assets/s-vermaken.jpg';
-import sGala from '../assets/s-gala.jpg';
-import sMeisjes from '../assets/s-bruidsmeisjes.jpg';
-import sAtelier from '../assets/s-meer.jpg';
-import satijn from '../assets/satijn.jpg';
-import kant from '../assets/kant.jpg';
-import bei from '../assets/bei.jpg';
+// Eigen foto's van Bei, via WhatsApp aangeleverd op 30-10-2026 (zie src/assets/BRONNEN.txt).
+import bruidsjurk from '../assets/bruidsjurk.jpg';
+import bruidsjurkRug from '../assets/bruidsjurk-rug.jpg';
+import vermaken from '../assets/vermaken.jpg';
+import vermakenRug from '../assets/vermaken-rug.jpg';
+import bruidsmoeder from '../assets/bruidsmoeder.jpg';
+import bruidsmoederDetail from '../assets/bruidsmoeder-detail.jpg';
+import bruidsmoederZwart from '../assets/bruidsmoeder-zwart.jpg';
+import bruidsmeisje from '../assets/bruidsmeisje.jpg';
+import gala from '../assets/gala.jpg';
+import galaDetail from '../assets/gala-detail.jpg';
+import kantPatroon from '../assets/kant-patroon.jpg';
+import lijfjeTafel from '../assets/lijfje-tafel.jpg';
 import hero from '../assets/hero.jpg';
 
 export interface Blok {
@@ -29,6 +34,10 @@ export interface Dienst {
   img: ImageMetadata;
   pos: string;
   alt: string;
+  /** Alleen als de paginakop een andere (grotere) foto nodig heeft dan het kaartje. */
+  kopFoto?: ImageMetadata;
+  kopPos?: string;
+  kopAlt?: string;
   foto2: ImageMetadata;
   foto2Pos: string;
   foto2Alt: string;
@@ -56,12 +65,13 @@ export const diensten: Dienst[] = [
     watJeKrijgt: 'Ontwerp, patroon, stof en drie pasbeurten. Ook gekleurd of in een grote maat.',
     kies: 'Bruidsjurk laten maken',
     wie: 'Bruiden',
-    img: sMaken,
-    pos: '50% 40%',
-    alt: 'Kanten lijfje van een bruidsjurk op een paspop in het atelier',
-    foto2: kant,
-    foto2Pos: '55% 45%',
-    foto2Alt: 'Detail van een kanten jurk met stoffen knoopjes',
+    img: bruidsjurk,
+    pos: '50% 35%',
+    alt: 'Kanten lijfje met hoge hals en lange doorschijnende mouwen, gepast in het atelier',
+    foto2: bruidsjurkRug,
+    foto2Pos: '50% 40%',
+    foto2Alt: 'Kanten rug van een bruidsjurk met een rij stoffen knoopjes en doorschijnende mouwen',
+    eigenFoto: true,
     h1: 'Bruidsjurk op maat in',
     h1Accent: 'Rotterdam.',
     eyebrow: 'Bruidsjurk op maat',
@@ -127,12 +137,12 @@ export const diensten: Dienst[] = [
     watJeKrijgt: 'Innemen, inkorten, uitleggen, bandjes of mouwen. Meestal twee pasbeurten, soms een derde.',
     kies: 'Trouwjurk laten vermaken',
     wie: 'Bruiden',
-    img: sVermaken,
-    pos: '50% 35%',
-    alt: 'Handen die de rug van een kanten trouwjurk innemen',
-    foto2: bei,
-    foto2Pos: '50% 30%',
-    foto2Alt: 'Bei speldt het lijfje van een trouwjurk af op de paspop in haar atelier',
+    img: vermaken,
+    pos: '50% 45%',
+    alt: 'Bei past een bruidsjurk met lange tule sleep, de bruid op de rug gezien',
+    foto2: vermakenRug,
+    foto2Pos: '50% 35%',
+    foto2Alt: 'Bei bekijkt de open kanten rug van een zeemeerminjurk',
     eigenFoto: true,
     h1: 'Trouwjurk vermaken in',
     h1Accent: 'Rotterdam.',
@@ -193,12 +203,16 @@ export const diensten: Dienst[] = [
     watJeKrijgt: 'Op maat gemaakt of aangepast, afgestemd op de kleur van de bruidsjurk.',
     kies: 'Jurk voor de bruidsmoeder',
     wie: 'Bruiden',
-    img: sGala,
-    pos: '50% 30%',
-    alt: 'Avondjurk in diep bordeauxrood',
-    foto2: satijn,
-    foto2Pos: '50% 50%',
-    foto2Alt: 'Ivoorkleurig satijn in plooien',
+    img: bruidsmoeder,
+    pos: '50% 38%',
+    alt: 'Blauwgrijze jurk met wit lijfje, kanten band en bijpassend jasje',
+    kopFoto: bruidsmoederZwart,
+    kopPos: '50% 30%',
+    kopAlt: 'Zwarte lange jurk met wit borduursel en fladdermouwtjes, gepast in het atelier',
+    foto2: bruidsmoederDetail,
+    foto2Pos: '50% 45%',
+    foto2Alt: 'Gouden applicaties met parels en spelden op een champagnekleurig lijfje op de paspop',
+    eigenFoto: true,
     h1: 'Jurk voor de bruidsmoeder in',
     h1Accent: 'Rotterdam.',
     eyebrow: 'Moeder van de bruid of bruidegom',
@@ -255,9 +269,9 @@ export const diensten: Dienst[] = [
     watJeKrijgt: 'Jurkjes en kleding in één lijn met jouw jurk, elk op eigen maat.',
     kies: 'Bruidsmeisjes of bruidsjonkers',
     wie: 'Bruiden',
-    img: sMeisjes,
-    pos: '50% 45%',
-    alt: 'Bruid met haar bruidsmeisjes, op de rug gezien',
+    img: bruidsmeisje,
+    pos: '50% 42%',
+    alt: 'Roze glitter-tule jurkje voor een bruidsmeisje aan een hanger tussen de bruidsjurken',
     foto2: hero,
     foto2Pos: '62% 40%',
     foto2Alt: 'Een bruid wordt in haar kanten trouwjurk geholpen',
@@ -316,12 +330,13 @@ export const diensten: Dienst[] = [
     watJeKrijgt: 'Een jurk die alleen jij hebt, of een gekochte jurk passend gemaakt.',
     kies: 'Gala- of avondkleding',
     wie: 'Klanten',
-    img: satijn,
+    img: gala,
     pos: '50% 50%',
-    alt: 'Ivoorkleurig satijn in plooien',
-    foto2: sGala,
-    foto2Pos: '50% 30%',
-    foto2Alt: 'Avondjurk in diep bordeauxrood',
+    alt: 'Rode kanten avondjurk met lange sleep, gepast in het atelier',
+    foto2: galaDetail,
+    foto2Pos: '50% 40%',
+    foto2Alt: 'Rug op de paspop met een gouden kanten applicatie over één schouder',
+    eigenFoto: true,
     h1: 'Galajurk of avondjurk op maat in',
     h1Accent: 'Rotterdam.',
     eyebrow: 'Gala en avond',
@@ -377,12 +392,12 @@ export const diensten: Dienst[] = [
     watJeKrijgt: 'Jurken, rokken, blouses en jassen op maat; vermaken en herstellen.',
     kies: 'Kleding op maat of vermaken',
     wie: 'Klanten',
-    img: sAtelier,
-    pos: '40% 50%',
-    alt: 'Garenklosjes, een vingerhoed en spelden op de werktafel van het atelier',
-    foto2: bei,
-    foto2Pos: '50% 30%',
-    foto2Alt: 'Bei aan het werk in haar atelier aan de Hoogstraat',
+    img: kantPatroon,
+    pos: '50% 50%',
+    alt: 'Kant met pailletten op een papieren patroon, met een schaar ernaast',
+    foto2: lijfjeTafel,
+    foto2Pos: '50% 45%',
+    foto2Alt: 'Geplisseerd lijfje in wording op de werktafel naast een patroonkaart',
     eigenFoto: true,
     h1: 'Kleermaker in Rotterdam voor kleding op maat en',
     h1Accent: 'vermaken.',

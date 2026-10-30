@@ -16,15 +16,15 @@ const logo = b64('src/assets/logo-licht.png', 'image/png');
 // Eén deelafbeelding per pagina. Kop en foto volgen de pagina zelf (src/data/diensten.ts).
 const paginas = [
   { naam: 'og', foto: 'hero.jpg', pos: '64% 38%', eyebrow: 'Bruidsatelier in Rotterdam', kop: 'Uw droom wordt werkelijkheid in ons <em>atelier.</em>' },
-  { naam: 'og-bruidsjurk-op-maat', foto: 's-maken.jpg', pos: '50% 40%', eyebrow: 'Bruidsjurk op maat', kop: 'Bruidsjurk op maat in <em>Rotterdam.</em>' },
-  { naam: 'og-trouwjurk-vermaken', foto: 's-vermaken.jpg', pos: '50% 35%', eyebrow: 'Vermaken', kop: 'Trouwjurk vermaken in <em>Rotterdam.</em>' },
-  { naam: 'og-bruidsmoeder-jurk', foto: 's-gala.jpg', pos: '50% 30%', eyebrow: 'Moeder van de bruid', kop: 'Een jurk voor de <em>bruidsmoeder.</em>' },
-  { naam: 'og-bruidsmeisjes-en-bruidsjonkers', foto: 's-bruidsmeisjes.jpg', pos: '50% 45%', eyebrow: 'Het hele gezelschap', kop: 'Bruidsmeisjes en <em>bruidsjonkers.</em>' },
-  { naam: 'og-gala-en-avondkleding', foto: 'satijn.jpg', pos: '50% 50%', eyebrow: 'Gala en avond', kop: 'Gala- en <em>avondkleding.</em>' },
-  { naam: 'og-kleding-op-maat', foto: 's-meer.jpg', pos: '40% 50%', eyebrow: 'Kleermaker', kop: 'Kleding op maat en <em>vermaken.</em>' },
+  { naam: 'og-bruidsjurk-op-maat', foto: 'bruidsjurk.jpg', pos: '50% 35%', eyebrow: 'Bruidsjurk op maat', kop: 'Bruidsjurk op maat in <em>Rotterdam.</em>' },
+  { naam: 'og-trouwjurk-vermaken', foto: 'vermaken.jpg', pos: '50% 45%', eyebrow: 'Trouwjurk vermaken', kop: 'Trouwjurk vermaken in <em>Rotterdam.</em>' },
+  { naam: 'og-bruidsmoeder-jurk', foto: 'bruidsmoeder-zwart.jpg', pos: '50% 30%', eyebrow: 'Moeder van de bruid', kop: 'Een jurk voor de <em>bruidsmoeder.</em>' },
+  { naam: 'og-bruidsmeisjes-en-bruidsjonkers', foto: 'bruidsmeisje.jpg', pos: '50% 42%', eyebrow: 'Het hele gezelschap', kop: 'Bruidsmeisjes en <em>bruidsjonkers.</em>' },
+  { naam: 'og-gala-en-avondkleding', foto: 'gala.jpg', pos: '50% 50%', eyebrow: 'Gala en avond', kop: 'Gala- en <em>avondkleding.</em>' },
+  { naam: 'og-kleding-op-maat', foto: 'kant-patroon.jpg', pos: '50% 50%', eyebrow: 'Kleermaker', kop: 'Kleding op maat en <em>vermaken.</em>' },
   { naam: 'og-werkwijze', foto: 'kant.jpg', pos: '55% 45%', eyebrow: 'Zo gaat het', kop: 'Van jouw foto tot <em>jouw jurk.</em>' },
-  { naam: 'og-klantervaringen', foto: 's-vermaken.jpg', pos: '50% 35%', eyebrow: 'Klantervaringen', kop: 'De verhalen achter de <em>jurken.</em>' },
-  { naam: 'og-contact', foto: 'bei.jpg', pos: '50% 30%', eyebrow: 'Contact', kop: 'Kom langs in het <em>atelier.</em>' },
+  { naam: 'og-klantervaringen', foto: 'vermaken-tule.jpg', pos: '50% 40%', eyebrow: 'Klantervaringen', kop: 'De verhalen achter de <em>jurken.</em>' },
+  { naam: 'og-contact', foto: 'bei-atelier.jpg', pos: '60% 35%', eyebrow: 'Contact', kop: 'Kom langs in het <em>atelier.</em>' },
 ];
 
 const maakHtml = ({ foto, pos, eyebrow, kop }) => `<!doctype html><html lang="nl"><head><meta charset="utf-8"><style>

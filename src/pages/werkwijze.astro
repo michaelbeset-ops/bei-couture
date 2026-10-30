@@ -12,7 +12,7 @@ import Cta from '../components/Cta.astro';
 import { url, site, stappen } from '../data/site';
 import { faqSchema } from '../lib/schema';
 import kant from '../assets/kant.jpg';
-import sMeer from '../assets/s-meer.jpg';
+import snijtafel from '../assets/snijtafel.jpg';
 
 const basis = new URL(url(''), Astro.site).href;
 const hier = new URL(Astro.url.pathname, Astro.site).href;
@@ -86,7 +86,7 @@ const faq = [
       <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div class="lg:col-span-5">
           <div class="relative">
-            <Picture src={sMeer} formats={['avif', 'webp']} widths={[480, 800]} sizes="(min-width: 1024px) 480px, 100vw" alt="Garenklosjes, een vingerhoed en spelden op de werktafel" class="foto aspect-[4/3] w-full object-cover" />
+            <Picture src={snijtafel} formats={['avif', 'webp']} widths={[480, 800, 1200]} sizes="(min-width: 1024px) 480px, 100vw" alt="Stof en patroondelen op de snijtafel met schaar en spelden" class="foto aspect-[4/3] w-full object-cover" />
           </div>
         </div>
         <div class="lg:col-span-7">

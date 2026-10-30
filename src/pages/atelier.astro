@@ -10,7 +10,7 @@ import Werkwijze from '../components/Werkwijze.astro';
 import Cta from '../components/Cta.astro';
 import { url, site } from '../data/site';
 import { diensten } from '../data/diensten';
-import sMaken from '../assets/s-maken.jpg';
+import lijfjePaspop from '../assets/lijfje-paspop.jpg';
 
 const basis = new URL(url(''), Astro.site).href;
 ---
@@ -26,9 +26,9 @@ const basis = new URL(url(''), Astro.site).href;
       h1="Alles wat er in het atelier"
       accent="gemaakt wordt."
       lead="Bei is kleermaker en sinds 2009 gespecialiseerd in bruidsmode. Hieronder staat per onderdeel wat er mogelijk is, van een bruidsjurk die vanaf nul wordt opgebouwd tot een jurk die alleen nog goed moet gaan zitten."
-      img={sMaken}
-      alt="Kanten lijfje van een bruidsjurk op een paspop in het atelier"
-      pos="50% 40%"
+      img={lijfjePaspop}
+      alt="Lijfje met wit kant en pailletten en lange chiffon mouwen op de paspop in het atelier"
+      pos="50% 35%"
       kruimels={[{ naam: 'Home', href: url('') }, { naam: 'Atelier', href: url('atelier/') }]}
     />
 

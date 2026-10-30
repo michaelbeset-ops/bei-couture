@@ -10,7 +10,7 @@ import Cta from '../components/Cta.astro';
 import { url, site, waMet } from '../data/site';
 import { ervaringen } from '../data/ervaringen';
 import { dienstOp } from '../data/diensten';
-import sVermaken from '../assets/s-vermaken.jpg';
+import vermakenTule from '../assets/vermaken-tule.jpg';
 
 const basis = new URL(url(''), Astro.site).href;
 const hier = new URL(Astro.url.pathname, Astro.site).href;
@@ -28,9 +28,9 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
       h1="De verhalen achter de"
       accent="jurken."
       lead="Hoe ging het precies, van de eerste afspraak tot de dag zelf? Hieronder staan de ervaringen van bruiden en klanten die in het atelier geholpen zijn, in hun eigen woorden."
-      img={sVermaken}
-      alt="Handen die de rug van een kanten trouwjurk innemen"
-      pos="50% 35%"
+      img={vermakenTule}
+      alt="Bei werkt aan de rug van een tule bruidsjurk in het atelier"
+      pos="50% 40%"
       kruimels={[{ naam: 'Home', href: url('') }, { naam: 'Klantervaringen', href: url('klantervaringen/') }]}
     />
 
