@@ -90,12 +90,22 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
                 <p class="eyebrow eyebrow-licht">Uit het atelier</p>
                 <h2 id="strook-kop" class="mt-4 text-[2rem] md:text-[2.4rem]">Wat er door Bei's <span class="text-strik">handen gaat</span></h2>
               </div>
-              <p class="max-w-md text-mist">Pasmomenten, ruggen met knoopjes, een roosje van organza. Foto's uit het atelier aan de Hoogstraat.</p>
+              <div class="flex items-center gap-5">
+                <p class="max-w-md text-mist">Pasmomenten, ruggen met knoopjes, een roosje van organza. Foto's uit het atelier aan de Hoogstraat. Swipe of klik door.</p>
+                <div class="flex gap-2">
+                  <button type="button" data-rij-vorige class="grid h-11 w-11 place-items-center border border-lijn text-wit transition-colors hover:border-wit disabled:opacity-30" aria-label="Vorige foto's">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 6 9 12l6 6" /></svg>
+                  </button>
+                  <button type="button" data-rij-volgende class="grid h-11 w-11 place-items-center border border-lijn text-wit transition-colors hover:border-wit disabled:opacity-30" aria-label="Volgende foto's">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+                  </button>
+                </div>
+              </div>
             </div>
             <ul class="rij mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 md:px-[max(1.25rem,calc((100vw-75rem)/2))]" data-rij tabindex="0" aria-label="Foto's uit het atelier, horizontaal te scrollen">
               {atelierStrook.map((f) => (
-                <li class="w-[62vw] flex-none snap-start sm:w-[36vw] lg:w-[17rem]">
-                  <Picture src={f.foto} formats={['avif', 'webp']} widths={[320, 480, 640]} sizes="(min-width: 1024px) 272px, 62vw" alt={f.alt} class="foto aspect-[3/4] w-full object-cover" style={`object-position:${f.pos ?? '50% 50%'}`} />
+                <li class="w-[62vw] flex-none snap-start sm:w-[36vw] lg:w-[15rem]">
+                  <Picture src={f.foto} formats={['avif', 'webp']} widths={[320, 480, 640]} sizes="(min-width: 1024px) 240px, 62vw" alt={f.alt} class="foto aspect-[3/4] w-full object-cover" style={`object-position:${f.pos ?? '50% 50%'}`} />
                 </li>
               ))}
             </ul>
@@ -123,3 +133,21 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
   </main>
   <Voet />
 </Base>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-rij]').forEach((rij) => {
+    const hoofd = rij.closest('section');
+    const vorige = hoofd?.querySelector<HTMLButtonElement>('[data-rij-vorige]');
+    const volgende = hoofd?.querySelector<HTMLButtonElement>('[data-rij-volgende]');
+    const stap = () => (rij.querySelector('li')?.getBoundingClientRect().width ?? 240) * 3 + 48;
+    const bij = () => {
+      if (!vorige || !volgende) return;
+      vorige.disabled = rij.scrollLeft < 8;
+      volgende.disabled = rij.scrollLeft > rij.scrollWidth - rij.clientWidth - 8;
+    };
+    vorige?.addEventListener('click', () => rij.scrollBy({ left: -stap(), behavior: 'smooth' }));
+    volgende?.addEventListener('click', () => rij.scrollBy({ left: stap(), behavior: 'smooth' }));
+    rij.addEventListener('scroll', bij, { passive: true });
+    requestAnimationFrame(bij);
+  });
+</script>
