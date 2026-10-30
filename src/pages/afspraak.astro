@@ -5,7 +5,7 @@ import Kop from '../components/Kop.astro';
 import Voet from '../components/Voet.astro';
 import Enquete from '../components/Enquete.astro';
 import Icoon from '../components/Icoon.astro';
-import { url, site } from '../data/site';
+import { url, site, waHoi } from '../data/site';
 
 const basis = new URL(url(''), Astro.site).href;
 const hier = new URL(Astro.url.pathname, Astro.site).href;
@@ -18,14 +18,14 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
 >
   <Kop opFoto={false} />
   <main id="inhoud" class="bg-strik-zacht">
-    <section class="py-10 md:py-16">
+    <section class="py-6 md:py-16">
       <div class="wrap">
         <div class="mx-auto max-w-2xl">
           <p class="eyebrow">Afspraak in het atelier</p>
-          <h1 class="mt-4 text-[2.2rem] md:text-[2.8rem]">Vertel Bei wat je <span class="text-merk">droomt</span></h1>
-          <p class="mt-4 text-steen">Vijf korte vragen, dan staat je bericht klaar voor WhatsApp. Je hoeft nog niets zeker te weten.</p>
+          <h1 class="mt-3 text-[1.9rem] md:mt-4 md:text-[2.8rem]">Vertel Bei wat je <span class="text-merk">droomt</span></h1>
+          <p class="mt-3 text-steen max-sm:text-[.95rem] md:mt-4">Een paar korte vragen, dan staat je bericht klaar voor WhatsApp. Liever meteen appen? <a href={waHoi} class="link font-semibold text-inkt">Open WhatsApp</a>.</p>
         </div>
-        <div class="mx-auto mt-8 max-w-2xl border border-merk/20 bg-wit p-5 sm:p-8 md:p-10">
+        <div class="mx-auto mt-5 max-w-2xl border border-merk/20 bg-wit p-4 sm:p-8 md:mt-8 md:p-10">
           <Enquete />
         </div>
         <ul class="mx-auto mt-8 flex max-w-2xl flex-wrap gap-x-8 gap-y-2 text-sm text-steen">

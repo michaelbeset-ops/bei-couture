@@ -16,51 +16,51 @@ const stappen = ['Waarvoor', 'Stof', 'Wanneer', 'Dag', 'Jij'];
   <form id="wens" class="mt-8" novalidate>
     <!-- 1 -->
     <fieldset data-stap="1" data-naam="Waarvoor">
-      <legend class="font-kop text-[1.9rem] leading-tight md:text-[2.4rem]">Waarvoor kom je?</legend>
-      <p class="mt-3 text-steen">Kies wat het dichtst in de buurt komt. Twijfel je, kies dan wat je het eerst te binnen schiet.</p>
-      <div class="mt-7 grid gap-3 sm:grid-cols-2">
+      <legend class="font-kop text-[1.6rem] leading-tight sm:text-[1.9rem] md:text-[2.4rem]">Waarvoor kom je?</legend>
+      <p class="mt-2 text-steen max-sm:text-[.95rem] sm:mt-3">Tik op wat het dichtst in de buurt komt. Je gaat vanzelf door naar de volgende vraag.</p>
+      <div class="mt-5 grid gap-2.5 sm:mt-7 sm:gap-3 sm:grid-cols-2">
         {diensten.map((d) => (
-          <label class="keuze min-h-[3.8rem] text-[1.05rem]"><input type="radio" name="wat" value={d.kies} /><span class="bol"></span>{d.kies}</label>
+          <label class="keuze min-h-[3.4rem] text-[1rem] sm:min-h-[3.8rem] sm:text-[1.05rem]"><input type="radio" name="wat" value={d.kies} /><span class="bol"></span>{d.kies}</label>
         ))}
       </div>
     </fieldset>
 
     <!-- 2 -->
     <fieldset data-stap="2" data-naam="Stof" hidden>
-      <legend class="font-kop text-[1.9rem] leading-tight md:text-[2.4rem]">Welke stof heb je in gedachten?</legend>
+      <legend class="font-kop text-[1.6rem] leading-tight sm:text-[1.9rem] md:text-[2.4rem]">Welke stof heb je in gedachten?</legend>
       <p class="mt-3 text-steen">In het atelier voel je ze allemaal. Dit is alleen om alvast een richting te hebben.</p>
-      <div class="mt-7 grid gap-3 sm:grid-cols-2">
+      <div class="mt-5 grid gap-2.5 sm:mt-7 sm:gap-3 sm:grid-cols-2">
         {['Taft', 'Bruidssatijn', 'Tule', 'Weet ik nog niet'].map((s) => (
-          <label class="keuze min-h-[3.8rem] text-[1.05rem]"><input type="radio" name="stof" value={s} /><span class="bol"></span>{s}</label>
+          <label class="keuze min-h-[3.4rem] text-[1rem] sm:min-h-[3.8rem] sm:text-[1.05rem]"><input type="radio" name="stof" value={s} /><span class="bol"></span>{s}</label>
         ))}
       </div>
     </fieldset>
 
     <!-- 3 -->
     <fieldset data-stap="3" data-naam="Wanneer" hidden>
-      <legend class="font-kop text-[1.9rem] leading-tight md:text-[2.4rem]">Wanneer is de grote dag?</legend>
+      <legend class="font-kop text-[1.6rem] leading-tight sm:text-[1.9rem] md:text-[2.4rem]">Wanneer is de grote dag?</legend>
       <p class="mt-3 text-steen">Dan weet Bei hoeveel tijd er is voor de pasbeurten.</p>
-      <div class="mt-7 grid gap-3 sm:grid-cols-2">
+      <div class="mt-5 grid gap-2.5 sm:mt-7 sm:gap-3 sm:grid-cols-2">
         {['Nog geen datum', 'Binnen een maand', 'Over 1 tot 3 maanden', 'Over 3 tot 6 maanden', 'Over meer dan een half jaar'].map((s) => (
-          <label class="keuze min-h-[3.8rem] text-[1.05rem]"><input type="radio" name="wanneer" value={s} /><span class="bol"></span>{s}</label>
+          <label class="keuze min-h-[3.4rem] text-[1rem] sm:min-h-[3.8rem] sm:text-[1.05rem]"><input type="radio" name="wanneer" value={s} /><span class="bol"></span>{s}</label>
         ))}
       </div>
     </fieldset>
 
     <!-- 4 -->
     <fieldset data-stap="4" data-naam="Dag" hidden>
-      <legend class="font-kop text-[1.9rem] leading-tight md:text-[2.4rem]">Wanneer kom je het liefst langs?</legend>
+      <legend class="font-kop text-[1.6rem] leading-tight sm:text-[1.9rem] md:text-[2.4rem]">Wanneer kom je het liefst langs?</legend>
       <p class="mt-3 text-steen">Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00. Lukt dat niet, dan wordt er een moment buiten de openingstijden gezocht.</p>
-      <div class="mt-7 grid gap-3 sm:grid-cols-2">
+      <div class="mt-5 grid gap-2.5 sm:mt-7 sm:gap-3 sm:grid-cols-2">
         {['Maakt niet uit', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zondag', 'Buiten de openingstijden'].map((s) => (
-          <label class="keuze min-h-[3.8rem] text-[1.05rem]"><input type="radio" name="dag" value={s} /><span class="bol"></span>{s}</label>
+          <label class="keuze min-h-[3.4rem] text-[1rem] sm:min-h-[3.8rem] sm:text-[1.05rem]"><input type="radio" name="dag" value={s} /><span class="bol"></span>{s}</label>
         ))}
       </div>
     </fieldset>
 
     <!-- 5 -->
     <fieldset data-stap="5" data-naam="Jij" hidden>
-      <legend class="font-kop text-[1.9rem] leading-tight md:text-[2.4rem]">Bijna klaar</legend>
+      <legend class="font-kop text-[1.6rem] leading-tight sm:text-[1.9rem] md:text-[2.4rem]">Bijna klaar</legend>
       <p class="mt-3 text-steen">Een foto van de jurk die je in gedachten hebt kun je in WhatsApp meesturen. Je naam mag, maar hoeft niet.</p>
       <div class="mt-7 grid gap-4">
         <label class="keuze keuze-vink min-h-[3.8rem] text-[1.05rem]"><input type="checkbox" name="foto" checked /><span class="bol"></span>Ik stuur een foto of ontwerp mee</label>
@@ -82,7 +82,7 @@ const stappen = ['Waarvoor', 'Stof', 'Wanneer', 'Dag', 'Jij'];
             <Icoon naam="wa" class="h-6 w-6 text-strik" />
           </div>
           <p id="bericht" class="mt-4 whitespace-pre-line font-kop text-[1.25rem] leading-snug" aria-live="polite">Hallo Bei, ik wil graag een afspraak maken in het atelier.</p>
-          <a id="stuur" href={waHoi} class="knop knop-merk mt-7 w-full"><Icoon naam="wa" />Verstuur via WhatsApp</a>
+          <a id="stuur" href={waHoi} class="knop knop-merk mt-7 w-full max-sm:sticky max-sm:bottom-3"><Icoon naam="wa" />Verstuur via WhatsApp</a>
           <p class="mt-4 text-center text-sm text-mist">Liever bellen? <a href={site.telHref} class="link num font-semibold text-wit">{site.tel}</a></p>
         </div>
       </div>
@@ -143,7 +143,7 @@ const stappen = ['Waarvoor', 'Stof', 'Wanneer', 'Dag', 'Jij'];
     if (naamEl) naamEl.textContent = alle.find((el) => Number(el.dataset.stap) === n)?.dataset.naam ?? '';
     if (balk) balk.style.width = `${Math.round(((i + 1) / r.length) * 100)}%`;
     if (terug) terug.disabled = i === 0;
-    if (verder) verder.hidden = n >= 5;
+    if (verder) verder.hidden = n >= 5 || !beantwoord(n);
     const kop = alle.find((el) => Number(el.dataset.stap) === n);
     kop?.querySelector<HTMLElement>('legend, p')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     maak();
@@ -165,6 +165,7 @@ const stappen = ['Waarvoor', 'Stof', 'Wanneer', 'Dag', 'Jij'];
     const t = e.target as HTMLInputElement;
     maak();
     if (t.type === 'radio') setTimeout(volgende, 220);
+    if (verder) verder.hidden = huidig >= 5 || !beantwoord(huidig);
   });
   verder?.addEventListener('click', volgende);
   terug?.addEventListener('click', vorige);
