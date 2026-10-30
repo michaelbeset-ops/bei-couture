@@ -8,7 +8,25 @@ import Tijden from './Tijden.astro';
 import hanger from '../assets/e-hanger.jpg';
 ---
 <section id="bezoek" class="bg-strik-zacht py-12 md:py-24">
-  <div class="wrap">
+  <!-- Mobiel en tablet: de eenvoudige versie, kop, tekst, gegevens, knoppen en daaronder de tijden. -->
+  <div class="wrap lg:hidden">
+    <p class="eyebrow">Bezoek het atelier</p>
+    <h2 class="mt-5 text-[2.2rem]">Hoogstraat <span class="text-merk">89A</span></h2>
+    <p class="mt-6 text-steen">Het atelier zit midden in Rotterdam, in het pand van {site.inPand}. Bruiden komen uit de hele regio: {werkgebied.slice(1, 7).join(', ')} en verder.</p>
+    <ul class="mt-8 space-y-4">
+      <li class="flex gap-4"><Icoon naam="pin" class="mt-1 h-5 w-5 flex-none text-merk" /><span>{site.straat}, {site.postcode} {site.plaats}<br /><span class="text-sm text-steen">Gevestigd in {site.inPand}</span></span></li>
+      <li class="flex gap-4"><Icoon naam="tel" class="mt-1 h-5 w-5 flex-none text-merk" /><a href={site.telHref} class="link num inline-block py-1">{site.tel}</a></li>
+      <li class="flex gap-4"><Icoon naam="mail" class="mt-1 h-5 w-5 flex-none text-merk" /><a href={`mailto:${site.mail}`} class="link inline-block py-1">{site.mail}</a></li>
+    </ul>
+    <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+      <a href={site.route} class="knop knop-inkt"><Icoon naam="pin" />Route plannen</a>
+      <a href={url('afspraak/')} class="knop knop-rand">Afspraak maken</a>
+    </div>
+    <div class="mt-10"><Tijden /></div>
+  </div>
+
+  <!-- Desktop: kop over de breedte, links de kaart met foto en gegevens, rechts de tijden. -->
+  <div class="wrap max-lg:hidden">
     <div class="grid gap-5 md:grid-cols-12 md:items-end">
       <div class="md:col-span-7">
         <p class="eyebrow">Bezoek het atelier</p>
