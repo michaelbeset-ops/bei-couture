@@ -52,7 +52,7 @@ const reviewsEerst = d.slug === 'trouwjurk-vermaken' ? ['Çanci A.', 'Mariluz', 
   <main id="inhoud">
     <!-- KOP -->
     <section class="relative isolate overflow-hidden bg-inkt text-wit">
-      <Picture src={d.kopFoto ?? d.img} formats={['avif', 'webp']} widths={[640, 960, 1400, 2000]} sizes="100vw" alt={d.kopAlt ?? d.alt} loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${d.kopPos ?? d.pos}`} />
+      <Picture src={d.kopFoto ?? d.img} formats={['avif', 'webp']} quality={78} widths={[640, 960, 1400, 2000]} sizes="100vw" alt={d.kopAlt ?? d.alt} loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${d.kopPos ?? d.pos}`} />
       <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#1b1716f2_0%,#1b1716c7_42%,#1b171659_80%,#1b171640_100%)] max-md:bg-[linear-gradient(180deg,#1b1716b3_0%,#1b1716e0_55%,#1b1716_100%)]"></div>
       <div class="wrap pb-10 pt-24 md:pb-24 md:pt-40">
         <div class="text-sm text-mist"><Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Atelier', href: url('atelier/') }, { naam: d.kaartTitel, href: hier }]} /></div>
@@ -86,7 +86,7 @@ const reviewsEerst = d.slug === 'trouwjurk-vermaken' ? ['Çanci A.', 'Mariluz', 
         <aside class="lg:col-span-5">
           <div class="border border-merk/20 bg-strik-zacht p-6 md:p-7">
             <div class="flex items-center gap-4">
-              <Picture src={bei} formats={['avif', 'webp']} widths={[128, 256]} sizes="64px" alt="Bei, kleermaker van Bei Couture" class="foto h-16 w-16 flex-none object-cover object-[62%_32%]" />
+              <Picture src={bei} formats={['avif', 'webp']} quality={78} widths={[128, 256]} sizes="64px" alt="Bei, kleermaker van Bei Couture" class="foto h-16 w-16 flex-none object-cover object-[62%_32%]" />
               <div>
                 <p class="eyebrow">Afspraak met Bei</p>
                 <p class="mt-1 font-kop text-[1.45rem] leading-tight">Stuur een foto van wat je in gedachten hebt</p>
@@ -108,7 +108,7 @@ const reviewsEerst = d.slug === 'trouwjurk-vermaken' ? ['Çanci A.', 'Mariluz', 
     <section class="bg-strik-zacht py-12 md:py-24">
       <div class="wrap grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-14">
         <div class="lg:col-span-5">
-          <Picture src={d.foto2} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(min-width: 1024px) 480px, 100vw" alt={d.foto2Alt} class="foto aspect-[4/5] w-full object-cover max-lg:aspect-[4/3]" style={`object-position:${d.foto2Pos}`} />
+          <Picture src={d.foto2} formats={['avif', 'webp']} quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 480px, 100vw" alt={d.foto2Alt} class="foto aspect-[4/5] w-full object-cover max-lg:aspect-[4/3]" style={`object-position:${d.foto2Pos}`} />
         </div>
         <div class="lg:col-span-7 lg:pl-4 xl:pl-10">
           <p class="eyebrow">{d.eyebrow}</p>
@@ -163,7 +163,7 @@ const reviewsEerst = d.slug === 'trouwjurk-vermaken' ? ['Çanci A.', 'Mariluz', 
             <li>
               <a href={url(`${v.slug}/`)} class="fotolink group flex items-center gap-4 sm:block">
                 <span class="foto block w-24 flex-none aspect-[3/4] sm:w-auto">
-                  <Picture src={v.img} formats={['avif', 'webp']} widths={[240, 480, 720]} sizes="(min-width: 640px) 33vw, 96px" alt={v.alt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" style={`object-position:${v.pos}`} />
+                  <Picture src={v.img} formats={['avif', 'webp']} quality={78} widths={[240, 480, 720]} sizes="(min-width: 640px) 33vw, 96px" alt={v.alt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" style={`object-position:${v.pos}`} />
                 </span>
                 <span class="block sm:mt-4">
                   <h3 class="font-tekst text-[.8rem] font-medium uppercase tracking-[.22em] text-inkt">{v.kaartTitel}</h3>

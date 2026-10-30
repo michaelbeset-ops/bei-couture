@@ -40,7 +40,7 @@ import hanger from '../assets/e-hanger.jpg';
     <div class="mt-8 grid gap-6 lg:grid-cols-12 lg:gap-8 md:mt-10">
       <div class="lg:col-span-5">
         <div class="border border-merk/20 bg-wit">
-          <Picture src={hanger} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(min-width: 1024px) 480px, 100vw" alt="Kanten bruidsjurk aan een hanger in het pashokje van het atelier" class="aspect-[4/3] w-full object-cover object-[50%_40%]" />
+          <Picture src={hanger} formats={['avif', 'webp']} quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 480px, 100vw" alt="Kanten bruidsjurk aan een hanger in het pashokje van het atelier" class="aspect-[4/3] w-full object-cover object-[50%_40%]" />
           <ul class="divide-y divide-merk/10 px-5 py-2 sm:px-6">
             <li class="flex items-center gap-4 py-3.5"><Icoon naam="pin" class="h-5 w-5 flex-none text-merk" /><span>{site.straat}, {site.postcode} {site.plaats}<span class="block text-sm text-steen">Gevestigd in {site.inPand}</span></span></li>
             <li class="flex items-center gap-4 py-3.5"><Icoon naam="tel" class="h-5 w-5 flex-none text-merk" /><a href={site.telHref} class="link num">{site.tel}</a><span class="text-sm text-steen">ook WhatsApp</span></li>
