@@ -12,28 +12,28 @@ const { achtergrond = 'bg-strik-zacht', kop = 'Vertel Bei wat je' } = Astro.prop
     <div class="min-w-0 lg:col-span-7">
       <p class="eyebrow">Afspraak in het atelier</p>
       <h2 id="afspraak-kop" class="mt-5 text-[2.2rem] md:text-[2.8rem]">{kop} <span class="text-merk">droomt</span></h2>
-      <p class="mt-5 max-w-xl text-lg text-steen">Kies hieronder wat je wilt laten maken of vermaken. Er staat meteen een bericht klaar voor WhatsApp, dat je zelf verstuurt. Je hoeft nog niets zeker te weten.</p>
+      <p class="mt-5 max-w-xl text-lg text-steen">Vier korte vragen. Na elk antwoord verschijnt de volgende, en je bericht aan Bei groeit mee. Versturen doe je zelf via WhatsApp.</p>
 
       <form id="wens" class="mt-10 space-y-10">
-        <fieldset>
-          <legend class="veld-label">Waarvoor kom je?</legend>
+        <fieldset data-stap="1">
+          <legend class="veld-label"><span class="mr-3 font-tekst text-[.78rem] font-medium uppercase tracking-[.22em] text-merk">Stap 1 van 4</span>Waarvoor kom je?</legend>
           <div class="grid gap-2.5 sm:grid-cols-2">
             {diensten.map((d, i) => (
-              <label class="keuze"><input type="radio" name="wat" value={d.kies} checked={i === 0} /><span class="bol"></span>{d.kies}</label>
+              <label class="keuze"><input type="radio" name="wat" value={d.kies} /><span class="bol"></span>{d.kies}</label>
             ))}
           </div>
         </fieldset>
-        <fieldset data-stofblok>
-          <legend class="veld-label">Welke stof heb je in gedachten?</legend>
+        <fieldset data-stofblok data-stap="2" hidden>
+          <legend class="veld-label"><span class="mr-3 font-tekst text-[.78rem] font-medium uppercase tracking-[.22em] text-merk">Stap 2 van 4</span>Welke stof heb je in gedachten?</legend>
           <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
             {['Taft', 'Bruidssatijn', 'Tule', 'Weet ik nog niet'].map((s, i) => (
               <label class="keuze"><input type="radio" name="stof" value={s} checked={i === 3} /><span class="bol"></span>{s}</label>
             ))}
           </div>
         </fieldset>
-        <div class="grid gap-10 sm:grid-cols-2">
+        <div class="grid gap-10 sm:grid-cols-2" data-stap="3" hidden>
           <fieldset>
-            <legend class="veld-label">Wanneer is de grote dag?</legend>
+            <legend class="veld-label"><span class="mr-3 font-tekst text-[.78rem] font-medium uppercase tracking-[.22em] text-merk">Stap 3 van 4</span>Wanneer is de grote dag?</legend>
             <select name="wanneer" class="veld" aria-label="Wanneer is de grote dag?">
               <option>Nog geen datum</option>
               <option>Binnen een maand</option>
@@ -51,12 +51,16 @@ const { achtergrond = 'bg-strik-zacht', kop = 'Vertel Bei wat je' } = Astro.prop
             </select>
           </fieldset>
         </div>
-        <div class="grid gap-5 sm:grid-cols-2 sm:items-end">
+        <div data-stap="4" hidden>
+          <p class="veld-label"><span class="mr-3 font-tekst text-[.78rem] font-medium uppercase tracking-[.22em] text-merk">Stap 4 van 4</span>Bijna klaar</p>
+          <div class="grid gap-5 sm:grid-cols-2 sm:items-end">
           <label class="keuze keuze-vink"><input type="checkbox" name="foto" checked /><span class="bol"></span>Ik stuur een foto of ontwerp mee</label>
           <div>
-            <label for="naam" class="veld-label">Je naam</label>
+            <label for="naam" class="mb-2 block text-sm font-semibold">Je naam</label>
             <input id="naam" name="naam" type="text" autocomplete="given-name" placeholder="Voornaam" class="veld" />
           </div>
+          </div>
+          <p class="mt-5 text-sm text-steen lg:hidden">Je bericht staat hieronder klaar. Klik op de groene knop om hem via WhatsApp te versturen.</p>
         </div>
       </form>
     </div>
@@ -89,12 +93,23 @@ const { achtergrond = 'bg-strik-zacht', kop = 'Vertel Bei wat je' } = Astro.prop
   const knop = document.querySelector<HTMLAnchorElement>('#stuur');
   const stofblok = document.querySelector<HTMLElement>('[data-stofblok]');
 
+  // Stap voor stap: de volgende vraag verschijnt zodra de vorige beantwoord is.
+  const stap = (n: number) => f?.querySelector<HTMLElement>(`[data-stap="${n}"]`);
+  let bereikt = 1;
+  function toon(n: number) {
+    for (let i = 2; i <= n; i++) { const el = stap(i); if (el && el.hidden && !(i === 2 && el.dataset.stofblok !== undefined && stofUit)) { el.hidden = false; el.classList.add('rijs', 'in'); } }
+    bereikt = Math.max(bereikt, n);
+  }
+  let stofUit = false;
+
   function maak() {
     if (!f || !out || !knop) return;
     const v = new FormData(f);
     const wat = String(v.get('wat') || '');
     const maken = wat === 'Bruidsjurk laten maken' || wat === 'Gala- of avondkleding' || wat === 'Jurk voor de bruidsmoeder';
-    if (stofblok) stofblok.hidden = !maken;
+    stofUit = !maken;
+    if (stofblok) stofblok.hidden = !maken || bereikt < 2;
+    if (!wat) { out.textContent = 'Hallo Bei, ik wil graag een afspraak maken in het atelier.'; knop.href = `${site.wa}?text=${encodeURIComponent(out.textContent)}`; return; }
     const regels = ['Hallo Bei, ik wil graag een afspraak maken in het atelier.', `Waarvoor: ${wat.charAt(0).toLowerCase() + wat.slice(1)}.`];
     if (maken && v.get('stof') !== 'Weet ik nog niet') regels.push(`Stof: ${String(v.get('stof')).toLowerCase()}.`);
     if (v.get('wanneer') !== 'Nog geen datum') regels.push(`De grote dag: ${String(v.get('wanneer')).toLowerCase()}.`);
@@ -117,6 +132,17 @@ const { achtergrond = 'bg-strik-zacht', kop = 'Vertel Bei wat je' } = Astro.prop
   }
   f?.addEventListener('submit', (e) => e.preventDefault());
   f?.addEventListener('input', maak);
-  f?.addEventListener('change', maak);
+  f?.addEventListener('change', (e) => {
+    const t = e.target as HTMLInputElement | HTMLSelectElement;
+    const wat = String(new FormData(f).get('wat') || '');
+    const maken = wat === 'Bruidsjurk laten maken' || wat === 'Gala- of avondkleding' || wat === 'Jurk voor de bruidsmoeder';
+    if (t.name === 'wat') toon(maken ? 2 : 3);
+    if (t.name === 'stof') toon(3);
+    if (t.name === 'wanneer' || t.name === 'dag') toon(4);
+    maak();
+    const volgende = stap(Math.min(bereikt, 4));
+    if (t.name !== 'naam' && volgende && window.innerWidth < 1024) volgende.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+  if (voor && f?.querySelector<HTMLInputElement>('input[name="wat"]:checked')) { const wat = voor; const maken = wat === 'Bruidsjurk laten maken' || wat === 'Gala- of avondkleding' || wat === 'Jurk voor de bruidsmoeder'; toon(maken ? 2 : 3); }
   maak();
 </script>

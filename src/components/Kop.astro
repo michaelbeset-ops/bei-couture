@@ -72,10 +72,6 @@ const nav: { href: string; t: string; actief: boolean }[] = [
   </nav>
 </header>
 
-<nav aria-label="Direct contact" class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 bg-inkt pb-[env(safe-area-inset-bottom)] md:hidden">
-  <a href={site.telHref} class="flex min-h-14 items-center justify-center gap-2.5 border-r border-lijn text-[1rem] font-semibold text-wit no-underline"><Icoon naam="tel" class="h-5 w-5 text-strik" />Bellen</a>
-  <a href={wa} class="flex min-h-14 items-center justify-center gap-2.5 bg-merk text-[1rem] font-semibold text-wit no-underline"><Icoon naam="wa" class="h-5 w-5" />App een foto</a>
-</nav>
 
 <script>
   const k = document.querySelector<HTMLButtonElement>('[data-menu-knop]');

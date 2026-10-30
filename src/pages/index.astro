@@ -9,6 +9,7 @@ import Werkwijze from '../components/Werkwijze.astro';
 import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
 import Bezoek from '../components/Bezoek.astro';
+import Lint from '../components/Lint.astro';
 import Afspraak from '../components/Afspraak.astro';
 import { site, url, waHoi, werkgebied } from '../data/site';
 import { diensten } from '../data/diensten';
@@ -58,14 +59,7 @@ const faq = [
     </section>
 
     <!-- FEITENREGEL: zacht roze lint onder de hero, één rustige regel over de hele breedte. -->
-    <section class="bg-strik-zacht" aria-label="Bei Couture in het kort">
-      <ul class="wrap flex flex-wrap items-center justify-center gap-x-8 gap-y-2 py-4 text-[.76rem] font-medium uppercase tracking-[.22em] text-merk-diep md:justify-between md:py-[1.15rem]">
-        <li>Eigen atelier sinds 1997</li>
-        <li>Bruidsmode sinds 2009</li>
-        <li>Ook op zondag open</li>
-        <li>Alles door Bei zelf gemaakt</li>
-      </ul>
-    </section>
+    <Lint label="Bei Couture in het kort" items={['Eigen atelier sinds 1997', 'Bruidsmode sinds 2009', 'Ook op zondag open', 'Alles door Bei zelf gemaakt', '5,0 uit 51 Google-reviews', 'Hoogstraat 89A, Rotterdam']} />
 
     <!-- ATELIER / DIENSTEN: een rij hoge foto's, alleen de naam eronder. Swipen op de telefoon, pijl op desktop. -->
     <section id="atelier" class="bg-ivoor pb-14 pt-14 md:pb-20 md:pt-20">

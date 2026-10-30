@@ -1,0 +1,21 @@
+---
+// Dun lint onder de hero: de feiten schuiven rustig van rechts naar links (marquee).
+// De lijst staat er twee keer in, zodat de beweging naadloos doorloopt. Bij "minder beweging"
+// staat het lint stil en past het gewoon op de regel.
+interface Props { items: string[]; label: string }
+const { items, label } = Astro.props;
+---
+<section class="lint overflow-hidden border-y border-merk/15 bg-strik-zacht" aria-label={label}>
+  <div class="lint-baan flex w-max items-center py-2.5 text-[.72rem] font-medium uppercase tracking-[.22em] text-merk-diep">
+    {[0, 1].map((k) => (
+      <ul class="flex flex-none items-center" aria-hidden={k === 1 ? 'true' : undefined}>
+        {items.map((t) => (
+          <li class="flex items-center whitespace-nowrap">
+            <span class="px-6">{t}</span>
+            <span class="h-1 w-1 rounded-full bg-merk/60" aria-hidden="true"></span>
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</section>

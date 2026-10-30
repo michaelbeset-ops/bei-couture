@@ -12,6 +12,7 @@ import Werkwijze from '../components/Werkwijze.astro';
 import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
 import Kruimels from '../components/Kruimels.astro';
+import Lint from '../components/Lint.astro';
 import { diensten, dienstOp } from '../data/diensten';
 import { site, url, waMet } from '../data/site';
 import { dienstSchema, faqSchema } from '../lib/schema';
@@ -69,12 +70,7 @@ const reviewsEerst = d.slug === 'trouwjurk-vermaken' ? ['Çanci A.', 'Mariluz', 
       </div>
     </section>
 
-    <!-- FEITENLINT -->
-    <section class="bg-strik-zacht" aria-label={`${d.kaartTitel} in het kort`}>
-      <ul class="wrap flex flex-wrap items-center justify-center gap-x-8 gap-y-2 py-4 text-[.76rem] font-medium uppercase tracking-[.22em] text-merk-diep md:justify-between md:py-[1.15rem]">
-        {d.feiten.map((f) => <li>{f}</li>)}
-      </ul>
-    </section>
+    <Lint label={`${d.kaartTitel} in het kort`} items={[...d.feiten, 'Hoogstraat 89A, Rotterdam', '5,0 uit 51 Google-reviews']} />
 
     <!-- INTRO: groot citaat, korte toelichting, rechts het afspraakpaneel -->
     <section class="bg-ivoor py-12 md:py-20">
