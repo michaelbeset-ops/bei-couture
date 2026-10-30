@@ -19,7 +19,7 @@ const { eyebrow, h1, accent, lead, img, alt = '', pos = '50% 50%', kruimels } = 
 <section class="relative isolate overflow-hidden bg-inkt text-wit">
   {img && (
     <>
-      <Picture src={img} formats={['avif', 'webp']} quality={78} widths={[640, 960, 1400, 2000]} sizes="100vw" alt={alt} loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${pos}`} />
+      <Picture src={img} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[640, 960, 1400, 2000]} sizes="100vw" alt={alt} loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${pos}`} />
       <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#1b1716f2_0%,#1b1716db_45%,#1b171675_100%)] max-md:bg-[linear-gradient(180deg,#1b1716cc_0%,#1b1716e0_60%,#1b1716_100%)]"></div>
     </>
   )}

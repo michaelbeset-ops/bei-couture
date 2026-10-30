@@ -34,7 +34,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
         <Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Over Bei', href: url('over-bei/') }]} />
         <div class="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div class="rijs lg:col-span-6">
-            <Picture src={bei} formats={['avif', 'webp']} quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 600px, 100vw" alt="Bei schikt geplooide stof op de paspop in haar atelier" loading="eager" fetchpriority="high" class="foto aspect-[4/5] w-full object-cover object-[60%_35%]" />
+            <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 600px, 100vw" alt="Bei schikt geplooide stof op de paspop in haar atelier" loading="eager" fetchpriority="high" class="foto aspect-[4/5] w-full object-cover object-[60%_35%]" />
             <p class="mt-4 text-sm text-steen">Bei aan het werk in haar atelier aan de Hoogstraat.</p>
           </div>
           <div class="lg:col-span-6 lg:pt-4">
@@ -96,7 +96,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
           <p class="mt-8 text-steen">Bruiden komen uit {site.plaats} en de hele omgeving: {werkgebied.slice(1, 9).join(', ')} en verder.</p>
         </div>
         <div class="lg:col-span-5">
-          <Picture src={kant} formats={['avif', 'webp']} quality={78} widths={[480, 800]} sizes="(min-width: 1024px) 480px, 100vw" alt="Detail van een kanten jurk met stoffen knoopjes" class="foto aspect-[4/5] w-full object-cover" />
+          <Picture src={kant} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 800]} sizes="(min-width: 1024px) 480px, 100vw" alt="Detail van een kanten jurk met stoffen knoopjes" class="foto aspect-[4/5] w-full object-cover" />
           <Tijden class="mt-6" />
         </div>
       </div>

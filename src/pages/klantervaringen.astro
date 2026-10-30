@@ -55,10 +55,10 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
             <div class={`relative lg:col-span-6 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
               <div class="grid grid-cols-12">
                 <div class={`col-span-9 ${i % 2 === 1 ? 'col-start-4' : ''}`}>
-                  <Picture src={e.foto} formats={['avif', 'webp']} quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 440px, 75vw" alt={e.fotoAlt} class="foto aspect-[4/5] w-full object-cover" style={`object-position:${e.pos ?? '50% 50%'}`} />
+                  <Picture src={e.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 440px, 75vw" alt={e.fotoAlt} class="foto aspect-[4/5] w-full object-cover" style={`object-position:${e.pos ?? '50% 50%'}`} />
                 </div>
                 <div class={`col-span-5 -mt-[28%] ${i % 2 === 1 ? 'col-start-1' : 'col-start-8'}`}>
-                  <Picture src={e.foto2} formats={['avif', 'webp']} quality={78} widths={[320, 480, 640]} sizes="(min-width: 1024px) 240px, 40vw" alt={e.foto2Alt} class={`foto aspect-[3/4] w-full object-cover ${i % 2 === 0 ? 'border-l-[6px]' : 'border-r-[6px]'} border-t-[6px] ${i % 2 === 0 ? 'border-strik-zacht' : 'border-ivoor'}`} style={`object-position:${e.pos2 ?? '50% 50%'}`} />
+                  <Picture src={e.foto2} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[320, 480, 640]} sizes="(min-width: 1024px) 240px, 40vw" alt={e.foto2Alt} class={`foto aspect-[3/4] w-full object-cover ${i % 2 === 0 ? 'border-l-[6px]' : 'border-r-[6px]'} border-t-[6px] ${i % 2 === 0 ? 'border-strik-zacht' : 'border-ivoor'}`} style={`object-position:${e.pos2 ?? '50% 50%'}`} />
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
             <ul class="rij mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 md:px-[max(1.25rem,calc((100vw-75rem)/2))]" data-rij tabindex="0" aria-label="Foto's uit het atelier, horizontaal te scrollen">
               {atelierStrook.map((f) => (
                 <li class="w-[62vw] flex-none snap-start sm:w-[36vw] lg:w-[15rem]">
-                  <Picture src={f.foto} formats={['avif', 'webp']} quality={70} widths={[320, 480, 640]} sizes="(min-width: 1024px) 240px, 62vw" alt={f.alt} class="foto aspect-[3/4] w-full object-cover" style={`object-position:${f.pos ?? '50% 50%'}`} />
+                  <Picture src={f.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={70} widths={[320, 480, 640]} sizes="(min-width: 1024px) 240px, 62vw" alt={f.alt} class="foto aspect-[3/4] w-full object-cover" style={`object-position:${f.pos ?? '50% 50%'}`} />
                 </li>
               ))}
             </ul>
