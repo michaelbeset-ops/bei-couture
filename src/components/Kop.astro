@@ -51,7 +51,7 @@ const nav: { href: string; t: string; actief: boolean }[] = [
     </nav>
 
     <div class="flex items-center gap-3">
-      <a href={url('contact/')} class="knop knop-merk hidden min-h-11 px-5 !rounded-[2px] !normal-case !tracking-[.01em] !text-[1rem] !font-semibold md:inline-flex">Afspraak maken</a>
+      <a href={url('afspraak/')} class="knop knop-merk hidden min-h-11 px-5 !rounded-[2px] !normal-case !tracking-[.01em] !text-[1rem] !font-semibold md:inline-flex">Afspraak maken</a>
       <button type="button" class="grid h-11 w-11 place-items-center text-wit lg:hidden" aria-expanded="false" aria-controls="menu-nav" data-menu-knop>
         <span class="sr-only">Menu</span>
         <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg>
@@ -65,7 +65,7 @@ const nav: { href: string; t: string; actief: boolean }[] = [
         <li><a href={n.href} class="block border-b border-lijn py-4 font-kop text-2xl font-normal text-wit no-underline">{n.t}</a></li>
       ))}
       <li class="flex flex-col gap-3 pt-6">
-        <a href={url('contact/')} class="knop knop-merk w-full">Afspraak maken</a>
+        <a href={url('afspraak/')} class="knop knop-merk w-full">Afspraak maken</a>
         <a href={site.telHref} class="knop knop-wit num w-full"><Icoon naam="tel" />{site.tel}</a>
       </li>
     </ul>

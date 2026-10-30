@@ -1,0 +1,40 @@
+---
+// Afspraak maken: een rustig scherm met één vraag per keer. Alle "Afspraak maken"-knoppen komen hier uit.
+import Base from '../layouts/Base.astro';
+import Kop from '../components/Kop.astro';
+import Voet from '../components/Voet.astro';
+import Enquete from '../components/Enquete.astro';
+import Icoon from '../components/Icoon.astro';
+import { url, site } from '../data/site';
+
+const basis = new URL(url(''), Astro.site).href;
+const hier = new URL(Astro.url.pathname, Astro.site).href;
+---
+<Base
+  title="Afspraak maken | Bruidsatelier Bei Couture Rotterdam"
+  description="Maak in een paar vragen een afspraak bij bruidsatelier Bei Couture aan de Hoogstraat 89A in Rotterdam. Je bericht staat daarna klaar voor WhatsApp."
+  og="og-contact.jpg"
+  kruimels={[{ naam: 'Home', url: basis }, { naam: 'Afspraak maken', url: hier }]}
+>
+  <Kop opFoto={false} />
+  <main id="inhoud" class="bg-strik-zacht">
+    <section class="py-10 md:py-16">
+      <div class="wrap">
+        <div class="mx-auto max-w-2xl">
+          <p class="eyebrow">Afspraak in het atelier</p>
+          <h1 class="mt-4 text-[2.2rem] md:text-[2.8rem]">Vertel Bei wat je <span class="text-merk">droomt</span></h1>
+          <p class="mt-4 text-steen">Vijf korte vragen, dan staat je bericht klaar voor WhatsApp. Je hoeft nog niets zeker te weten.</p>
+        </div>
+        <div class="mx-auto mt-8 max-w-2xl border border-merk/20 bg-wit p-5 sm:p-8 md:p-10">
+          <Enquete />
+        </div>
+        <ul class="mx-auto mt-8 flex max-w-2xl flex-wrap gap-x-8 gap-y-2 text-sm text-steen">
+          <li class="flex items-center gap-2"><Icoon naam="klok" class="h-4 w-4 text-merk" />Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00</li>
+          <li class="flex items-center gap-2"><Icoon naam="kalender" class="h-4 w-4 text-merk" />Buiten die tijden op afspraak</li>
+          <li class="flex items-center gap-2"><Icoon naam="tel" class="h-4 w-4 text-merk" />Liever bellen? <a href={site.telHref} class="link num">{site.tel}</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <Voet />
+</Base>

@@ -36,7 +36,7 @@ const [eerste, ...rest] = d.blokken;
 
 // Eén WhatsApp-bericht voor de hele pagina, in hetzelfde format als het formulier op /contact/.
 const waDienst = waMet(`Hallo Bei, ik wil graag een afspraak maken. Waarvoor: ${d.kies.toLowerCase()}. Ik stuur een foto mee van wat ik in gedachten heb.`);
-const afspraak = `${url('contact/')}?voor=${encodeURIComponent(d.kies)}#afspraak`;
+const afspraak = `${url('afspraak/')}?voor=${encodeURIComponent(d.kies)}`;
 const reviewsEerst = d.slug === 'trouwjurk-vermaken' ? ['Çanci A.', 'Mariluz', 'Christina W.'] : ['Marisela B.', 'Marcel'];
 ---
 <Base

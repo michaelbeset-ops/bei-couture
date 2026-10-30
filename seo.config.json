@@ -160,7 +160,8 @@
     "/werkwijze/",
     "/klantervaringen/",
     "/over-bei/",
-    "/contact/"
+    "/contact/",
+    "/afspraak/"
   ],
   "ignorePaths": [
     "/privacy/",

@@ -41,7 +41,8 @@ export const GET: APIRoute = ({ site: basis }) => {
     `- [Werkwijze](${abs('werkwijze/')}): de vijf stappen van wens tot jurk`,
     `- [Klantervaringen](${abs('klantervaringen/')}): verhalen van bruiden`,
     `- [Over Bei](${abs('over-bei/')}): wie Bei is en hoe zij werkt`,
-    `- [Contact](${abs('contact/')}): afspraak maken, ook buiten de openingstijden`,
+    `- [Afspraak maken](${abs('afspraak/')}): in vijf vragen, daarna staat het bericht klaar voor WhatsApp`,
+    `- [Contact](${abs('contact/')}): adres, openingstijden en contactmanieren`,
     '',
   ];
   return new Response(regels.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });

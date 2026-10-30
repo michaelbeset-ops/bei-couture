@@ -88,6 +88,7 @@
 }
 
 @layer components {
+  .enquete-let .keuze { border-color: var(--color-merk); }
   .lint-baan { animation: lint 38s linear infinite; }
   .lint:hover .lint-baan { animation-play-state: paused; }
   @keyframes lint { from { transform: translateX(0); } to { transform: translateX(-50%); } }

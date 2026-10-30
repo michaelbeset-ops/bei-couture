@@ -29,7 +29,7 @@ const { eyebrow, h1, accent, lead, img, alt = '', pos = '50% 50%', kruimels } = 
     <h1 class="mt-5 max-w-[16ch] text-4xl">{h1} {accent && <em class="accent-licht">{accent}</em>}</h1>
     {lead && <p class="mt-6 max-w-2xl text-lg text-wit/85 md:text-xl">{lead}</p>}
     <div class="mt-9 flex flex-wrap gap-3">
-      <a href={url('contact/')} class="knop knop-merk">Afspraak maken <Icoon naam="pijl" /></a>
+      <a href={url('afspraak/')} class="knop knop-merk">Afspraak maken <Icoon naam="pijl" /></a>
       <a href={site.telHref} class="knop knop-wit num"><Icoon naam="tel" />{site.tel}</a>
     </div>
     <p class="mt-6 flex items-center gap-2.5 text-[.95rem] text-wit/80"><Icoon naam="klok" class="h-4 w-4 flex-none text-strik" />Ook op afspraak buiten de openingstijden, ook 's avonds en in het weekend.</p>
