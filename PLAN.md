@@ -38,6 +38,14 @@ op lichte pagina's een donkere balk.
 - `/contact/` contactmanieren, openingstijden met het blok "ook buiten de openingstijden", afspraakformulier
 - `/privacy/`, `/404`
 
+## Livegang op beicouture.nl (voorbereid 02-11-2026)
+`npm run live` bouwt met `PUBLIC_SITE=https://www.beicouture.nl PUBLIC_BASE=`; `public/CNAME` staat klaar.
+Redirects (astro.config.mjs, meta-refresh met canonical en noindex) voor de echte oude WordPress-pagina's:
+/happy-customers/ > /klantervaringen/, /openingstijden/ > /contact/, /bruidsjurk-laten-maken/ (plus drie
+bijlagepagina's) > /bruidsjurk-op-maat/. De gehackte spampagina's (/plinko-casino/ en zo) en /wp-content/
+krijgen bewust 404 en staan niet in robots.txt, zodat Google ze weggooit. De oude WordPress-hosting is kapot
+en gehackt: na de DNS-omzetting opzeggen en wachtwoorden wijzigen.
+
 ## SEO
 Doelgroep is vrouwelijk: bruid, bruidsmoeder (moeder van de bruid), bruidsmeisjes, bruidsjonkers. Geen herenmode.
 Zoekwoorden per pagina in `seo.config.json`. Schema: ClothingStore/LocalBusiness met openingstijden, werkgebied en

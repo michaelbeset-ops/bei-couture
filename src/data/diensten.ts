@@ -411,7 +411,7 @@ export const diensten: Dienst[] = [
     h1Accent: 'vermaken.',
     eyebrow: 'Kleding op maat en vermaken',
     title: 'Kleermaker in Rotterdam: kleding op maat | Bei Couture',
-    description: 'Kleermaker in Rotterdam voor kleding op maat en vermaakwerk: jurken, rokken, blouses en jassen, innemen, inkorten en herstellen. Bei Couture, Hoogstraat 89A.',
+    description: 'Kleermaker in Rotterdam voor kleding op maat en vermaakwerk: jurken, rokken, blouses, jassen, innemen, inkorten en herstellen. Bei Couture, Hoogstraat 89A.',
     lead: 'Bei is kleermaker. Naast bruidsmode maakt en vermaakt ze gewone kleding, voor vrouwen die iets willen dat echt past.',
     intro: [
       'Sommige kledingstukken vind je nergens goed. Een rok die altijd te kort of te lang is, een jurk in precies die ene kleur, een blouse die op jouw schouders klopt. Dat kan hier gemaakt worden.',

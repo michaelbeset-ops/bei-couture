@@ -11,10 +11,27 @@ const geenIndex = ['/privacy/', '/404/'];
 const domein = process.env.PUBLIC_SITE ?? 'https://voorstel.sitefront.nl';
 const basis = (process.env.PUBLIC_BASE ?? '/bei-couture').replace(/\/$/, '');
 
+// Oude WordPress-pagina's van beicouture.nl die nog in Google staan. GitHub Pages kent geen 301's;
+// Astro maakt hier een pagina met meta-refresh, canonical en noindex van (Google telt dat als permanent).
+// Bewust NIET doorgestuurd: de gehackte spampagina's (/plinko-casino/ en zo) en /wp-content/-mappen.
+// Die moeten 404 geven, zodat Google ze weggooit. Dus ook geen vangnet-redirect.
+const oudeUrls = {
+  '/happy-customers/': '/klantervaringen/',
+  '/openingstijden/': '/contact/',
+  '/bruidsjurk-laten-maken/': '/bruidsjurk-op-maat/',
+  // Bijlagepagina's van die oude pagina (Astro kent geen jokerteken naar een vast doel; onbekende
+  // bijlagen geven 404, die hebben geen waarde).
+  '/bruidsjurk-laten-maken/jurk-maken-aplicaties/': '/bruidsjurk-op-maat/',
+  '/bruidsjurk-laten-maken/jurk-maken-tule-stof/': '/bruidsjurk-op-maat/',
+  '/bruidsjurk-laten-maken/jurk-maken-stap-5/': '/bruidsjurk-op-maat/',
+};
+const redirects = Object.fromEntries(Object.entries(oudeUrls).map(([van, naar]) => [van, `${basis}${naar}`]));
+
 // Voorstel draait op voorstel.sitefront.nl/bei-couture/ (map in de Sitefront-verzamelrepo).
 export default defineConfig({
   site: domein,
   ...(basis ? { base: basis } : {}),
+  redirects,
   trailingSlash: 'always',
   devToolbar: { enabled: false },
   build: { format: 'directory', inlineStylesheets: 'always' },

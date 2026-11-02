@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview --port 4536 --host 127.0.0.1",
     "voorstel": "PUBLIC_VOORSTEL=1 astro build",
-    "live": "astro build",
+    "live": "PUBLIC_SITE=https://www.beicouture.nl PUBLIC_BASE= astro build",
     "astro": "astro"
   },
   "allowScripts": {

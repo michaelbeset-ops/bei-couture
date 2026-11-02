@@ -1,8 +1,8 @@
 {
   "slug": "bei-couture",
-  "site": "https://voorstel.sitefront.nl",
-  "base": "/bei-couture",
-  "githubPagesUrl": "https://voorstel.sitefront.nl/bei-couture/",
+  "site": "https://www.beicouture.nl",
+  "base": "",
+  "githubPagesUrl": "https://michaelbeset-ops.github.io/bei-couture/",
   "mode": "klant",
   "language": "nl-NL",
   "branche": "bruidsatelier",
@@ -175,5 +175,6 @@
   ],
   "aiCrawlers": {
     "training": "allow"
-  }
+  },
+  "previewUrl": "https://voorstel.sitefront.nl/bei-couture/"
 }
