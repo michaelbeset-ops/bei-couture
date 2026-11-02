@@ -1,0 +1,51 @@
+# Bouwt de site voor het eigen domein (www.beicouture.nl) en zet hem op GitHub Pages.
+#
+# Eenmalig nodig voordat dit werkt:
+#  1. De repo openbaar maken (GitHub Pages op een privé-repo vraagt een betaald account).
+#  2. Settings -> Pages -> Source: "GitHub Actions"; Custom domain: www.beicouture.nl; "Enforce HTTPS" aan.
+#  3. DNS in cPanel (Zone Editor) van het Namecheap-hostingpakket: A-records voor beicouture.nl naar
+#     185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153 en www als CNAME naar
+#     michaelbeset-ops.github.io. De MX-records blijven staan.
+name: Site bouwen en uitrollen
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  bouwen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      # "live" bouwt met PUBLIC_SITE=https://www.beicouture.nl en zonder base, en zonder voorstelbalk of noindex.
+      - name: Bouwen voor www.beicouture.nl
+        run: npm run live
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  uitrollen:
+    needs: bouwen
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.uitrol.outputs.page_url }}
+    steps:
+      - id: uitrol
+        uses: actions/deploy-pages@v4
