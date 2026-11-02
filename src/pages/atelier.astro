@@ -1,0 +1,82 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Kop from '../components/Kop.astro';
+import Voet from '../components/Voet.astro';
+import Icoon from '../components/Icoon.astro';
+import PaginaKop from '../components/PaginaKop.astro';
+import Werkwijze from '../components/Werkwijze.astro';
+import Cta from '../components/Cta.astro';
+import { url, site } from '../data/site';
+import { diensten, extraKaarten } from '../data/diensten';
+import lijfjePaspop from '../assets/lijfje-paspop.jpg';
+
+const basis = new URL(url(''), Astro.site).href;
+---
+<Base
+  title="Het atelier van Bei Couture in Rotterdam"
+  description="Alles wat bruidsatelier Bei Couture in Rotterdam maakt en vermaakt: bruidsjurken, trouwjurken, bruidsmoeder, bruidsmeisjes, gala en kleding op maat."
+  kruimels={[{ naam: 'Home', url: basis }, { naam: 'Atelier', url: new URL(Astro.url.pathname, Astro.site).href }]}
+>
+  <Kop />
+  <main id="inhoud">
+    <PaginaKop
+      eyebrow="Het atelier"
+      h1="Alles wat er in het atelier"
+      accent="gemaakt wordt."
+      lead="Bei is kleermaker en sinds 2009 gespecialiseerd in bruidsmode. Hieronder staat per onderdeel wat er mogelijk is, van een bruidsjurk die vanaf nul wordt opgebouwd tot een jurk die alleen nog goed moet gaan zitten."
+      img={lijfjePaspop}
+      alt="Lijfje met wit kant en pailletten en lange chiffon mouwen op de paspop in het atelier"
+      pos="50% 35%"
+      kruimels={[{ naam: 'Home', href: url('') }, { naam: 'Atelier', href: url('atelier/') }]}
+    />
+
+    <section class="bg-ivoor py-16 md:py-24">
+      <div class="wrap">
+        <div class="flex items-end justify-between gap-6">
+          <p class="max-w-2xl text-steen">Swipe of klik door de onderdelen. Elke foto gaat naar de pagina met wat er mogelijk is, hoe het gaat en wat je meeneemt. Bei reinigt ook trouwjurken, voor een goede prijs.</p>
+          <div class="hidden gap-2 md:flex">
+            <button type="button" data-rij-vorige class="grid h-11 w-11 place-items-center rounded-full border border-ivoor-3 text-inkt transition-colors hover:border-inkt disabled:opacity-30" aria-label="Vorige diensten">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M15 6 9 12l6 6" /></svg>
+            </button>
+            <button type="button" data-rij-volgende class="grid h-11 w-11 place-items-center rounded-full border border-ivoor-3 text-inkt transition-colors hover:border-inkt disabled:opacity-30" aria-label="Volgende diensten">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+            </button>
+          </div>
+        </div>
+        <ul class="rij mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:gap-5" data-rij tabindex="0" aria-label="Diensten, horizontaal te scrollen">
+          {[...diensten, ...extraKaarten].map((d) => (
+            <li class="w-[72vw] flex-none snap-start sm:w-[44vw] lg:w-[calc((100%-3.75rem)/4)]">
+              <a href={url(`${d.slug}/`)} class="fotolink group block">
+                <span class="foto block aspect-[3/4] bg-ivoor-2">
+                  <Picture src={d.img} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[400, 560, 800]} sizes="(min-width: 1024px) 24vw, (min-width: 640px) 44vw, 72vw" alt={d.alt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" style={`object-position:${d.pos}`} />
+                </span>
+                <h2 class="mt-4 font-tekst text-[.78rem] font-medium uppercase tracking-[.22em] text-inkt transition-colors group-hover:text-merk">{d.kaartTitel}</h2>
+                <span class="mt-1.5 block text-[.92rem] text-steen">{d.kaartTekst}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-10 text-steen">Staat jouw vraag er niet tussen? Het atelier maakt ook carnavalskleding, turnpakjes en kostuums. Bel of app gerust: <a href={site.telHref} class="link num font-semibold">{site.tel}</a>.</p>
+      </div>
+    </section>
+
+    <Werkwijze />
+    <Cta />
+  </main>
+  <Voet />
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-rij]').forEach((rij) => {
+    const hoofd = rij.closest('section');
+    const vorige = hoofd?.querySelector<HTMLButtonElement>('[data-rij-vorige]');
+    const volgende = hoofd?.querySelector<HTMLButtonElement>('[data-rij-volgende]');
+    const stap = () => rij.querySelector('li')?.getBoundingClientRect().width ?? 320;
+    const bij = () => { if (!vorige || !volgende) return; vorige.disabled = rij.scrollLeft < 8; volgende.disabled = rij.scrollLeft > rij.scrollWidth - rij.clientWidth - 8; };
+    vorige?.addEventListener('click', () => rij.scrollBy({ left: -(stap() + 20), behavior: 'smooth' }));
+    volgende?.addEventListener('click', () => rij.scrollBy({ left: stap() + 20, behavior: 'smooth' }));
+    rij.addEventListener('scroll', bij, { passive: true });
+    requestAnimationFrame(bij);
+  });
+</script>

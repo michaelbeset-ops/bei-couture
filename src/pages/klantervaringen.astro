@@ -1,0 +1,153 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Kop from '../components/Kop.astro';
+import Voet from '../components/Voet.astro';
+import Icoon from '../components/Icoon.astro';
+import PaginaKop from '../components/PaginaKop.astro';
+import Cta from '../components/Cta.astro';
+import { url, site, waMet } from '../data/site';
+import { ervaringen, atelierStrook } from '../data/ervaringen';
+import { dienstOp } from '../data/diensten';
+import vermakenTule from '../assets/vermaken-tule.jpg';
+
+const basis = new URL(url(''), Astro.site).href;
+const hier = new URL(Astro.url.pathname, Astro.site).href;
+---
+<Base
+  title="Klantervaringen van bruiden | Bei Couture Rotterdam"
+  description="Verhalen van bruiden die bij bruidsatelier Bei Couture in Rotterdam geholpen zijn, met hun eigen woorden over de jurk en het atelier."
+  og="og-klantervaringen.jpg"
+  kruimels={[{ naam: 'Home', url: basis }, { naam: 'Klantervaringen', url: hier }]}
+>
+  <Kop />
+  <main id="inhoud">
+    <PaginaKop
+      eyebrow="Klantervaringen"
+      h1="De verhalen achter de"
+      accent="jurken."
+      lead="Hoe ging het precies, van de eerste afspraak tot de dag zelf? Hieronder staan de ervaringen van bruiden en klanten die in het atelier geholpen zijn, in hun eigen woorden."
+      img={vermakenTule}
+      alt="Bei werkt aan de rug van een tule bruidsjurk in het atelier"
+      pos="50% 40%"
+      kruimels={[{ naam: 'Home', href: url('') }, { naam: 'Klantervaringen', href: url('klantervaringen/') }]}
+    />
+
+    <!-- INTRO -->
+    <section class="bg-ivoor py-12 md:py-16">
+      <div class="wrap flex flex-wrap items-center justify-between gap-x-10 gap-y-5">
+        <p class="max-w-2xl text-lg text-steen">Vijf verhalen van bruiden en klanten, in hun eigen woorden. Elk citaat staat letterlijk op het Google-profiel van het atelier. De foto's erbij komen uit het atelier van Bei en laten zien wat er door haar handen gaat.</p>
+        <a href={site.reviews} target="_blank" rel="noopener" class="flex items-center gap-3 border border-merk/20 bg-wit px-4 py-2.5 no-underline">
+          <Icoon naam="g" class="h-5 w-5" />
+          <span class="leading-tight">
+            <span class="flex items-center gap-1.5 text-[.95rem]"><strong class="num font-semibold">{site.google.score}</strong><span class="flex text-[#fbbc05]">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-3 w-3" />)}</span></span>
+            <span class="block text-[.78rem] text-steen">{site.google.aantal} reviews op Google<span class="sr-only"> (opent in een nieuw tabblad)</span></span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- VERHALEN: om en om wit en roze, foto's links of rechts, twee foto's per verhaal -->
+    {ervaringen.map((e, i) => (
+      <>
+        <section class={`${i % 2 === 0 ? 'bg-strik-zacht' : 'bg-ivoor'} py-12 md:py-20`} aria-labelledby={`verhaal-${i}`}>
+          <div class="wrap grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
+            <div class={`relative lg:col-span-6 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+              <div class="grid grid-cols-12">
+                <div class={`col-span-9 ${i % 2 === 1 ? 'col-start-4' : ''}`}>
+                  <Picture src={e.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 440px, 75vw" alt={e.fotoAlt} class="foto aspect-[4/5] w-full object-cover" style={`object-position:${e.pos ?? '50% 50%'}`} />
+                </div>
+                <div class={`col-span-5 -mt-[28%] ${i % 2 === 1 ? 'col-start-1' : 'col-start-8'}`}>
+                  <Picture src={e.foto2} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[320, 480, 640]} sizes="(min-width: 1024px) 240px, 40vw" alt={e.foto2Alt} class={`foto aspect-[3/4] w-full object-cover ${i % 2 === 0 ? 'border-l-[6px]' : 'border-r-[6px]'} border-t-[6px] ${i % 2 === 0 ? 'border-strik-zacht' : 'border-ivoor'}`} style={`object-position:${e.pos2 ?? '50% 50%'}`} />
+                </div>
+              </div>
+            </div>
+
+            <div class={`lg:col-span-6 ${i % 2 === 1 ? 'lg:order-1 lg:pr-6' : 'lg:pl-6'}`}>
+              <p class="eyebrow">{e.dienst}</p>
+              <h2 id={`verhaal-${i}`} class="mt-4 text-[2rem] md:text-[2.5rem]">{e.kern}</h2>
+              <blockquote class="mt-6 border-l-2 border-merk pl-5">
+                <p class="text-[1.05rem] leading-relaxed text-inkt-2 md:text-[1.1rem]">“{e.citaat}”</p>
+              </blockquote>
+              <p class="mt-6 max-w-xl text-steen">{e.samenvatting}</p>
+              <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <span class="flex gap-0.5 text-merk">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-3.5 w-3.5" />)}</span>
+                <span class="text-[.8rem] font-medium uppercase tracking-[.2em] text-merk-diep">{e.naam}</span>
+                <span class="text-sm text-steen">{`· Google, ${e.wanneer}`}</span>
+              </div>
+              <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <a href={url(`${e.slug}/`)} class="knop knop-rand bg-wit">{dienstOp(e.slug).kaartTitel}</a>
+                <a href={site.reviews} target="_blank" rel="noopener" class="inline-flex items-center gap-2 py-2 text-sm text-steen no-underline hover:text-merk"><Icoon naam="g" class="h-4 w-4" />Lees op Google<span class="sr-only"> (opent in een nieuw tabblad)</span></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {i === 1 && (
+          <section class="bg-inkt py-12 text-wit md:py-16" aria-labelledby="strook-kop">
+            <div class="wrap flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+              <div>
+                <p class="eyebrow eyebrow-licht">Uit het atelier</p>
+                <h2 id="strook-kop" class="mt-4 text-[2rem] md:text-[2.4rem]">Wat er door Bei's <span class="text-strik">handen gaat</span></h2>
+              </div>
+              <div class="flex items-center gap-5">
+                <p class="max-w-md text-mist">Pasmomenten, ruggen met knoopjes, een roosje van organza. Foto's uit het atelier aan de Hoogstraat. Swipe of klik door.</p>
+                <div class="flex gap-2">
+                  <button type="button" data-rij-vorige class="grid h-11 w-11 place-items-center border border-lijn text-wit transition-colors hover:border-wit disabled:opacity-30" aria-label="Vorige foto's">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 6 9 12l6 6" /></svg>
+                  </button>
+                  <button type="button" data-rij-volgende class="grid h-11 w-11 place-items-center border border-lijn text-wit transition-colors hover:border-wit disabled:opacity-30" aria-label="Volgende foto's">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <ul class="rij mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 md:px-[max(1.25rem,calc((100vw-75rem)/2))]" data-rij tabindex="0" aria-label="Foto's uit het atelier, horizontaal te scrollen">
+              {atelierStrook.map((f) => (
+                <li class="w-[62vw] flex-none snap-start sm:w-[36vw] lg:w-[15rem]">
+                  <Picture src={f.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={70} widths={[320, 480, 640]} sizes="(min-width: 1024px) 240px, 62vw" alt={f.alt} class="foto aspect-[3/4] w-full object-cover" style={`object-position:${f.pos ?? '50% 50%'}`} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </>
+    ))}
+
+    <!-- ZELF VERTELLEN -->
+    <section class="bg-merk py-16 text-wit md:py-24">
+      <div class="wrap grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
+        <div class="lg:col-span-7">
+          <p class="eyebrow eyebrow-licht">Jouw verhaal</p>
+          <h2 class="mt-5 text-[2.2rem] md:text-[2.8rem]">Ben jij bij Bei <span class="text-strik">geweest?</span></h2>
+          <p class="mt-6 text-lg text-wit/85">Bei ziet haar jurken zelden op de dag zelf. Een foto van je trouwdag is daarom altijd welkom, en als je hem met je verhaal meestuurt mag hij hier een plek krijgen. Alleen met jouw toestemming, en je bepaalt zelf of je naam erbij staat.</p>
+        </div>
+        <div class="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
+          <a href={waMet('Hallo Bei, ik wil graag mijn foto en ervaring met je delen voor op de website.')} class="knop bg-wit text-inkt hover:bg-ivoor"><Icoon naam="wa" />Stuur je foto en verhaal</a>
+          <a href={site.reviews} target="_blank" rel="noopener" class="knop border border-wit/70 text-wit hover:bg-wit hover:text-merk"><Icoon naam="ster" />Review op Google</a>
+        </div>
+      </div>
+    </section>
+
+    <Cta kop="Ook zo'n verhaal over jouw" accent="trouwdag?" />
+  </main>
+  <Voet />
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-rij]').forEach((rij) => {
+    const hoofd = rij.closest('section');
+    const vorige = hoofd?.querySelector<HTMLButtonElement>('[data-rij-vorige]');
+    const volgende = hoofd?.querySelector<HTMLButtonElement>('[data-rij-volgende]');
+    const stap = () => (rij.querySelector('li')?.getBoundingClientRect().width ?? 240) * 3 + 48;
+    const bij = () => {
+      if (!vorige || !volgende) return;
+      vorige.disabled = rij.scrollLeft < 8;
+      volgende.disabled = rij.scrollLeft > rij.scrollWidth - rij.clientWidth - 8;
+    };
+    vorige?.addEventListener('click', () => rij.scrollBy({ left: -stap(), behavior: 'smooth' }));
+    volgende?.addEventListener('click', () => rij.scrollBy({ left: stap(), behavior: 'smooth' }));
+    rij.addEventListener('scroll', bij, { passive: true });
+    requestAnimationFrame(bij);
+  });
+</script>

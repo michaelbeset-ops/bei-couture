@@ -4,371 +4,131 @@ import Base from '../layouts/Base.astro';
 import Kop from '../components/Kop.astro';
 import Voet from '../components/Voet.astro';
 import Icoon from '../components/Icoon.astro';
-import { site, reviews, dagen, waHoi } from '../data/site';
+import Reviews from '../components/Reviews.astro';
+import Werkwijze from '../components/Werkwijze.astro';
+import Bezoek from '../components/Bezoek.astro';
+import Lint from '../components/Lint.astro';
+import { site, url, waHoi, werkgebied } from '../data/site';
+import { diensten, extraKaarten } from '../data/diensten';
 
 import hero from '../assets/hero.jpg';
-import kant from '../assets/kant.jpg';
-import satijn from '../assets/satijn.jpg';
-import sMaken from '../assets/s-maken.jpg';
-import sVermaken from '../assets/s-vermaken.jpg';
-import sGala from '../assets/s-gala.jpg';
-import sMeisjes from '../assets/s-bruidsmeisjes.jpg';
-import sHeren from '../assets/s-heren.jpg';
-import sMeer from '../assets/s-meer.jpg';
+import bei from '../assets/bei-bloemen.jpg';
 
-const diensten = [
-  { img: sMaken, pos: '50% 40%', titel: 'Bruidsjurk op maat', tekst: 'Neem een foto of ontwerp mee naar het atelier. Het ontwerp wordt gemaakt naar jouw smaak en maat.', kies: 'Bruidsjurk laten maken' },
-  { img: sVermaken, pos: '50% 35%', titel: 'Trouwjurk vermaken', tekst: 'Korter, passender of net iets anders: je eigen jurk helemaal op maat.', kies: 'Trouwjurk laten vermaken' },
-  { img: sGala, pos: '50% 30%', titel: 'Gala- en avondkleding', tekst: 'Ook u kunt schitteren in een unieke creatie.', kies: 'Gala- of avondkleding' },
-  { img: sMeisjes, pos: '50% 45%', titel: 'Bruidsmeisjes en -jonkers', tekst: 'Bruidsmode die perfect bij jou past, maar ook bij je partner en eventuele bruidsmeisjes en -jonkers.', kies: 'Bruidsmeisjes of -jonkers' },
-  { img: sHeren, pos: '50% 50%', titel: 'Herenpakken', tekst: 'Ook het pak van je partner kan in het atelier gemaakt of vermaakt worden.', kies: 'Herenpak' },
-  { img: sMeer, pos: '40% 50%', titel: 'En nog veel meer', tekst: 'Carnavalskleding, turnpakken en nog veel meer. Noem het maar op en het wordt gemaakt in het atelier.', kies: 'Iets anders' },
-];
-
-const stappen = [
-  { t: 'Je wens', p: 'Je kunt een of meerdere foto’s meenemen naar je afspraak. Heb je geen foto’s of een ontwerp? Geen zorgen, er wordt goed naar je wensen geluisterd.' },
-  { t: 'Schets en maten', p: 'Met behulp van schetsen wordt er een beter beeld gecreëerd van het eindresultaat. Dan word je door Bei opgemeten in het atelier.' },
-  { t: 'De stof', p: 'Je kiest een stof, zoals taft, bruidssatijn of tule. Er kunnen ook applicaties toegevoegd worden als je dat wilt.' },
-  { t: 'Passen', p: 'Bij de volgende afspraak pas je het kledingstuk en het wordt eventueel bijgewerkt.' },
-];
-
-const volgorde = [1, 2, 3, 4, 5, 6, 0];
 ---
-<Base title="Bei Couture | Bruidsmode en kleermaker in Rotterdam" description="Bruidsjurken, gala- en avondkleding en andere kledingstukken op maat. Atelier van Bei aan de Hoogstraat 89A in Rotterdam. Afspraak via 06 53 61 25 43.">
-  <main id="inhoud">
-  <div class="relative">
+<Base
+  heroFont
+  title="Bruidsatelier Rotterdam: bruidsjurk op maat | Bei Couture"
+  description="Bruidsjurk op maat, trouwjurk vermaken, bruidsmoeder en bruidsmeisjes. Bruidsatelier Bei Couture, Hoogstraat 89A Rotterdam. Bel 06 53 61 25 43."
+  kruimels={[{ naam: 'Home', url: new URL(url(''), Astro.site).href }]}
+>
   <Kop />
+  <main id="inhoud">
 
     <!-- HERO -->
-    <section class="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-inkt text-wit">
-      <Picture src={hero} formats={['avif', 'webp']} widths={[640, 960, 1400, 2000]} sizes="100vw" alt="Een bruid wordt in haar kanten trouwjurk geholpen" loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover object-[62%_40%] max-md:object-[60%_62%]" />
+    <section class="font-sans relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-[#1b1716] text-[#ffffff]">
+      <Picture src={hero} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[640, 960, 1400, 2000]} sizes="100vw" alt="Een bruid wordt in haar kanten trouwjurk geholpen in het atelier" loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover object-[62%_40%] max-md:object-[60%_62%]" />
       <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#1b1716f2_0%,#1b1716c7_42%,#1b171640_80%,#1b171626_100%)] max-md:bg-[linear-gradient(180deg,#1b1716b3_0%,#1b171699_35%,#1b1716e6_78%,#1b1716_100%)]"></div>
       <div class="wrap flex flex-1 flex-col justify-end pb-[5.5rem] pt-28 md:pb-20 md:pt-36 lg:pt-44">
-        <p class="eyebrow eyebrow-licht">Bruidsmode in Rotterdam</p>
-        <h1 class="mt-4 max-w-[13ch] text-hero md:mt-6">Uw droom wordt werkelijkheid in ons <em class="accent-licht">atelier.</em></h1>
-        <p class="mt-5 max-w-xl text-[1.06rem] text-wit/90 md:mt-7 md:text-xl">Bruidsjurken, gala- en avondkleding en andere kledingstukken, perfect op maat gemaakt. Door Bei zelf, in haar atelier aan de Hoogstraat.</p>
+        <p class="eyebrow eyebrow-licht !font-sans !text-[.8125rem] !font-semibold !tracking-[.2em]">Bruidsatelier in Rotterdam</p>
+        <h1 class="hero-kop mt-4 max-w-[13ch] text-hero md:mt-6">Uw droom wordt werkelijkheid in ons <em class="accent-hero">atelier.</em></h1>
+        <p class="mt-5 max-w-xl text-[1.06rem] text-[#ffffffe6] md:mt-7 md:text-[1.375rem]">Bruidsjurken op maat, trouwjurken vermaakt en jurken voor de bruidsmoeder, de bruidsmeisjes en de bruidsjonkers. Gemaakt door Bei zelf, in haar atelier aan de Hoogstraat.</p>
         <div class="mt-7 flex flex-wrap gap-3 md:mt-9">
-          <a href="#afspraak" class="knop knop-merk">Afspraak maken <Icoon naam="pijl" /></a>
-          <a href={site.telHref} class="knop knop-wit num"><Icoon naam="tel" />{site.tel}</a>
+          <a href={url('afspraak/')} class="knop knop-merk !rounded-[2px] !font-sans !normal-case !tracking-[.01em] !text-[1.05rem] !font-semibold">Afspraak maken <Icoon naam="pijl" /></a>
+          <a href={site.telHref} class="knop knop-wit num !rounded-[2px] !border-[1.5px] !font-sans !normal-case !tracking-[.01em] !text-[1.05rem] !font-semibold"><Icoon naam="tel" />{site.tel}</a>
         </div>
-        <ul class="mt-6 flex flex-wrap items-center gap-x-7 gap-y-2 text-[.95rem] text-wit/85 md:mt-9">
-          <li class="flex items-center gap-2"><span class="flex text-strik">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span><strong class="font-semibold text-wit">{site.google.score}</strong> op Google, {site.google.aantal} reviews</li>
+        <ul class="mt-6 flex flex-wrap items-center gap-x-7 gap-y-2 text-[.95rem] text-[#ffffffd9] md:mt-9">
+          <li class="flex items-center gap-2"><span class="flex text-strik">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span><strong class="font-semibold text-[#ffffff]">{site.google.score}</strong> op Google, {site.google.aantal} reviews</li>
           <li class="flex items-center gap-2"><Icoon naam="klok" class="h-4 w-4 text-strik" /><span data-nu>Di t/m vr en zondag open</span></li>
+          <li class="flex items-center gap-2"><Icoon naam="kalender" class="h-4 w-4 text-strik" />Ook buiten de openingstijden op afspraak</li>
         </ul>
       </div>
-      <p class="absolute bottom-3 right-4 hidden text-[.7rem] text-wit/55 md:block">Sfeerfoto (Unsplash)</p>
     </section>
 
-    </div>
-    <!-- CIJFERS -->
-    <section class="bg-ivoor" aria-label="Bei Couture in cijfers">
-      <div class="wrap grid grid-cols-2 py-12 md:grid-cols-4 md:py-16">
-        {[
-          ['1997', 'eigen atelier', 'begonnen op het Marconiplein', false],
-          ['2009', 'bruidsmode', 'sindsdien gespecialiseerd', false],
-          [site.google.score, 'op Google', `uit ${site.google.aantal} reviews`, false],
-          ['zondag', 'ook open', '12:00 tot 17:00', true],
-        ].map(([n, a, b, cursief], i) => (
-          <div class={`rijs py-4 pr-2 ${i % 2 === 1 ? 'border-l border-dashed border-ivoor-3 pl-5' : 'pl-1'} md:px-8 ${i > 0 ? 'md:border-l md:border-dashed md:border-ivoor-3' : 'md:pl-0'} ${i > 1 ? 'max-md:mt-2 max-md:border-t max-md:border-dashed max-md:border-ivoor-3 max-md:pt-6' : ''}`} style={`--d:${i * 0.08}s`}>
-            <p class={`num font-kop text-[2.6rem] font-extrabold leading-none tracking-[-.03em] md:text-[3.4rem] ${cursief ? 'italic text-merk' : ''}`}>{n}</p>
-            <p class="mt-3 font-semibold">{a}</p>
-            <p class="text-sm text-steen">{b}</p>
-          </div>
-        ))}
-      </div>
-      <div class="wrap"><hr class="naad" /></div>
-    </section>
+    <!-- FEITENREGEL: zacht roze lint onder de hero, één rustige regel over de hele breedte. -->
+    <Lint label="Bei Couture in het kort" items={['Eigen atelier sinds 1997', 'Bruidsmode sinds 2009', 'Ook op zondag open', 'Alles door Bei zelf gemaakt', '5,0 uit 51 Google-reviews', 'Hoogstraat 89A, Rotterdam']} />
 
-    <!-- ATELIER / DIENSTEN -->
-    <section id="atelier" class="bg-ivoor py-20 md:py-28">
+    <!-- ATELIER / DIENSTEN: een rij hoge foto's, alleen de naam eronder. Swipen op de telefoon, pijl op desktop. -->
+    <section id="atelier" class="bg-ivoor pb-14 pt-14 md:pb-20 md:pt-20">
       <div class="wrap">
-        <div class="grid gap-8 md:grid-cols-12 md:items-end">
-          <div class="md:col-span-7">
-            <p class="eyebrow">Het atelier</p>
-            <h2 class="mt-5 text-4xl">Gemaakt en vermaakt, <em class="accent">op maat.</em></h2>
+        <div class="flex items-end justify-between gap-6">
+          <h2 class="text-[2rem] md:text-[2.4rem]">Het atelier</h2>
+          <div class="hidden gap-2 md:flex">
+            <button type="button" data-rij-vorige class="grid h-11 w-11 place-items-center rounded-full border border-ivoor-3 text-inkt transition-colors hover:border-inkt disabled:opacity-30" aria-label="Vorige diensten">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M15 6 9 12l6 6" /></svg>
+            </button>
+            <button type="button" data-rij-volgende class="grid h-11 w-11 place-items-center rounded-full border border-ivoor-3 text-inkt transition-colors hover:border-inkt disabled:opacity-30" aria-label="Volgende diensten">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+            </button>
           </div>
-          <p class="text-lg text-steen md:col-span-5">Naast bruidsjurken, gala- en avondkleding kun je bij Bei Couture ook terecht voor herenpakken, carnavalskleding, turnpakken en nog veel meer.</p>
         </div>
-        <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-          {diensten.map((d, i) => (
-            <li class="rijs" style={`--d:${(i % 3) * 0.08}s`}>
-              <a href="#afspraak" data-kies={d.kies} class="group relative block overflow-hidden rounded-[2px] bg-inkt text-wit no-underline">
-                <Picture src={d.img} formats={['avif', 'webp']} widths={[480, 800]} sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" alt="" class="aspect-[4/5] w-full object-cover opacity-90 transition-transform duration-700 ease-[cubic-bezier(.22,.61,.36,1)] group-hover:scale-[1.04]" style={`object-position:${d.pos}`} />
-                <div class="absolute inset-0 bg-[linear-gradient(180deg,#1b171600_35%,#1b1716e6_100%)]"></div>
-                <div class="absolute inset-x-0 bottom-0 p-6 md:p-7">
-                  <h3 class="text-[1.85rem]">{d.titel}</h3>
-                  <p class="mt-2 text-[.98rem] leading-snug text-wit/85">{d.tekst}</p>
-                  <span class="mt-4 inline-flex items-center gap-2 border-b border-dashed border-strik pb-0.5 text-sm font-semibold text-strik">Afspraak hiervoor <Icoon naam="pijl" class="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
-                </div>
+
+        <ul class="rij mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:mt-10 md:gap-5" data-rij tabindex="0" aria-label="Diensten, horizontaal te scrollen">
+          {[...diensten, ...extraKaarten].map((d) => (
+            <li class="w-[72vw] flex-none snap-start sm:w-[44vw] lg:w-[calc((100%-3.75rem)/4)]">
+              <a href={url(`${d.slug}/`)} class="fotolink group block">
+                <span class="foto block aspect-[3/4] bg-ivoor-2">
+                  <Picture src={d.img} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[400, 560, 800]} sizes="(min-width: 1024px) 24vw, (min-width: 640px) 44vw, 72vw" alt={d.alt} class="h-full w-full object-cover" style={`object-position:${d.pos}`} />
+                </span>
+                <span class="mt-4 block text-[.78rem] font-medium uppercase tracking-[.22em] text-inkt transition-colors group-hover:text-merk">{d.kaartTitel}</span>
+                {'kaartTekst' in d && d.kaartTitel === 'Trouwjurk reinigen' && <span class="mt-1.5 block text-[.92rem] text-steen">{d.kaartTekst}</span>}
               </a>
             </li>
           ))}
         </ul>
-        <p class="mt-6 text-xs text-steen">Sfeerfoto's via Unsplash, ter illustratie.</p>
       </div>
     </section>
 
-    <!-- OVER BEI -->
-    <section id="bei" class="bg-inkt py-20 text-wit md:py-32">
-      <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <div class="rijs lg:col-span-6">
-          <div class="relative">
-            <Picture src={kant} formats={['avif', 'webp']} widths={[600, 900, 1200]} sizes="(min-width: 1024px) 600px, 100vw" alt="Detail van een kanten jurk met stoffen knoopjes" class="aspect-[4/5] w-full rounded-[2px] object-cover" />
-            <div class="absolute -bottom-6 left-6 right-6 border border-dashed border-strik/60 bg-inkt-2 px-6 py-5 md:left-auto md:right-[-1.5rem] md:w-72">
-              <p class="font-kop text-xl font-extrabold italic leading-tight">“Geen enkele opgave is teveel.”</p>
-              <p class="mt-1 text-sm text-mist">Bei, op haar eigen website</p>
-            </div>
-          </div>
+    <!-- OVER BEI: in dezelfde kolom als Het atelier. Foto links op eigen formaat (de bron is klein),
+         rechts op zacht roze haar verhaal, drie beloftes en een knop. -->
+    <section id="bei" class="bg-strik-zacht py-16 md:py-24">
+      <div class="wrap grid gap-7 lg:grid-cols-12 lg:gap-14">
+        <div class="lg:hidden">
+          <p class="eyebrow">Over Bei</p>
+          <h2 class="mt-4 text-[2.2rem]">De vrouw achter <span class="text-merk">de jurk</span></h2>
         </div>
-        <div class="lg:col-span-6 lg:pt-6">
-          <p class="eyebrow eyebrow-licht">Over Bei</p>
-          <h2 class="mt-5 text-4xl">Mijn naam is <em class="accent-licht">Bei.</em></h2>
-          <div class="mt-8 space-y-5 text-lg text-wit/85">
-            <p>Ik ben geboren in China en woon nu al een lange tijd in Nederland. Vanaf kleins af aan ben ik dol op tekenen en naaien, zo is mijn liefde ontstaan om kleding te ontwerpen. Ik ben een perfectionist en wil het liefst alles zelf doen.</p>
-            <p>Ik ben in 1997 begonnen met een eigen atelier op Marconiplein. Daarna ben ik in 2009 mij gaan specialiseren in bruidsmode, dus ook voor bruidsjonkers en bruidsmeisjes. Het is echt mijn passie en ik krijg elke keer een glimlach op mijn gezicht als een klant weer super tevreden is.</p>
-          </div>
-          <hr class="naad naad-donker mt-10" />
-          <ul class="mt-8 grid gap-4 sm:grid-cols-3">
+        <div class="lg:col-span-5">
+          <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={88} widths={[480, 720, 960, 1200]} sizes="(min-width: 1024px) 520px, 92vw" alt="Bei, lachend voor een wand van witte bloemen" class="foto aspect-square w-full object-cover object-[60%_30%] max-lg:w-[92%]" />
+        </div>
+        <div class="flex flex-col justify-center lg:col-span-7 lg:pl-4 xl:pl-10">
+          <p class="eyebrow max-lg:hidden">Over Bei</p>
+          <h2 class="mt-5 text-[2.2rem] max-lg:hidden md:text-[2.8rem]">De vrouw achter <span class="text-merk">de jurk</span></h2>
+          <p class="mt-7 max-w-xl text-steen max-lg:mt-0">Bei Couture, dat is Bei. Geboren in China, al een lange tijd in Nederland, en sinds 1997 met een eigen atelier. Ze is een perfectionist en wil het liefst alles zelf doen: het gesprek, het meten, het knippen en het naaien. Sinds 2009 is bruidsmode haar specialisme, en ze krijgt nog steeds een glimlach op haar gezicht als een bruid weer super tevreden is.</p>
+
+          <ul class="mt-10 max-w-xl divide-y divide-merk/20 border-y border-merk/20 bg-wit/60">
             {[
-              ['Neemt de tijd voor je.', 'Marisela B.'],
-              ['Hij zat echt als gegoten.', 'Çanci A.'],
-              ['Je hebt gouden handen.', 'Christina W.'],
-            ].map(([q, n]) => (
-              <li class="border border-lijn bg-inkt-2 p-5">
-                <Icoon naam="naald" class="h-6 w-6 text-strik" />
-                <p class="mt-4 font-kop text-lg font-extrabold italic leading-snug">“{q}”</p>
-                <p class="mt-2 text-xs text-mist">{n}, Google</p>
+              ['Alles door Bei zelf', 'Dezelfde persoon doet het gesprek, meet je op, knipt en naait. Geen tussenpersoon, geen atelier elders.'],
+              ['De tijd die het nodig heeft', 'Eerst een schets en je maten, dan de proefjurk, dan jouw jurk in de echte stof. Soms een vierde keer om op te halen.'],
+              ['Geen enkele opgave is teveel', 'Haar eigen woorden. Een gekleurde trouwjurk, een grote maat, de jurk van je moeder: het kan.'],
+            ].map(([k, t]) => (
+              <li class="px-6 py-5">
+                <p class="text-[.82rem] font-medium uppercase tracking-[.2em]">{k}</p>
+                <p class="mt-1.5 text-[.98rem] text-steen">{t}</p>
               </li>
             ))}
           </ul>
-        </div>
-      </div>
-    </section>
 
-    <!-- WERKWIJZE -->
-    <section id="werkwijze" class="bg-ivoor py-20 md:py-28">
-      <div class="wrap">
-        <div class="grid gap-8 md:grid-cols-12 md:items-end">
-          <div class="md:col-span-7">
-            <p class="eyebrow">Werkwijze</p>
-            <h2 class="mt-5 text-4xl">Van foto tot <em class="accent">pasbeurt.</em></h2>
-          </div>
-          <p class="text-lg text-steen md:col-span-5">Omdat er vele verschillende opties zijn als het aankomt op bruidsmode, vindt Bei het belangrijk om tijdens een persoonlijke afspraak alles op een rijtje te krijgen.</p>
-        </div>
-        <ol class="mt-14 grid gap-px overflow-hidden rounded-[2px] border border-ivoor-3 bg-ivoor-3 sm:grid-cols-2 lg:grid-cols-4">
-          {stappen.map((s, i) => (
-            <li class="rijs bg-wit p-7 md:p-8" style={`--d:${i * 0.08}s`}>
-              <p class="stap-nr">0{i + 1}</p>
-              <hr class="naad mt-6" />
-              <h3 class="mt-6 text-2xl">{s.t}</h3>
-              <p class="mt-3 text-steen">{s.p}</p>
-            </li>
-          ))}
-        </ol>
-        <div class="mt-6 grid overflow-hidden rounded-[2px] bg-inkt text-wit md:grid-cols-12">
-          <div class="relative min-h-48 md:col-span-4">
-            <Picture src={satijn} formats={['avif', 'webp']} widths={[480, 800]} sizes="(min-width: 768px) 400px, 100vw" alt="" class="absolute inset-0 h-full w-full object-cover" />
-          </div>
-          <div class="flex flex-col justify-center gap-5 p-7 md:col-span-8 md:flex-row md:items-center md:justify-between md:p-10">
-            <p class="font-kop text-2xl font-extrabold leading-tight md:text-[1.9rem]">Heb je een mooie jurk in gedachte? <em class="accent-licht">Neem een foto mee.</em></p>
-            <a href="#afspraak" class="knop knop-merk flex-none">Afspraak maken <Icoon naam="pijl" /></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WOW: AFSPRAAK -->
-    <section id="afspraak" class="bg-ivoor-2 py-20 md:py-28">
-      <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-14">
-        <div class="min-w-0 lg:col-span-7">
-          <p class="eyebrow">Afspraak in het atelier</p>
-          <h2 class="mt-5 text-4xl">Vertel Bei wat je <em class="accent">droomt.</em></h2>
-          <p class="mt-5 max-w-xl text-lg text-steen">Kies hieronder wat je wilt laten maken of vermaken. Er staat meteen een bericht klaar voor WhatsApp, dat je zelf verstuurt.</p>
-
-          <form id="wens" class="mt-10 space-y-10" onsubmit="return false">
-            <fieldset>
-              <legend class="veld-label">Waarvoor kom je?</legend>
-              <div class="grid gap-2.5 sm:grid-cols-2">
-                {diensten.map((d, i) => (
-                  <label class="keuze"><input type="radio" name="wat" value={d.kies} checked={i === 0} /><span class="bol"></span>{d.kies}</label>
-                ))}
-              </div>
-            </fieldset>
-            <fieldset data-stofblok>
-              <legend class="veld-label">Welke stof heb je in gedachte?</legend>
-              <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-                {['Taft', 'Bruidssatijn', 'Tule', 'Weet ik nog niet'].map((s, i) => (
-                  <label class="keuze"><input type="radio" name="stof" value={s} checked={i === 3} /><span class="bol"></span>{s}</label>
-                ))}
-              </div>
-            </fieldset>
-            <div class="grid gap-10 sm:grid-cols-2">
-              <fieldset>
-                <legend class="veld-label">Wanneer is de grote dag?</legend>
-                <select name="wanneer" class="veld" aria-label="Wanneer is de grote dag?">
-                  <option>Nog geen datum</option>
-                  <option>Binnen een maand</option>
-                  <option>Over 1 tot 3 maanden</option>
-                  <option>Over 3 tot 6 maanden</option>
-                  <option>Over meer dan een half jaar</option>
-                </select>
-              </fieldset>
-              <fieldset>
-                <legend class="veld-label">Liefst langs op</legend>
-                <select name="dag" class="veld" aria-label="Liefst langs op">
-                  <option>Maakt niet uit</option>
-                  <option>Dinsdag</option><option>Woensdag</option><option>Donderdag</option><option>Vrijdag</option><option>Zondag</option>
-                </select>
-              </fieldset>
-            </div>
-            <div class="grid gap-5 sm:grid-cols-2 sm:items-end">
-              <label class="keuze keuze-vink"><input type="checkbox" name="foto" checked /><span class="bol"></span>Ik neem een foto of ontwerp mee</label>
-              <div>
-                <label for="naam" class="mb-2 block text-sm font-semibold">Je naam</label>
-                <input id="naam" name="naam" type="text" autocomplete="given-name" placeholder="Voornaam" class="veld" />
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <div class="min-w-0 lg:col-span-5">
-          <div class="lg:sticky lg:top-8">
-            <div class="relative rounded-[2px] bg-wit p-3 shadow-[0_24px_60px_-28px_#1b171659]">
-              <div class="border-[1.5px] border-dashed border-ivoor-3 p-6 md:p-8">
-                <div class="flex items-center justify-between gap-4">
-                  <p class="text-xs font-semibold uppercase tracking-[.2em] text-merk">Je bericht aan Bei</p>
-                  <Icoon naam="wa" class="h-6 w-6 text-[#1f9d55]" />
-                </div>
-                <p id="bericht" class="mt-5 whitespace-pre-line font-kop text-[1.3rem] font-extrabold leading-snug tracking-[-.01em]" aria-live="polite">Hallo Bei, ik wil graag een afspraak maken in het atelier.</p>
-                <hr class="naad mt-7" />
-                <a id="stuur" href={waHoi} class="knop knop-merk mt-7 w-full"><Icoon naam="wa" />Verstuur via WhatsApp</a>
-                <p class="mt-4 text-center text-sm text-steen">Liever bellen? <a href={site.telHref} class="link num font-semibold text-inkt">{site.tel}</a></p>
-              </div>
-            </div>
-            <p class="mt-5 flex items-start gap-2.5 text-sm text-steen"><Icoon naam="foto" class="mt-0.5 h-5 w-5 flex-none text-merk" />Een foto van je jurk of een ontwerp kun je in WhatsApp direct meesturen.</p>
+          <div class="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <a href={url('over-bei/')} class="text-[.8rem] font-medium uppercase tracking-[.25em] text-merk underline decoration-merk/40 underline-offset-[6px]">Lees meer over Bei</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- REVIEWS -->
-    <section id="reviews" class="bg-inkt py-20 text-wit md:py-28">
-      <div class="wrap">
-        <div class="flex flex-wrap items-end justify-between gap-8">
-          <div>
-            <p class="eyebrow eyebrow-licht">Reviews</p>
-            <h2 class="mt-5 text-4xl">Wat bruidjes <em class="accent-licht">zeggen.</em></h2>
-          </div>
-          <a href={site.reviews} class="flex items-center gap-4 rounded-[2px] border border-lijn bg-inkt-2 px-5 py-4 no-underline transition-colors hover:border-wit/50">
-            <span class="grid h-11 w-11 place-items-center rounded-full bg-wit"><Icoon naam="g" class="h-6 w-6" /></span>
-            <span>
-              <span class="flex items-center gap-2"><strong class="num font-kop text-2xl font-extrabold">{site.google.score}</strong><span class="flex text-strik">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span></span>
-              <span class="block text-sm text-mist">{site.google.aantal} reviews op Google</span>
-            </span>
-          </a>
-        </div>
-        <ul class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
-          {reviews.map((r, i) => (
-            <li class={`rijs flex flex-col rounded-[2px] p-7 md:p-8 ${i === 0 ? 'bg-merk lg:row-span-2' : 'border border-lijn bg-inkt-2'}`} style={`--d:${(i % 3) * 0.08}s`}>
-              <span class={`flex ${i === 0 ? 'text-wit' : 'text-strik'}`}>{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span>
-              <p class={`mt-5 flex-1 ${i === 0 ? 'font-kop text-[1.6rem] font-extrabold italic leading-snug md:text-[1.9rem]' : 'text-wit/90'}`}>“{r.tekst}”</p>
-              <p class="mt-6 text-sm"><strong class="font-semibold text-wit">{r.naam}</strong> <span class={i === 0 ? 'text-wit/75' : 'text-mist'}>· Google review · {r.wanneer}</span></p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
 
-    <!-- BEZOEK -->
-    <section id="bezoek" class="bg-ivoor py-20 md:py-28">
-      <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-14">
-        <div class="lg:col-span-5">
-          <p class="eyebrow">Bezoek het atelier</p>
-          <h2 class="mt-5 text-4xl">Hoogstraat <em class="accent">89A.</em></h2>
-          <p class="mt-6 text-lg text-steen">Bei Couture hanteert flexibele openingstijden. Neem gerust contact op om een geschikt moment in te plannen voor een afspraak.</p>
-          <ul class="mt-8 space-y-4">
-            <li class="flex gap-4"><Icoon naam="pin" class="mt-1 h-5 w-5 flex-none text-merk" /><span>{site.straat}, {site.postcode} {site.plaats}<br /><span class="text-sm text-steen">Gevestigd in {site.inPand}</span></span></li>
-            <li class="flex gap-4"><Icoon naam="tel" class="mt-1 h-5 w-5 flex-none text-merk" /><a href={site.telHref} class="link num">{site.tel}</a></li>
-            <li class="flex gap-4"><Icoon naam="mail" class="mt-1 h-5 w-5 flex-none text-merk" /><a href={`mailto:${site.mail}`} class="link">{site.mail}</a></li>
-          </ul>
-          <div class="mt-7 flex flex-wrap gap-3 md:mt-9">
-            <a href={site.route} class="knop knop-inkt"><Icoon naam="pin" />Route plannen</a>
-            <a href={waHoi} class="knop knop-rand"><Icoon naam="wa" />WhatsApp</a>
-          </div>
-        </div>
-        <div class="lg:col-span-7">
-          <div class="kaart p-6 md:p-9">
-            <div class="flex flex-wrap items-center justify-between gap-3">
-              <h3 class="text-2xl">Openingstijden</h3>
-              <p class="flex items-center gap-2 rounded-full bg-ivoor px-3.5 py-1.5 text-sm font-semibold"><span class="h-2 w-2 rounded-full bg-steen" data-stip></span><span data-status>Openingstijden</span></p>
-            </div>
-            <hr class="naad mt-6" />
-            <table class="num mt-2 w-full text-left">
-              <tbody>
-                {volgorde.map((d) => { const t = site.tijden[d]; return (
-                  <tr data-dag={d} class="border-b border-dashed border-ivoor-3 last:border-0">
-                    <th scope="row" class="py-3.5 pl-3 font-medium">{dagen[d]}</th>
-                    <td class={`py-3.5 pr-3 text-right ${t ? '' : 'text-steen'}`}>{t ? `${t[0]}:00 tot ${t[1]}:00` : 'Gesloten'}</td>
-                  </tr>
-                ); })}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- WERKWIJZE -->
+    <Werkwijze />
 
-    <!-- SLOTBALK -->
-    <section class="bg-merk text-wit">
-      <div class="wrap flex flex-col gap-7 py-14 md:flex-row md:items-center md:justify-between md:py-16">
-        <p class="max-w-2xl font-kop text-3xl font-extrabold leading-tight md:text-[2.6rem]">Iedereen wil er stralend uitzien op zijn of haar <em>grote dag.</em></p>
-        <a href="#afspraak" class="knop flex-none bg-wit text-inkt hover:bg-ivoor">Plan je afspraak <Icoon naam="pijl" /></a>
-      </div>
-    </section>
+    <!-- IN HET KORT -->
+
+    <!-- AFSPRAAK -->
+
+
+    <Reviews />
+
+
+    <Bezoek />
+
   </main>
   <Voet />
 </Base>
-
-<script>
-  import { site } from '../data/site';
-  // Live open/gesloten (tijd in Nederland)
-  const nu = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Amsterdam' }));
-  const d = nu.getDay(); const u = nu.getHours() + nu.getMinutes() / 60; const t = site.tijden[d];
-  const open = !!t && u >= t[0] && u < t[1];
-  let tekst = open ? `Nu open tot ${t![1]}:00` : 'Nu gesloten';
-  if (!open) {
-    if (t && u < t[0]) tekst = `Vandaag open vanaf ${t[0]}:00`;
-    else { for (let i = 1; i <= 7; i++) { const n = (d + i) % 7; const tt = site.tijden[n]; if (tt) { tekst = `Gesloten, ${i === 1 ? 'morgen' : ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'][n]} open vanaf ${tt[0]}:00`; break; } } }
-  }
-  document.querySelectorAll('[data-nu]').forEach((e) => (e.textContent = open ? `Vandaag open tot ${t![1]}:00` : tekst));
-  const st = document.querySelector('[data-status]'); if (st) st.textContent = open ? 'Nu open' : 'Nu gesloten';
-  const sp = document.querySelector<HTMLElement>('[data-stip]'); if (sp) sp.style.background = open ? '#2f8a4f' : '#8f4b4f';
-  document.querySelector(`tr[data-dag="${d}"]`)?.classList.add('bg-strik-zacht', 'font-semibold');
-
-  // Wow: bericht samenstellen
-  const f = document.querySelector<HTMLFormElement>('#wens');
-  const out = document.querySelector('#bericht');
-  const knop = document.querySelector<HTMLAnchorElement>('#stuur');
-  const stofblok = document.querySelector<HTMLElement>('[data-stofblok]');
-  function maak() {
-    if (!f || !out || !knop) return;
-    const v = new FormData(f);
-    const wat = String(v.get('wat') || '');
-    const maken = wat === 'Bruidsjurk laten maken' || wat === 'Gala- of avondkleding';
-    if (stofblok) stofblok.hidden = !maken;
-    const regels = ['Hallo Bei, ik wil graag een afspraak maken in het atelier.', `Waarvoor: ${wat.charAt(0).toLowerCase() + wat.slice(1)}.`];
-    if (maken && v.get('stof') !== 'Weet ik nog niet') regels.push(`Stof: ${String(v.get('stof')).toLowerCase()}.`);
-    if (v.get('wanneer') !== 'Nog geen datum') regels.push(`De grote dag: ${String(v.get('wanneer')).toLowerCase()}.`);
-    if (v.get('dag') !== 'Maakt niet uit') regels.push(`Liefst op een ${String(v.get('dag')).toLowerCase()}.`);
-    if (v.get('foto')) regels.push('Ik neem een foto of ontwerp mee.');
-    const naam = String(v.get('naam') || '').trim();
-    if (naam) regels.push(`Groetjes, ${naam}`);
-    const tekst = regels.join('\n');
-    out.textContent = tekst;
-    knop.href = `${site.wa}?text=${encodeURIComponent(tekst)}`;
-  }
-  f?.addEventListener('input', maak); f?.addEventListener('change', maak); maak();
-  document.querySelectorAll<HTMLAnchorElement>('[data-kies]').forEach((a) => a.addEventListener('click', () => {
-    const r = f?.querySelector<HTMLInputElement>(`input[name="wat"][value="${a.dataset.kies}"]`); if (r) { r.checked = true; maak(); }
-  }));
-</script>

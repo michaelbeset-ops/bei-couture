@@ -1,49 +1,54 @@
 ---
-import { site, url, waHoi, dagen } from '../data/site';
+import { site, url, waHoi } from '../data/site';
+import { diensten } from '../data/diensten';
 import Merk from './Merk.astro';
 import Icoon from './Icoon.astro';
 const jaar = new Date().getFullYear();
-const thuis = Astro.url.pathname.replace(/\/$/, '') === import.meta.env.BASE_URL.replace(/\/$/, '');
-const h = (id: string) => (thuis ? `#${id}` : url(`#${id}`));
-const diensten = ['Bruidsjurk op maat', 'Trouwjurk vermaken', 'Gala- en avondkleding', 'Bruidsmeisjes en -jonkers', 'Herenpakken', 'Carnavalskleding en turnpakken'];
-const volgorde = [1, 2, 3, 4, 5, 6, 0];
 ---
 <footer class="bg-inkt text-mist">
   <div class="wrap grid gap-x-10 gap-y-12 py-16 text-[.95rem] sm:grid-cols-2 md:py-24 lg:grid-cols-12">
     <div class="lg:col-span-4">
-      <Merk />
-      <p class="mt-6 max-w-xs">Kleermaker en atelier voor bruidsmode aan de Hoogstraat in Rotterdam. Uw droom wordt werkelijkheid in ons atelier.</p>
+      <Merk donker />
+      <p class="mt-6 max-w-xs">Bruidsatelier en kleermaker aan de Hoogstraat in Rotterdam. Uw droom wordt werkelijkheid in ons atelier.</p>
       <div class="mt-7 flex flex-wrap items-center gap-3">
         <a href={waHoi} class="knop knop-merk min-h-11 px-5"><Icoon naam="wa" />WhatsApp</a>
-        <a href={`mailto:${site.mail}`} class="grid h-11 w-11 place-items-center rounded-[2px] border border-lijn text-wit transition-colors hover:border-wit" aria-label="E-mail Bei Couture"><Icoon naam="mail" class="h-5 w-5" /></a>
+        <a href={`mailto:${site.mail}`} class="grid h-11 w-11 place-items-center rounded-sm border border-lijn text-wit transition-colors hover:border-wit" aria-label="E-mail Bei Couture"><Icoon naam="mail" class="h-5 w-5" /></a>
       </div>
     </div>
-    <div class="lg:col-span-2">
-      <p class="font-semibold text-wit">Atelier</p>
+
+    <div class="lg:col-span-3">
+      <p class="font-semibold text-wit">Het atelier</p>
       <ul class="mt-5 space-y-2">
-        {diensten.map((t) => <li><a href={h('atelier')} class="no-underline transition-colors hover:text-strik">{t}</a></li>)}
+        {diensten.map((d) => <li><a href={url(`${d.slug}/`)} class="no-underline transition-colors hover:text-strik">{d.kaartTitel}</a></li>)}
       </ul>
     </div>
+
+    <div class="lg:col-span-2">
+      <p class="font-semibold text-wit">Bei Couture</p>
+      <ul class="mt-5 space-y-2">
+        <li><a href={url('werkwijze/')} class="no-underline transition-colors hover:text-strik">Werkwijze</a></li>
+        <li><a href={url('klantervaringen/')} class="no-underline transition-colors hover:text-strik">Klantervaringen</a></li>
+        <li><a href={url('over-bei/')} class="no-underline transition-colors hover:text-strik">Over Bei</a></li>
+        <li><a href={url('afspraak/')} class="no-underline transition-colors hover:text-strik">Afspraak maken</a></li>
+        <li><a href={site.route} class="no-underline transition-colors hover:text-strik">Route plannen</a></li>
+      </ul>
+    </div>
+
     <div class="lg:col-span-3">
       <p class="font-semibold text-wit">Contact</p>
       <ul class="mt-5 space-y-2">
         <li><a href={site.telHref} class="num no-underline hover:text-strik">{site.tel}</a> <span class="text-mist/80">(ook WhatsApp)</span></li>
         <li><a href={`mailto:${site.mail}`} class="no-underline hover:text-strik">{site.mail}</a></li>
         <li>{site.straat}<br />{site.postcode} {site.plaats}</li>
-        <li><a href={site.route} class="no-underline hover:text-strik">Route plannen</a></li>
       </ul>
-    </div>
-    <div class="lg:col-span-3">
-      <p class="font-semibold text-wit">Openingstijden</p>
-      <ul class="num mt-5 space-y-1.5">
-        {volgorde.map((d) => { const t = site.tijden[d]; return <li class="flex justify-between gap-6"><span>{dagen[d]}</span><span class={t ? 'text-wit' : ''}>{t ? `${t[0]}:00 tot ${t[1]}:00` : 'Gesloten'}</span></li>; })}
-      </ul>
+      <p class="mt-5 border-t border-lijn pt-5 text-sm text-strik">Afspraken kunnen al vanaf 9:00 uur, ook buiten de openingstijden. Zaterdag gesloten.</p>
     </div>
   </div>
-  <div class="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-t border-dashed border-lijn py-7 text-xs">
-    <p>© {jaar} {site.naam} · {site.straat}, {site.plaats}</p>
+
+  <div class="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-t border-lijn py-7 text-xs">
+    <p>© {jaar} {site.naam} · {site.straat}, {site.plaats} · KvK <span class="num">{site.kvk}</span></p>
     <p class="flex flex-wrap gap-x-6 gap-y-2"><a href={url('privacy/')} class="no-underline hover:text-wit">Privacyverklaring</a><span>Website door Sitefront</span></p>
   </div>
-  {site.voorstel && <p class="wrap pb-8 text-xs">Kantfoto, teksten en werkwijze van jullie eigen website (webarchief). Sfeerfoto's via Unsplash, ter illustratie. Reviews letterlijk van Google (stand 15 oktober 2026).</p>}
+  {site.voorstel && <p class="wrap pb-8 text-xs">Kantfoto, logo, atelierfoto en teksten van Bei Couture zelf. Overige sfeerfoto's via Unsplash, ter illustratie. Reviews letterlijk van Google (stand 15 oktober 2026).</p>}
   <div class="h-14 md:hidden" aria-hidden="true"></div>
 </footer>

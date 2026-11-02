@@ -1,0 +1,43 @@
+---
+// Afspraak maken op de homepage en de contactpagina: dezelfde enquête als op /afspraak/,
+// één vraag per keer met voortgang. Rechts (op desktop) wie je te spreken krijgt.
+import { Picture } from 'astro:assets';
+import { site } from '../data/site';
+import Icoon from './Icoon.astro';
+import Enquete from './Enquete.astro';
+import bei from '../assets/bei-bloemen.jpg';
+interface Props { achtergrond?: string; kop?: string }
+const { achtergrond = 'bg-strik-zacht', kop = 'Vertel Bei wat je' } = Astro.props;
+---
+<section id="afspraak" class={`${achtergrond} scroll-mt-24 py-12 md:py-24`} aria-labelledby="afspraak-kop">
+  <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-14">
+    <div class="min-w-0 lg:col-span-7">
+      <p class="eyebrow">Afspraak in het atelier</p>
+      <h2 id="afspraak-kop" class="mt-4 text-[2.2rem] md:mt-5 md:text-[2.8rem]">{kop} <span class="text-merk">droomt</span></h2>
+      <p class="mt-4 max-w-xl text-steen md:text-lg">Een paar korte vragen, dan staat je bericht klaar voor WhatsApp. Je hoeft nog niets zeker te weten.</p>
+      <div class="mt-7 border border-merk/20 bg-wit p-4 sm:p-7 md:mt-9 md:p-8">
+        <Enquete />
+      </div>
+    </div>
+
+    <aside class="min-w-0 lg:col-span-5">
+      <div class="lg:sticky lg:top-32">
+        <div class="border border-merk/20 bg-wit p-6 md:p-7">
+          <div class="flex items-center gap-4">
+            <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[128, 256]} sizes="64px" alt="Bei, kleermaker van Bei Couture" class="foto h-16 w-16 flex-none object-cover object-[68%_14%]" />
+            <div>
+              <p class="eyebrow">Je afspraak is met Bei</p>
+              <p class="mt-1 font-kop text-[1.35rem] leading-tight">Dezelfde handen van gesprek tot jurk</p>
+            </div>
+          </div>
+          <ul class="mt-5 space-y-2.5 border-t border-merk/20 pt-5 text-[.95rem] text-steen">
+            <li class="flex gap-3"><Icoon naam="vink" class="mt-1 h-4 w-4 flex-none text-merk" />Nog geen foto of idee? Ook prima, dan begint het gesprek in het atelier.</li>
+            <li class="flex gap-3"><Icoon naam="vink" class="mt-1 h-4 w-4 flex-none text-merk" />Je hoort de prijs bij de eerste afspraak, voordat er iets gemaakt wordt.</li>
+            <li class="flex gap-3"><Icoon naam="klok" class="mt-1 h-4 w-4 flex-none text-merk" />Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00. Afspraak kan al vanaf 9:00 uur, en in overleg 's avonds.</li>
+            <li class="flex gap-3"><Icoon naam="tel" class="mt-1 h-4 w-4 flex-none text-merk" />Liever bellen? <a href={site.telHref} class="link num">{site.tel}</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>

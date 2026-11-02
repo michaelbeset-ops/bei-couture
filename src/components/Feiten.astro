@@ -1,0 +1,31 @@
+---
+// Concrete feiten over het atelier, zichtbaar op de pagina en herbruikbaar in llms.txt.
+// Zoekmachines en AI-assistenten citeren dit soort korte, specifieke antwoorden.
+import { site, werkgebied, url } from '../data/site';
+
+const feiten = [
+  { kop: 'Stoffen in het atelier', tekst: 'Taft, bruidssatijn, tule en kant. Applicaties, kraaltjes of borduursel kunnen erbij, precies waar jij ze wilt.' },
+  { kop: 'Drie, soms vier afspraken', tekst: 'Schets en maten, de proefjurk, de jurk in de echte stof, en als er nog iets aangepast is een vierde keer om op te halen. Bij vermaakwerk meestal twee.' },
+  { kop: 'Alles door Bei zelf', tekst: 'Dezelfde persoon voert het gesprek, meet je op, knipt en naait. Geen tussenpersoon, geen atelier elders.' },
+  { kop: 'Nederlands, Engels, Chinees', tekst: `Je kunt in drie talen terecht. Bruiden komen uit ${site.plaats} en de hele regio, van ${werkgebied[1]} tot ${werkgebied[15]}.` },
+];
+---
+<section class="bg-ivoor py-16 md:py-20" aria-labelledby="feiten-kop">
+  <div class="wrap">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p class="eyebrow">In het kort</p>
+        <h2 id="feiten-kop" class="mt-5 text-[2rem] md:text-[2.4rem]">Goed om te <span class="text-merk">weten</span></h2>
+      </div>
+      <a href={url('werkwijze/')} class="text-[.8rem] font-medium uppercase tracking-[.25em] text-merk underline decoration-merk/40 underline-offset-[6px]">Zo verloopt een traject</a>
+    </div>
+    <ul class="mt-8 grid gap-x-10 gap-y-8 border-t border-ivoor-3 pt-8 sm:grid-cols-2 lg:grid-cols-4">
+      {feiten.map((f, i) => (
+        <li class="rijs" style={`--d:${i * 0.06}s`}>
+          <h3 class="text-[1.35rem]">{f.kop}</h3>
+          <p class="mt-3 text-[.98rem] leading-relaxed text-steen">{f.tekst}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

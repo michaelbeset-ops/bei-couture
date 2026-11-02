@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import Kop from '../components/Kop.astro';
+import Voet from '../components/Voet.astro';
+import Icoon from '../components/Icoon.astro';
+import Kruimels from '../components/Kruimels.astro';
+import Afspraak from '../components/Afspraak.astro';
+import Tijden from '../components/Tijden.astro';
+import Faq from '../components/Faq.astro';
+import Reviews from '../components/Reviews.astro';
+import { url, site, waHoi, werkgebied } from '../data/site';
+import { faqSchema } from '../lib/schema';
+
+const basis = new URL(url(''), Astro.site).href;
+const hier = new URL(Astro.url.pathname, Astro.site).href;
+
+const faq = [
+  { v: 'Waar zit bruidsatelier Bei Couture?', a: `Aan de ${site.straat} in ${site.plaats}, in het pand van ${site.inPand}. Het atelier ligt midden in de stad en is goed bereikbaar met het openbaar vervoer.` },
+  { v: 'Kan ik een afspraak maken buiten de openingstijden?', a: 'Ja. Het atelier is dinsdag tot en met vrijdag open van 11:00 tot 17:00 en op zondag van 12:00 tot 17:00. Kun je dan niet, dan wordt er een moment buiten die tijden gezocht, ook in de avond, op maandag. Bel of app even.' },
+  { v: 'Hoe maak ik het snelst een afspraak?', a: `Via WhatsApp op ${site.tel}. Je kunt daar meteen een foto van de jurk meesturen. Bellen kan natuurlijk ook, en mailen naar ${site.mail}.` },
+  { v: 'Kost een eerste afspraak geld?', a: 'In het eerste gesprek kijken we samen wat je wilt en wat er mogelijk is. Wat jouw jurk gaat kosten hangt af van het model, de stof en het werk, en dat hoor je voordat er iets gemaakt wordt.' },
+  { v: 'Kan ik zomaar binnenlopen?', a: 'Voor een korte vraag of een kleine vermaking kun je tijdens de openingstijden gerust binnenlopen. Voor bruidsmode is een afspraak beter, want dan wordt de tijd voor jou vrijgehouden.' },
+  { v: 'Waar kan ik parkeren?', a: 'Het atelier zit aan de Hoogstraat midden in Rotterdam, in het pand van Estay Concept & Design. Er is betaald parkeren in de omgeving en de halte is vlakbij, dus met het openbaar vervoer is het goed te doen.' },
+  { v: 'Moet ik al weten wat ik wil?', a: 'Nee. Veel bruiden komen binnen met één foto en een vaag gevoel. In het eerste gesprek wordt dat samen scherp gemaakt. Je mag ook van gedachten veranderen.' },
+  { v: 'Wat neem ik mee naar de eerste afspraak?', a: 'Foto\'s van jurken die je mooi vindt, en als je ze al hebt je trouwschoenen. Heb je nog niets, kom dan toch: het gesprek is het beginpunt.' },
+  { v: 'Maken jullie alleen bruidsjurken?', a: 'Nee. Bei is kleermaker. Naast bruidsjurken maakt en vermaakt ze jurken voor de bruidsmoeder, bruidsmeisjes en bruidsjonkers, gala- en avondkleding en gewone kleding op maat. Ook trouwjurken reinigen kan.' },
+  { v: 'In welke plaatsen komen jullie klanten vandaan?', a: `Bruiden komen uit ${site.plaats} en de hele omgeving, onder meer uit ${werkgebied.slice(1, 8).join(', ')} en verder.` },
+];
+---
+<Base
+  title="Contact en afspraak maken | Bei Couture Rotterdam"
+  description="Afspraak maken bij bruidsatelier Bei Couture, Hoogstraat 89A Rotterdam. Ook buiten de openingstijden. Bel of app 06 53 61 25 43."
+  og="og-contact.jpg"
+  kruimels={[{ naam: 'Home', url: basis }, { naam: 'Contact', url: hier }]}
+  schema={[faqSchema(faq)]}
+>
+  <Kop />
+  <main id="inhoud">
+    <section class="bg-inkt pb-16 pt-28 text-wit md:pb-20 md:pt-44">
+      <div class="wrap">
+        <div class="text-mist"><Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Contact', href: url('contact/') }]} /></div>
+        <div class="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div class="lg:col-span-7">
+            <p class="eyebrow eyebrow-licht">Contact</p>
+            <h1 class="mt-5 text-4xl">Kom langs in het <em class="accent-licht">atelier.</em></h1>
+            <p class="mt-6 max-w-xl text-lg text-wit/85">Bellen, appen of mailen: alle drie komen ze bij Bei zelf terecht. Stuur gerust meteen een foto van de jurk die je in gedachten hebt, dan weet ze waar je aan denkt.</p>
+            <ul class="mt-10 divide-y divide-lijn border-y border-lijn">
+              {[
+                { href: waHoi, icoon: 'wa', kop: 'WhatsApp', tekst: site.tel, sub: 'Het snelst, en je kunt een foto meesturen.' },
+                { href: site.telHref, icoon: 'tel', kop: 'Bellen', tekst: site.tel, sub: 'Even overleggen wat er mogelijk is.' },
+                { href: `mailto:${site.mail}`, icoon: 'mail', kop: 'E-mail', tekst: site.mail, sub: '' },
+                { href: site.route, icoon: 'pin', kop: site.straat, tekst: `${site.postcode} ${site.plaats}`, sub: `In het pand van ${site.inPand}.` },
+              ].map((c) => (
+                <li><a href={c.href} class="group flex items-start gap-5 py-5 no-underline">
+                  <Icoon naam={c.icoon} class="mt-1 h-5 w-5 flex-none text-strik" />
+                  <span class="flex-1"><strong class="block font-semibold text-wit group-hover:underline group-hover:underline-offset-4">{c.kop}</strong><span class="num text-mist">{c.tekst}</span>{c.sub && <span class="mt-0.5 block text-sm text-mist">{c.sub}</span>}</span>
+                </a></li>
+              ))}
+            </ul>
+          </div>
+          <div class="lg:col-span-5">
+            <Tijden />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Afspraak kop="Stel je bericht samen en vertel wat je" />
+    <Faq vragen={faq} kop="Vragen over het atelier" />
+    <Reviews />
+  </main>
+  <Voet />
+</Base>

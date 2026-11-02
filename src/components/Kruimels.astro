@@ -1,0 +1,16 @@
+---
+interface Props { items: { naam: string; href: string }[] }
+const { items } = Astro.props;
+---
+<nav aria-label="Kruimelpad" class="text-sm">
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
+    {items.map((i, n) => (
+      <li class="flex items-center gap-2">
+        {n > 0 && <span class="opacity-40" aria-hidden="true">/</span>}
+        {n === items.length - 1
+          ? <span class="opacity-80" aria-current="page">{i.naam}</span>
+          : <a href={i.href} class="link opacity-90">{i.naam}</a>}
+      </li>
+    ))}
+  </ol>
+</nav>

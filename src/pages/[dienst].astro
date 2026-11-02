@@ -1,0 +1,179 @@
+---
+// Dienstpagina. Ritme: hero (zwart) > feitenlint (roze) > intro met afspraakpaneel (wit) >
+// foto met het eerste onderdeel (roze) > de overige onderdelen met figuurtjes (wit) >
+// werkwijze (roze) > reviews (zwart) > FAQ (wit) > verwant (roze) > slotbalk (rozenhout).
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Kop from '../components/Kop.astro';
+import Voet from '../components/Voet.astro';
+import Icoon from '../components/Icoon.astro';
+import Werkwijze from '../components/Werkwijze.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import Kruimels from '../components/Kruimels.astro';
+import Lint from '../components/Lint.astro';
+import { diensten, dienstOp } from '../data/diensten';
+import { site, url, waMet } from '../data/site';
+import { dienstSchema, faqSchema } from '../lib/schema';
+import bei from '../assets/bei-bloemen.jpg';
+
+export function getStaticPaths() {
+  return diensten.map((d) => ({ params: { dienst: d.slug }, props: { slug: d.slug } }));
+}
+
+const { slug } = Astro.props;
+const d = dienstOp(slug);
+const basis = new URL(url(''), Astro.site).href;
+const hier = new URL(Astro.url.pathname, Astro.site).href;
+const kruimels = [
+  { naam: 'Home', url: basis },
+  { naam: 'Atelier', url: new URL(url('atelier/'), Astro.site).href },
+  { naam: d.kaartTitel, url: hier },
+];
+const verwant = d.verwant.map(dienstOp);
+const [eerste, ...rest] = d.blokken;
+
+// Eén WhatsApp-bericht voor de hele pagina, in hetzelfde format als het formulier op /contact/.
+const waDienst = waMet(`Hallo Bei, ik wil graag een afspraak maken. Waarvoor: ${d.kies.toLowerCase()}. Ik stuur een foto mee van wat ik in gedachten heb.`);
+const afspraak = `${url('afspraak/')}?voor=${encodeURIComponent(d.kies)}`;
+---
+<Base
+  title={d.title}
+  description={d.description}
+  kruimels={kruimels}
+  og={`og-${d.slug}.jpg`}
+  ogAlt={`${d.kaartTitel} bij Bei Couture, bruidsatelier in Rotterdam`}
+  hoofdEntiteit={`${hier}#dienst`}
+  schema={[dienstSchema(d.kaartTitel, d.description, hier, basis, new URL(url(`og-${d.slug}.jpg`), Astro.site).href), faqSchema(d.faq)]}
+>
+  <Kop wa={waDienst} />
+  <main id="inhoud">
+    <!-- KOP -->
+    <section class="relative isolate overflow-hidden bg-inkt text-wit">
+      <Picture src={d.kopFoto ?? d.img} formats={['avif', 'webp']} fallbackFormat="webp" quality={68} widths={[640, 960, 1400, 2000]} sizes="100vw" alt={d.kopAlt ?? d.alt} loading="eager" fetchpriority="high" class="absolute inset-0 -z-10 h-full w-full object-cover" style={`object-position:${d.kopPos ?? d.pos}`} />
+      <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#1b1716f2_0%,#1b1716c7_42%,#1b171659_80%,#1b171640_100%)] max-md:bg-[linear-gradient(180deg,#1b1716b3_0%,#1b1716e0_55%,#1b1716_100%)]"></div>
+      <div class="wrap pb-10 pt-24 md:pb-24 md:pt-40">
+        <div class="text-sm text-mist"><Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Atelier', href: url('atelier/') }, { naam: d.kaartTitel, href: hier }]} /></div>
+        <p class="eyebrow eyebrow-licht mt-6 md:mt-8">{d.eyebrow}</p>
+        <h1 class="mt-4 max-w-[18ch] text-[2.3rem] md:mt-5 md:text-4xl">{d.h1} <span class="text-strik">{d.h1Accent}</span></h1>
+        <p class="mt-5 max-w-2xl text-base text-wit/85 md:mt-6 md:text-xl">{d.lead}</p>
+        <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-9">
+          <a href={waDienst} class="knop knop-merk"><Icoon naam="wa" />App een foto van je jurk</a>
+          <a href={afspraak} class="knop knop-wit">Afspraak maken <Icoon naam="pijl" /></a>
+        </div>
+        <ul class="mt-6 flex flex-wrap items-center gap-x-7 gap-y-2 text-[.95rem] text-wit/80">
+          <li class="flex items-center gap-2"><span class="flex text-strik">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-[.9rem] w-[.9rem]" />)}</span><strong class="num font-semibold text-wit">{site.google.score}</strong> op Google, {site.google.aantal} reviews</li>
+          <li class="flex items-center gap-2"><Icoon naam="kalender" class="h-4 w-4 flex-none text-strik" />Ook buiten de openingstijden op afspraak</li>
+        </ul>
+      </div>
+    </section>
+
+    <Lint label={`${d.kaartTitel} in het kort`} items={[...d.feiten, 'Hoogstraat 89A, Rotterdam', '5,0 uit 51 Google-reviews']} />
+
+    <!-- INTRO: groot citaat, korte toelichting, rechts het afspraakpaneel -->
+    <section class="bg-ivoor py-12 md:py-20">
+      <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-7">
+          <p class="uitspraak max-w-2xl text-[1.5rem] md:text-[1.9rem]">{d.intro[0]}</p>
+          <div class="mt-6 max-w-xl space-y-4 text-steen">
+            {d.intro.slice(1).map((p) => <p>{p}</p>)}
+          </div>
+          <p class="mt-6"><a href={url('over-bei/')} class="inline-block py-2 text-[.8rem] font-medium uppercase tracking-[.25em] text-merk underline decoration-merk/40 underline-offset-[6px]">Meer over Bei, kleermaker sinds 1997</a></p>
+        </div>
+
+        <aside class="lg:col-span-5">
+          <div class="border border-merk/20 bg-strik-zacht p-6 md:p-7">
+            <div class="flex items-center gap-4">
+              <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[128, 256]} sizes="64px" alt="Bei, kleermaker van Bei Couture" class="foto h-16 w-16 flex-none object-cover object-[68%_14%]" />
+              <div>
+                <p class="eyebrow">Afspraak met Bei</p>
+                <p class="mt-1 font-kop text-[1.45rem] leading-tight">Stuur een foto van wat je in gedachten hebt</p>
+              </div>
+            </div>
+            <a href={waDienst} class="knop knop-merk mt-6 w-full"><Icoon naam="wa" />App een foto of je vraag</a>
+            <p class="mt-3 text-center text-sm text-steen"><strong class="num font-semibold text-inkt">{site.google.score}</strong> uit {site.google.aantal} reviews op Google</p>
+            <ul class="mt-5 space-y-2.5 border-t border-merk/20 pt-5 text-[.95rem] text-steen">
+              <li class="flex gap-3"><Icoon naam="vink" class="mt-1 h-4 w-4 flex-none text-merk" />Nog geen foto of idee? Ook prima, dan begint het gesprek in het atelier.</li>
+              <li class="flex gap-3"><Icoon naam="vink" class="mt-1 h-4 w-4 flex-none text-merk" />Je hoort de prijs bij de eerste afspraak, voordat er iets gemaakt wordt.</li>
+              <li class="flex gap-3"><Icoon naam="klok" class="mt-1 h-4 w-4 flex-none text-merk" />Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00. Afspraak kan al vanaf 9:00 uur, en in overleg 's avonds.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- EERSTE ONDERDEEL: foto links, tekst rechts op het zachte roze (zoals Over Bei op de homepage) -->
+    <section class="bg-strik-zacht py-12 md:py-24">
+      <div class="wrap grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-14">
+        <div class="lg:col-span-5">
+          <Picture src={d.foto2} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 480px, 100vw" alt={d.foto2Alt} class="foto aspect-[4/5] w-full object-cover max-lg:aspect-[4/3]" style={`object-position:${d.foto2Pos}`} />
+        </div>
+        <div class="lg:col-span-7 lg:pl-4 xl:pl-10">
+          <p class="eyebrow">{d.eyebrow}</p>
+          <h2 class="mt-4 text-[2rem] md:text-[2.4rem]">{eerste.kop}</h2>
+          {eerste.tekst && <div class="mt-6 max-w-xl space-y-4 text-steen">{eerste.tekst.map((p) => <p>{p}</p>)}</div>}
+          {eerste.lijst && (
+            <ul class="mt-6 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+              {eerste.lijst.map((l) => <li class="flex items-start gap-3 text-[.95rem] text-steen"><Icoon naam="vink" class="mt-1.5 h-4 w-4 flex-none text-merk" />{l}</li>)}
+            </ul>
+          )}
+        </div>
+      </div>
+    </section>
+
+    <!-- OVERIGE ONDERDELEN: raster met figuurtjes, geen lappen tekst -->
+    <section class="bg-ivoor py-12 md:py-20">
+      <div class="wrap">
+        <p class="eyebrow">Goed om te weten</p>
+        <h2 class="mt-4 text-[2rem] md:text-[2.4rem]">Wat er <span class="text-merk">mogelijk is</span></h2>
+        <ul class="mt-8 grid gap-x-10 gap-y-9 border-t border-ivoor-3 pt-8 sm:grid-cols-2 lg:grid-cols-3">
+          {rest.map((b, i) => (
+            <li class="rijs" style={`--d:${i * 0.07}s`}>
+              <Icoon naam={b.icoon} class="h-[46px] w-[46px] text-merk" />
+              <h3 class="mt-4 text-[1.35rem] leading-tight">{b.kop}</h3>
+              {b.tekst && <p class="mt-2 text-[.95rem] leading-relaxed text-steen">{b.tekst.join(' ')}</p>}
+              {b.lijst && (
+                <ul class="mt-3 space-y-2 text-[.95rem] text-steen">
+                  {b.lijst.map((l) => <li class="flex gap-3"><Icoon naam="vink" class="mt-1.5 h-4 w-4 flex-none text-merk" />{l}</li>)}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-4 md:mt-10">
+          <a href={waDienst} class="knop knop-merk"><Icoon naam="wa" />App een foto van je jurk</a>
+          <a href={afspraak} class="knop knop-rand">Afspraak maken</a>
+        </div>
+      </div>
+    </section>
+
+    <Werkwijze achtergrond="bg-strik-zacht" />
+    <Faq vragen={d.faq} kop={`Vragen over ${d.kaartTitel.toLowerCase()}`} achtergrond="bg-ivoor" />
+
+    <!-- VERWANT -->
+    <section class="bg-strik-zacht py-12 md:py-20">
+      <div class="wrap">
+        <p class="eyebrow">Meer in het atelier</p>
+        <h2 class="mt-4 text-[2rem] md:text-[2.4rem]">Misschien ook <span class="text-merk">interessant</span></h2>
+        <ul class="mt-6 grid gap-4 sm:mt-8 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-10">
+          {verwant.map((v) => (
+            <li>
+              <a href={url(`${v.slug}/`)} class="fotolink group flex items-center gap-4 sm:block">
+                <span class="foto block w-24 flex-none aspect-[3/4] sm:w-auto">
+                  <Picture src={v.img} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[240, 480, 720]} sizes="(min-width: 640px) 33vw, 96px" alt={v.alt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" style={`object-position:${v.pos}`} />
+                </span>
+                <span class="block sm:mt-4">
+                  <h3 class="font-tekst text-[.8rem] font-medium uppercase tracking-[.22em] text-inkt">{v.kaartTitel}</h3>
+                  <span class="mt-1.5 block text-[.95rem] text-steen">{v.voorWie}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <Cta href={afspraak} wa={waDienst} tekst="Kom langs in het atelier aan de Hoogstraat, of app eerst een foto. Je hoeft nog niets te weten, alleen wat je mooi vindt." />
+  </main>
+  <Voet />
+</Base>

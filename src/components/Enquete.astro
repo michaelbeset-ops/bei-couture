@@ -1,0 +1,183 @@
+---
+// Afspraak maken als korte enquête: één vraag per scherm, grote knoppen, en aan het einde
+// het bericht aan Bei dat je zelf via WhatsApp verstuurt. Niets wordt opgeslagen of verzonden.
+import { site, waHoi } from '../data/site';
+import { diensten } from '../data/diensten';
+import Icoon from './Icoon.astro';
+const stappen = ['Waarvoor', 'Stof', 'Wanneer', 'Dag', 'Jij'];
+---
+<div class="enquete mx-auto max-w-2xl" data-enquete>
+  <div class="flex items-center justify-between gap-4 text-[.78rem] font-medium uppercase tracking-[.22em] text-merk">
+    <span>Stap <span data-stap-nr>1</span> van <span data-stap-tot>5</span></span>
+    <span data-stap-naam>{stappen[0]}</span>
+  </div>
+  <div class="mt-3 h-[3px] w-full bg-merk/15"><div class="h-full bg-merk transition-[width] duration-500" style="width: 20%" data-balk></div></div>
+
+  <form id="wens" class="mt-8" novalidate>
+    <!-- 1 -->
+    <fieldset data-stap="1" data-naam="Waarvoor">
+      <legend class="font-kop text-[1.6rem] leading-tight sm:text-[1.9rem] md:text-[2.4rem]">Waarvoor kom je?</legend>
+      <p class="mt-2 text-steen max-sm:text-[.95rem] sm:mt-3">Tik op wat het dichtst in de buurt komt. Je gaat vanzelf door naar de volgende vraag.</p>
+      <div class="mt-5 grid gap-2.5 sm:mt-7 sm:gap-3 sm:grid-cols-2">
+        {diensten.map((d) => (
+          <label class="keuze min-h-[3.4rem] text-[1rem] sm:min-h-[3.8rem] sm:text-[1.05rem]"><input type="radio" name="wat" value={d.kies} /><span class="bol"></span>{d.kies}</label>
+        ))}
+        <label class="keuze min-h-[3.4rem] text-[1rem] sm:min-h-[3.8rem] sm:text-[1.05rem]"><input type="radio" name="wat" value="Iets anders" /><span class="bol"></span>Anders</label>
+      </div>
+    </fieldset>
+
+    <!-- 2 -->
+    <fieldset data-stap="2" data-naam="Stof" hidden>
+      <legend class="font-kop text-[1.6rem] leading-tight sm:text-[1.9rem] md:text-[2.4rem]">Welke stof heb je in gedachten?</legend>
+      <p class="mt-3 text-steen">In het atelier voel je ze allemaal. Dit is alleen om alvast een richting te hebben.</p>
+      <div class="mt-5 grid gap-2.5 sm:mt-7 sm:gap-3 sm:grid-cols-2">
+        {['Taft', 'Bruidssatijn', 'Tule', 'Weet ik nog niet'].map((s) => (
+          <label class="keuze min-h-[3.4rem] text-[1rem] sm:min-h-[3.8rem] sm:text-[1.05rem]"><input type="radio" name="stof" value={s} /><span class="bol"></span>{s}</label>
+        ))}
+      </div>
+    </fieldset>
+
+    <!-- 3 -->
+    <fieldset data-stap="3" data-naam="Wanneer" hidden>
+      <legend class="font-kop text-[1.6rem] leading-tight sm:text-[1.9rem] md:text-[2.4rem]">Wanneer is de grote dag?</legend>
+      <p class="mt-3 text-steen">Dan weet Bei hoeveel tijd er is voor de afspraken.</p>
+      <div class="mt-5 grid gap-2.5 sm:mt-7 sm:gap-3 sm:grid-cols-2">
+        {['Nog geen datum', 'Binnen een maand', 'Over 1 tot 3 maanden', 'Over 3 tot 6 maanden', 'Over meer dan een half jaar'].map((s) => (
+          <label class="keuze min-h-[3.4rem] text-[1rem] sm:min-h-[3.8rem] sm:text-[1.05rem]"><input type="radio" name="wanneer" value={s} /><span class="bol"></span>{s}</label>
+        ))}
+      </div>
+    </fieldset>
+
+    <!-- 4 -->
+    <fieldset data-stap="4" data-naam="Dag" hidden>
+      <legend class="font-kop text-[1.6rem] leading-tight sm:text-[1.9rem] md:text-[2.4rem]">Wanneer kom je het liefst langs?</legend>
+      <p class="mt-3 text-steen">Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00. Een afspraak kan al vanaf 9:00 uur. Lukt het overdag niet, dan zoeken we in overleg een avond.</p>
+      <div class="mt-5 grid gap-2.5 sm:mt-7 sm:gap-3 sm:grid-cols-2">
+        {['Maakt niet uit', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zondag', 'Buiten de openingstijden'].map((s) => (
+          <label class="keuze min-h-[3.4rem] text-[1rem] sm:min-h-[3.8rem] sm:text-[1.05rem]"><input type="radio" name="dag" value={s} /><span class="bol"></span>{s}</label>
+        ))}
+      </div>
+    </fieldset>
+
+    <!-- 5 -->
+    <fieldset data-stap="5" data-naam="Jij" hidden>
+      <legend class="font-kop text-[1.6rem] leading-tight sm:text-[1.9rem] md:text-[2.4rem]">Bijna klaar</legend>
+      <p class="mt-3 text-steen">Een foto van de jurk die je in gedachten hebt kun je in WhatsApp meesturen. Je naam mag, maar hoeft niet.</p>
+      <div class="mt-7 grid gap-4">
+        <label class="keuze keuze-vink min-h-[3.8rem] text-[1.05rem]"><input type="checkbox" name="foto" checked /><span class="bol"></span>Ik stuur een foto of ontwerp mee</label>
+        <div>
+          <label for="naam" class="mb-2 block text-sm font-semibold">Je naam</label>
+          <input id="naam" name="naam" type="text" autocomplete="given-name" placeholder="Voornaam" class="veld" />
+        </div>
+      </div>
+      <button type="button" class="knop knop-merk mt-7 w-full sm:w-auto" data-klaar>Bekijk je bericht <Icoon naam="pijl" /></button>
+    </fieldset>
+
+    <!-- 6: bericht -->
+    <div data-stap="6" data-naam="Versturen" hidden>
+      <p class="font-kop text-[1.9rem] leading-tight md:text-[2.4rem]">Je bericht aan Bei staat klaar</p>
+      <div class="mt-6 bg-inkt p-2 text-wit">
+        <div class="border border-wit/15 p-6 md:p-7">
+          <div class="flex items-center justify-between gap-4">
+            <p class="text-[.78rem] font-medium uppercase tracking-[.22em] text-strik">Je bericht</p>
+            <Icoon naam="wa" class="h-6 w-6 text-strik" />
+          </div>
+          <p id="bericht" class="mt-4 whitespace-pre-line font-kop text-[1.25rem] leading-snug" aria-live="polite">Hallo Bei, ik wil graag een afspraak maken in het atelier.</p>
+          <a id="stuur" href={waHoi} class="knop knop-merk mt-7 w-full max-sm:sticky max-sm:bottom-3"><Icoon naam="wa" />Verstuur via WhatsApp</a>
+          <p class="mt-4 text-center text-sm text-mist">Liever bellen? <a href={site.telHref} class="link num font-semibold text-wit">{site.tel}</a></p>
+        </div>
+      </div>
+      <p class="mt-5 text-sm text-steen">WhatsApp opent met dit bericht. Je kunt hem nog aanpassen voordat je hem verstuurt. Er wordt hier niets opgeslagen.</p>
+    </div>
+
+    <div class="mt-8 flex items-center justify-between gap-4">
+      <button type="button" class="inline-flex items-center gap-2 py-2 text-[.8rem] font-medium uppercase tracking-[.2em] text-merk disabled:invisible" data-terug><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 6 9 12l6 6" /></svg>Terug</button>
+      <button type="button" class="knop knop-rand bg-wit" data-verder>Volgende <Icoon naam="pijl" /></button>
+    </div>
+  </form>
+</div>
+
+<script>
+  import { site } from '../data/site';
+  const f = document.querySelector<HTMLFormElement>('#wens');
+  const out = document.querySelector('#bericht');
+  const knop = document.querySelector<HTMLAnchorElement>('#stuur');
+  const terug = document.querySelector<HTMLButtonElement>('[data-terug]');
+  const verder = document.querySelector<HTMLButtonElement>('[data-verder]');
+  const balk = document.querySelector<HTMLElement>('[data-balk]');
+  const nr = document.querySelector('[data-stap-nr]');
+  const tot = document.querySelector('[data-stap-tot]');
+  const naamEl = document.querySelector('[data-stap-naam]');
+  const alle = [...document.querySelectorAll<HTMLElement>('[data-stap]')];
+  const maakWerk = (wat: string) => wat === 'Bruidsjurk laten maken' || wat === 'Gala- of avondkleding' || wat === 'Jurk voor de bruidsmoeder';
+  const v = () => new FormData(f!);
+  // Volgorde van schermen, afhankelijk van de keuze bij stap 1 (de stofvraag alleen bij maakwerk).
+  const route = () => (maakWerk(String(v().get('wat') || '')) ? [1, 2, 3, 4, 5, 6] : [1, 3, 4, 5, 6]);
+  let huidig = 1;
+
+  function maak() {
+    if (!f || !out || !knop) return;
+    const d = v();
+    const wat = String(d.get('wat') || '');
+    const regels = ['Hallo Bei, ik wil graag een afspraak maken in het atelier.'];
+    if (wat === 'Iets anders') regels.push('Waarvoor: iets anders, dat leg ik graag even uit.');
+    else if (wat) regels.push(`Waarvoor: ${wat.charAt(0).toLowerCase() + wat.slice(1)}.`);
+    if (maakWerk(wat) && d.get('stof') && d.get('stof') !== 'Weet ik nog niet') regels.push(`Stof: ${String(d.get('stof')).toLowerCase()}.`);
+    if (d.get('wanneer') && d.get('wanneer') !== 'Nog geen datum') regels.push(`De grote dag: ${String(d.get('wanneer')).toLowerCase()}.`);
+    const dag = String(d.get('dag') || '');
+    if (dag === 'Buiten de openingstijden') regels.push('Ik kan niet tijdens de openingstijden, mag het buiten die tijden?');
+    else if (dag && dag !== 'Maakt niet uit') regels.push(`Liefst op een ${dag.toLowerCase()}.`);
+    if (d.get('foto')) regels.push('Ik stuur een foto of ontwerp mee.');
+    const naam = String(d.get('naam') || '').trim();
+    if (naam) regels.push(`Groetjes, ${naam}`);
+    const tekst = regels.join('\n');
+    out.textContent = tekst;
+    knop.href = `${site.wa}?text=${encodeURIComponent(tekst)}`;
+  }
+
+  function toon(n: number) {
+    huidig = n;
+    const r = route();
+    const i = r.indexOf(n);
+    alle.forEach((el) => { el.hidden = Number(el.dataset.stap) !== n; });
+    if (nr) nr.textContent = String(Math.min(i + 1, r.length - 1));
+    if (tot) tot.textContent = String(r.length - 1);
+    if (naamEl) naamEl.textContent = alle.find((el) => Number(el.dataset.stap) === n)?.dataset.naam ?? '';
+    if (balk) balk.style.width = `${Math.round(((i + 1) / r.length) * 100)}%`;
+    if (terug) terug.disabled = i === 0;
+    if (verder) verder.hidden = n >= 5 || !beantwoord(n);
+    // Niet springen: alleen terugscrollen als de vraag boven het scherm is verdwenen.
+    const vak = document.querySelector<HTMLElement>('[data-enquete]');
+    if (vak && vak.getBoundingClientRect().top < 0) vak.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    maak();
+  }
+  const beantwoord = (n: number) => {
+    const naam = { 1: 'wat', 2: 'stof', 3: 'wanneer', 4: 'dag' }[n as 1 | 2 | 3 | 4];
+    return !naam || !!v().get(naam);
+  };
+  function volgende() {
+    const r = route(); const i = r.indexOf(huidig);
+    if (!beantwoord(huidig)) { alle.find((el) => Number(el.dataset.stap) === huidig)?.classList.add('enquete-let'); return; }
+    if (i < r.length - 1) toon(r[i + 1]);
+  }
+  function vorige() { const r = route(); const i = r.indexOf(huidig); if (i > 0) toon(r[i - 1]); }
+
+  f?.addEventListener('submit', (e) => { e.preventDefault(); volgende(); });
+  f?.addEventListener('input', maak);
+  f?.addEventListener('change', (e) => {
+    const t = e.target as HTMLInputElement;
+    maak();
+    if (t.type === 'radio') setTimeout(volgende, 220);
+    if (verder) verder.hidden = huidig >= 5 || !beantwoord(huidig);
+  });
+  verder?.addEventListener('click', volgende);
+  terug?.addEventListener('click', vorige);
+  document.querySelector('[data-klaar]')?.addEventListener('click', () => toon(6));
+
+  // Vooraf ingevuld vanaf een dienstpagina: /afspraak/?voor=...
+  const voor = new URLSearchParams(location.search).get('voor');
+  if (voor && f) {
+    const r = f.querySelector<HTMLInputElement>(`input[name="wat"][value="${CSS.escape(voor)}"]`);
+    if (r) { r.checked = true; toon(route()[1]); } else toon(1);
+  } else toon(1);
+</script>
