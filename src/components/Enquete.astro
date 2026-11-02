@@ -22,6 +22,7 @@ const stappen = ['Waarvoor', 'Stof', 'Wanneer', 'Dag', 'Jij'];
         {diensten.map((d) => (
           <label class="keuze min-h-[3.4rem] text-[1rem] sm:min-h-[3.8rem] sm:text-[1.05rem]"><input type="radio" name="wat" value={d.kies} /><span class="bol"></span>{d.kies}</label>
         ))}
+        <label class="keuze min-h-[3.4rem] text-[1rem] sm:min-h-[3.8rem] sm:text-[1.05rem]"><input type="radio" name="wat" value="Iets anders" /><span class="bol"></span>Anders</label>
       </div>
     </fieldset>
 
@@ -119,7 +120,8 @@ const stappen = ['Waarvoor', 'Stof', 'Wanneer', 'Dag', 'Jij'];
     const d = v();
     const wat = String(d.get('wat') || '');
     const regels = ['Hallo Bei, ik wil graag een afspraak maken in het atelier.'];
-    if (wat) regels.push(`Waarvoor: ${wat.charAt(0).toLowerCase() + wat.slice(1)}.`);
+    if (wat === 'Iets anders') regels.push('Waarvoor: iets anders, dat leg ik graag even uit.');
+    else if (wat) regels.push(`Waarvoor: ${wat.charAt(0).toLowerCase() + wat.slice(1)}.`);
     if (maakWerk(wat) && d.get('stof') && d.get('stof') !== 'Weet ik nog niet') regels.push(`Stof: ${String(d.get('stof')).toLowerCase()}.`);
     if (d.get('wanneer') && d.get('wanneer') !== 'Nog geen datum') regels.push(`De grote dag: ${String(d.get('wanneer')).toLowerCase()}.`);
     const dag = String(d.get('dag') || '');

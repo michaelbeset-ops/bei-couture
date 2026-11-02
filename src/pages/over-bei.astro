@@ -9,7 +9,7 @@ import Cta from '../components/Cta.astro';
 import Kruimels from '../components/Kruimels.astro';
 import Tijden from '../components/Tijden.astro';
 import { url, site, werkgebied } from '../data/site';
-import bei from '../assets/bei-atelier.jpg';
+import bei from '../assets/bei-bloemen.jpg';
 import kant from '../assets/kant.jpg';
 
 const basis = new URL(url(''), Astro.site).href;
@@ -34,7 +34,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
         <Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Over Bei', href: url('over-bei/') }]} />
         <div class="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div class="rijs lg:col-span-6">
-            <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 600px, 100vw" alt="Bei schikt geplooide stof op de paspop in haar atelier" loading="eager" fetchpriority="high" class="foto aspect-[4/5] w-full object-cover object-[60%_35%]" />
+            <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 600px, 100vw" alt="Bei, lachend voor een wand van witte bloemen" loading="eager" fetchpriority="high" class="foto aspect-[4/5] w-full object-cover object-[66%_30%]" />
             <p class="mt-4 text-sm text-steen">Bei aan het werk in haar atelier aan de Hoogstraat.</p>
           </div>
           <div class="lg:col-span-6 lg:pt-4">

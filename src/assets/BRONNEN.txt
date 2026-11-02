@@ -18,8 +18,10 @@ gala-detail.jpg         foto2/gala-en-avondkleding-01.jpg (a2-011), 1200x1599. G
 kant-patroon.jpg        foto2/kleding-op-maat-01.jpg (a2-008), 1200x1599. Kant op een papieren patroon met schaar.
 lijfje-tafel.jpg        atelier/atelier-02.jpg (a2-013), 1200x1599. Geplisseerd lijfje in wording op de tafel.
 snijtafel.jpg           atelier/atelier-01.jpg (a2-016), 1599x1200. Stof en patroondelen op de snijtafel. /werkwijze/, "Wat neem je mee".
-bei-atelier.jpg         over-bei/bei-01.jpg (a2-014), 1200x1599. Bei schikt geplooide stof op de paspop en kijkt in de camera.
-                        Vervangt de eerdere bei.jpg (480x640, aangeleverd 27-10-2026).
+bei-bloemen.jpg         eigen foto, aangeleverd door Bei op 02-11-2026, 1206x1200. Bei lachend voor een bloemenwand.
+                        Vervangt bei-atelier.jpg (over-bei/bei-01) en de eerdere bei.jpg.
+logo-rond.png           volledige logo, aangeleverd door Bei op 02-11-2026 (600x600 op zwart); zwart doorzichtig gemaakt.
+                        Vervangt logo.png en logo-licht.png in kop en voet; de favicons komen nog van logo.png.
 applicaties.jpg         reviews/review-01.jpg (a2-009), 1200x1599. Gouden kanten applicaties met parels. Bij een klantervaring.
 
 Eerder eigen beeld

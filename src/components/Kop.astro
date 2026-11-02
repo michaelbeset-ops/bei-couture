@@ -60,8 +60,22 @@ const nav: { href: string; t: string; actief: boolean }[] = [
   </div>
 
   <nav id="menu-nav" aria-label="Menu" class="hidden bg-inkt lg:hidden" data-menu>
-    <ul class="wrap max-h-[calc(100svh-5rem)] overflow-y-auto pb-24 pt-2">
-      {[...diensten.map((d) => ({ href: url(`${d.slug}/`), t: d.kaartTitel })), ...nav.map((n) => ({ href: n.href, t: n.t }))].map((n) => (
+    <ul class="wrap max-h-[calc(100svh-5rem)] overflow-y-auto pb-24 pt-2" data-menu-lijst>
+      <li class="border-b border-lijn">
+        <div class="flex items-center justify-between">
+          <a href={url('atelier/')} class="block py-4 font-kop text-2xl font-normal text-wit no-underline">Atelier</a>
+          <button type="button" class="grid h-12 w-12 place-items-center text-wit" aria-expanded="false" aria-controls="menu-atelier" data-atelier-knop>
+            <span class="sr-only">Diensten tonen</span>
+            <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" data-atelier-pijl><path d="m6 9 6 6 6-6" /></svg>
+          </button>
+        </div>
+        <ul id="menu-atelier" class="hidden pb-3" data-atelier-lijst>
+          {diensten.map((d) => (
+            <li><a href={url(`${d.slug}/`)} class="block py-2.5 pl-5 text-[1.05rem] text-wit/85 no-underline">{d.kaartTitel}</a></li>
+          ))}
+        </ul>
+      </li>
+      {nav.map((n) => (
         <li><a href={n.href} class="block border-b border-lijn py-4 font-kop text-2xl font-normal text-wit no-underline">{n.t}</a></li>
       ))}
       <li class="flex flex-col gap-3 pt-6">
@@ -76,6 +90,10 @@ const nav: { href: string; t: string; actief: boolean }[] = [
 <script>
   const k = document.querySelector<HTMLButtonElement>('[data-menu-knop]');
   const m = document.querySelector<HTMLElement>('[data-menu]');
+  const ak = document.querySelector<HTMLButtonElement>('[data-atelier-knop]');
+  const al = document.querySelector<HTMLElement>('[data-atelier-lijst]');
+  const ap = document.querySelector<HTMLElement>('[data-atelier-pijl]');
+  ak?.addEventListener('click', () => { const o = ak.getAttribute('aria-expanded') !== 'true'; ak.setAttribute('aria-expanded', String(o)); al?.classList.toggle('hidden', !o); ap?.classList.toggle('rotate-180', o); });
   if (k && m) {
     k.addEventListener('click', () => { const o = k.getAttribute('aria-expanded') !== 'true'; k.setAttribute('aria-expanded', String(o)); m.classList.toggle('hidden', !o); k.closest('header')?.classList.toggle('bg-inkt', o); document.documentElement.classList.toggle('overflow-hidden', o); });
     m.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { k.setAttribute('aria-expanded', 'false'); m.classList.add('hidden'); k.closest('header')?.classList.remove('bg-inkt'); document.documentElement.classList.remove('overflow-hidden'); }));

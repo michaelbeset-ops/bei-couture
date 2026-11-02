@@ -35,7 +35,7 @@ import galaDetail from '../assets/gala-detail.jpg';
 import kantPatroon from '../assets/kant-patroon.jpg';
 import lijfjeTafel from '../assets/lijfje-tafel.jpg';
 import snijtafel from '../assets/snijtafel.jpg';
-import beiAtelier from '../assets/bei-atelier.jpg';
+import beiBloemen from '../assets/bei-bloemen.jpg';
 
 export interface Ervaring {
   naam: string;
@@ -153,7 +153,7 @@ export const atelierStrook: { foto: ImageMetadata; alt: string; pos?: string }[]
   { foto: zeemeermin, alt: 'Kanten zeemeerminjurk met een rij knoopjes op de rug', pos: '50% 40%' },
   { foto: gala, alt: 'Rode kanten avondjurk met lange sleep, gepast in het atelier', pos: '50% 50%' },
   { foto: corset, alt: 'Satijnen jurk met corsetrug en sleep', pos: '50% 35%' },
-  { foto: beiAtelier, alt: 'Bei schikt geplooide stof op de paspop in haar atelier', pos: '60% 35%' },
+  { foto: beiBloemen, alt: 'Bei, lachend voor een wand van witte bloemen', pos: '66% 30%' },
   { foto: vRug, alt: 'V-rug met kanten mouwtjes en knoopjes', pos: '50% 35%' },
   { foto: kantPatroon, alt: 'Kant met pailletten op een papieren patroon, schaar ernaast', pos: '50% 50%' },
   { foto: rugKnoopjes, alt: 'Kanten rug met knoopjes en een tule rok', pos: '50% 35%' },

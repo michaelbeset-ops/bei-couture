@@ -5,7 +5,7 @@ import { Picture } from 'astro:assets';
 import { site } from '../data/site';
 import Icoon from './Icoon.astro';
 import Enquete from './Enquete.astro';
-import bei from '../assets/bei-atelier.jpg';
+import bei from '../assets/bei-bloemen.jpg';
 interface Props { achtergrond?: string; kop?: string }
 const { achtergrond = 'bg-strik-zacht', kop = 'Vertel Bei wat je' } = Astro.props;
 ---
@@ -24,7 +24,7 @@ const { achtergrond = 'bg-strik-zacht', kop = 'Vertel Bei wat je' } = Astro.prop
       <div class="lg:sticky lg:top-32">
         <div class="border border-merk/20 bg-wit p-6 md:p-7">
           <div class="flex items-center gap-4">
-            <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[128, 256]} sizes="64px" alt="Bei, kleermaker van Bei Couture" class="foto h-16 w-16 flex-none object-cover object-[62%_32%]" />
+            <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[128, 256]} sizes="64px" alt="Bei, kleermaker van Bei Couture" class="foto h-16 w-16 flex-none object-cover object-[68%_14%]" />
             <div>
               <p class="eyebrow">Je afspraak is met Bei</p>
               <p class="mt-1 font-kop text-[1.35rem] leading-tight">Dezelfde handen van gesprek tot jurk</p>

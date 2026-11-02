@@ -24,7 +24,7 @@ const paginas = [
   { naam: 'og-kleding-op-maat', foto: 'kant-patroon.jpg', pos: '50% 50%', eyebrow: 'Kleermaker', kop: 'Kleding op maat en <em>vermaken.</em>' },
   { naam: 'og-werkwijze', foto: 'kant.jpg', pos: '55% 45%', eyebrow: 'Zo gaat het', kop: 'Van jouw foto tot <em>jouw jurk.</em>' },
   { naam: 'og-klantervaringen', foto: 'vermaken-tule.jpg', pos: '50% 40%', eyebrow: 'Klantervaringen', kop: 'De verhalen achter de <em>jurken.</em>' },
-  { naam: 'og-contact', foto: 'bei-atelier.jpg', pos: '60% 35%', eyebrow: 'Contact', kop: 'Kom langs in het <em>atelier.</em>' },
+  { naam: 'og-contact', foto: 'bei-bloemen.jpg', pos: '66% 30%', eyebrow: 'Contact', kop: 'Kom langs in het <em>atelier.</em>' },
 ];
 
 const maakHtml = ({ foto, pos, eyebrow, kop }) => `<!doctype html><html lang="nl"><head><meta charset="utf-8"><style>

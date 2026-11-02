@@ -16,7 +16,7 @@ import Lint from '../components/Lint.astro';
 import { diensten, dienstOp } from '../data/diensten';
 import { site, url, waMet } from '../data/site';
 import { dienstSchema, faqSchema } from '../lib/schema';
-import bei from '../assets/bei-atelier.jpg';
+import bei from '../assets/bei-bloemen.jpg';
 
 export function getStaticPaths() {
   return diensten.map((d) => ({ params: { dienst: d.slug }, props: { slug: d.slug } }));
@@ -86,7 +86,7 @@ const reviewsEerst = d.slug === 'trouwjurk-vermaken' ? ['Çanci A.', 'Mariluz', 
         <aside class="lg:col-span-5">
           <div class="border border-merk/20 bg-strik-zacht p-6 md:p-7">
             <div class="flex items-center gap-4">
-              <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[128, 256]} sizes="64px" alt="Bei, kleermaker van Bei Couture" class="foto h-16 w-16 flex-none object-cover object-[62%_32%]" />
+              <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[128, 256]} sizes="64px" alt="Bei, kleermaker van Bei Couture" class="foto h-16 w-16 flex-none object-cover object-[68%_14%]" />
               <div>
                 <p class="eyebrow">Afspraak met Bei</p>
                 <p class="mt-1 font-kop text-[1.45rem] leading-tight">Stuur een foto van wat je in gedachten hebt</p>
