@@ -25,7 +25,7 @@ export const GET: APIRoute = ({ site: basis }) => {
     '',
     '## Openingstijden',
     ...tijden,
-    '- Buiten deze tijden is een afspraak mogelijk, ook in de avond, op maandag of op zaterdag',
+    '- Buiten deze tijden is een afspraak mogelijk, ook in de avond, op maandag',
     '',
     '## Wat het atelier doet',
     ...diensten.map((d) => `- [${d.kaartTitel}](${abs(`${d.slug}/`)}): ${d.kaartTekst}`),

@@ -26,9 +26,12 @@ export const site = {
   route: 'https://www.google.com/maps/dir/?api=1&destination=Hoogstraat+89A%2C+3011+PJ+Rotterdam',
   reviews: 'https://www.google.com/maps/place/Bei+Couture/@51.922307,4.4914026,17z/data=!4m6!3m5!1s0x47c4335ec636a273:0xd37342ba58cbe407!8m2!3d51.922307!4d4.4914026!16s%2Fg%2F11b67bk6v8',
   google: { score: '5,0', scoreNum: 5, aantal: 51 },
-  // 0 = zondag ... 6 = zaterdag; null = gesloten. Buiten deze tijden: op afspraak.
+  // 0 = zondag ... 6 = zaterdag; null = gesloten. Maandag op afspraak; zaterdag echt dicht (zie `dicht`).
+  // Afspraken kunnen al vanaf 9:00, voordat het atelier opengaat (Bei, 02-11-2026).
   tijden: [[12, 17], null, [11, 17], [11, 17], [11, 17], [11, 17], null] as ([number, number] | null)[],
-  opAfspraak: 'Past het overdag niet? Een afspraak buiten de openingstijden kan, ook in de avond, op maandag of op zaterdag. Even bellen of appen en we zoeken samen een moment.',
+  dicht: [6],
+  afspraakVanaf: 9,
+  opAfspraak: 'Een afspraak kan al vanaf 9:00 uur, voordat het atelier opengaat. Past het overdag niet, dan kan het in overleg ook in de avond of op maandag. Even bellen of appen en we prikken samen een moment.',
   themeColor: '#1b1716',
   voorstel: import.meta.env.PUBLIC_VOORSTEL === '1',
 };
@@ -67,7 +70,7 @@ export const kernfeiten = [
   { vraag: 'Hoeveel pasafspraken?', antwoord: 'Meestal drie bij een jurk op maat (proefjurk, proefmodel in de gekozen stof, complete jurk) en twee bij vermaakwerk. Een extra pasbeurt kan altijd.' },
   { vraag: 'Welke talen?', antwoord: 'Nederlands, Engels en Chinees.' },
   { vraag: 'Afspraak nodig?', antwoord: 'Voor bruidsmode wel, zodat de tijd voor jou wordt vrijgehouden. Voor een korte vraag of een kleine vermaking kun je tijdens de openingstijden binnenlopen.' },
-  { vraag: 'Buiten de openingstijden?', antwoord: 'Ja, een afspraak in de avond, op maandag of op zaterdag kan in overleg.' },
+  { vraag: 'Buiten de openingstijden?', antwoord: 'Ja. Een afspraak kan al vanaf 9:00 uur, en in overleg ook in de avond of op maandag. Zaterdag is het atelier gesloten.' },
   { vraag: 'Wat kost het?', antwoord: 'Dat hangt af van het model, de stof en het werk. Je hoort de prijs bij de eerste afspraak, voordat er iets gemaakt wordt.' },
   { vraag: 'Beoordeling?', antwoord: '5,0 uit 51 reviews op Google.' },
 ];

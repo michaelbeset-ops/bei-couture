@@ -59,9 +59,9 @@ zichtbaar op de site (sectie "Goed om te weten" en de FAQ's), want AI-antwoorden
 staat. Eigen deelafbeelding per pagina (`public/og-*.jpg`, gemaakt met `node tools/og.mjs`).
 
 ## Openingstijden
-Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00, maandag en zaterdag op afspraak. Dat een afspraak buiten de
-openingstijden kan, staat op elke pagina: in de topbalk, in het openingstijdenblok, onder elke slotbalk en als
-keuze in het afspraakformulier.
+Di t/m vr 11:00 tot 17:00, zondag 12:00 tot 17:00, maandag op afspraak, zaterdag gesloten (Bei, 02-11-2026).
+Afspraken kunnen al vanaf 9:00 uur, voordat het atelier opengaat; 's avonds in overleg. Dat staat in het
+openingstijdenblok, in de hero-regel, onder elke slotbalk en in de enquête bij "Buiten de openingstijden".
 
 ## Bronnen
 bron/web, bron/archief (teksten april/juni 2026), bron/google (place, uren, 5 reviews), bron/social, bron/unsplash.

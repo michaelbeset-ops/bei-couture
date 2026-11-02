@@ -341,7 +341,7 @@ export const diensten: Dienst[] = [
     h1Accent: 'Rotterdam.',
     eyebrow: 'Gala en avond',
     title: 'Galajurk op maat laten maken in Rotterdam | Bei Couture',
-    description: 'Galajurk of avondjurk op maat laten maken of vermaken in Rotterdam. Bruidsatelier Bei Couture, Hoogstraat 89A. Ook op afspraak in de avond of op zaterdag.',
+    description: 'Galajurk of avondjurk op maat laten maken of vermaken in Rotterdam. Bruidsatelier Bei Couture, Hoogstraat 89A. Afspraken kunnen al vanaf 9:00 uur.',
     lead: 'Voor een gala, een jubileum of een feest waar je er echt wilt staan. Een jurk die niemand anders heeft, in jouw kleur en op jouw maat.',
     intro: [
       'Niet elke mooie avond is een bruiloft. Bei maakt ook galajurken en avondjurken, met dezelfde aandacht als voor bruidsmode: opgemeten, gepast en afgewerkt tot het klopt.',

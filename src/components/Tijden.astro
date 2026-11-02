@@ -17,7 +17,7 @@ const { class: cls = '' } = Astro.props;
       {volgorde.map((d) => { const t = site.tijden[d]; return (
         <tr data-dag={d} class="border-b border-merk/10 last:border-0">
           <th scope="row" class="py-2.5 pl-3 font-medium md:py-3">{dagen[d]}</th>
-          <td class={`py-2.5 pr-3 text-right md:py-3 ${t ? '' : 'text-steen'}`}>{t ? `${t[0]}:00 tot ${t[1]}:00` : 'Op afspraak'}</td>
+          <td class={`py-2.5 pr-3 text-right md:py-3 ${t ? '' : 'text-steen'}`}>{t ? `${t[0]}:00 tot ${t[1]}:00` : site.dicht.includes(d) ? 'Gesloten' : 'Op afspraak'}</td>
         </tr>
       ); })}
     </tbody>
@@ -41,7 +41,7 @@ const { class: cls = '' } = Astro.props;
   const nu = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Amsterdam' }));
   const d = nu.getDay(); const u = nu.getHours() + nu.getMinutes() / 60; const t = site.tijden[d];
   const open = !!t && u >= t[0] && u < t[1];
-  let tekst = open ? `Nu open tot ${t![1]}:00` : 'Nu gesloten, wel op afspraak';
+  let tekst = open ? `Nu open tot ${t![1]}:00` : 'Nu gesloten';
   if (!open) {
     if (t && u < t[0]) tekst = `Vandaag open vanaf ${t[0]}:00`;
     else { for (let i = 1; i <= 7; i++) { const n = (d + i) % 7; const tt = site.tijden[n]; if (tt) { tekst = `Gesloten, ${i === 1 ? 'morgen' : ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'][n]} open vanaf ${tt[0]}:00`; break; } } }
