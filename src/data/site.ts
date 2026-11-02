@@ -20,6 +20,8 @@ export const site = {
   telHref: 'tel:+31653612543',
   telE164: '+31653612543',
   wa: 'https://wa.me/31653612543',
+  // KvK-nummer volgens bedrijvengidsen (rotterdam-010.nl, cylex.nl, 02-11-2026); nog door Bei te bevestigen.
+  kvk: '24425086',
   mail: 'info@beicouture.nl',
   lat: 51.922307,
   lon: 4.4914026,

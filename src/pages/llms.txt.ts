@@ -7,7 +7,7 @@ export const GET: APIRoute = ({ site: basis }) => {
   const abs = (p: string) => new URL(url(p), basis).href;
   const tijden = volgorde.map((d) => {
     const t = site.tijden[d];
-    return `- ${dagen[d]}: ${t ? `${t[0]}:00 tot ${t[1]}:00` : 'gesloten, wel op afspraak'}`;
+    return `- ${dagen[d]}: ${t ? `${t[0]}:00 tot ${t[1]}:00` : site.dicht.includes(d) ? 'gesloten' : 'gesloten, wel op afspraak'}`;
   });
 
   const regels = [
