@@ -22,7 +22,7 @@ const paginas = [
   { naam: 'og-bruidsmeisjes-en-bruidsjonkers', foto: 'bruidsmeisje.jpg', pos: '50% 42%', eyebrow: 'Het hele gezelschap', kop: 'Bruidsmeisjes en <em>bruidsjonkers.</em>' },
   { naam: 'og-gala-en-avondkleding', foto: 'gala.jpg', pos: '50% 50%', eyebrow: 'Gala en avond', kop: 'Gala- en <em>avondkleding.</em>' },
   { naam: 'og-kleding-op-maat', foto: 'kant-patroon.jpg', pos: '50% 50%', eyebrow: 'Kleermaker', kop: 'Kleding op maat en <em>vermaken.</em>' },
-  { naam: 'og-werkwijze', foto: 'kant.jpg', pos: '55% 45%', eyebrow: 'Zo gaat het', kop: 'Van jouw foto tot <em>jouw jurk.</em>' },
+  { naam: 'og-werkwijze', foto: 'vermaken.jpg', pos: '50% 42%', eyebrow: 'Zo gaat het', kop: 'Van jouw foto tot <em>jouw jurk.</em>' },
   { naam: 'og-klantervaringen', foto: 'vermaken-tule.jpg', pos: '50% 40%', eyebrow: 'Klantervaringen', kop: 'De verhalen achter de <em>jurken.</em>' },
   { naam: 'og-contact', foto: 'bei-bloemen.jpg', pos: '66% 30%', eyebrow: 'Contact', kop: 'Kom langs in het <em>atelier.</em>' },
 ];

@@ -11,7 +11,7 @@ import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
 import { url, site, stappen } from '../data/site';
 import { faqSchema } from '../lib/schema';
-import kant from '../assets/kant.jpg';
+import vermaken from '../assets/vermaken.jpg';
 import snijtafel from '../assets/snijtafel.jpg';
 
 const basis = new URL(url(''), Astro.site).href;
@@ -52,9 +52,9 @@ const faq = [
       h1="Van jouw foto tot"
       accent="jouw jurk."
       lead="Een jurk op maat is geen gok. Het gaat in vier afspraken, van de eerste schets tot het ophalen, zodat je op elk moment weet waar je staat en hoe de jurk eruit gaat zien."
-      img={kant}
-      alt="Detail van een kanten jurk met stoffen knoopjes"
-      pos="55% 45%"
+      img={vermaken}
+      alt="Bei past een bruidsjurk met lange tule sleep in het atelier"
+      pos="50% 42%"
       kruimels={[{ naam: 'Home', href: url('') }, { naam: 'Werkwijze', href: url('werkwijze/') }]}
     />
 
