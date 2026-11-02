@@ -47,7 +47,7 @@ const jaar = new Date().getFullYear();
 
   <div class="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-t border-lijn py-7 text-xs">
     <p>© {jaar} {site.naam} · {site.straat}, {site.plaats} · KvK <span class="num">{site.kvk}</span></p>
-    <p class="flex flex-wrap gap-x-6 gap-y-2"><a href={url('privacy/')} class="no-underline hover:text-wit">Privacyverklaring</a><span>Website door Sitefront</span></p>
+    <p class="flex flex-wrap gap-x-6 gap-y-2"><a href={url('privacy/')} class="no-underline hover:text-wit">Privacyverklaring</a><a href="https://www.sitefront.nl" rel="noopener" class="no-underline hover:text-wit">Website door Sitefront</a></p>
   </div>
   {site.voorstel && <p class="wrap pb-8 text-xs">Kantfoto, logo, atelierfoto en teksten van Bei Couture zelf. Overige sfeerfoto's via Unsplash, ter illustratie. Reviews letterlijk van Google (stand 15 oktober 2026).</p>}
   <div class="h-14 md:hidden" aria-hidden="true"></div>
