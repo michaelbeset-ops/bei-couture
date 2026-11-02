@@ -6,33 +6,20 @@ import Voet from '../components/Voet.astro';
 import Icoon from '../components/Icoon.astro';
 import Reviews from '../components/Reviews.astro';
 import Werkwijze from '../components/Werkwijze.astro';
-import Faq from '../components/Faq.astro';
-import Cta from '../components/Cta.astro';
 import Bezoek from '../components/Bezoek.astro';
 import Lint from '../components/Lint.astro';
-import Afspraak from '../components/Afspraak.astro';
 import { site, url, waHoi, werkgebied } from '../data/site';
-import { diensten } from '../data/diensten';
-import { faqSchema } from '../lib/schema';
+import { diensten, extraKaarten } from '../data/diensten';
 
 import hero from '../assets/hero.jpg';
 import bei from '../assets/bei-bloemen.jpg';
 
-const faq = [
-  { v: 'Waar zit bruidsatelier Bei Couture?', a: `Aan de ${site.straat} in ${site.plaats}, in het pand van ${site.inPand}. Het atelier ligt midden in de stad en is goed bereikbaar met het openbaar vervoer.` },
-  { v: 'Kan ik buiten de openingstijden langskomen?', a: 'Ja. Het atelier is dinsdag tot en met vrijdag open van 11:00 tot 17:00 en op zondag van 12:00 tot 17:00, maar een afspraak buiten die tijden kan ook, bijvoorbeeld in de avond, op maandag. Bel of app even, dan zoeken we samen een moment.' },
-  { v: 'Moet ik een afspraak maken?', a: 'Voor bruidsmode wel, want daar wordt rustig de tijd voor genomen en die tijd wordt voor jou vrijgehouden. Voor een kleine vermaking of een vraag kun je tijdens de openingstijden ook gewoon binnenlopen.' },
-  { v: 'Wat neem ik mee naar de eerste afspraak?', a: 'Foto\'s van jurken die je mooi vindt, en als je ze al hebt je trouwschoenen en het ondergoed dat je die dag wilt dragen. Heb je nog geen foto\'s, dan is dat ook geen probleem: er wordt goed naar je geluisterd en we tekenen het samen uit.' },
-  { v: 'Maken jullie alleen bruidsjurken?', a: 'Nee. Bei is kleermaker. Naast bruidsjurken maakt en vermaakt ze jurken voor bruidsmoeders, bruidsmeisjes en bruidsjonkers, gala- en avondkleding, en gewone kleding op maat.' },
-  { v: 'In welke plaatsen komen jullie klanten vandaan?', a: `Bruiden komen uit ${site.plaats} en de hele omgeving, onder meer uit ${werkgebied.slice(1, 8).join(', ')} en verder.` },
-];
 ---
 <Base
   heroFont
   title="Bruidsatelier Rotterdam | Bei Couture"
   description="Bruidsjurk op maat, trouwjurk vermaken, bruidsmoeder en bruidsmeisjes. Bruidsatelier Bei Couture, Hoogstraat 89A Rotterdam. Bel 06 53 61 25 43."
   kruimels={[{ naam: 'Home', url: new URL(url(''), Astro.site).href }]}
-  schema={[faqSchema(faq)]}
 >
   <Kop />
   <main id="inhoud">
@@ -77,13 +64,14 @@ const faq = [
         </div>
 
         <ul class="rij mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:mt-10 md:gap-5" data-rij tabindex="0" aria-label="Diensten, horizontaal te scrollen">
-          {diensten.map((d) => (
+          {[...diensten, ...extraKaarten].map((d) => (
             <li class="w-[72vw] flex-none snap-start sm:w-[44vw] lg:w-[calc((100%-3.75rem)/4)]">
               <a href={url(`${d.slug}/`)} class="fotolink group block">
                 <span class="foto block aspect-[3/4] bg-ivoor-2">
                   <Picture src={d.img} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[400, 560, 800]} sizes="(min-width: 1024px) 24vw, (min-width: 640px) 44vw, 72vw" alt={d.alt} class="h-full w-full object-cover" style={`object-position:${d.pos}`} />
                 </span>
                 <span class="mt-4 block text-[.78rem] font-medium uppercase tracking-[.22em] text-inkt transition-colors group-hover:text-merk">{d.kaartTitel}</span>
+                {'kaartTekst' in d && d.kaartTitel === 'Trouwjurk reinigen' && <span class="mt-1.5 block text-[.92rem] text-steen">{d.kaartTekst}</span>}
               </a>
             </li>
           ))}
@@ -121,7 +109,6 @@ const faq = [
           </ul>
 
           <div class="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-            <a href={waHoi} class="knop knop-merk"><Icoon naam="wa" />Plan een kennismaking</a>
             <a href={url('over-bei/')} class="text-[.8rem] font-medium uppercase tracking-[.25em] text-merk underline decoration-merk/40 underline-offset-[6px]">Lees meer over Bei</a>
           </div>
         </div>
@@ -136,7 +123,6 @@ const faq = [
     <!-- IN HET KORT -->
 
     <!-- AFSPRAAK -->
-    <Afspraak />
 
 
     <Reviews />
@@ -144,8 +130,6 @@ const faq = [
 
     <Bezoek />
 
-    <Faq vragen={faq} kop="Vragen over het atelier" achtergrond="bg-ivoor" />
-    <Cta />
   </main>
   <Voet />
 </Base>

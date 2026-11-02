@@ -14,6 +14,7 @@ import galaDetail from '../assets/gala-detail.jpg';
 import kantPatroon from '../assets/kant-patroon.jpg';
 import lijfjeTafel from '../assets/lijfje-tafel.jpg';
 import hero from '../assets/hero.jpg';
+import hangerFoto from '../assets/e-hanger.jpg';
 
 export interface Blok {
   kop: string;
@@ -182,6 +183,13 @@ export const diensten: Dienst[] = [
         icoon: 'jurk',
         tekst: [
           'De jurk van de bruidsmoeder en de jurkjes van de bruidsmeisjes en bruidsjonkers kunnen in dezelfde ronde mee. Dan sluit alles op elkaar aan en loop je op de dag zelf niet met een te lange zoom.',
+        ],
+      },
+      {
+        kop: 'Trouwjurk reinigen',
+        icoon: 'ster',
+        tekst: [
+          'Bei reinigt ook je trouwjurk, voor een goede prijs. Handig na de bruiloft, of voor een jurk die al een tijd hangt en weer fris moet zijn voordat er iets aan vermaakt wordt.',
         ],
       },
     ],
@@ -450,3 +458,16 @@ export const diensten: Dienst[] = [
 ];
 
 export const dienstOp = (slug: string) => diensten.find((d) => d.slug === slug)!;
+
+// Extra kaart in de rij op de homepage en het atelieroverzicht (Bei, 02-11-2026): ze reinigt ook
+// trouwjurken, voor een goede prijs. Geen eigen pagina; de kaart linkt naar trouwjurk vermaken.
+export const extraKaarten = [
+  {
+    slug: 'trouwjurk-vermaken',
+    kaartTitel: 'Trouwjurk reinigen',
+    kaartTekst: 'Bei reinigt ook je trouwjurk, voor een goede prijs. Na de bruiloft, of een jurk die al een tijd hangt.',
+    img: hangerFoto,
+    pos: '50% 40%',
+    alt: 'Kanten bruidsjurk aan een hanger in het pashokje van het atelier',
+  },
+];

@@ -4,10 +4,8 @@ import Base from '../layouts/Base.astro';
 import Kop from '../components/Kop.astro';
 import Voet from '../components/Voet.astro';
 import Icoon from '../components/Icoon.astro';
-import Reviews from '../components/Reviews.astro';
 import Cta from '../components/Cta.astro';
 import Kruimels from '../components/Kruimels.astro';
-import Tijden from '../components/Tijden.astro';
 import { url, site, werkgebied } from '../data/site';
 import bei from '../assets/bei-bloemen.jpg';
 import kant from '../assets/kant.jpg';
@@ -35,7 +33,6 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
         <div class="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div class="rijs lg:col-span-6">
             <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={88} widths={[480, 720, 960, 1200]} sizes="(min-width: 1024px) 600px, 100vw" alt="Bei, lachend voor een wand van witte bloemen" loading="eager" fetchpriority="high" class="foto aspect-square w-full object-cover" />
-            <p class="mt-4 text-sm text-steen">Bei aan het werk in haar atelier aan de Hoogstraat.</p>
           </div>
           <div class="lg:col-span-6 lg:pt-4">
             <p class="eyebrow">Over Bei</p>
@@ -43,7 +40,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
             <div class="mt-8 space-y-5 text-lg text-steen">
               <p>Ik ben geboren in China en woon nu al een lange tijd in Nederland. Vanaf kleins af aan ben ik dol op tekenen en naaien, zo is mijn liefde ontstaan om kleding te ontwerpen. Ik ben een perfectionist en wil het liefst alles zelf doen.</p>
               <p>Ik ben in 1997 begonnen met een eigen atelier op Marconiplein. Daarna ben ik in 2009 mij gaan specialiseren in bruidsmode, dus ook voor bruidsjonkers en bruidsmeisjes. Het is echt mijn passie en ik krijg elke keer een glimlach op mijn gezicht als een klant weer super tevreden is.</p>
-              <p>Iedereen wil er stralend uitzien op haar grote dag. Daar werk ik met veel plezier aan, en geen enkele opgave is mij teveel.</p>
+              <p>Iedereen wil er stralend uitzien op hun grote dag. Daar werk ik met veel plezier aan, en geen enkele opgave is mij teveel.</p>
             </div>
             <div class="mt-9 flex flex-wrap gap-3">
               <a href={url('afspraak/')} class="knop knop-merk">Afspraak maken</a>
@@ -97,12 +94,10 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
         </div>
         <div class="lg:col-span-5">
           <Picture src={kant} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 800]} sizes="(min-width: 1024px) 480px, 100vw" alt="Detail van een kanten jurk met stoffen knoopjes" class="foto aspect-[4/5] w-full object-cover" />
-          <Tijden class="mt-6" />
         </div>
       </div>
     </section>
 
-    <Reviews />
     <Cta />
   </main>
   <Voet />

@@ -21,8 +21,9 @@ proefjurk, jurk in de echte stof, ophalen). Kop doorzichtig over de hero met het
 op lichte pagina's een donkere balk.
 
 ## Paginastructuur
-- `/` home: hero > cijfers > 6 dienstkaarten > over Bei (eigen atelierfoto) > Google-reviews (swipebaar) >
-  werkwijze > afspraak (wow) > bezoek met openingstijden > FAQ > slotbalk
+- `/` home (ingekort op verzoek van Bei, 02-11-2026): hero > feitenlint > 7 kaarten in een rij (6 diensten plus
+  trouwjurk reinigen) > over Bei > werkwijze > Google-reviews > bezoek (adres, geen tijden). Afspraak, FAQ en slotbalk
+  staan niet meer op de home; de FAQ-vragen staan op /contact/, afspraken lopen via /afspraak/.
 - `/atelier/` overzicht van alles wat gemaakt en vermaakt wordt
 - 6 dienstpagina's (29-10-2026 herbouwd na review door zes invalshoeken: ontwerp, mobiel, tekst, SEO, conversie,
   toegankelijkheid): hero met WhatsApp als eerste knop, roze feitenlint, groot citaat met afspraakpaneel (portret Bei,

@@ -1,5 +1,5 @@
 ---
-import { site, url, waHoi, dagen, volgorde } from '../data/site';
+import { site, url, waHoi } from '../data/site';
 import { diensten } from '../data/diensten';
 import Merk from './Merk.astro';
 import Icoon from './Icoon.astro';
@@ -35,16 +35,13 @@ const jaar = new Date().getFullYear();
     </div>
 
     <div class="lg:col-span-3">
-      <p class="font-semibold text-wit">Contact en openingstijden</p>
+      <p class="font-semibold text-wit">Contact</p>
       <ul class="mt-5 space-y-2">
         <li><a href={site.telHref} class="num no-underline hover:text-strik">{site.tel}</a> <span class="text-mist/80">(ook WhatsApp)</span></li>
         <li><a href={`mailto:${site.mail}`} class="no-underline hover:text-strik">{site.mail}</a></li>
         <li>{site.straat}<br />{site.postcode} {site.plaats}</li>
       </ul>
-      <ul class="num mt-5 space-y-1.5 border-t border-lijn pt-5">
-        {volgorde.map((d) => { const t = site.tijden[d]; return <li class="flex justify-between gap-6"><span>{dagen[d]}</span><span class={t ? 'text-wit' : ''}>{t ? `${t[0]}:00 tot ${t[1]}:00` : site.dicht.includes(d) ? 'Gesloten' : 'Op afspraak'}</span></li>; })}
-      </ul>
-      <p class="mt-4 text-sm text-strik">Een afspraak kan al vanaf 9:00 uur. Buiten de tijden in overleg.</p>
+      <p class="mt-5 border-t border-lijn pt-5 text-sm text-strik">Afspraken kunnen al vanaf 9:00 uur, ook buiten de openingstijden. Zaterdag gesloten.</p>
     </div>
   </div>
 

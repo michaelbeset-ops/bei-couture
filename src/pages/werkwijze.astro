@@ -6,7 +6,6 @@ import Voet from '../components/Voet.astro';
 import Icoon from '../components/Icoon.astro';
 import PaginaKop from '../components/PaginaKop.astro';
 import Werkwijze from '../components/Werkwijze.astro';
-import Reviews from '../components/Reviews.astro';
 import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
 import { url, site, stappen } from '../data/site';
@@ -126,7 +125,6 @@ const faq = [
       </div>
     </section>
 
-    <Reviews />
     <Faq vragen={faq} kop="Vragen over de werkwijze" achtergrond="bg-ivoor" />
     <Cta kop="Benieuwd wat er mogelijk is met jouw" accent="jurk?" tekst={`Stuur een foto via WhatsApp of bel ${site.tel}. Je hoort meteen wat er kan.`} />
   </main>

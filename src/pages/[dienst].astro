@@ -7,7 +7,6 @@ import Base from '../layouts/Base.astro';
 import Kop from '../components/Kop.astro';
 import Voet from '../components/Voet.astro';
 import Icoon from '../components/Icoon.astro';
-import Reviews from '../components/Reviews.astro';
 import Werkwijze from '../components/Werkwijze.astro';
 import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
@@ -37,7 +36,6 @@ const [eerste, ...rest] = d.blokken;
 // Eén WhatsApp-bericht voor de hele pagina, in hetzelfde format als het formulier op /contact/.
 const waDienst = waMet(`Hallo Bei, ik wil graag een afspraak maken. Waarvoor: ${d.kies.toLowerCase()}. Ik stuur een foto mee van wat ik in gedachten heb.`);
 const afspraak = `${url('afspraak/')}?voor=${encodeURIComponent(d.kies)}`;
-const reviewsEerst = d.slug === 'trouwjurk-vermaken' ? ['Çanci A.', 'Mariluz', 'Christina W.'] : ['Marisela B.', 'Marcel'];
 ---
 <Base
   title={d.title}
@@ -150,7 +148,6 @@ const reviewsEerst = d.slug === 'trouwjurk-vermaken' ? ['Çanci A.', 'Mariluz', 
     </section>
 
     <Werkwijze achtergrond="bg-strik-zacht" />
-    <Reviews donker kop={d.wie === 'Klanten' ? 'Wat klanten zeggen' : 'Wat bruiden zeggen'} eerst={reviewsEerst} />
     <Faq vragen={d.faq} kop={`Vragen over ${d.kaartTitel.toLowerCase()}`} achtergrond="bg-ivoor" />
 
     <!-- VERWANT -->

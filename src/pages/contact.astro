@@ -8,18 +8,23 @@ import Afspraak from '../components/Afspraak.astro';
 import Tijden from '../components/Tijden.astro';
 import Faq from '../components/Faq.astro';
 import Reviews from '../components/Reviews.astro';
-import { url, site, waHoi } from '../data/site';
+import { url, site, waHoi, werkgebied } from '../data/site';
 import { faqSchema } from '../lib/schema';
 
 const basis = new URL(url(''), Astro.site).href;
 const hier = new URL(Astro.url.pathname, Astro.site).href;
 
 const faq = [
+  { v: 'Waar zit bruidsatelier Bei Couture?', a: `Aan de ${site.straat} in ${site.plaats}, in het pand van ${site.inPand}. Het atelier ligt midden in de stad en is goed bereikbaar met het openbaar vervoer.` },
   { v: 'Kan ik een afspraak maken buiten de openingstijden?', a: 'Ja. Het atelier is dinsdag tot en met vrijdag open van 11:00 tot 17:00 en op zondag van 12:00 tot 17:00. Kun je dan niet, dan wordt er een moment buiten die tijden gezocht, ook in de avond, op maandag. Bel of app even.' },
   { v: 'Hoe maak ik het snelst een afspraak?', a: `Via WhatsApp op ${site.tel}. Je kunt daar meteen een foto van de jurk meesturen. Bellen kan natuurlijk ook, en mailen naar ${site.mail}.` },
   { v: 'Kost een eerste afspraak geld?', a: 'In het eerste gesprek kijken we samen wat je wilt en wat er mogelijk is. Wat jouw jurk gaat kosten hangt af van het model, de stof en het werk, en dat hoor je voordat er iets gemaakt wordt.' },
   { v: 'Kan ik zomaar binnenlopen?', a: 'Voor een korte vraag of een kleine vermaking kun je tijdens de openingstijden gerust binnenlopen. Voor bruidsmode is een afspraak beter, want dan wordt de tijd voor jou vrijgehouden.' },
   { v: 'Waar kan ik parkeren?', a: 'Het atelier zit aan de Hoogstraat midden in Rotterdam, in het pand van Estay Concept & Design. Er is betaald parkeren in de omgeving en de halte is vlakbij, dus met het openbaar vervoer is het goed te doen.' },
+  { v: 'Moet ik al weten wat ik wil?', a: 'Nee. Veel bruiden komen binnen met één foto en een vaag gevoel. In het eerste gesprek wordt dat samen scherp gemaakt. Je mag ook van gedachten veranderen.' },
+  { v: 'Wat neem ik mee naar de eerste afspraak?', a: 'Foto\'s van jurken die je mooi vindt, en als je ze al hebt je trouwschoenen. Heb je nog niets, kom dan toch: het gesprek is het beginpunt.' },
+  { v: 'Maken jullie alleen bruidsjurken?', a: 'Nee. Bei is kleermaker. Naast bruidsjurken maakt en vermaakt ze jurken voor de bruidsmoeder, bruidsmeisjes en bruidsjonkers, gala- en avondkleding en gewone kleding op maat. Ook trouwjurken reinigen kan.' },
+  { v: 'In welke plaatsen komen jullie klanten vandaan?', a: `Bruiden komen uit ${site.plaats} en de hele omgeving, onder meer uit ${werkgebied.slice(1, 8).join(', ')} en verder.` },
 ];
 ---
 <Base
@@ -61,7 +66,7 @@ const faq = [
     </section>
 
     <Afspraak kop="Stel je bericht samen en vertel wat je" />
-    <Faq vragen={faq} kop="Vragen over een afspraak" />
+    <Faq vragen={faq} kop="Vragen over het atelier" />
     <Reviews />
   </main>
   <Voet />
