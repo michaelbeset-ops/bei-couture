@@ -62,7 +62,7 @@ export const diensten: Dienst[] = [
     kaartTitel: 'Bruidsjurk op maat',
     kaartTekst: 'Jouw trouwjurk, gemaakt naar jouw ontwerp, jouw kleur en jouw maat. Ook in een kleur of in een grote maat.',
     voorWie: 'Voor de bruid die een jurk wil die nog niet bestaat.',
-    watJeKrijgt: 'Ontwerp, patroon, stof en drie pasbeurten. Ook gekleurd of in een grote maat.',
+    watJeKrijgt: 'Schets, maten, proefjurk en de jurk in de echte stof. Ook gekleurd of in een grote maat.',
     kies: 'Bruidsjurk laten maken',
     wie: 'Bruiden',
     img: bruidsjurk,
@@ -83,7 +83,7 @@ export const diensten: Dienst[] = [
       'Laat een foto zien van een jurk die je mooi vindt, of vertel wat je voor je ziet. Vanaf daar wordt een trouwjurk op maat gemaakt die alleen van jou is.',
       'Bei naait sinds 1997 in haar eigen atelier en legt zich sinds 2009 helemaal toe op bruidsmode. Ze werkt alleen, dus de vrouw met wie je aan tafel zit is ook de vrouw die jouw jurk maakt.',
     ],
-    feiten: ['Drie pasbeurten', 'Stof kies je in het atelier', 'Ook een gekleurde trouwjurk', 'Ook in grote maten'],
+    feiten: ['Schets en maten bij de eerste afspraak', 'Stof kies je in het atelier', 'Ook een gekleurde trouwjurk', 'Ook in grote maten'],
     blokken: [
       {
         kop: 'De foto is het beginpunt',
@@ -111,7 +111,7 @@ export const diensten: Dienst[] = [
         kop: 'Goed om te weten',
         icoon: 'kalender',
         lijst: [
-          'Kom op tijd. Er zijn drie pasbeurten nodig en die wil je niet samenpersen.',
+          'Kom op tijd. Er zijn drie tot vier afspraken nodig en die wil je niet samenpersen.',
           'Neem je trouwschoenen mee naar de pasbeurten, want die bepalen de lengte.',
           'Neem gerust je moeder, zus of getuige mee. Een tweede paar ogen helpt.',
           'Foto\'s van wat je mooi vindt, en van wat je juist niet wilt, zijn welkom.',
@@ -124,7 +124,7 @@ export const diensten: Dienst[] = [
       { v: 'Moet ik al weten wat ik wil?', a: 'Nee. Een foto van een jurk die je mooi vindt is handig, maar een kleur, een gevoel of alleen "geen kant" is ook genoeg. In het eerste gesprek wordt het samen duidelijk.' },
       { v: 'Maken jullie ook een gekleurde trouwjurk?', a: 'Ja. Omdat elke jurk vanaf de stof wordt opgebouwd, is elke kleur mogelijk. Van ivoor en champagne tot poederroze, blauw of bordeaux, of kleur alleen in de onderrok of het kant.' },
       { v: 'Ik heb een grote maat, kan dat ook?', a: 'Zeker. Er wordt gemeten aan jouw lijf en het patroon wordt daar omheen gemaakt, dus er is geen standaardmaat waar je in moet passen. Bei denkt mee over pasvorm en steun zodat de jurk de hele dag goed blijft zitten.' },
-      { v: 'Hoeveel pasafspraken zijn er?', a: 'Meestal drie. Je past eerst een proefjurk, daarna een proefmodel in de gekozen stof en ten slotte de complete jurk. Soms is er een extra pasbeurt nodig, bijvoorbeeld als je maten veranderen. Dat hoort erbij.' },
+      { v: 'Hoeveel afspraken zijn er?', a: 'Meestal drie, soms vier. Bij de eerste afspraak bespreek je je ideeën, maakt Bei een schets en neemt ze je maten op. Daarna pas je de proefjurk, en bij de derde afspraak jouw jurk in de echte stof. Is er dan nog een kleine aanpassing nodig, dan haal je hem de vierde keer op.' },
     ],
     verwant: ['trouwjurk-vermaken', 'bruidsmeisjes-en-bruidsjonkers', 'bruidsmoeder-jurk'],
   },

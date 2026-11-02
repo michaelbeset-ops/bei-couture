@@ -144,7 +144,7 @@
   .fotolink :is(h2, h3) { transition: color .25s; }
   .fotolink:hover :is(h2, h3) { color: var(--color-merk); text-decoration: underline; text-underline-offset: .22em; text-decoration-thickness: 1px; }
 
-  /* Werkwijze: vijf stappen van links naar rechts op één doorlopende lijn. */
+  /* Werkwijze: vier afspraken van links naar rechts op één doorlopende lijn. */
   .stap { position: relative; border-top: 1px solid var(--color-ivoor-3); padding-top: 2rem; }
   @media (max-width: 1023px) {
     .stap { border-top: 0; border-left: 1px solid var(--color-ivoor-3); padding-top: 0; padding-left: 1.75rem; padding-bottom: 2.5rem; }

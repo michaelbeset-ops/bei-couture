@@ -26,7 +26,7 @@ const mee = [
 
 const faq = [
   { v: 'Hoe lang van tevoren moet ik beginnen met een trouwjurk op maat?', a: 'Hoe eerder je begint, hoe rustiger het verloopt. Er zijn meerdere pasafspraken nodig en daar zit telkens tijd tussen om door te werken. Zit je krap, bel of app dan even. Er wordt altijd eerlijk gezegd of het nog haalbaar is in plaats van ja te knikken en het daarna te moeten haasten.' },
-  { v: 'Hoeveel pasafspraken zijn er in totaal?', a: 'In de regel drie: de proefjurk, het proefmodel in de gekozen stof en de complete jurk. Bij vermaakwerk zijn het er vaak twee. Soms is er een extra pasbeurt nodig, bijvoorbeeld als je maten veranderen. Dat hoort erbij.' },
+  { v: 'Hoeveel afspraken zijn er in totaal?', a: 'Bij een jurk op maat drie, soms vier: schets en maten, de proefjurk, de jurk in de echte stof, en als er nog iets aangepast is een vierde keer om op te halen. Bij vermaakwerk zijn het er meestal twee. Veranderen je maten tussendoor, dan wordt dat gewoon meegenomen.' },
   { v: 'Wat als mijn maten in de tussentijd veranderen?', a: 'Dat gebeurt vaker dan je denkt en het is geen probleem. De laatste pasbeurt wordt zo kort mogelijk voor de bruiloft ingepland, zodat de jurk klopt met je maten op dat moment.' },
   { v: 'Kan ik buiten de openingstijden langskomen voor een pasbeurt?', a: 'Ja. Het atelier is dinsdag tot en met vrijdag open van 11:00 tot 17:00 en op zondag van 12:00 tot 17:00, maar een afspraak in de avond, op maandag kan ook. Geef aan wat jou uitkomt, dan wordt er een moment gezocht.' },
   { v: 'Moet ik al precies weten wat ik wil?', a: 'Nee. Veel bruiden komen binnen met één foto en een vaag gevoel. Juist in het eerste gesprek wordt dat samen scherp gemaakt. Er wordt geluisterd en meegedacht, en je mag van gedachten veranderen.' },
@@ -34,14 +34,14 @@ const faq = [
 ];
 ---
 <Base
-  title="Zo werkt het, in vijf stappen | Bei Couture"
-  description="De werkwijze van bruidsatelier Bei Couture in Rotterdam in vijf stappen: je wens, het gesprek, de proefjurk, het proefmodel en de complete jurk."
+  title="Zo werkt het, in vier afspraken | Bei Couture"
+  description="De werkwijze van bruidsatelier Bei Couture in Rotterdam in vier afspraken: schets en maten, de proefjurk, jouw jurk in de echte stof, en ophalen."
   og="og-werkwijze.jpg"
   kruimels={[{ naam: 'Home', url: basis }, { naam: 'Werkwijze', url: hier }]}
   schema={[faqSchema(faq), {
     '@type': 'HowTo',
     name: 'Een bruidsjurk op maat laten maken bij Bei Couture',
-    description: 'Van je eerste foto tot de complete jurk, in vijf stappen met een eigen afspraak per stap.',
+    description: 'Van je eerste schets tot de complete jurk, in vier afspraken.',
     step: stappen.map((s) => ({ '@type': 'HowToStep', name: s.titel, text: s.tekst })),
   }]}
 >
@@ -51,7 +51,7 @@ const faq = [
       eyebrow="Zo gaat het"
       h1="Van jouw foto tot"
       accent="jouw jurk."
-      lead="Een jurk op maat is geen gok. Het gaat in vijf stappen, met een eigen afspraak per stap, zodat je op elk moment weet waar je staat en hoe de jurk eruit gaat zien."
+      lead="Een jurk op maat is geen gok. Het gaat in vier afspraken, van de eerste schets tot het ophalen, zodat je op elk moment weet waar je staat en hoe de jurk eruit gaat zien."
       img={kant}
       alt="Detail van een kanten jurk met stoffen knoopjes"
       pos="55% 45%"

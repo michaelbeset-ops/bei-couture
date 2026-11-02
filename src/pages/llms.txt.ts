@@ -38,10 +38,10 @@ export const GET: APIRoute = ({ site: basis }) => {
     "## Pagina's",
     `- [Home](${abs('')}): bruidsatelier in ${site.plaats}`,
     `- [Atelier](${abs('atelier/')}): alles wat gemaakt en vermaakt wordt`,
-    `- [Werkwijze](${abs('werkwijze/')}): de vijf stappen van wens tot jurk`,
+    `- [Werkwijze](${abs('werkwijze/')}): de vier afspraken van schets tot jurk`,
     `- [Klantervaringen](${abs('klantervaringen/')}): verhalen van bruiden`,
     `- [Over Bei](${abs('over-bei/')}): wie Bei is en hoe zij werkt`,
-    `- [Afspraak maken](${abs('afspraak/')}): in vijf vragen, daarna staat het bericht klaar voor WhatsApp`,
+    `- [Afspraak maken](${abs('afspraak/')}): in een paar vragen, daarna staat het bericht klaar voor WhatsApp`,
     `- [Contact](${abs('contact/')}): adres, openingstijden en contactmanieren`,
     '',
   ];

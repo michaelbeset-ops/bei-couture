@@ -67,7 +67,7 @@ export const kernfeiten = [
   { vraag: 'Sinds wanneer?', antwoord: 'Bei heeft sinds 1997 een eigen atelier, begonnen op het Marconiplein, en legde zich in 2009 toe op bruidsmode.' },
   { vraag: 'Wie maakt de jurk?', antwoord: 'Bei zelf. Zij voert het gesprek, meet op, knipt en naait. Je werkt dus van begin tot eind met dezelfde persoon.' },
   { vraag: 'Welke stoffen?', antwoord: 'Taft, bruidssatijn, tule en kant, met applicaties, kraaltjes of borduursel waar je ze wilt.' },
-  { vraag: 'Hoeveel pasafspraken?', antwoord: 'Meestal drie bij een jurk op maat (proefjurk, proefmodel in de gekozen stof, complete jurk) en twee bij vermaakwerk. Een extra pasbeurt kan altijd.' },
+  { vraag: 'Hoeveel afspraken?', antwoord: 'Bij een jurk op maat meestal drie, soms vier: schets en maten, de proefjurk, de jurk in de echte stof, en als er nog iets aangepast is een vierde keer om op te halen. Bij vermaakwerk meestal twee.' },
   { vraag: 'Welke talen?', antwoord: 'Nederlands, Engels en Chinees.' },
   { vraag: 'Afspraak nodig?', antwoord: 'Voor bruidsmode wel, zodat de tijd voor jou wordt vrijgehouden. Voor een korte vraag of een kleine vermaking kun je tijdens de openingstijden binnenlopen.' },
   { vraag: 'Buiten de openingstijden?', antwoord: 'Ja. Een afspraak kan al vanaf 9:00 uur, en in overleg ook in de avond of op maandag. Zaterdag is het atelier gesloten.' },
@@ -75,41 +75,34 @@ export const kernfeiten = [
   { vraag: 'Beoordeling?', antwoord: '5,0 uit 51 reviews op Google.' },
 ];
 
-// De vijf stappen van het atelier, zoals Bei ze zelf beschrijft (27 oktober 2026).
+// De werkwijze zoals Bei hem zelf beschrijft (02-11-2026): vier afspraken. Soms is de derde al de laatste.
 export const stappen = [
   {
     nr: '01',
-    titel: 'Je wens doorgeven',
-    kort: 'Stuur een foto van de jurk die je in gedachten hebt',
-    tekst: 'Je laat weten waar je aan denkt. Heb je een foto van een jurk gezien die je mooi vindt, stuur die dan gerust mee via WhatsApp. Een schets, een kleur, een stofje of alleen een gevoel mag ook. Er is heel veel mogelijk, dus hoe meer je laat zien, hoe sneller duidelijk wordt waar we naartoe werken.',
-    icoon: 'foto',
-  },
-  {
-    nr: '02',
-    titel: 'In gesprek in het atelier',
-    kort: 'Samen je wensen helder krijgen',
-    tekst: 'Tijdens de eerste afspraak nemen we rustig de tijd. We brengen je wensen in kaart: model, hals, mouw, rug, kleur, stof en wat je vooral niet wilt. Bei denkt mee over wat bij jouw figuur en jouw dag past. Aan het einde van dit gesprek begrijpen we elkaar precies, en dat is de basis voor alles wat daarna komt.',
+    titel: 'Ideeën, schets en maten',
+    kort: 'Eerste afspraak: foto\'s bespreken, schets, opmeten, stof kiezen',
+    tekst: 'Je neemt foto\'s en ideeën mee en we bespreken ze rustig. Zodra duidelijk is wat je wilt, maakt Bei meteen een schets van het ontwerp en neemt ze je maten op. Ook de stof en het materiaal komen in deze eerste afspraak aan bod: taft, bruidssatijn, tule, kant en eventuele applicaties liggen in het atelier om te voelen.',
     icoon: 'praat',
   },
   {
-    nr: '03',
-    titel: 'Passen en meten met een proefjurk',
-    kort: 'Opmeten, proefjurk aan, stoffen kiezen',
-    tekst: 'Je wordt opgemeten en je past een proefjurk, zodat je het model echt om je heen voelt in plaats van het alleen op papier te zien. Daarbij leggen we de materialen naast je: taft, bruidssatijn, tule, kant en eventuele applicaties. Zo zie je meteen welke stof bij je huid, je kleur en het model past.',
+    nr: '02',
+    titel: 'De proefjurk passen',
+    kort: 'Tweede afspraak: pasvorm in proefstof, met de echte stof ernaast',
+    tekst: 'Bij de tweede afspraak pas je de proefjurk, gemaakt in een proefstof. Zo voel je het model echt om je heen en controleren we de pasvorm: het lijfje, de rok, de lengte op je schoenen. De gekozen stof ligt er meteen naast, zodat je ziet hoe de jurk wordt.',
     icoon: 'meet',
   },
   {
-    nr: '04',
-    titel: 'Proefmodel in de juiste stof',
-    kort: 'De pasvorm controleren in het echte materiaal',
-    tekst: 'Bij de volgende afspraak pas je het proefmodel, nu in de stof die we gekozen hebben. We controleren de pasvorm tot in de details: zit het lijfje goed, valt de rok zoals je wilt, klopt de lengte met je schoenen. Alles wat nog niet klopt wordt afgespeld en meegenomen naar het eindwerk.',
+    nr: '03',
+    titel: 'Jouw jurk in de echte stof',
+    kort: 'Derde afspraak: de jurk in het gekozen materiaal',
+    tekst: 'Nu pas je jouw jurk, gemaakt in de stof die je gekozen hebt. Meestal zit hij dan goed en neem je hem mee. Is er nog een kleine aanpassing nodig, dan wordt die afgespeld.',
     icoon: 'naald',
   },
   {
-    nr: '05',
-    titel: 'De complete jurk',
-    kort: 'Laatste aanpassingen, dan is hij van jou',
-    tekst: 'De jurk is af. Je past hem helemaal compleet en waar nodig wordt er nog een laatste keer aangepast, tot alles zit zoals het hoort. Daarna hangt hij klaar voor je grote dag. Verandert er daarna nog iets aan je maten, dan kun je altijd terugkomen.',
+    nr: '04',
+    titel: 'Ophalen',
+    kort: 'Vierde afspraak, alleen als er nog iets aangepast is',
+    tekst: 'Waren er bij de derde afspraak nog kleine aanpassingen, dan pas je de jurk nog één keer en neem je hem helemaal compleet mee. Daarna hangt hij klaar voor je grote dag. Verandert er daarna nog iets aan je maten, dan kun je altijd terugkomen.',
     icoon: 'jurk',
   },
 ];

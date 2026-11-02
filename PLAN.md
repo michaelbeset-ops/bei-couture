@@ -16,7 +16,8 @@ Letters: de hero houdt Bodoni Moda 800 (hun logo). Daarbuiten Playfair Display 4
 klant uit drie proeven, 29-10-2026) en DM Sans voor tekst, labels en knoppen (kapitalen met tracking).
 Hoeken 2 px, knoppen rechthoekig zoals in de hero, geen schaduwen, geen golfjes, geen nummering.
 Diensten op de homepage als zes staande foto's met de naam in kapitalen, voor wie het is, en "Bekijk".
-Werkwijze als vijf stappen van links naar rechts op één lijn. Kop doorzichtig over de hero met het logo in ivoor;
+Werkwijze als vier afspraken van links naar rechts op één lijn (Bei, 02-11-2026: schets en maten,
+proefjurk, jurk in de echte stof, ophalen). Kop doorzichtig over de hero met het logo in ivoor;
 op lichte pagina's een donkere balk.
 
 ## Paginastructuur
@@ -30,7 +31,7 @@ op lichte pagina's een donkere balk.
   `/bruidsjurk-op-maat/` (ook gekleurde trouwjurk en grote maten), `/trouwjurk-vermaken/`
   (ook de jurk van een eerdere trouwdag of van moeder), `/bruidsmoeder-jurk/`, `/bruidsmeisjes-en-bruidsjonkers/`,
   `/gala-en-avondkleding/`, `/kleding-op-maat/`
-- `/werkwijze/` de vijf stappen, visueel als draad langs genummerde cirkels, plus wat je meeneemt
+- `/werkwijze/` de vier afspraken op één lijn met figuurtjes, plus wat je meeneemt
 - `/klantervaringen/` verhalen per klant: citaat van Google, wat er gedaan is, foto waar die er is
 - `/over-bei/` haar verhaal, tijdlijn 1997 / 2009 / nu, waarom bruiden komen
 - `/contact/` contactmanieren, openingstijden met het blok "ook buiten de openingstijden", afspraakformulier
@@ -54,7 +55,7 @@ Sitefront. Het afspraakformulier verstuurt niets en slaat niets op; het opent Wh
 `robots.txt` noemt de zoek- en AI-zoekcrawlers apart (Googlebot, Google-Extended, Google-Agent, Bingbot,
 OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot, Applebot, DuckAssistBot en meer) en staat ook de
 trainingscrawlers toe, zoals afgesproken in `seo.config.json` (`aiCrawlers.training: allow`). `llms.txt` bevat de
-gegevens, de openingstijden, de diensten, de vijf stappen en tien korte vraag-en-antwoorden. Diezelfde feiten staan
+gegevens, de openingstijden, de diensten, de vier afspraken en tien korte vraag-en-antwoorden. Diezelfde feiten staan
 zichtbaar op de site (sectie "Goed om te weten" en de FAQ's), want AI-antwoorden citeren alleen wat op de pagina
 staat. Eigen deelafbeelding per pagina (`public/og-*.jpg`, gemaakt met `node tools/og.mjs`).
 
