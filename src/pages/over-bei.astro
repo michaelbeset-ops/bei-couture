@@ -34,7 +34,7 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
         <Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Over Bei', href: url('over-bei/') }]} />
         <div class="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div class="rijs lg:col-span-6">
-            <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 600px, 100vw" alt="Bei, lachend voor een wand van witte bloemen" loading="eager" fetchpriority="high" class="foto aspect-[4/5] w-full object-cover object-[66%_30%]" />
+            <Picture src={bei} formats={['avif', 'webp']} fallbackFormat="webp" quality={88} widths={[480, 720, 960, 1200]} sizes="(min-width: 1024px) 600px, 100vw" alt="Bei, lachend voor een wand van witte bloemen" loading="eager" fetchpriority="high" class="foto aspect-square w-full object-cover" />
             <p class="mt-4 text-sm text-steen">Bei aan het werk in haar atelier aan de Hoogstraat.</p>
           </div>
           <div class="lg:col-span-6 lg:pt-4">
