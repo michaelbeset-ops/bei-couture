@@ -35,6 +35,8 @@ export default defineConfig({
   trailingSlash: 'always',
   devToolbar: { enabled: false },
   build: { format: 'directory', inlineStylesheets: 'always' },
+  // Artikelen van Bei zijn markdown; geen codeblokken, dus geen Shiki (dat botst met de CSP).
+  markdown: { syntaxHighlight: false },
   // Content-Security-Policy als meta-tag. Astro hasht de eigen scripts, zodat er geen
   // 'unsafe-inline' voor JavaScript nodig is. Stijlattributen (object-position, animatievertraging)
   // vragen wel 'unsafe-inline' voor style-src.

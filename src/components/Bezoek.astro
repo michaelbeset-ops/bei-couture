@@ -12,7 +12,7 @@ import hanger from '../assets/e-hanger.jpg';
     <div class="min-w-0 lg:col-span-6">
     <p class="eyebrow">Bezoek het atelier</p>
     <h2 class="mt-5 text-[2.8rem]">Hoogstraat <span class="text-merk">89A</span></h2>
-    <p class="mt-6 text-steen">Het atelier zit midden in Rotterdam, in het pand van {site.inPand}. Bruiden komen uit de hele regio: {werkgebied.slice(1, 7).join(', ')} en verder.</p>
+    <p class="mt-6 text-steen">Het atelier zit in Rotterdam Centrum, aan de Hoogstraat in het pand van {site.inPand}. Bruiden komen uit de hele regio: {werkgebied.slice(1, 7).join(', ')} en verder.</p>
     <ul class="mt-8 space-y-4">
       <li class="flex gap-4"><Icoon naam="pin" class="mt-1 h-5 w-5 flex-none text-merk" /><span>{site.straat}, {site.postcode} {site.plaats}<br /><span class="text-sm text-steen">Gevestigd in {site.inPand}</span></span></li>
       <li class="flex gap-4"><Icoon naam="tel" class="mt-1 h-5 w-5 flex-none text-merk" /><a href={site.telHref} class="link num inline-block py-1">{site.tel}</a></li>
@@ -32,7 +32,7 @@ import hanger from '../assets/e-hanger.jpg';
   <div class="wrap lg:hidden">
     <p class="eyebrow">Bezoek het atelier</p>
     <h2 class="mt-4 text-[2.2rem]">Hoogstraat <span class="text-merk">89A</span>, Rotterdam</h2>
-    <p class="mt-4 text-steen">Midden in de stad, in het pand van {site.inPand}. Bruiden komen uit de hele regio: {werkgebied.slice(1, 5).join(', ')} en verder.</p>
+    <p class="mt-4 text-steen">In Rotterdam Centrum, in het pand van {site.inPand}. Bruiden komen uit de hele regio: {werkgebied.slice(1, 5).join(', ')} en verder.</p>
     <div class="mt-7 border border-merk/20 bg-wit">
       <ul class="divide-y divide-merk/10 px-5 py-1">
         <li class="flex items-center gap-4 py-3.5"><Icoon naam="pin" class="h-5 w-5 flex-none text-merk" /><span>{site.straat}, {site.postcode} {site.plaats}<span class="block text-sm text-steen">Gevestigd in {site.inPand}</span></span></li>

@@ -149,11 +149,12 @@ export const diensten: Dienst[] = [
     h1Accent: 'Rotterdam.',
     eyebrow: 'Trouwjurk vermaken',
     title: 'Trouwjurk vermaken Rotterdam | Bruidsatelier Bei Couture',
-    description: 'Trouwjurk of bruidsjurk laten vermaken in Rotterdam: innemen, uitleggen, inkorten of opnieuw passend maken. Bruidsatelier Bei Couture, Hoogstraat 89A.',
+    description: 'Trouwjurk of bruidsjurk laten vermaken in Rotterdam (wedding dress alterations): innemen, uitleggen, inkorten of opnieuw passend maken. Bruidsatelier Bei Couture, Hoogstraat 89A.',
     lead: 'Je jurk is bijna goed, maar nog niet helemaal van jou. In het atelier wordt hij ingenomen, uitgelegd of ingekort tot hij zit alsof hij voor jou gemaakt is.',
     intro: [
       'Een jurk uit de winkel is gemaakt op een standaardmaat, en vrijwel niemand heeft die maat precies. Je bruidsjurk laten vermaken is daarom geen noodgreep, maar de normale laatste stap.',
       'Juist die stap bepaalt of een jurk er duur uitziet of niet. Bei vermaakt al jaren bruidsjurken. Bruiden zeggen vaak dat niemand meer ziet dat er iets aan gedaan is, en dat is precies de bedoeling.',
+      'Zoek je in het Engels naar wedding dress alterations in Rotterdam? Dan ben je hier ook aan het juiste adres.',
     ],
     feiten: ['Meestal twee pasbeurten', 'Niemand ziet het', 'Ook de jurk van je moeder', 'Ook het hele gezelschap'],
     blokken: [

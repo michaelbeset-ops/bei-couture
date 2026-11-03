@@ -1,0 +1,100 @@
+---
+// Een artikel van Bei (markdown uit src/content/artikelen, beheer via Pages CMS).
+import { Picture } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Kop from '../../components/Kop.astro';
+import Voet from '../../components/Voet.astro';
+import Kruimels from '../../components/Kruimels.astro';
+import Cta from '../../components/Cta.astro';
+import Icoon from '../../components/Icoon.astro';
+import { url, site } from '../../data/site';
+import { artikelen, datumNl, type Artikel } from '../../lib/beheer';
+
+export async function getStaticPaths() {
+  const lijst = await artikelen();
+  return lijst.map((a) => ({ params: { slug: a.id }, props: { artikel: a, andere: lijst.filter((b) => b.id !== a.id).slice(0, 3) } }));
+}
+
+const { artikel, andere } = Astro.props as { artikel: Artikel; andere: Artikel[] };
+const { Content } = await render(artikel);
+const basis = new URL(url(''), Astro.site).href;
+const hier = new URL(Astro.url.pathname, Astro.site).href;
+const blog = new URL(url('blog/'), Astro.site).href;
+const d = artikel.data;
+---
+<Base
+  title={`${d.titel} | ${site.naam}`}
+  description={d.intro}
+  kruimels={[{ naam: 'Home', url: basis }, { naam: 'Blog', url: blog }, { naam: d.titel, url: hier }]}
+  schema={[{
+    '@type': 'BlogPosting',
+    '@id': `${hier}#artikel`,
+    url: hier,
+    headline: d.titel,
+    description: d.intro,
+    datePublished: d.datum.toISOString().slice(0, 10),
+    inLanguage: 'nl-NL',
+    author: { '@type': 'Person', name: site.eigenaar, worksFor: { '@id': `${basis}#bedrijf` } },
+    publisher: { '@id': `${basis}#bedrijf` },
+    isPartOf: { '@id': `${blog}#blog` },
+    ...(d.foto ? { image: new URL(d.foto.src, Astro.site).href } : {}),
+  }]}
+  hoofdEntiteit={`${hier}#artikel`}
+>
+  <Kop opFoto={false} />
+  <main id="inhoud">
+    <article class="bg-ivoor pb-16 pt-10 md:pb-24 md:pt-14">
+      <div class="wrap">
+        <Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Blog', href: url('blog/') }, { naam: d.titel, href: url(`blog/${artikel.id}/`) }]} />
+        <header class="mx-auto mt-10 max-w-3xl">
+          <p class="eyebrow num">{datumNl(d.datum)}</p>
+          <h1 class="mt-5 text-[2.4rem] md:text-[3.2rem]">{d.titel}</h1>
+          <p class="mt-6 text-lg text-steen md:text-xl">{d.intro}</p>
+        </header>
+        {d.foto && (
+          <div class="mx-auto mt-10 max-w-5xl">
+            <Picture src={d.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={80} widths={[640, 960, 1280, 1600]} sizes="(min-width: 1024px) 1024px, 100vw" alt={d.fotoAlt ?? ''} loading="eager" fetchpriority="high" class="foto aspect-[16/10] w-full object-cover" />
+          </div>
+        )}
+        <div class="artikel mx-auto mt-10 max-w-3xl md:mt-14">
+          <Content />
+        </div>
+        <footer class="mx-auto mt-12 max-w-3xl border-t border-ivoor-3 pt-8">
+          <p class="text-steen">Geschreven door {site.eigenaar}, kleermaker en eigenaar van {site.naam} aan de {site.straat} in {site.plaats}.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href={url('afspraak/')} class="knop knop-merk">Afspraak maken <Icoon naam="pijl" /></a>
+            <a href={url('blog/')} class="knop knop-rand">Alle artikelen</a>
+          </div>
+        </footer>
+      </div>
+    </article>
+
+    {andere.length > 0 && (
+      <section class="bg-strik-zacht py-14 md:py-20" aria-labelledby="meer-kop">
+        <div class="wrap">
+          <p class="eyebrow">Blog</p>
+          <h2 id="meer-kop" class="mt-4 text-[2rem] md:text-[2.4rem]">Meer uit het <span class="text-merk">atelier</span></h2>
+          <ul class="mt-8 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {andere.map((a) => (
+              <li>
+                <a href={url(`blog/${a.id}/`)} class="fotolink group block">
+                  <span class="foto block aspect-[4/3] bg-wit">
+                    {a.data.foto
+                      ? <Picture src={a.data.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={76} widths={[480, 720, 960]} sizes="(min-width: 1024px) 400px, (min-width: 640px) 48vw, 92vw" alt={a.data.fotoAlt ?? ''} class="h-full w-full object-cover" />
+                      : <span class="grid h-full w-full place-items-center text-merk"><Icoon naam="naald" class="h-10 w-10" /></span>}
+                  </span>
+                  <span class="num mt-4 block text-[.78rem] font-medium uppercase tracking-[.22em] text-merk">{datumNl(a.data.datum)}</span>
+                  <h3 class="mt-2 text-[1.35rem] leading-[1.15]">{a.data.titel}</h3>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )}
+
+    <Cta />
+  </main>
+  <Voet />
+</Base>

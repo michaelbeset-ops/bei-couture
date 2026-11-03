@@ -1,0 +1,91 @@
+# Beheer van de site via Pages CMS (https://app.pagescms.org).
+# Bei logt in met haar e-mailadres (uitgenodigd als medewerker) en kan hier artikelen schrijven en
+# foto's plaatsen. Elke keer dat zij opslaat wordt dat een commit op main; daarna bouwt GitHub de site
+# opnieuw (.github/workflows/deploy.yml) en staat het binnen een paar minuten op www.beicouture.nl.
+#
+# Foto's komen in src/assets/upload en worden bij het bouwen automatisch verkleind en omgezet
+# (avif/webp), dus een grote telefoonfoto is prima. De paden worden relatief weggeschreven vanuit
+# src/content/<map>/, zodat Astro ze als eigen beelden herkent en optimaliseert.
+
+media:
+  input: src/assets/upload
+  output: ../../assets/upload
+  label: Foto's
+  categories: [image]
+  extensions: [jpg, jpeg, png, webp]
+  rename: safe
+
+settings:
+  commit:
+    identity: user
+
+content:
+  - name: artikelen
+    label: Artikelen
+    description: Verhalen en nieuws voor op de site. Een nieuw artikel staat na het opslaan binnen een paar minuten op www.beicouture.nl/blog/.
+    type: collection
+    path: src/content/artikelen
+    filename: "{fields.titel}.md"
+    exclude: [.gitkeep]
+    view:
+      fields: [foto, titel, datum, online]
+      primary: titel
+      sort: [datum, titel]
+      default:
+        sort: datum
+        order: desc
+    fields:
+      - name: titel
+        label: Titel
+        type: string
+        required: true
+        description: Kort en duidelijk, bijvoorbeeld "Trouwjurk vermaken: zo gaat dat bij Bei".
+      - name: datum
+        label: Datum
+        type: date
+        required: true
+      - name: intro
+        label: Korte inleiding
+        type: text
+        required: true
+        description: Een of twee zinnen. Staat onder de titel en in het overzicht, en Google gebruikt hem als samenvatting.
+        options:
+          maxlength: 220
+      - name: foto
+        label: Foto bij het artikel
+        type: image
+        description: Liggend werkt het mooist. Zonder gezichten van klanten, tenzij zij toestemming hebben gegeven.
+      - name: fotoAlt
+        label: Wat staat er op de foto?
+        type: string
+        description: Een korte beschrijving, bijvoorbeeld "Kanten lijfje met knoopjes op de rug".
+      - name: body
+        label: Tekst
+        type: rich-text
+        description: De tekst van het artikel. Met de knoppen bovenin maak je tussenkoppen, opsommingen en zet je foto's in de tekst.
+      - name: online
+        label: Online
+        type: boolean
+        default: true
+        description: Uitzetten om een artikel tijdelijk van de site te halen zonder het weg te gooien.
+
+  - name: galerij
+    label: Foto's van klanten
+    description: Deze foto's staan op de pagina Klantervaringen in de fotostrook, de nieuwste eerst. Alleen met toestemming van de klant.
+    type: file
+    path: src/content/galerij/fotos.json
+    fields:
+      - name: fotos
+        label: Foto's
+        type: object
+        list: true
+        fields:
+          - name: foto
+            label: Foto
+            type: image
+            required: true
+          - name: alt
+            label: Wat staat er op de foto?
+            type: string
+            required: true
+            description: Bijvoorbeeld "Bruid in een zeemeerminjurk met kanten sleep".
