@@ -51,7 +51,8 @@ export default defineConfig({
         "base-uri 'self'",
         "form-action 'none'",
         "frame-src 'none'",
-        'upgrade-insecure-requests',
+        // Geen 'upgrade-insecure-requests': GitHub Pages stuurt http zelf door naar https (Enforce HTTPS).
+        // Met deze regel bleven foto's en lettertypes leeg zolang het certificaat nog werd aangevraagd.
       ],
     },
   },
