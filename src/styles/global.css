@@ -63,8 +63,10 @@
 @layer base {
   /* Boven en onder is de site donker (kop en voet): bij doorscrollen op de telefoon zie je dus geen wit. */
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 1.5rem; background: var(--color-inkt); }
+  /* Body donker zoals de hero: iOS Safari gebruikt de body-kleur voor de ruimte boven en onder de pagina
+     bij doortrekken. De witte ondergrond staat op de inhoud zelf (zie Base.astro). */
   body {
-    background-color: var(--color-ivoor);
+    background-color: var(--color-inkt);
     color: var(--color-inkt);
     font-family: var(--font-tekst);
     font-weight: 400;
