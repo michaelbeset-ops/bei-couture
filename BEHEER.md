@@ -6,10 +6,10 @@ op www.beicouture.nl.
 
 ## Inloggen
 
-1. Ga naar https://app.pagescms.org
+1. Ga naar www.beicouture.nl/admin
 2. Kies inloggen met e-mail en vul je e-mailadres in. Je krijgt een link per mail; daarmee ben je ingelogd
    (geen wachtwoord nodig).
-3. Klik op "bei-couture". Links zie je: Artikelen, Foto's van klanten en Foto's.
+3. Links zie je: Artikelen, Foto's van klanten en Foto's.
 
 ## Een artikel schrijven
 

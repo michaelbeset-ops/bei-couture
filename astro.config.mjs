@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 // Pagina's die niet in Google horen en dus ook niet in de sitemap (zie src/layouts/Base.astro).
-const geenIndex = ['/privacy/', '/404/'];
+const geenIndex = ['/privacy/', '/404/', '/admin/'];
 
 // Waar de site draait. Standaard de voorstel-URL; bij oplevering op het eigen domein:
 //   PUBLIC_SITE=https://www.beicouture.nl PUBLIC_BASE= npm run build
@@ -25,7 +25,11 @@ const oudeUrls = {
   '/bruidsjurk-laten-maken/jurk-maken-tule-stof/': '/bruidsjurk-op-maat/',
   '/bruidsjurk-laten-maken/jurk-maken-stap-5/': '/bruidsjurk-op-maat/',
 };
-const redirects = Object.fromEntries(Object.entries(oudeUrls).map(([van, naar]) => [van, `${basis}${naar}`]));
+const redirects = {
+  ...Object.fromEntries(Object.entries(oudeUrls).map(([van, naar]) => [van, `${basis}${naar}`])),
+  // Beheer: Bei onthoudt alleen www.beicouture.nl/admin/; dat stuurt door naar haar omgeving in Pages CMS (zie .pages.yml).
+  '/admin/': 'https://app.pagescms.org/michaelbeset-ops/bei-couture/main',
+};
 
 // Voorstel draait op voorstel.sitefront.nl/bei-couture/ (map in de Sitefront-verzamelrepo).
 export default defineConfig({
