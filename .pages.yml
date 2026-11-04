@@ -39,7 +39,7 @@ content:
         label: Titel
         type: string
         required: true
-        description: Kort en duidelijk, bijvoorbeeld "Trouwjurk vermaken: zo gaat dat bij Bei".
+        description: 'Kort en duidelijk, bijvoorbeeld "Trouwjurk vermaken, zo gaat dat bij Bei".'
       - name: datum
         label: Datum
         type: date
