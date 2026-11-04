@@ -11,7 +11,13 @@ name: Site bouwen en uitrollen
 on:
   push:
     branches: [main]
+  # Handmatig, en via de knop "Zet op de site" in Pages CMS (die stuurt een 'payload' mee, zie .pages.yml).
   workflow_dispatch:
+    inputs:
+      payload:
+        description: Gegevens van Pages CMS (wie, wat); niet gebruikt door de build
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -49,3 +55,7 @@ jobs:
     steps:
       - id: uitrol
         uses: actions/deploy-pages@v4
+        with:
+          # GitHub Pages bleef op 04-11-2026 eenmaal tien minuten hangen op 'updating_pages'. Niet langer wachten
+          # dan vijf minuten: dan faalt de run snel en kan de knop in Pages CMS hem opnieuw starten.
+          timeout: 300000

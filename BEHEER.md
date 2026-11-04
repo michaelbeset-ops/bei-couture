@@ -17,8 +17,11 @@ op www.beicouture.nl.
 2. Vul in: Titel, Datum, Korte inleiding (een of twee zinnen), een Foto bij het artikel en wat erop staat.
 3. Schrijf de tekst. Met de knoppen bovenin maak je tussenkoppen, dikgedrukte woorden, opsommingen en
    zet je extra foto's tussen de tekst.
-4. Klik op Opslaan. Na een paar minuten staat het artikel op www.beicouture.nl/blog/ en komt "Blog"
-   in het menu van de site. De nieuwste drie artikelen staan ook op de homepage.
+4. Klik op Opslaan.
+5. Klik links op Actions en dan op de knop "Zet op de site". Je ziet dan of het bezig is, klaar is of
+   mislukt. Na ongeveer drie minuten staat het artikel op www.beicouture.nl/blog/ en komt "Blog" in het
+   menu van de site. De nieuwste drie artikelen staan ook op de homepage.
+   (Opslaan zet het ook zonder die knop op de site, maar met de knop zie je wat er gebeurt.)
 
 Tips voor een goed artikel:
 - Schrijf zoals je praat met een bruid in het atelier. Een paar alinea's is genoeg.
@@ -30,7 +33,8 @@ Tips voor een goed artikel:
 
 1. Klik op Foto's van klanten.
 2. Klik op Toevoegen, kies een foto van je telefoon of computer en schrijf kort wat erop staat.
-3. Klik op Opslaan. De foto's staan daarna in de fotostrook op de pagina Klantervaringen, de nieuwste eerst.
+3. Klik op Opslaan en daarna links op Actions, "Zet op de site". De foto's staan daarna in de fotostrook op de
+   pagina Klantervaringen, de nieuwste eerst.
 
 Let op: alleen foto's waarvoor de klant toestemming heeft gegeven. Gezichten van klanten liever niet,
 tenzij de klant dat zelf goed vindt. Grote telefoonfoto's zijn prima, de site verkleint ze zelf.
