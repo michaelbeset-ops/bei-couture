@@ -19,6 +19,18 @@ settings:
   commit:
     identity: user
 
+# De knop "Zet op de site" (links onder Admin, Actions, en bovenin bij Artikelen). Opslaan zet alles al automatisch
+# op de site, maar met deze knop ziet Bei de voortgang (bezig, klaar, mislukt) en kan ze het opnieuw starten.
+actions:
+  - name: publiceren
+    label: Zet op de site
+    workflow: deploy.yml
+    ref: main
+    confirm:
+      title: Zet alles op de site?
+      message: Alles wat je hebt opgeslagen komt op www.beicouture.nl. Dat duurt ongeveer drie minuten; de voortgang zie je onder Actions.
+      button: Ja, zet op de site
+
 content:
   - name: artikelen
     label: Artikelen
