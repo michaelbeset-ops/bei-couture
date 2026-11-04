@@ -4,7 +4,7 @@
 import { site, werkgebied, waHoi, url } from '../data/site';
 import { Picture } from 'astro:assets';
 import Icoon from './Icoon.astro';
-import hanger from '../assets/e-hanger.jpg';
+import atelier from '../assets/vermaken-tule.jpg';
 ---
 <section id="bezoek" class="bg-strik-zacht py-12 md:py-24">
   <!-- Desktop: de eenvoudige versie, links kop, tekst, gegevens en knoppen, rechts de tijden. -->
@@ -24,7 +24,7 @@ import hanger from '../assets/e-hanger.jpg';
     </div>
     </div>
     <div class="lg:col-span-6">
-      <Picture src={hanger} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 560px, 100vw" alt="Kanten bruidsjurk aan een hanger in het pashokje van het atelier" class="foto aspect-[4/3] w-full object-cover object-[50%_40%]" />
+      <Picture src={atelier} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 560px, 100vw" alt="Bei helpt een bruid met haar jurk in het atelier" class="foto aspect-[4/3] w-full object-cover object-[60%_35%]" />
     </div>
   </div>
 
