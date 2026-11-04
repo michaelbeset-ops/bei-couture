@@ -1,17 +1,19 @@
 // Bewerkmodus van Bei Couture. Wordt alleen geladen na inloggen (zie de lader in src/layouts/Base.astro).
-// Bei ziet haar eigen site met een balk bovenin en kan artikelen schrijven en klantfoto's toevoegen op de
-// pagina's zelf; wat ze typt verschijnt direct in de pagina. Opslaan gaat via de brug (beheer/worker.js),
+// Bei ziet haar eigen site met een balk bovenin en kan klantervaringen en klantfoto's toevoegen op de pagina
+// Klantervaringen zelf; wat ze typt verschijnt direct in de pagina. Opslaan gaat via de brug (beheer/worker.js),
 // die alles in één commit op GitHub zet; daarna bouwt de site zichzelf opnieuw (ongeveer drie minuten).
 //
-// Bestanden die hieruit ontstaan: src/content/artikelen/<slug>.md, src/assets/upload/<naam>.jpg en
-// src/content/galerij/fotos.json. Precies dezelfde vorm als de site verwacht (src/content.config.ts, src/lib/beheer.ts).
+// Bestanden die hieruit ontstaan: src/content/klantverhalen/<id>.json, src/assets/upload/<naam>.jpg en
+// src/content/galerij/fotos.json. Precies dezelfde vorm als de site verwacht (src/lib/beheer.ts).
 
 const meta = (n) => document.querySelector(`meta[name="${n}"]`)?.content ?? '';
 const API = meta('beheer-api').replace(/\/$/, '');
 const BASIS = meta('beheer-basis') || '/';
 const OPSLAG = 'bei-beheer';
 const UPLOAD = 'src/assets/upload';
-const ARTIKELEN = 'src/content/artikelen';
+const VERHALEN = 'src/content/klantverhalen';
+const BRONNEN = ['Google', 'WhatsApp', 'Instagram', 'Facebook', 'In het atelier'];
+const MAX_FOTOS = 4;
 const GALERIJ = 'src/content/galerij/fotos.json';
 const RELATIEF = '../../assets/upload';
 
@@ -30,13 +32,13 @@ const el = (tag, attrs = {}, kinderen = []) => {
   return e;
 };
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
-const datumNl = (iso) => {
+const maandJaar = (iso) => {
   const d = new Date(`${iso}T12:00:00`);
-  return isNaN(d) ? '' : d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+  return isNaN(d) ? '' : d.toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' });
 };
 const vandaag = () => new Date().toISOString().slice(0, 10);
 const slug = (s) =>
-  String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'artikel';
+  String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || 'ervaring';
 const basisnaam = (pad) => (pad || '').split('/').pop().split('.')[0];
 
 // ---------- brug ----------
@@ -81,78 +83,18 @@ const kiesBestand = () =>
     i.addEventListener('change', () => ok(i.files[0] || null));
     i.click();
   });
+const kiesBestanden = () =>
+  new Promise((ok) => {
+    const i = el('input', { type: 'file', accept: 'image/*', multiple: '' });
+    i.addEventListener('change', () => ok([...i.files]));
+    i.click();
+  });
 const nieuweNaam = (voorvoegsel) => `${voorvoegsel}-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 5)}.jpg`;
-
-// ---------- markdown (klein, alleen wat het paneel maakt) ----------
-function inline(s) {
-  return esc(s)
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>')
-    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2">$1</a>');
-}
-function markdownNaarHtml(md, beeldSrc) {
-  const regels = String(md || '').replace(/\r/g, '').split('\n');
-  const uit = [];
-  let para = [];
-  let lijst = null;
-  const sluitPara = () => { if (para.length) { uit.push(`<p>${inline(para.join(' '))}</p>`); para = []; } };
-  const sluitLijst = () => { if (lijst) { uit.push(`<${lijst.t}>${lijst.items.map((i) => `<li>${inline(i)}</li>`).join('')}</${lijst.t}>`); lijst = null; } };
-  for (const r of regels) {
-    const t = r.trim();
-    let m;
-    if (!t) { sluitPara(); sluitLijst(); continue; }
-    if ((m = /^(#{1,4})\s+(.*)$/.exec(t))) { sluitPara(); sluitLijst(); const n = Math.min(4, Math.max(2, m[1].length)); uit.push(`<h${n}>${inline(m[2])}</h${n}>`); continue; }
-    if ((m = /^!\[([^\]]*)\]\(([^)\s]+)\)$/.exec(t))) { sluitPara(); sluitLijst(); const src = beeldSrc(m[2]); uit.push(src ? `<img src="${esc(src)}" alt="${esc(m[1])}">` : `<div class="b-beeld-plek">Foto: ${esc(basisnaam(m[2]))}</div>`); continue; }
-    if ((m = /^[-*]\s+(.*)$/.exec(t))) { sluitPara(); if (!lijst || lijst.t !== 'ul') { sluitLijst(); lijst = { t: 'ul', items: [] }; } lijst.items.push(m[1]); continue; }
-    if ((m = /^\d+[.)]\s+(.*)$/.exec(t))) { sluitPara(); if (!lijst || lijst.t !== 'ol') { sluitLijst(); lijst = { t: 'ol', items: [] }; } lijst.items.push(m[1]); continue; }
-    if ((m = /^>\s?(.*)$/.exec(t))) { sluitPara(); sluitLijst(); uit.push(`<blockquote><p>${inline(m[1])}</p></blockquote>`); continue; }
-    if (/^(-{3,}|\*{3,})$/.test(t)) { sluitPara(); sluitLijst(); uit.push('<hr>'); continue; }
-    sluitLijst();
-    para.push(t);
-  }
-  sluitPara(); sluitLijst();
-  return uit.join('\n');
-}
-
-// Frontmatter lezen en schrijven in de vorm die Astro (src/content.config.ts) verwacht.
-function leesArtikel(bron) {
-  const m = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(bron);
-  const data = {};
-  if (m) {
-    let sleutel = null;
-    for (const r of m[1].split(/\r?\n/)) {
-      const k = /^([A-Za-z_][\w-]*):\s?(.*)$/.exec(r);
-      if (k) { sleutel = k[1]; data[sleutel] = k[2]; }
-      else if (sleutel && /^\s+\S/.test(r)) data[sleutel] = `${data[sleutel]} ${r.trim()}`.trim();
-    }
-    for (const k of Object.keys(data)) {
-      const v = data[k].trim();
-      if (/^".*"$/.test(v)) { try { data[k] = JSON.parse(v); continue; } catch {} }
-      if (/^'.*'$/.test(v)) { data[k] = v.slice(1, -1).replace(/''/g, "'"); continue; }
-      data[k] = v;
-    }
-  }
-  return { ...data, online: String(data.online ?? 'true') !== 'false', tekst: (m ? m[2] : bron).replace(/^\n+/, '') };
-}
-function schrijfArtikel(a) {
-  const q = (s) => JSON.stringify(String(s ?? ''));
-  return [
-    '---',
-    `titel: ${q(a.titel)}`,
-    `datum: ${a.datum}`,
-    `intro: ${q(a.intro)}`,
-    ...(a.foto ? [`foto: ${a.foto}`, `fotoAlt: ${q(a.fotoAlt)}`] : []),
-    `online: ${a.online ? 'true' : 'false'}`,
-    '---',
-    String(a.tekst || '').replace(/\r/g, '').trim(),
-    '',
-  ].join('\n');
-}
 
 // ---------- de bewerkmodus ----------
 let balk, statusVak, paneel;
 const pagina = {
-  artikel: document.querySelector('[data-b-artikel]:not(li)'),
+  verhalen: document.querySelector('[data-b-nieuw-hier]'),
   galerij: document.querySelector('[data-b-galerij]'),
 };
 
@@ -162,18 +104,21 @@ function start() {
   statusVak = el('span', { class: 'b-status' });
   balk = el('div', { class: 'b-balk', role: 'region', 'aria-label': 'Bewerkmodus' }, [
     el('span', { class: 'b-naam' }, 'Bewerkmodus'),
-    el('button', { class: 'b-knop b-vol', type: 'button', onclick: () => nieuwArtikel() }, 'Artikel schrijven'),
-    pagina.artikel?.dataset.bArtikel ? el('button', { class: 'b-knop', type: 'button', onclick: () => bewerkArtikel(pagina.artikel.dataset.bArtikel) }, 'Dit artikel bewerken') : null,
+    el('button', { class: 'b-knop b-vol', type: 'button', onclick: () => {
+      if (pagina.verhalen) nieuwVerhaal(); else location.href = `${BASIS}klantervaringen/#nieuw`;
+    } }, [el('span', { class: 'b-lang' }, 'Klantervaring toevoegen'), el('span', { class: 'b-kort' }, '+ Ervaring')]),
     pagina.galerij
-      ? el('button', { class: 'b-knop', type: 'button', onclick: () => galerij.toevoegen() }, 'Foto toevoegen')
+      ? el('button', { class: 'b-knop', type: 'button', onclick: () => galerij.toevoegen() }, [el('span', { class: 'b-lang' }, 'Foto toevoegen'), el('span', { class: 'b-kort' }, '+ Foto')])
       : el('button', { class: 'b-knop', type: 'button', onclick: () => { location.href = `${BASIS}klantervaringen/#fotos`; } }, "Klantfoto's"),
     statusVak,
     el('button', { class: 'b-knop b-rood', type: 'button', onclick: uitloggen }, 'Uitloggen'),
   ]);
   document.body.prepend(balk);
   zetStatus(API ? 'Klik op een knop om iets toe te voegen of te wijzigen.' : 'De brug is nog niet gekoppeld; opslaan werkt nog niet.');
+  if (pagina.verhalen) markeerVerhalen();
   if (pagina.galerij) galerij.start();
   if (location.hash === '#fotos' && pagina.galerij) setTimeout(() => galerij.toevoegen(), 300);
+  if (location.hash === '#nieuw' && pagina.verhalen) { history.replaceState(null, '', location.pathname); nieuwVerhaal(); }
   const laatste = sessionStorage.getItem('bei-beheer-commit');
   if (laatste) volgDeploy(laatste);
 }
@@ -206,125 +151,227 @@ async function volgDeploy(commit) {
   zetStatus('Het bouwen duurt langer dan normaal. Kijk straks nog eens, of app Michael.');
 }
 
-// ---------- artikel: paneel met live voorbeeld in de pagina ----------
-function veld(label, invoer, hint) {
-  return [el('label', { for: invoer.id }, label), invoer, hint ? el('p', { class: 'b-hint' }, hint) : null];
+// ---------- klantervaringen: paneel met live voorbeeld in de pagina ----------
+// Het blok komt uit /admin/sjabloon/ (src/components/Verhaal.astro), in de variant met het juiste aantal foto's
+// en de juiste kant. Zo ziet Bei precies wat bezoekers straks zien, zonder dat hier opmaak dubbel staat.
+let sjabloonDoc = null;
+async function sjabloon() {
+  if (!sjabloonDoc) {
+    const r = await fetch(`${BASIS}admin/sjabloon/`);
+    if (!r.ok) throw new Error('Het sjabloon kon niet geladen worden. Vernieuw de pagina en probeer het opnieuw.');
+    sjabloonDoc = new DOMParser().parseFromString(await r.text(), 'text/html');
+  }
+  return sjabloonDoc;
+}
+const dienstenLijst = (doc) => {
+  try { return JSON.parse(doc.querySelector('[data-b-diensten]')?.dataset.bDiensten || '[]'); } catch { return []; }
+};
+
+// Knoppen bij de ervaringen die Bei zelf heeft toegevoegd; offline gezette worden zichtbaar (gemarkeerd).
+function markeerVerhalen() {
+  document.querySelectorAll('section[data-b-verhaal]').forEach((sectie) => {
+    if (sectie.hidden) {
+      sectie.hidden = false;
+      sectie.classList.add('b-offline');
+      sectie.prepend(el('p', { class: 'b-offline-label' }, 'Staat offline: bezoekers zien deze ervaring niet'));
+    }
+    sectie.prepend(el('button', { type: 'button', class: 'b-verhaal-knop', onclick: () => bewerkVerhaal(sectie) }, 'Deze ervaring bewerken'));
+  });
 }
 
-async function nieuwArtikel() {
-  // Het sjabloon laden in de pagina, zodat Bei haar artikel ziet ontstaan zoals het straks wordt.
-  const r = await fetch(`${BASIS}admin/sjabloon/`);
-  const doc = new DOMParser().parseFromString(await r.text(), 'text/html');
-  const main = doc.querySelector('main');
-  let hier = document.querySelector('main');
-  if (!hier) { hier = el('main', { id: 'inhoud' }); document.body.querySelector('.bg-ivoor')?.append(hier); }
-  hier.innerHTML = main.innerHTML;
-  window.scrollTo({ top: 0 });
-  pagina.artikel = hier.querySelector('[data-b-artikel]');
-  openPaneel({ id: '', titel: '', datum: vandaag(), intro: '', foto: '', fotoAlt: '', online: true, tekst: '' }, 'nieuw');
+const leegVerhaal = () => ({ id: '', label: '', kop: '', citaat: '', tekst: '', naam: '', sterren: 5, bron: '', datum: vandaag(), dienst: '', fotos: [], online: true });
+
+async function nieuwVerhaal() {
+  if (paneel) return;
+  zetStatus('Sjabloon laden...');
+  try { await openVerhaal(leegVerhaal(), 'nieuw', null); zetStatus('Vul de velden in; je ziet de ervaring meteen in de pagina.'); }
+  catch (e) { zetStatus(e.message); }
 }
 
-async function bewerkArtikel(id) {
-  zetStatus('Artikel ophalen...');
+async function bewerkVerhaal(sectie) {
+  if (paneel) return;
+  const id = sectie.dataset.bVerhaal;
+  zetStatus('Ervaring ophalen...');
   try {
-    const { inhoud } = await brug(`/bestand?pad=${encodeURIComponent(`${ARTIKELEN}/${id}.md`)}`);
-    const a = leesArtikel(inhoud);
-    openPaneel({ id, titel: a.titel ?? '', datum: a.datum ?? vandaag(), intro: a.intro ?? '', foto: a.foto ?? '', fotoAlt: a.fotoAlt ?? '', online: a.online, tekst: a.tekst }, 'bewerk');
-    zetStatus('Pas het artikel aan; je ziet het meteen in de pagina.');
+    const { inhoud } = await brug(`/bestand?pad=${encodeURIComponent(`${VERHALEN}/${id}.json`)}`);
+    const v = { ...leegVerhaal(), ...JSON.parse(inhoud), id };
+    // Bestaande foto's: de gebouwde bestandsnaam begint met de oorspronkelijke naam.
+    // Astro kan een naam veranderen (dezelfde foto twee keer wordt één bestand), dus anders op volgorde.
+    const opVolgorde = [...sectie.querySelectorAll('[data-b-plek]')]
+      .map((pl, k) => [Number(pl.dataset.bVolgorde ?? k), pl.querySelector('img')])
+      .sort((x, y) => x[0] - y[0])
+      .map(([, img]) => img?.currentSrc || img?.src || '');
+    const bestaand = new Map(opVolgorde.map((src) => [basisnaam(src), src]));
+    v.fotos = (v.fotos || []).map((f, k) => ({ foto: f.foto, alt: f.alt || '', src: bestaand.get(basisnaam(f.foto)) || opVolgorde[k] || '' }));
+    v.sterren = Number(v.sterren ?? 0);
+    await openVerhaal(v, 'bewerk', sectie);
+    zetStatus('Pas de ervaring aan; je ziet het meteen in de pagina.');
   } catch (e) { zetStatus(e.message); }
 }
 
-function openPaneel(a, modus) {
-  paneel?.remove();
-  const art = pagina.artikel;
-  const d = (n) => art?.querySelector(`[data-b="${n}"]`);
-  const beelden = new Map(); // bestandsnaam -> { dataUrl, base64 } van nieuwe foto's
-  // Bestaande foto's in de tekst: de gebouwde bestandsnaam begint met de oorspronkelijke naam.
-  const bestaand = new Map();
-  art?.querySelectorAll('[data-b="tekst"] img, [data-b="foto"] img').forEach((img) => bestaand.set(basisnaam(img.currentSrc || img.src), img.currentSrc || img.src));
-  const beeldSrc = (pad) => beelden.get(basisnaam(pad) + '.jpg')?.dataUrl || beelden.get(pad.split('/').pop())?.dataUrl || bestaand.get(basisnaam(pad)) || '';
+function veld(label, invoer, hint) {
+  return [el('label', { for: invoer.id }, label), invoer, hint ? el('p', { class: 'b-hint' }, hint) : null];
+}
+function keuze(id, opties, waarde) {
+  const s = el('select', { id }, opties.map(([w, t]) => el('option', { value: w }, t)));
+  s.value = String(waarde ?? '');
+  return s;
+}
 
-  const titel = el('input', { type: 'text', id: 'b-titel', value: a.titel, placeholder: 'Bijvoorbeeld: Trouwjurk vermaken, zo gaat dat bij Bei' });
-  const datum = el('input', { type: 'date', id: 'b-datum', value: a.datum });
-  const intro = el('textarea', { id: 'b-intro', placeholder: 'Een of twee zinnen. Staan onder de titel en in Google.' }, a.intro);
-  const fotoBeeld = el('img', { alt: '' });
-  const fotoKnop = el('button', { type: 'button', class: 'b-p-knop', onclick: async () => {
-    const f = await kiesBestand(); if (!f) return;
-    const b = await leesFoto(f, 2200);
-    a.foto = `${RELATIEF}/${nieuweNaam(slug(titel.value || 'artikel'))}`;
-    beelden.set(a.foto.split('/').pop(), b);
-    toon();
-  } }, a.foto ? 'Andere foto' : 'Foto kiezen');
-  const fotoAlt = el('input', { type: 'text', id: 'b-fotoalt', value: a.fotoAlt, placeholder: 'Bijvoorbeeld: kanten lijfje met knoopjes op de rug' });
-  const tekst = el('textarea', { id: 'b-tekst', class: 'b-tekst', placeholder: 'Schrijf zoals je praat met een bruid in het atelier.' }, a.tekst);
+async function openVerhaal(v, modus, sectie) {
+  const doc = await sjabloon();
+  const diensten = dienstenLijst(doc);
+  const p = sectie ? Number(sectie.dataset.bP) || 0 : Number(pagina.verhalen.dataset.bP) || 0;
+  const oorspronkelijk = new Set(v.fotos.map((f) => (f.foto || '').split('/').pop())); // om weggehaalde foto's op te ruimen
+  let voorbeeld = sectie;
+  let huidigN = -1;
+
+  // ----- velden -----
+  const label = el('input', { type: 'text', id: 'b-label', value: v.label, placeholder: 'Bijvoorbeeld: Trouwjurk vermaakt' });
+  const kop = el('input', { type: 'text', id: 'b-kop', value: v.kop, placeholder: 'Bijvoorbeeld: Nog mooier dan gedacht' });
+  const citaat = el('textarea', { id: 'b-citaat', placeholder: 'Plak of typ hier wat de klant schreef of zei.' });
+  citaat.value = v.citaat;
+  const tekst = el('textarea', { id: 'b-tekst', placeholder: 'Wat heb je gedaan? Bijvoorbeeld: de jurk is ingenomen en de sleep ingekort.' });
+  tekst.value = v.tekst;
+  const naam = el('input', { type: 'text', id: 'b-naam', value: v.naam, placeholder: 'Bijvoorbeeld: Marcel of Christina W.' });
+  const sterren = keuze('b-sterren', [['5', '★★★★★  5 sterren'], ['4', '★★★★  4 sterren'], ['3', '★★★  3 sterren'], ['2', '★★  2 sterren'], ['1', '★  1 ster'], ['0', 'Geen sterren tonen']], v.sterren);
+  const bron = keuze('b-bron', [['', 'Niet vermelden'], ...BRONNEN.map((b) => [b, b])], BRONNEN.includes(v.bron) ? v.bron : '');
+  const datum = el('input', { type: 'date', id: 'b-datum', value: v.datum || vandaag() });
+  const dienst = keuze('b-dienst', [['', 'Geen knop'], ...diensten.map((d) => [d.slug, d.titel])], v.dienst);
   const online = el('input', { type: 'checkbox', id: 'b-online' });
-  online.checked = a.online !== false;
+  online.checked = v.online !== false;
   const fout = el('p', { class: 'b-fout', hidden: '' });
 
-  const wrap = (voor, na = '') => {
-    const s = tekst.selectionStart, e = tekst.selectionEnd;
-    const sel = tekst.value.slice(s, e) || 'tekst';
-    tekst.setRangeText(`${voor}${sel}${na}`, s, e, 'select');
-    tekst.dispatchEvent(new Event('input'));
-    tekst.focus();
-  };
-  const regelPrefix = (p) => {
-    const s = tekst.value.lastIndexOf('\n', tekst.selectionStart - 1) + 1;
-    tekst.setRangeText(p, s, s, 'end');
-    tekst.dispatchEvent(new Event('input'));
-    tekst.focus();
-  };
-  const werkbalk = el('div', { class: 'b-werkbalk' }, [
-    el('button', { type: 'button', onclick: () => regelPrefix('## ') }, 'Tussenkop'),
-    el('button', { type: 'button', onclick: () => wrap('**', '**') }, 'Vet'),
-    el('button', { type: 'button', onclick: () => regelPrefix('- ') }, 'Opsomming'),
-    el('button', { type: 'button', onclick: () => regelPrefix('> ') }, 'Citaat'),
-    el('button', { type: 'button', onclick: async () => {
-      const f = await kiesBestand(); if (!f) return;
-      const b = await leesFoto(f, 1800);
-      const naam = nieuweNaam(`${slug(titel.value || 'artikel')}-tekst`);
-      beelden.set(naam, b);
-      const s = tekst.selectionStart;
-      tekst.setRangeText(`\n\n![Foto](${RELATIEF}/${naam})\n\n`, s, s, 'end');
-      tekst.dispatchEvent(new Event('input'));
-    } }, 'Foto in de tekst'),
-  ]);
+  // ----- foto's -----
+  const fotoLijst = el('div', { class: 'b-fotolijst' });
+  const fotoKnop = el('button', { type: 'button', class: 'b-p-knop', onclick: async () => {
+    const vrij = MAX_FOTOS - v.fotos.length;
+    const gekozen = (await kiesBestanden()).slice(0, vrij);
+    if (!gekozen.length) return;
+    fotoKnop.disabled = true; fotoKnop.textContent = "Foto's verkleinen...";
+    for (const f of gekozen) {
+      try {
+        const b = await leesFoto(f, 1800);
+        v.fotos.push({ foto: `${RELATIEF}/${nieuweNaam('ervaring')}`, alt: '', src: b.dataUrl, base64: b.base64 });
+      } catch (e) { toonFout(e.message); }
+    }
+    fotoKnop.disabled = false;
+    toonFotos(); toon();
+  } }, "Foto's kiezen");
 
-  function toon() {
-    if (!art) return;
-    d('titel').textContent = titel.value || 'Titel van het artikel';
-    d('titel').classList.toggle('b-leeg', !titel.value);
-    d('datum').textContent = datumNl(datum.value) || 'Datum';
-    d('intro').textContent = intro.value || 'Hier komt de korte inleiding.';
-    d('intro').classList.toggle('b-leeg', !intro.value);
-    const fv = d('foto');
-    const src = beeldSrc(a.foto);
-    if (a.foto && src) {
-      fv.classList.remove('hidden');
-      if (beelden.has(a.foto.split('/').pop())) fv.innerHTML = `<img src="${src}" alt="${esc(fotoAlt.value)}" class="foto aspect-[16/10] w-full object-cover">`;
-      fotoBeeld.src = src;
-      fotoKnop.textContent = 'Andere foto';
-    } else if (!a.foto) { fv.classList.add('hidden'); fv.innerHTML = ''; fotoBeeld.removeAttribute('src'); }
-    d('tekst').innerHTML = markdownNaarHtml(tekst.value, beeldSrc) || '<p class="b-leeg">Hier komt de tekst van het artikel.</p>';
-    document.title = `${titel.value || 'Nieuw artikel'} | bewerken`;
+  function toonFotos() {
+    fotoLijst.replaceChildren(...v.fotos.map((f, k) => {
+      const alt = el('input', { type: 'text', value: f.alt, placeholder: 'Wat staat erop? (mag leeg blijven)', 'aria-label': `Beschrijving foto ${k + 1}` });
+      alt.addEventListener('input', () => { f.alt = alt.value; toon(); });
+      const schuif = (r) => { const [x] = v.fotos.splice(k, 1); v.fotos.splice(k + r, 0, x); toonFotos(); toon(); };
+      return el('div', { class: 'b-fotoitem' }, [
+        el('img', { src: f.src, alt: '' }),
+        el('div', { class: 'b-fotoinfo' }, [
+          el('span', { class: 'b-fotonr' }, k === 0 ? 'Grote foto' : `Foto ${k + 1}`),
+          alt,
+          el('div', { class: 'b-fotoknoppen' }, [
+            el('button', { type: 'button', disabled: k === 0 ? '' : null, title: 'Naar voren', onclick: () => schuif(-1) }, k === 1 ? 'Maak groot' : '← Naar voren'),
+            el('button', { type: 'button', disabled: k === v.fotos.length - 1 ? '' : null, title: 'Naar achteren', onclick: () => schuif(1) }, 'Naar achteren →'),
+            el('button', { type: 'button', class: 'b-weg-tekst', onclick: () => { v.fotos.splice(k, 1); toonFotos(); toon(); } }, 'Weghalen'),
+          ]),
+        ]),
+      ]);
+    }));
+    fotoKnop.hidden = v.fotos.length >= MAX_FOTOS;
+    fotoKnop.textContent = v.fotos.length ? 'Nog een foto toevoegen' : "Foto's kiezen";
   }
-  [titel, datum, intro, fotoAlt, tekst].forEach((i) => i.addEventListener('input', toon));
 
+  // ----- live voorbeeld -----
+  const leesVelden = () => {
+    Object.assign(v, {
+      label: label.value.trim(), kop: kop.value.trim(), citaat: citaat.value.trim().replace(/^["“”]+|["“”]+$/g, ''), tekst: tekst.value.trim(),
+      naam: naam.value.trim(), sterren: Number(sterren.value), bron: bron.value, datum: datum.value || vandaag(), dienst: dienst.value, online: online.checked,
+    });
+  };
+  function toon() {
+    leesVelden();
+    const n = v.fotos.length;
+    if (n !== huidigN) {
+      const blok = doc.querySelector(`[data-b-variant="${n}-${p}"]`);
+      if (!blok) return;
+      const kloon = document.importNode(blok, true);
+      kloon.removeAttribute('data-b-variant');
+      kloon.hidden = false;
+      kloon.classList.add('b-bewerkbaar');
+      if (voorbeeld) voorbeeld.replaceWith(kloon); else pagina.verhalen.after(kloon);
+      const eerste = !voorbeeld;
+      voorbeeld = kloon;
+      huidigN = n;
+      if (eerste) kloon.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
+    vul(voorbeeld);
+  }
+  function vul(s) {
+    const d = (n) => s.querySelector(`[data-b="${n}"]`);
+    const zet = (e, aan) => { if (e) e.hidden = !aan; };
+    d('label').textContent = v.label; zet(d('label'), v.label);
+    d('kop').textContent = v.kop || 'Kop van de ervaring';
+    d('kop').classList.toggle('b-leeg', !v.kop);
+    d('kop').classList.toggle('mt-4', !!v.label);
+    d('citaat').textContent = `“${v.citaat}”`; zet(d('citaat-blok'), v.citaat);
+    d('tekst').replaceChildren(...v.tekst.split(/\n\s*\n/).map((t) => t.replace(/\s*\n\s*/g, ' ').trim()).filter(Boolean).map((t) => el('p', {}, t)));
+    zet(d('tekst'), v.tekst);
+    s.querySelectorAll('[data-b-ster]').forEach((st, k) => zet(st, k < v.sterren));
+    d('sterren').setAttribute('aria-label', `${v.sterren} van 5 sterren`);
+    zet(d('sterren'), v.sterren > 0);
+    d('naam').textContent = v.naam; zet(d('naam'), v.naam);
+    const bronTekst = [v.bron, maandJaar(v.datum)].filter(Boolean).join(', ');
+    d('bron').textContent = v.sterren > 0 || v.naam ? `· ${bronTekst}` : bronTekst; zet(d('bron'), bronTekst);
+    zet(d('meta'), v.sterren > 0 || v.naam || bronTekst);
+    const dt = diensten.find((x) => x.slug === v.dienst);
+    if (dt) { d('knop').href = `${BASIS}${dt.slug}/`; d('knop').textContent = dt.titel; }
+    zet(d('knop'), dt);
+    zet(d('google'), v.bron === 'Google');
+    zet(d('knoppen'), dt || v.bron === 'Google');
+    const plekken = [...s.querySelectorAll('[data-b-plek]')].map((pl, k) => [Number(pl.dataset.bVolgorde ?? k), pl]).sort((a, b) => a[0] - b[0]).map(([, pl]) => pl);
+    plekken.forEach((pl, k) => {
+      const f = v.fotos[k];
+      if (!f) return;
+      const img = pl.querySelector('img');
+      if (pl.dataset.bSrc !== f.src) {
+        const nieuw = el('img', { src: f.src, alt: f.alt, class: img?.className || 'foto w-full object-cover', style: img?.getAttribute('style') || '' });
+        pl.replaceChildren(nieuw);
+        pl.dataset.bSrc = f.src;
+      } else if (img) img.alt = f.alt;
+    });
+    s.classList.toggle('b-offline', !v.online);
+  }
+  [label, kop, citaat, tekst, naam, datum].forEach((i) => i.addEventListener('input', toon));
+  [sterren, bron, dienst, online].forEach((i) => i.addEventListener('change', toon));
+
+  // ----- opslaan en verwijderen -----
+  const opslaanTekst = modus === 'bewerk' ? 'Wijzigingen opslaan' : 'Op de site zetten';
   const opslaan = el('button', { type: 'button', class: 'b-p-knop b-vol', onclick: async () => {
     fout.hidden = true;
-    if (!titel.value.trim()) return toonFout('Geef het artikel een titel.');
-    if (!intro.value.trim()) return toonFout('Schrijf een korte inleiding.');
-    if (a.foto && !fotoAlt.value.trim()) return toonFout('Schrijf kort wat er op de foto staat.');
-    const id = modus === 'bewerk' ? a.id : slug(titel.value);
-    const bestanden = [{ pad: `${ARTIKELEN}/${id}.md`, tekst: schrijfArtikel({ ...a, titel: titel.value.trim(), datum: datum.value || vandaag(), intro: intro.value.trim(), fotoAlt: fotoAlt.value.trim(), online: online.checked, tekst: tekst.value }) }];
-    const genoemd = new Set([a.foto, ...[...tekst.value.matchAll(/!\[[^\]]*\]\(([^)\s]+)\)/g)].map((m) => m[1])].filter(Boolean).map((p) => p.split('/').pop()));
-    for (const [naam, b] of beelden) if (genoemd.has(naam)) bestanden.push({ pad: `${UPLOAD}/${naam}`, base64: b.base64 });
-    await verstuur(bestanden, modus === 'bewerk' ? `Artikel bijgewerkt: ${titel.value.trim()}` : `Nieuw artikel: ${titel.value.trim()}`);
-  } }, modus === 'bewerk' ? 'Wijzigingen opslaan' : 'Op de site zetten');
+    leesVelden();
+    if (!v.kop) return toonFout('Geef de ervaring een kop, bijvoorbeeld een paar woorden uit wat de klant zei.');
+    if (!v.citaat && !v.tekst) return toonFout('Vul wat de klant zei in, of schrijf een toelichting.');
+    let id = v.id;
+    if (modus !== 'bewerk') {
+      id = `${v.datum}-${slug(v.kop)}`;
+      if (document.querySelector(`[data-b-verhaal="${id}"]`)) id += `-${Date.now().toString(36).slice(-4)}`;
+    }
+    const data = {
+      label: v.label, kop: v.kop, citaat: v.citaat, tekst: v.tekst, naam: v.naam, sterren: v.sterren, bron: v.bron,
+      datum: v.datum, dienst: v.dienst, fotos: v.fotos.map((f) => ({ foto: f.foto, alt: f.alt.trim() })), online: v.online,
+    };
+    const bestanden = [{ pad: `${VERHALEN}/${id}.json`, tekst: `${JSON.stringify(data, null, 2)}\n` }];
+    for (const f of v.fotos) if (f.base64) bestanden.push({ pad: `${UPLOAD}/${f.foto.split('/').pop()}`, base64: f.base64 });
+    const nu = new Set(v.fotos.map((f) => f.foto.split('/').pop()));
+    for (const naamOud of oorspronkelijk) if (naamOud && !nu.has(naamOud)) bestanden.push({ pad: `${UPLOAD}/${naamOud}`, verwijder: true });
+    await verstuur(bestanden, modus === 'bewerk' ? `Klantervaring bijgewerkt: ${v.kop}` : `Nieuwe klantervaring: ${v.kop}`);
+  } }, opslaanTekst);
 
   const verwijder = modus === 'bewerk' ? el('button', { type: 'button', class: 'b-p-knop b-rood', onclick: async () => {
-    if (!confirm('Dit artikel van de site halen? Dit kan niet ongedaan worden gemaakt.')) return;
-    await verstuur([{ pad: `${ARTIKELEN}/${a.id}.md`, verwijder: true }], `Artikel verwijderd: ${a.titel}`);
+    if (!confirm('Deze ervaring en de foto\'s erbij van de site halen? Dit kan niet ongedaan worden gemaakt. (Tijdelijk weghalen kan ook: zet dan "Online" uit.)')) return;
+    const bestanden = [{ pad: `${VERHALEN}/${v.id}.json`, verwijder: true }];
+    for (const naamOud of oorspronkelijk) if (naamOud) bestanden.push({ pad: `${UPLOAD}/${naamOud}`, verwijder: true });
+    await verstuur(bestanden, `Klantervaring verwijderd: ${v.kop}`);
   } }, 'Verwijderen') : null;
 
   async function verstuur(bestanden, bericht) {
@@ -332,37 +379,45 @@ function openPaneel(a, modus) {
     try {
       const { commit } = await brug('/opslaan', { method: 'POST', body: JSON.stringify({ bericht, bestanden }) });
       paneel.remove(); paneel = null;
+      document.body.classList.remove('b-paneel-open');
       volgDeploy(commit);
     } catch (e) {
       toonFout(e.message);
-      opslaan.disabled = false; opslaan.textContent = modus === 'bewerk' ? 'Wijzigingen opslaan' : 'Op de site zetten';
+      opslaan.disabled = false; opslaan.textContent = opslaanTekst;
     }
   }
   function toonFout(t) { fout.textContent = t; fout.hidden = false; fout.scrollIntoView({ block: 'nearest' }); }
+  const sluit = () => { paneel.remove(); paneel = null; location.reload(); };
 
-  paneel = el('aside', { class: 'b-paneel', 'aria-label': 'Artikel bewerken' }, [
-    el('header', {}, [el('h2', {}, modus === 'bewerk' ? 'Artikel bewerken' : 'Nieuw artikel'), el('button', { type: 'button', class: 'b-sluit', 'aria-label': 'Sluiten', onclick: () => { paneel.remove(); paneel = null; if (modus === 'nieuw') location.reload(); } }, '×')]),
+  paneel = el('aside', { class: 'b-paneel', 'aria-label': 'Klantervaring bewerken' }, [
+    el('header', {}, [el('h2', {}, modus === 'bewerk' ? 'Ervaring bewerken' : 'Nieuwe klantervaring'), el('button', { type: 'button', class: 'b-sluit', 'aria-label': 'Sluiten', onclick: sluit }, '×')]),
     el('div', { class: 'b-velden' }, [
-      ...veld('Titel', titel),
-      ...veld('Datum', datum),
-      ...veld('Korte inleiding', intro, 'Een of twee zinnen. Google gebruikt dit als samenvatting.'),
-      el('label', {}, 'Foto bij het artikel'),
-      el('div', { class: 'b-foto-veld' }, [fotoBeeld, fotoKnop]),
-      el('p', { class: 'b-hint' }, 'Liggend werkt het mooist. Grote telefoonfoto\'s zijn prima, ze worden vanzelf verkleind.'),
-      ...veld('Wat staat er op de foto?', fotoAlt),
-      el('label', { for: 'b-tekst' }, 'Tekst'),
-      werkbalk,
-      tekst,
-      el('p', { class: 'b-hint' }, 'Een lege regel begint een nieuwe alinea. Met de knoppen maak je tussenkoppen, opsommingen en zet je foto\'s in de tekst.'),
-      el('label', { class: 'b-schakel' }, [online, 'Online (uitzetten haalt het artikel tijdelijk van de site)']),
+      el('p', { class: 'b-groep' }, 'De tekst'),
+      ...veld('Kop', kop, 'De grote titel. Een paar woorden uit wat de klant zei werkt goed.'),
+      ...veld('Klein label boven de kop', label, 'Wat er gedaan is. Mag leeg blijven.'),
+      ...veld('Wat zei de klant?', citaat, 'Komt tussen aanhalingstekens. Die zet de site er zelf omheen.'),
+      ...veld('Jouw toelichting', tekst, 'Mag leeg blijven. Een lege regel begint een nieuwe alinea.'),
+      el('p', { class: 'b-groep' }, "Foto's"),
+      el('p', { class: 'b-hint b-hint-boven' }, "1 tot 4 foto's. De eerste is de grote foto. Grote telefoonfoto's zijn prima, ze worden vanzelf verkleind."),
+      fotoLijst,
+      fotoKnop,
+      el('p', { class: 'b-groep' }, 'Van wie en wanneer'),
+      ...veld('Naam van de klant', naam, 'Alleen met toestemming. Voornaam, eventueel met een letter. Mag leeg blijven.'),
+      ...veld('Sterren', sterren),
+      ...veld('Waar staat deze review?', bron, 'Kies Google alleen als de review echt op Google staat; dan komt er ook een link "Lees op Google" bij.'),
+      ...veld('Datum', datum, 'Er staat alleen maand en jaar. De nieuwste ervaring komt bovenaan (onder de vaste reviews).'),
+      el('p', { class: 'b-groep' }, 'Knop'),
+      ...veld('Knop naar', dienst, 'Een knop naar de pagina die bij deze ervaring past.'),
+      el('label', { class: 'b-schakel' }, [online, 'Online (uitzetten haalt de ervaring tijdelijk van de site)']),
       fout,
     ]),
-    el('footer', {}, [opslaan, el('button', { type: 'button', class: 'b-p-knop', onclick: () => { paneel.remove(); paneel = null; if (modus === 'nieuw') location.reload(); else location.reload(); } }, 'Annuleren'), verwijder]),
+    el('footer', {}, [opslaan, el('button', { type: 'button', class: 'b-p-knop', onclick: sluit }, 'Annuleren'), verwijder]),
   ]);
   document.body.append(paneel);
-  art?.classList.add('b-bewerkbaar');
+  document.body.classList.add('b-paneel-open');
+  toonFotos();
   toon();
-  titel.focus();
+  kop.focus({ preventScroll: true });
 }
 
 // ---------- klantfoto's op de pagina Klantervaringen ----------

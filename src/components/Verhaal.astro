@@ -1,0 +1,132 @@
+---
+// Eén klantervaring op /klantervaringen/: tekst aan de ene kant, een collage van 0 tot 4 foto's aan de andere.
+// Gebruikt voor de vaste Google-reviews (src/data/ervaringen.ts), voor de ervaringen die Bei zelf toevoegt
+// (src/content/klantverhalen/*.json) en voor het sjabloon van de bewerkmodus (/admin/sjabloon/).
+// De data-b-attributen zijn de haakjes waarmee public/beheer/bewerk.js de inhoud live vervangt terwijl Bei typt;
+// lege onderdelen krijgen het attribuut hidden (niet de klasse: die verliest het van flex en inline-flex),
+// zodat de bewerkmodus ze weer kan tonen.
+import { Picture } from 'astro:assets';
+import Icoon from './Icoon.astro';
+import { url, site } from '../data/site';
+import { dienstOp } from '../data/diensten';
+
+export interface VerhaalFoto { foto: ImageMetadata; alt: string; pos?: string }
+interface Props {
+  /** Volgnummer op de pagina: bepaalt de achtergrond en aan welke kant de foto's staan. */
+  i: number;
+  /** id van de kop (voor aria-labelledby en ankers). */
+  kopId: string;
+  label?: string;
+  kop: string;
+  citaat?: string;
+  /** Alinea's onder het citaat. */
+  tekst?: string[];
+  naam?: string;
+  /** 0 tot 5; 0 laat de sterren weg. */
+  sterren?: number;
+  /** Bijvoorbeeld "Google, 4 maanden geleden" of "WhatsApp, november 2026". */
+  bron?: string;
+  /** Link naar Google-reviews tonen. */
+  google?: boolean;
+  /** slug van een dienstpagina voor de knop. */
+  dienst?: string;
+  fotos: VerhaalFoto[];
+  /** Alleen bij ervaringen die Bei zelf beheert: bestandsnaam zonder .json. */
+  beheer?: string;
+  online?: boolean;
+  /** Voor het sjabloon: welke variant dit is (aantal foto's en kant). */
+  variant?: string;
+}
+const { i, kopId, label = '', kop, citaat = '', tekst = [], naam = '', sterren = 0, bron = '', google = false, dienst = '', fotos, beheer, online = true, variant } = Astro.props;
+
+const p = i % 2; // 0: foto's links, 1: foto's rechts
+const n = Math.min(fotos.length, 4);
+const rand = p === 0 ? 'border-strik-zacht' : 'border-ivoor';
+const knop = dienst ? dienstOp(dienst) : undefined;
+const metaLeeg = !sterren && !naam && !bron;
+const knoppenLeeg = !knop && !google;
+const pos = (f: VerhaalFoto) => `object-position:${f.pos ?? '50% 50%'}`;
+---
+<section
+  class={`${p === 0 ? 'bg-strik-zacht' : 'bg-ivoor'} py-12 md:py-20`}
+  aria-labelledby={kopId}
+  hidden={!online}
+  data-b-verhaal={beheer}
+  data-b-p={p}
+  data-b-n={n}
+  data-b-variant={variant}
+>
+  <div class="wrap grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
+    {n > 0 && (
+      <div class={`relative lg:col-span-6 ${p === 1 ? 'lg:order-2' : ''}`} data-b="fotos">
+        {n === 1 && (
+          <div class="mx-auto max-w-lg" data-b-plek>
+            <Picture src={fotos[0].foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 512px, 92vw" alt={fotos[0].alt} class="foto aspect-[4/5] w-full object-cover" style={pos(fotos[0])} />
+          </div>
+        )}
+
+        {n === 2 && (
+          <div class="grid grid-cols-12">
+            <div class={`col-span-9 ${p === 1 ? 'col-start-4' : ''}`} data-b-plek>
+              <Picture src={fotos[0].foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 440px, 75vw" alt={fotos[0].alt} class="foto aspect-[4/5] w-full object-cover" style={pos(fotos[0])} />
+            </div>
+            <div class={`col-span-5 -mt-[28%] ${p === 1 ? 'col-start-1' : 'col-start-8'}`} data-b-plek>
+              <Picture src={fotos[1].foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[320, 480, 640]} sizes="(min-width: 1024px) 240px, 40vw" alt={fotos[1].alt} class={`foto aspect-[3/4] w-full object-cover ${p === 0 ? 'border-l-[6px]' : 'border-r-[6px]'} border-t-[6px] ${rand}`} style={pos(fotos[1])} />
+            </div>
+          </div>
+        )}
+
+        {n === 3 && (
+          <div class="grid grid-cols-12 gap-3 md:gap-4">
+            <div class={`col-span-8 ${p === 1 ? 'order-2' : ''}`} data-b-plek>
+              <Picture src={fotos[0].foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 380px, 64vw" alt={fotos[0].alt} class="foto aspect-[4/5] w-full object-cover" style={pos(fotos[0])} />
+            </div>
+            <div class={`col-span-4 flex flex-col gap-3 pt-[22%] md:gap-4 ${p === 1 ? 'order-1' : ''}`}>
+              {fotos.slice(1, 3).map((f) => (
+                <div data-b-plek>
+                  <Picture src={f.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={76} widths={[240, 360, 480]} sizes="(min-width: 1024px) 190px, 32vw" alt={f.alt} class="foto aspect-[3/4] w-full object-cover" style={pos(f)} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {n === 4 && (
+          <div class="grid grid-cols-2 gap-3 md:gap-4">
+            {[0, 1].map((kolom) => (
+              <div class={`flex flex-col gap-3 md:gap-4 ${kolom === (p === 0 ? 1 : 0) ? 'pt-[16%]' : ''}`}>
+                {[fotos[kolom], fotos[kolom + 2]].map((f, rij) => (
+                  <div data-b-plek data-b-volgorde={kolom + rij * 2}>
+                    <Picture src={f.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={76} widths={[320, 480, 640]} sizes="(min-width: 1024px) 280px, 46vw" alt={f.alt} class={`foto w-full object-cover ${(kolom + rij) % 2 === 0 ? 'aspect-[4/5]' : 'aspect-[3/4]'}`} style={pos(f)} />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    )}
+
+    <div class={n === 0 ? 'lg:col-span-8 lg:col-start-3' : `lg:col-span-6 ${p === 1 ? 'lg:order-1 lg:pr-6' : 'lg:pl-6'}`}>
+      <p class="eyebrow" hidden={!label} data-b="label">{label}</p>
+      <h2 id={kopId} class={`${label ? 'mt-4' : ''} text-[2rem] md:text-[2.5rem]`} data-b="kop">{kop}</h2>
+      <blockquote class="mt-6 border-l-2 border-merk pl-5" hidden={!citaat} data-b="citaat-blok">
+        <p class="text-[1.05rem] leading-relaxed text-inkt-2 md:text-[1.1rem]" data-b="citaat">“{citaat}”</p>
+      </blockquote>
+      <div class="mt-6 max-w-xl space-y-4 text-steen" hidden={!tekst.length} data-b="tekst">
+        {tekst.map((t) => <p>{t}</p>)}
+      </div>
+      <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2" hidden={metaLeeg} data-b="meta">
+        <span class="flex gap-0.5 text-merk" hidden={!sterren} data-b="sterren" role="img" aria-label={`${sterren} van 5 sterren`}>
+          {[1, 2, 3, 4, 5].map((s) => <span class="block" hidden={s > sterren} data-b-ster><Icoon naam="ster" class="h-3.5 w-3.5" /></span>)}
+        </span>
+        <span class="text-[.8rem] font-medium uppercase tracking-[.2em] text-merk-diep" hidden={!naam} data-b="naam">{naam}</span>
+        <span class="text-sm text-steen" hidden={!bron} data-b="bron">{sterren || naam ? `· ${bron}` : bron}</span>
+      </div>
+      <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3" hidden={knoppenLeeg} data-b="knoppen">
+        <a href={knop ? url(`${knop.slug}/`) : url('atelier/')} class="knop knop-rand bg-wit" hidden={!knop} data-b="knop">{knop?.kaartTitel ?? 'Atelier'}</a>
+        <a href={site.reviews} target="_blank" rel="noopener" class="inline-flex items-center gap-2 py-2 text-sm text-steen no-underline hover:text-merk" hidden={!google} data-b="google"><Icoon naam="g" class="h-4 w-4" />Lees op Google<span class="sr-only"> (opent in een nieuw tabblad)</span></a>
+      </div>
+    </div>
+  </div>
+</section>

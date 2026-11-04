@@ -1,17 +1,35 @@
 ---
-// Sjabloon voor de bewerkmodus: als Bei een nieuw artikel schrijft, laadt bewerk.js de <main> van deze pagina
-// in de huidige pagina en vult hem live. Niet voor bezoekers (noindex, niet in de sitemap).
+// Sjabloon voor de bewerkmodus. Als Bei een klantervaring toevoegt of bewerkt, haalt public/beheer/bewerk.js
+// van deze pagina het blok met het juiste aantal foto's (0 tot 4) en de juiste kant (links of rechts) en vult
+// het live in de pagina Klantervaringen. Zo ziet ze precies wat bezoekers straks zien.
+// Niet voor bezoekers (noindex, niet in de sitemap).
 import Base from '../../layouts/Base.astro';
-import Kop from '../../components/Kop.astro';
-import Voet from '../../components/Voet.astro';
-import Artikel from '../../components/Artikel.astro';
+import Verhaal from '../../components/Verhaal.astro';
+import { diensten } from '../../data/diensten';
+import kant from '../../assets/kant.jpg';
+
+const voorbeeld = Array.from({ length: 4 }, () => ({ foto: kant, alt: '' }));
+const varianten = [0, 1, 2, 3, 4].flatMap((n) => [0, 1].map((p) => ({ n, p })));
+const lijst = diensten.map((d) => ({ slug: d.slug, titel: d.kaartTitel }));
 ---
-<Base title="Sjabloon voor de bewerkmodus" description="Sjabloon van een artikel, alleen voor de bewerkmodus." noindex>
-  <Kop opFoto={false} />
-  <main id="inhoud">
-    <Artikel id="" titel="Titel van het artikel" datum={new Date()} intro="Hier komt de korte inleiding.">
-      <p>Hier komt de tekst van het artikel.</p>
-    </Artikel>
+<Base title="Sjabloon voor de bewerkmodus" description="Sjabloon van een klantervaring, alleen voor de bewerkmodus." noindex>
+  <main id="inhoud" data-b-diensten={JSON.stringify(lijst)}>
+    {varianten.map(({ n, p }) => (
+      <Verhaal
+        i={p}
+        kopId={`sjabloon-${n}-${p}`}
+        variant={`${n}-${p}`}
+        label="Label"
+        kop="Kop van de ervaring"
+        citaat="Wat de klant zei."
+        tekst={['Toelichting van Bei.']}
+        naam="Naam"
+        sterren={5}
+        bron="Google"
+        google
+        dienst={diensten[0].slug}
+        fotos={voorbeeld.slice(0, n)}
+      />
+    ))}
   </main>
-  <Voet />
 </Base>

@@ -1,20 +1,10 @@
-// Hulpfuncties voor de inhoud die Bei zelf beheert (zie .pages.yml).
-import { getCollection, type CollectionEntry } from 'astro:content';
+// Hulpfuncties voor de inhoud die Bei zelf beheert via de bewerkmodus (public/beheer/bewerk.js):
+// klantervaringen (src/content/klantverhalen/*.json) en klantfoto's (src/content/galerij/fotos.json).
 import galerijBestand from '../content/galerij/fotos.json';
+import type { VerhaalFoto } from '../components/Verhaal.astro';
+import { diensten } from '../data/diensten';
 
-export type Artikel = CollectionEntry<'artikelen'>;
-
-// Alle artikelen die online staan, nieuwste eerst.
-const bestanden = import.meta.glob('/src/content/artikelen/*.md');
-export async function artikelen(): Promise<Artikel[]> {
-  if (Object.keys(bestanden).length === 0) return []; // anders waarschuwt Astro bij elke pagina over een lege collectie
-  const alle = await getCollection('artikelen', (a) => a.data.online !== false);
-  return alle.sort((a, b) => b.data.datum.getTime() - a.data.datum.getTime());
-}
-
-export const datumNl = (d: Date) => d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
-
-// Foto's uit src/assets/upload. Pages CMS schrijft paden relatief vanuit src/content/<map>/
+// Foto's uit src/assets/upload. De bewerkmodus schrijft paden relatief vanuit src/content/<map>/
 // (../../assets/upload/naam.jpg); hier zoeken we het beeld op via de bestandsnaam.
 const uploads = import.meta.glob<ImageMetadata>('/src/assets/upload/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', { eager: true, import: 'default' });
 const opNaam = new Map(Object.entries(uploads).map(([pad, beeld]) => [pad.split('/').pop()!, beeld]));
@@ -31,4 +21,72 @@ export function galerijFotos(): { foto: ImageMetadata; alt: string; bestand: str
     .map((f) => ({ foto: uploadFoto(f.foto), alt: f.alt?.trim() || 'Foto uit het atelier van Bei Couture', bestand: (f.foto ?? '').split('/').pop() ?? '' }))
     .filter((f): f is { foto: ImageMetadata; alt: string; bestand: string } => !!f.foto)
     .reverse();
+}
+
+// ---------- klantervaringen die Bei zelf toevoegt ----------
+// Vorm van een bestand in src/content/klantverhalen/ (zo schrijft bewerk.js het ook weg).
+interface KlantverhaalBestand {
+  label?: string;
+  kop?: string;
+  citaat?: string;
+  tekst?: string;
+  naam?: string;
+  sterren?: number;
+  bron?: string;
+  datum?: string;
+  dienst?: string;
+  fotos?: { foto?: string; alt?: string }[];
+  online?: boolean;
+}
+export interface Klantverhaal {
+  id: string;
+  label: string;
+  kop: string;
+  citaat: string;
+  tekst: string[];
+  naam: string;
+  sterren: number;
+  /** Bron plus maand, zoals hij op de pagina staat: "Google, november 2026". */
+  bron: string;
+  google: boolean;
+  datum: Date;
+  dienst: string;
+  fotos: VerhaalFoto[];
+  online: boolean;
+}
+
+const verhaalBestanden = import.meta.glob<KlantverhaalBestand>('/src/content/klantverhalen/*.json', { eager: true, import: 'default' });
+const dienstSlugs = new Set(diensten.map((d) => d.slug));
+
+export const maandJaar = (d: Date) => d.toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' });
+
+/** Alle klantervaringen van Bei, nieuwste eerst, ook de offline gezette (die staan verborgen op de pagina,
+ *  zodat Bei ze in de bewerkmodus terug kan zetten). */
+export function klantverhalen(): Klantverhaal[] {
+  return Object.entries(verhaalBestanden)
+    .map(([pad, v]) => {
+      const datum = new Date(`${v.datum ?? '2026-01-01'}T12:00:00`);
+      const naam = (v.naam ?? '').trim();
+      const bronNaam = (v.bron ?? '').trim();
+      const fotos = (v.fotos ?? [])
+        .map((f) => ({ foto: uploadFoto(f.foto), alt: f.alt?.trim() || `Foto bij de ervaring${naam ? ` van ${naam}` : ''} met Bei Couture` }))
+        .filter((f): f is VerhaalFoto => !!f.foto)
+        .slice(0, 4);
+      return {
+        id: pad.split('/').pop()!.replace(/\.json$/, ''),
+        label: (v.label ?? '').trim(),
+        kop: (v.kop ?? '').trim() || 'Een klantervaring',
+        citaat: (v.citaat ?? '').trim().replace(/^["“”]+|["“”]+$/g, ''),
+        tekst: (v.tekst ?? '').replace(/\r/g, '').split(/\n\s*\n/).map((t) => t.replace(/\s*\n\s*/g, ' ').trim()).filter(Boolean),
+        naam,
+        sterren: Math.max(0, Math.min(5, Math.round(Number(v.sterren ?? 0)) || 0)),
+        bron: [bronNaam, isNaN(datum.getTime()) ? '' : maandJaar(datum)].filter(Boolean).join(', '),
+        google: bronNaam === 'Google',
+        datum,
+        dienst: dienstSlugs.has(v.dienst ?? '') ? v.dienst! : '',
+        fotos,
+        online: v.online !== false,
+      };
+    })
+    .sort((a, b) => b.datum.getTime() - a.datum.getTime() || a.id.localeCompare(b.id));
 }

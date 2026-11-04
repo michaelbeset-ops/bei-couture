@@ -3,7 +3,6 @@ import { url, waHoi, site } from '../data/site';
 import { diensten } from '../data/diensten';
 import Icoon from './Icoon.astro';
 import Merk from './Merk.astro';
-import { artikelen } from '../lib/beheer';
 
 // opFoto: de kop staat over de donkere hero van de pagina (doorzichtig).
 // Staat de pagina bovenaan licht, dan krijgt de kop zelf de donkere achtergrond.
@@ -14,11 +13,9 @@ const pad = Astro.url.pathname.replace(/\/+$/, '');
 const hier = (p: string) => pad === url(p).replace(/\/+$/, '');
 const dienstActief = diensten.some((d) => hier(`${d.slug}/`));
 
-const heeftBlog = (await artikelen()).length > 0;
 const nav: { href: string; t: string; actief: boolean }[] = [
   { href: url('werkwijze/'), t: 'Werkwijze', actief: hier('werkwijze/') },
   { href: url('klantervaringen/'), t: 'Klantervaringen', actief: hier('klantervaringen/') },
-  ...(heeftBlog ? [{ href: url('blog/'), t: 'Blog', actief: Astro.url.pathname.includes('/blog/') }] : []),
   { href: url('over-bei/'), t: 'Over Bei', actief: hier('over-bei/') },
   { href: url('contact/'), t: 'Contact', actief: hier('contact/') },
 ];

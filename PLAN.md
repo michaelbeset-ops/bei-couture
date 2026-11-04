@@ -101,3 +101,16 @@ Opslaan gaat via beheer/worker.js (Cloudflare Worker, gratis) die alles in één
 volgt de deploy (bezig, klaar, mislukt). Dezelfde bestanden als eerst (src/content/artikelen/*.md,
 src/content/galerij/fotos.json, src/assets/upload/), dus de bouw is ongewijzigd. Inrichten: beheer/README.md.
 Testen zonder Cloudflare: tools/beheer-mock.mjs en tools/beheer-test.mjs.
+
+## Klantervaringen in plaats van blog (04-11-2026)
+Michael wilde dat wat Bei schrijft geen blogartikel wordt maar een blok zoals de Google-reviews op
+Klantervaringen, met meerdere foto's. De blog is weg (pagina's, menu, voet, homepageblok, llms.txt; er stond
+nog geen artikel online, dus geen URL's om door te sturen). Alle verhalen op Klantervaringen lopen nu via
+src/components/Verhaal.astro: de vijf vaste Google-reviews (src/data/ervaringen.ts, opmaak ongewijzigd) en
+daaronder, nieuwste eerst, de ervaringen van Bei uit src/content/klantverhalen/<datum>-<kop>.json (velden:
+label, kop, citaat, tekst, naam, sterren, bron, datum, dienst, fotos[], online; ingelezen in src/lib/beheer.ts).
+Collage per aantal foto's: 0 (tekst in het midden), 1, 2 (zoals de reviews), 3 en 4. "Lees op Google" alleen als
+de bron Google is; de datum staat als maand en jaar. Offline gezette staan verborgen in de HTML, zodat de
+bewerkmodus ze kan tonen en terugzetten. De bewerkmodus (public/beheer/bewerk.js) haalt het blok met het juiste
+aantal foto's en de juiste kant uit /admin/sjabloon/ en vult het live; foto's worden in de browser verkleind,
+weggehaalde foto's worden ook uit src/assets/upload verwijderd.

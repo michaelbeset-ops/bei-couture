@@ -41,9 +41,9 @@ daarna `wrangler secret put WACHTWOORD` (en SECRET, GITHUB_TOKEN). De variabelen
 1. GitHub, repo bei-couture, Settings, Secrets and variables, Actions, tab Variables, New repository
    variable: naam `PUBLIC_BEHEER_API`, waarde de Worker-URL (zonder slash aan het eind).
 2. Start een deploy (Actions, "Site bouwen en uitrollen", Run workflow) of push iets naar main.
-3. Test: www.beicouture.nl/admin, inloggen, "Artikel schrijven", iets invullen, "Op de site zetten".
-   Na drie minuten staat het op www.beicouture.nl/blog/. Verwijder het testartikel daarna via
-   "Dit artikel bewerken", Verwijderen.
+3. Test: www.beicouture.nl/admin, inloggen, "Klantervaring toevoegen", iets invullen, "Op de site zetten".
+   Na drie minuten staat het onderaan de verhalen op www.beicouture.nl/klantervaringen/. Verwijder de
+   testervaring daarna via "Deze ervaring bewerken", Verwijderen.
 
 Lokaal testen zonder Cloudflare: `node tools/beheer-mock.mjs` (nepbrug op poort 4537, wachtwoord `test`),
 `PUBLIC_BEHEER_API=http://127.0.0.1:4537 npm run build && npm run preview`, en `node tools/beheer-test.mjs`
@@ -51,7 +51,7 @@ voor de automatische test.
 
 ## Wat Bei kan
 
-Artikelen (toevoegen, aanpassen, offline zetten, verwijderen) en klantfoto's op Klantervaringen (toevoegen,
+Klantervaringen op Klantervaringen (toevoegen, aanpassen, offline zetten, verwijderen; met 0 tot 4 foto's) en klantfoto's op Klantervaringen (toevoegen,
 verwijderen). De handleiding voor haar staat in `BEHEER.md`.
 
 ## Veiligheid

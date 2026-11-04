@@ -1,11 +1,9 @@
 import type { APIRoute } from 'astro';
 import { site, url, werkgebied, stappen, kernfeiten, dagen, volgorde } from '../data/site';
 import { diensten } from '../data/diensten';
-import { artikelen } from '../lib/beheer';
 
 // Korte, feitelijke samenvatting voor AI-assistenten. Alleen wat ook zichtbaar op de site staat.
 export const GET: APIRoute = async ({ site: basis }) => {
-  const blog = await artikelen();
   const abs = (p: string) => new URL(url(p), basis).href;
   const tijden = volgorde.map((d) => {
     const t = site.tijden[d];
@@ -45,7 +43,6 @@ export const GET: APIRoute = async ({ site: basis }) => {
     `- [Over Bei](${abs('over-bei/')}): wie Bei is en hoe zij werkt`,
     `- [Afspraak maken](${abs('afspraak/')}): in een paar vragen, daarna staat het bericht klaar voor WhatsApp`,
     `- [Contact](${abs('contact/')}): adres, openingstijden en contactmanieren`,
-    ...(blog.length ? [`- [Blog](${abs('blog/')}): artikelen van Bei over jurken en het atelier`, '', '## Artikelen', ...blog.map((a) => `- [${a.data.titel}](${abs(`blog/${a.id}/`)}): ${a.data.intro}`)] : []),
     '',
   ];
   return new Response(regels.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });

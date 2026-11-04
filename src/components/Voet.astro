@@ -3,8 +3,6 @@ import { site, url, waHoi } from '../data/site';
 import { diensten } from '../data/diensten';
 import Merk from './Merk.astro';
 import Icoon from './Icoon.astro';
-import { artikelen } from '../lib/beheer';
-const heeftBlog = (await artikelen()).length > 0;
 const jaar = new Date().getFullYear();
 ---
 <footer class="bg-inkt text-mist">
@@ -30,7 +28,6 @@ const jaar = new Date().getFullYear();
       <ul class="mt-5 space-y-2">
         <li><a href={url('werkwijze/')} class="no-underline transition-colors hover:text-strik">Werkwijze</a></li>
         <li><a href={url('klantervaringen/')} class="no-underline transition-colors hover:text-strik">Klantervaringen</a></li>
-        {heeftBlog && <li><a href={url('blog/')} class="no-underline transition-colors hover:text-strik">Blog</a></li>}
         <li><a href={url('over-bei/')} class="no-underline transition-colors hover:text-strik">Over Bei</a></li>
         <li><a href={url('afspraak/')} class="no-underline transition-colors hover:text-strik">Afspraak maken</a></li>
         <li><a href={site.route} class="no-underline transition-colors hover:text-strik">Route plannen</a></li>
