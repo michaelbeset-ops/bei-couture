@@ -27,6 +27,8 @@ const basis = new URL(url(''), Astro.site).href;
 const canoniek = new URL(Astro.url.pathname, Astro.site).href;
 const ogAfbeelding = new URL(url(og), Astro.site).href;
 const logoUrl = new URL(url('logo.png'), Astro.site).href;
+// Bewerkmodus (public/beheer/bewerk.js): de brug (Cloudflare Worker, zie beheer/) staat in PUBLIC_BEHEER_API.
+const beheerApi = import.meta.env.PUBLIC_BEHEER_API ?? '';
 
 const graaf = [
   bedrijf(basis, logoUrl, ogAfbeelding),
@@ -69,6 +71,8 @@ const graaf = [
     <meta name="twitter:card" content="summary_large_image" />
     {!uitSearch && <script type="application/ld+json" is:inline set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graaf })} />}
     <script is:inline>document.documentElement.classList.add('js')</script>
+    <meta name="beheer-api" content={beheerApi} />
+    <meta name="beheer-basis" content={url('')} />
   </head>
   <body class="min-h-dvh">
     <a href="#inhoud" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-sm focus:bg-wit focus:px-4 focus:py-2 focus:text-inkt">Naar de inhoud</a>
@@ -76,6 +80,13 @@ const graaf = [
     <script>
       const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px' });
       document.querySelectorAll('.rijs').forEach((el) => io.observe(el));
+    </script>
+    <script>
+      // Bewerkmodus alleen laden voor wie is ingelogd (of op de inlogpagina). Bezoekers laden niets extra's.
+      const basis = document.querySelector<HTMLMetaElement>('meta[name="beheer-basis"]')?.content ?? '/';
+      let ingelogd = false;
+      try { ingelogd = !!localStorage.getItem('bei-beheer'); } catch {}
+      if (ingelogd || location.pathname === `${basis}admin/`) import(/* @vite-ignore */ `${basis}beheer/bewerk.js`);
     </script>
   </body>
 </html>

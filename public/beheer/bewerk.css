@@ -1,0 +1,53 @@
+/* Bewerkmodus van Bei Couture (zie public/beheer/bewerk.js). Kleuren en letters komen uit de site zelf. */
+:root { --b-hoogte: 3.25rem; }
+body.b-aan { padding-top: var(--b-hoogte); }
+.b-balk { position: fixed; inset: 0 0 auto 0; z-index: 90; height: var(--b-hoogte); display: flex; align-items: center; gap: .5rem; padding: 0 1rem; background: var(--color-merk); color: var(--color-wit); font-family: var(--font-tekst); font-size: .9rem; box-shadow: 0 1px 0 #0002; }
+.b-balk .b-naam { font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: .72rem; white-space: nowrap; }
+.b-balk .b-status { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: .95; }
+.b-balk .b-status a { color: inherit; text-decoration: underline; }
+.b-knop { display: inline-flex; align-items: center; gap: .4rem; min-height: 2.25rem; padding: 0 .9rem; border: 1px solid #ffffff99; border-radius: 2px; background: transparent; color: var(--color-wit); font: inherit; font-size: .82rem; font-weight: 500; letter-spacing: .06em; cursor: pointer; white-space: nowrap; }
+.b-knop:hover { background: var(--color-wit); color: var(--color-merk); }
+.b-knop.b-vol { background: var(--color-wit); color: var(--color-inkt); border-color: var(--color-wit); }
+.b-knop.b-vol:hover { background: var(--color-ivoor-2); }
+.b-knop.b-rood { border-color: transparent; color: #ffd9d9; }
+.b-knop[disabled] { opacity: .5; cursor: default; }
+@media (max-width: 767px) { .b-balk { gap: .35rem; padding: 0 .6rem; } .b-balk .b-naam { display: none; } .b-knop { padding: 0 .6rem; font-size: .76rem; } .b-balk .b-status { font-size: .78rem; } }
+
+/* Paneel: rechts op desktop, onderin op de telefoon. */
+.b-paneel { position: fixed; z-index: 95; background: var(--color-wit); color: var(--color-inkt); font-family: var(--font-tekst); box-shadow: -8px 0 30px #0002; display: flex; flex-direction: column; top: var(--b-hoogte); right: 0; bottom: 0; width: min(26rem, 100vw); }
+.b-paneel header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--color-ivoor-3); }
+.b-paneel header h2 { font-family: var(--font-kop); font-size: 1.3rem; font-weight: 400; margin: 0; }
+.b-paneel .b-velden { flex: 1; overflow-y: auto; padding: 1rem 1.25rem 1.5rem; }
+.b-paneel footer { display: flex; flex-wrap: wrap; gap: .5rem; padding: .9rem 1.25rem; border-top: 1px solid var(--color-ivoor-3); background: var(--color-ivoor-2); }
+.b-paneel label { display: block; margin-top: 1rem; font-size: .78rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--color-merk); }
+.b-paneel label:first-child { margin-top: 0; }
+.b-paneel .b-hint { margin: .25rem 0 0; font-size: .82rem; color: var(--color-steen); }
+.b-paneel input[type=text], .b-paneel input[type=date], .b-paneel textarea { width: 100%; margin-top: .4rem; padding: .6rem .75rem; border: 1px solid var(--color-ivoor-3); border-radius: 2px; background: var(--color-wit); font: inherit; font-size: .95rem; color: var(--color-inkt); }
+.b-paneel textarea { min-height: 5.5rem; resize: vertical; line-height: 1.5; }
+.b-paneel textarea.b-tekst { min-height: 14rem; font-family: var(--font-tekst); }
+.b-paneel input:focus, .b-paneel textarea:focus { outline: none; border-color: var(--color-merk); box-shadow: 0 0 0 2px var(--color-strik-zacht); }
+.b-paneel .b-foto-veld { margin-top: .4rem; display: flex; gap: .75rem; align-items: center; }
+.b-paneel .b-foto-veld img { width: 5rem; height: 4rem; object-fit: cover; background: var(--color-ivoor-2); }
+.b-paneel .b-werkbalk { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .4rem; }
+.b-paneel .b-werkbalk button { padding: .3rem .6rem; border: 1px solid var(--color-ivoor-3); border-radius: 2px; background: var(--color-wit); font: inherit; font-size: .78rem; cursor: pointer; color: var(--color-inkt); }
+.b-paneel .b-werkbalk button:hover { border-color: var(--color-merk); color: var(--color-merk); }
+.b-paneel .b-schakel { display: flex; align-items: center; gap: .6rem; margin-top: 1.1rem; font-size: .95rem; text-transform: none; letter-spacing: 0; color: var(--color-inkt); font-weight: 400; }
+.b-paneel .b-schakel input { width: 1.1rem; height: 1.1rem; accent-color: var(--color-merk); }
+.b-p-knop { display: inline-flex; align-items: center; justify-content: center; min-height: 2.6rem; padding: 0 1.1rem; border: 1px solid var(--color-inkt); border-radius: 2px; background: var(--color-wit); color: var(--color-inkt); font: inherit; font-size: .82rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+.b-p-knop.b-vol { background: var(--color-merk); border-color: var(--color-merk); color: var(--color-wit); }
+.b-p-knop.b-vol:hover { background: var(--color-merk-diep); }
+.b-p-knop.b-rood { border-color: transparent; color: #a33; margin-left: auto; }
+.b-p-knop[disabled] { opacity: .5; cursor: default; }
+.b-fout { margin: .75rem 0 0; padding: .6rem .75rem; background: #fde8e8; color: #7a1f1f; font-size: .85rem; border-radius: 2px; }
+.b-sluit { width: 2.25rem; height: 2.25rem; border: 0; background: transparent; font-size: 1.4rem; line-height: 1; cursor: pointer; color: var(--color-steen); }
+@media (max-width: 767px) { .b-paneel { top: auto; left: 0; right: 0; bottom: 0; width: auto; max-height: 72vh; box-shadow: 0 -8px 30px #0003; border-top: 2px solid var(--color-merk); } }
+
+/* Haakjes in de pagina */
+body.b-aan [data-b-foto] { position: relative; }
+.b-weg { position: absolute; top: .5rem; right: .5rem; z-index: 2; width: 2rem; height: 2rem; border: 0; border-radius: 50%; background: #1b1716d9; color: #fff; font-size: 1.1rem; line-height: 1; cursor: pointer; }
+.b-weg:hover { background: var(--color-merk); }
+[data-b-foto].b-verwijderd { opacity: .35; outline: 2px dashed #a33; outline-offset: -2px; }
+[data-b-foto].b-nieuw { outline: 2px solid var(--color-merk); outline-offset: -2px; }
+.b-bewerkbaar { outline: 1px dashed var(--color-merk); outline-offset: 6px; }
+.b-leeg { color: var(--color-mist); }
+.b-beeld-plek { display: grid; place-items: center; aspect-ratio: 16/10; background: var(--color-ivoor-2); color: var(--color-steen); font-size: .85rem; }

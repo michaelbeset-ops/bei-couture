@@ -1,0 +1,44 @@
+---
+// Weergave van een artikel. Gebruikt door /blog/<slug>/ en door het sjabloon voor de bewerkmodus
+// (/admin/sjabloon/). De data-b-attributen zijn de haakjes waarmee de bewerkmodus (public/beheer/bewerk.js)
+// de tekst live in de pagina vervangt terwijl Bei typt.
+import { Picture } from 'astro:assets';
+import Kruimels from './Kruimels.astro';
+import Icoon from './Icoon.astro';
+import { url, site } from '../data/site';
+import { datumNl } from '../lib/beheer';
+
+interface Props {
+  id: string;
+  titel: string;
+  datum: Date;
+  intro: string;
+  foto?: ImageMetadata;
+  fotoAlt?: string;
+  online?: boolean;
+}
+const { id, titel, datum, intro, foto, fotoAlt = '', online = true } = Astro.props;
+---
+<article class="bg-ivoor pb-16 pt-10 md:pb-24 md:pt-14" data-b-artikel={id} data-b-online={online ? '1' : '0'}>
+  <div class="wrap">
+    <Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Blog', href: url('blog/') }, { naam: titel, href: url(`blog/${id}/`) }]} />
+    <header class="mx-auto mt-10 max-w-3xl">
+      <p class="eyebrow num" data-b="datum" data-b-iso={datum.toISOString().slice(0, 10)}>{datumNl(datum)}</p>
+      <h1 class="mt-5 text-[2.4rem] md:text-[3.2rem]" data-b="titel">{titel}</h1>
+      <p class="mt-6 text-lg text-steen md:text-xl" data-b="intro">{intro}</p>
+    </header>
+    <div class={`mx-auto mt-10 max-w-5xl ${foto ? '' : 'hidden'}`} data-b="foto">
+      {foto && <Picture src={foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={80} widths={[640, 960, 1280, 1600]} sizes="(min-width: 1024px) 1024px, 100vw" alt={fotoAlt} loading="eager" fetchpriority="high" class="foto aspect-[16/10] w-full object-cover" />}
+    </div>
+    <div class="artikel mx-auto mt-10 max-w-3xl md:mt-14" data-b="tekst">
+      <slot />
+    </div>
+    <footer class="mx-auto mt-12 max-w-3xl border-t border-ivoor-3 pt-8">
+      <p class="text-steen">Geschreven door {site.eigenaar}, kleermaker en eigenaar van {site.naam} aan de {site.straat} in {site.plaats}.</p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href={url('afspraak/')} class="knop knop-merk">Afspraak maken <Icoon naam="pijl" /></a>
+        <a href={url('blog/')} class="knop knop-rand">Alle artikelen</a>
+      </div>
+    </footer>
+  </div>
+</article>

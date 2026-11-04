@@ -11,13 +11,7 @@ name: Site bouwen en uitrollen
 on:
   push:
     branches: [main]
-  # Handmatig, en via de knop "Zet op de site" in Pages CMS (die stuurt een 'payload' mee, zie .pages.yml).
   workflow_dispatch:
-    inputs:
-      payload:
-        description: Gegevens van Pages CMS (wie, wat); niet gebruikt door de build
-        required: false
-        type: string
 
 permissions:
   contents: read
@@ -40,6 +34,10 @@ jobs:
       - run: npm ci
       # "live" bouwt met PUBLIC_SITE=https://www.beicouture.nl en zonder base, en zonder voorstelbalk of noindex.
       - name: Bouwen voor www.beicouture.nl
+        # PUBLIC_BEHEER_API: adres van de brug voor de bewerkmodus (Cloudflare Worker, zie beheer/README.md).
+        # Instellen onder Settings -> Secrets and variables -> Actions -> Variables.
+        env:
+          PUBLIC_BEHEER_API: ${{ vars.PUBLIC_BEHEER_API }}
         run: npm run live
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

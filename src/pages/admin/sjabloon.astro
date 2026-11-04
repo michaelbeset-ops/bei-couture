@@ -1,0 +1,17 @@
+---
+// Sjabloon voor de bewerkmodus: als Bei een nieuw artikel schrijft, laadt bewerk.js de <main> van deze pagina
+// in de huidige pagina en vult hem live. Niet voor bezoekers (noindex, niet in de sitemap).
+import Base from '../../layouts/Base.astro';
+import Kop from '../../components/Kop.astro';
+import Voet from '../../components/Voet.astro';
+import Artikel from '../../components/Artikel.astro';
+---
+<Base title="Sjabloon voor de bewerkmodus" description="Sjabloon van een artikel, alleen voor de bewerkmodus." noindex>
+  <Kop opFoto={false} />
+  <main id="inhoud">
+    <Artikel id="" titel="Titel van het artikel" datum={new Date()} intro="Hier komt de korte inleiding.">
+      <p>Hier komt de tekst van het artikel.</p>
+    </Artikel>
+  </main>
+  <Voet />
+</Base>

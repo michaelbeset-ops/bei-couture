@@ -25,10 +25,10 @@ export function uploadFoto(pad: string | undefined): ImageMetadata | undefined {
 }
 
 // Foto's van klanten voor de strook op Klantervaringen, nieuwste (onderaan in het beheer) eerst.
-export function galerijFotos(): { foto: ImageMetadata; alt: string }[] {
+export function galerijFotos(): { foto: ImageMetadata; alt: string; bestand: string }[] {
   const lijst = (galerijBestand as { fotos?: { foto?: string; alt?: string }[] }).fotos ?? [];
   return lijst
-    .map((f) => ({ foto: uploadFoto(f.foto), alt: f.alt?.trim() || 'Foto uit het atelier van Bei Couture' }))
-    .filter((f): f is { foto: ImageMetadata; alt: string } => !!f.foto)
+    .map((f) => ({ foto: uploadFoto(f.foto), alt: f.alt?.trim() || 'Foto uit het atelier van Bei Couture', bestand: (f.foto ?? '').split('/').pop() ?? '' }))
+    .filter((f): f is { foto: ImageMetadata; alt: string; bestand: string } => !!f.foto)
     .reverse();
 }

@@ -5,18 +5,18 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Kop from '../../components/Kop.astro';
 import Voet from '../../components/Voet.astro';
-import Kruimels from '../../components/Kruimels.astro';
+import Artikel from '../../components/Artikel.astro';
 import Cta from '../../components/Cta.astro';
 import Icoon from '../../components/Icoon.astro';
 import { url, site } from '../../data/site';
-import { artikelen, datumNl, type Artikel } from '../../lib/beheer';
+import { artikelen, datumNl, type Artikel as ArtikelItem } from '../../lib/beheer';
 
 export async function getStaticPaths() {
   const lijst = await artikelen();
   return lijst.map((a) => ({ params: { slug: a.id }, props: { artikel: a, andere: lijst.filter((b) => b.id !== a.id).slice(0, 3) } }));
 }
 
-const { artikel, andere } = Astro.props as { artikel: Artikel; andere: Artikel[] };
+const { artikel, andere } = Astro.props as { artikel: ArtikelItem; andere: ArtikelItem[] };
 const { Content } = await render(artikel);
 const basis = new URL(url(''), Astro.site).href;
 const hier = new URL(Astro.url.pathname, Astro.site).href;
@@ -44,31 +44,9 @@ const d = artikel.data;
 >
   <Kop opFoto={false} />
   <main id="inhoud">
-    <article class="bg-ivoor pb-16 pt-10 md:pb-24 md:pt-14">
-      <div class="wrap">
-        <Kruimels items={[{ naam: 'Home', href: url('') }, { naam: 'Blog', href: url('blog/') }, { naam: d.titel, href: url(`blog/${artikel.id}/`) }]} />
-        <header class="mx-auto mt-10 max-w-3xl">
-          <p class="eyebrow num">{datumNl(d.datum)}</p>
-          <h1 class="mt-5 text-[2.4rem] md:text-[3.2rem]">{d.titel}</h1>
-          <p class="mt-6 text-lg text-steen md:text-xl">{d.intro}</p>
-        </header>
-        {d.foto && (
-          <div class="mx-auto mt-10 max-w-5xl">
-            <Picture src={d.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={80} widths={[640, 960, 1280, 1600]} sizes="(min-width: 1024px) 1024px, 100vw" alt={d.fotoAlt ?? ''} loading="eager" fetchpriority="high" class="foto aspect-[16/10] w-full object-cover" />
-          </div>
-        )}
-        <div class="artikel mx-auto mt-10 max-w-3xl md:mt-14">
-          <Content />
-        </div>
-        <footer class="mx-auto mt-12 max-w-3xl border-t border-ivoor-3 pt-8">
-          <p class="text-steen">Geschreven door {site.eigenaar}, kleermaker en eigenaar van {site.naam} aan de {site.straat} in {site.plaats}.</p>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <a href={url('afspraak/')} class="knop knop-merk">Afspraak maken <Icoon naam="pijl" /></a>
-            <a href={url('blog/')} class="knop knop-rand">Alle artikelen</a>
-          </div>
-        </footer>
-      </div>
-    </article>
+    <Artikel id={artikel.id} titel={d.titel} datum={d.datum} intro={d.intro} foto={d.foto} fotoAlt={d.fotoAlt} online={d.online}>
+      <Content />
+    </Artikel>
 
     {andere.length > 0 && (
       <section class="bg-strik-zacht py-14 md:py-20" aria-labelledby="meer-kop">
