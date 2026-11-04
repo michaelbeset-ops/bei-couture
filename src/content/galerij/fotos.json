@@ -1,1 +1,8 @@
-{ "fotos": [] }
+{
+  "fotos": [
+    {
+      "foto": "../../assets/upload/klant-mw2j2q1u8yg.jpg",
+      "alt": "kin"
+    }
+  ]
+}
