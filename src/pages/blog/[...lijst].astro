@@ -1,0 +1,67 @@
+---
+// Overzicht van de artikelen die Bei zelf schrijft (beheer via Pages CMS, zie .pages.yml).
+// De pagina bestaat alleen als er minstens een artikel online staat; tot die tijd ook geen Blog in het menu.
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Kop from '../../components/Kop.astro';
+import Voet from '../../components/Voet.astro';
+import PaginaKop from '../../components/PaginaKop.astro';
+import Cta from '../../components/Cta.astro';
+import Icoon from '../../components/Icoon.astro';
+import { url, site } from '../../data/site';
+import { artikelen, datumNl } from '../../lib/beheer';
+import kant from '../../assets/kant.jpg';
+
+export async function getStaticPaths() {
+  const lijst = await artikelen();
+  return lijst.length ? [{ params: { lijst: undefined } }] : [];
+}
+
+const lijst = await artikelen();
+const basis = new URL(url(''), Astro.site).href;
+const hier = new URL(Astro.url.pathname, Astro.site).href;
+---
+<Base
+  title={`Blog van bruidsatelier Bei Couture in ${site.plaats}`}
+  description={`Artikelen van Bei over bruidsjurken op maat, trouwjurken vermaken en het werk in haar atelier aan de ${site.straat} in ${site.plaats}.`}
+  kruimels={[{ naam: 'Home', url: basis }, { naam: 'Blog', url: hier }]}
+  schema={[{ '@type': 'Blog', '@id': `${hier}#blog`, url: hier, name: `Blog van ${site.naam}`, publisher: { '@id': `${basis}#bedrijf` }, inLanguage: 'nl-NL' }]}
+  hoofdEntiteit={`${hier}#blog`}
+>
+  <Kop />
+  <main id="inhoud">
+    <PaginaKop
+      eyebrow="Blog"
+      h1="Uit het atelier van"
+      accent="Bei."
+      lead="Verhalen over jurken, stoffen en het werk achter de naaimachine, geschreven door Bei zelf."
+      img={kant}
+      alt="Kant en knoopjes op een bruidsjurk in het atelier"
+      pos="50% 50%"
+      kruimels={[{ naam: 'Home', href: url('') }, { naam: 'Blog', href: url('blog/') }]}
+    />
+
+    <section class="bg-ivoor py-14 md:py-20" aria-label="Artikelen">
+      <ul class="wrap grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {lijst.map((a) => (
+          <li>
+            <a href={url(`blog/${a.id}/`)} class="fotolink group block">
+              <span class="foto block aspect-[4/3] bg-strik-zacht">
+                {a.data.foto
+                  ? <Picture src={a.data.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 400px, (min-width: 640px) 48vw, 92vw" alt={a.data.fotoAlt ?? ''} class="h-full w-full object-cover" />
+                  : <span class="grid h-full w-full place-items-center text-merk"><Icoon naam="naald" class="h-10 w-10" /></span>}
+              </span>
+              <span class="num mt-5 block text-[.78rem] font-medium uppercase tracking-[.22em] text-merk">{datumNl(a.data.datum)}</span>
+              <h2 class="mt-2 text-[1.5rem] leading-[1.15] md:text-[1.7rem]">{a.data.titel}</h2>
+              <span class="mt-3 block text-steen">{a.data.intro}</span>
+              <span class="mt-4 inline-flex items-center gap-2 text-[.85rem] font-medium uppercase tracking-[.18em] text-inkt">Lees verder <Icoon naam="pijl" class="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <Cta />
+  </main>
+  <Voet />
+</Base>

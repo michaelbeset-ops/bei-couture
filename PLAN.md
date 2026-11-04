@@ -81,3 +81,12 @@ Logo en de atelierfoto van Bei zijn door de klant aangeleverd (27-10-2026), zie 
 KvK-nummer en bewaartermijn voor de privacyverklaring. Eigen foto's van jurken en atelier (nu nog sfeerfoto's van
 Unsplash). Trouwfoto's plus verhaal van klanten voor `/klantervaringen/` (het `foto`-veld in
 `src/data/ervaringen.ts` staat klaar).
+
+## Beheer (03-11-2026)
+Bei wil zelf foto's en artikelen plaatsen. Gekozen: Pages CMS (app.pagescms.org), gratis, geen eigen server:
+het leest en schrijft rechtstreeks in deze repo via de Pages CMS GitHub-app, Bei logt in met een e-maillink.
+Configuratie in .pages.yml. Artikelen: markdown in src/content/artikelen (collectie in src/content.config.ts),
+pagina's /blog/ en /blog/<slug>/ die alleen bestaan als er een artikel online staat; dan ook Blog in menu en voet,
+laatste drie op de homepage en een lijst in llms.txt. Foto's van klanten: src/content/galerij/fotos.json, vooraan
+in de fotostrook op Klantervaringen. Uploads in src/assets/upload, relatieve paden zodat Astro ze optimaliseert.
+Handleiding voor Bei: BEHEER.md.

@@ -66,7 +66,7 @@ export const reviews = [
 // en in llms.txt, zodat zoekmachines en AI-assistenten ze kunnen overnemen. Alleen wat klopt.
 export const kernfeiten = [
   { vraag: 'Wat is Bei Couture?', antwoord: 'Een bruidsatelier en kleermakerij aan de Hoogstraat 89A in Rotterdam. Bei maakt en vermaakt er zelf bruidsjurken, jurken voor de bruidsmoeder, bruidsmeisjes en bruidsjonkers, gala- en avondkleding en gewone kleding op maat.' },
-  { vraag: 'Sinds wanneer?', antwoord: 'Bei heeft sinds 1997 een eigen atelier, begonnen op het Marconiplein, en legde zich in 2009 toe op bruidsmode.' },
+  { vraag: 'Sinds wanneer?', antwoord: 'Bei heeft sinds 1997 een eigen kledingatelier, begonnen op het Marconiplein, en legde zich in 2009 toe op bruidsmode.' },
   { vraag: 'Wie maakt de jurk?', antwoord: 'Bei zelf. Zij voert het gesprek, meet op, knipt en naait. Je werkt dus van begin tot eind met dezelfde persoon.' },
   { vraag: 'Welke stoffen?', antwoord: 'Taft, bruidssatijn, tule en kant, met applicaties, kraaltjes of borduursel waar je ze wilt.' },
   { vraag: 'Hoeveel afspraken?', antwoord: 'Bij een jurk op maat meestal drie, soms vier: schets en maten, de proefjurk, de jurk in de echte stof, en als er nog iets aangepast is een vierde keer om op te halen. Bij vermaakwerk meestal twee.' },
