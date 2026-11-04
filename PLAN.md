@@ -82,7 +82,7 @@ KvK-nummer en bewaartermijn voor de privacyverklaring. Eigen foto's van jurken e
 Unsplash). Trouwfoto's plus verhaal van klanten voor `/klantervaringen/` (het `foto`-veld in
 `src/data/ervaringen.ts` staat klaar).
 
-## Beheer (03-11-2026)
+## Beheer, eerste poging (03-11-2026, vervangen)
 Bei wil zelf foto's en artikelen plaatsen. Gekozen: Pages CMS (app.pagescms.org), gratis, geen eigen server:
 het leest en schrijft rechtstreeks in deze repo via de Pages CMS GitHub-app, Bei logt in met een e-maillink.
 Configuratie in .pages.yml. Artikelen: markdown in src/content/artikelen (collectie in src/content.config.ts),
@@ -90,3 +90,14 @@ pagina's /blog/ en /blog/<slug>/ die alleen bestaan als er een artikel online st
 laatste drie op de homepage en een lijst in llms.txt. Foto's van klanten: src/content/galerij/fotos.json, vooraan
 in de fotostrook op Klantervaringen. Uploads in src/assets/upload, relatieve paden zodat Astro ze optimaliseert.
 Handleiding voor Bei: BEHEER.md.
+
+## Bewerkmodus (04-11-2026)
+Pages CMS werkte, maar Bei zag niets van haar site en van de voortgang; Michael wilde "een bewerkmodus op de
+site zelf". Daarom een eigen laag: www.beicouture.nl/admin/ logt in met een wachtwoord, daarna laadt
+public/beheer/bewerk.js op elke pagina (alleen voor wie ingelogd is) een balk met "Artikel schrijven",
+"Dit artikel bewerken", "Klantfoto's". Een nieuw artikel laadt het sjabloon /admin/sjabloon/ in de pagina
+en vult het live terwijl Bei typt; klantfoto's verschijnen direct in de strook op Klantervaringen.
+Opslaan gaat via beheer/worker.js (Cloudflare Worker, gratis) die alles in één commit op main zet; de balk
+volgt de deploy (bezig, klaar, mislukt). Dezelfde bestanden als eerst (src/content/artikelen/*.md,
+src/content/galerij/fotos.json, src/assets/upload/), dus de bouw is ongewijzigd. Inrichten: beheer/README.md.
+Testen zonder Cloudflare: tools/beheer-mock.mjs en tools/beheer-test.mjs.

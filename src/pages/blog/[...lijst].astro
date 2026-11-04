@@ -42,9 +42,9 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
     />
 
     <section class="bg-ivoor py-14 md:py-20" aria-label="Artikelen">
-      <ul class="wrap grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      <ul class="wrap grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3" data-b-lijst>
         {lijst.map((a) => (
-          <li>
+          <li data-b-artikel={a.id}>
             <a href={url(`blog/${a.id}/`)} class="fotolink group block">
               <span class="foto block aspect-[4/3] bg-strik-zacht">
                 {a.data.foto

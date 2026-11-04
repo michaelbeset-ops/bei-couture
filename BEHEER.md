@@ -1,44 +1,51 @@
-# Zelf foto's en artikelen op de site zetten
+# Zelf je site bewerken
 
-De site van Bei Couture heeft een beheeromgeving via Pages CMS. Daar kun je zonder technische kennis
-artikelen schrijven en foto's van klanten toevoegen. Alles wat je opslaat staat binnen een paar minuten
-op www.beicouture.nl.
+Je kunt zelf artikelen schrijven en foto's van klanten op de site zetten. Je doet dat op je eigen site:
+je ziet meteen hoe het eruitziet.
 
 ## Inloggen
 
 1. Ga naar www.beicouture.nl/admin
-2. Kies inloggen met e-mail en vul je e-mailadres in. Je krijgt een link per mail; daarmee ben je ingelogd
-   (geen wachtwoord nodig).
-3. Links zie je: Artikelen, Foto's van klanten en Foto's.
+2. Vul je wachtwoord in (dat heb je van Michael gekregen).
+3. Je komt op je eigen site, met een roze balk bovenin: "Bewerkmodus". Je blijft dertig dagen ingelogd.
+
+Bezoekers zien die balk niet, alleen jij.
 
 ## Een artikel schrijven
 
-1. Klik op Artikelen en dan op de knop om een nieuw artikel te maken.
-2. Vul in: Titel, Datum, Korte inleiding (een of twee zinnen), een Foto bij het artikel en wat erop staat.
-3. Schrijf de tekst. Met de knoppen bovenin maak je tussenkoppen, dikgedrukte woorden, opsommingen en
-   zet je extra foto's tussen de tekst.
-4. Klik op Opslaan.
-5. Klik links op Actions en dan op de knop "Zet op de site". Je ziet dan of het bezig is, klaar is of
-   mislukt. Na ongeveer drie minuten staat het artikel op www.beicouture.nl/blog/ en komt "Blog" in het
-   menu van de site. De nieuwste drie artikelen staan ook op de homepage.
-   (Opslaan zet het ook zonder die knop op de site, maar met de knop zie je wat er gebeurt.)
+1. Klik in de balk op "Artikel schrijven". De pagina verandert in een leeg artikel en rechts (op de
+   telefoon: onderin) opent een paneel.
+2. Vul de titel, de datum en een korte inleiding in. Je ziet het meteen op de pagina verschijnen.
+3. Klik op "Foto kiezen" voor een foto bij het artikel en schrijf kort wat erop staat. Grote
+   telefoonfoto's zijn prima, ze worden vanzelf verkleind.
+4. Schrijf de tekst. Een lege regel begint een nieuwe alinea. Met de knopjes boven het tekstvak maak je
+   een tussenkop, dikgedrukte woorden, een opsomming of een citaat, en zet je een foto tussen de tekst.
+5. Klik op "Op de site zetten". De balk zegt dan dat de site opnieuw gebouwd wordt. Dat duurt ongeveer
+   drie minuten; daarna staat er "Staat live". Vernieuw de pagina en je artikel staat erop.
 
-Tips voor een goed artikel:
+Na je eerste artikel komt "Blog" vanzelf in het menu van de site, en staan de nieuwste drie artikelen
+ook op de homepage.
+
+Een artikel aanpassen: open het artikel op de site en klik in de balk op "Dit artikel bewerken".
+Daar kun je ook "Online" uitzetten (dan staat het tijdelijk niet op de site) of het verwijderen.
+
+## Foto's van klanten
+
+1. Klik in de balk op "Klantfoto's". Je komt op de pagina Klantervaringen.
+2. Klik op "Foto toevoegen", kies de foto en schrijf kort wat erop staat. De foto staat meteen vooraan
+   in de fotostrook.
+3. Wil je er meer? Klik nog eens op "Foto toevoegen". Een foto weghalen: klik op het kruisje erop.
+4. Klik op "Foto's opslaan". Na ongeveer drie minuten staat het live.
+
+Let op: alleen foto's waarvoor de klant toestemming heeft gegeven.
+
+## Tips
+
 - Schrijf zoals je praat met een bruid in het atelier. Een paar alinea's is genoeg.
-- Gebruik de woorden waar mensen op zoeken, gewoon in de tekst: trouwjurk vermaken Rotterdam,
+- Gebruik de woorden waar mensen op zoeken gewoon in de tekst: trouwjurk vermaken Rotterdam,
   bruidsjurk op maat, kledingatelier Rotterdam Centrum.
-- Zet het schuifje Online uit als je een artikel tijdelijk van de site wilt halen.
+- Liggende foto's werken het mooist bij een artikel, staande foto's in de fotostrook.
 
-## Foto's van klanten toevoegen
-
-1. Klik op Foto's van klanten.
-2. Klik op Toevoegen, kies een foto van je telefoon of computer en schrijf kort wat erop staat.
-3. Klik op Opslaan en daarna links op Actions, "Zet op de site". De foto's staan daarna in de fotostrook op de
-   pagina Klantervaringen, de nieuwste eerst.
-
-Let op: alleen foto's waarvoor de klant toestemming heeft gegeven. Gezichten van klanten liever niet,
-tenzij de klant dat zelf goed vindt. Grote telefoonfoto's zijn prima, de site verkleint ze zelf.
-
-## Vragen
+## Vragen of wachtwoord kwijt?
 
 App of bel Michael van Sitefront, 06 43430003.

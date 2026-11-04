@@ -1,0 +1,10 @@
+name = "bei-couture-beheer"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+REPO = "michaelbeset-ops/bei-couture"
+TAK = "main"
+# Vanaf welke sites de bewerkmodus de brug mag aanroepen (komma-gescheiden).
+ORIGINS = "https://www.beicouture.nl,https://beicouture.nl"
+# Geheimen niet hier maar via: wrangler secret put WACHTWOORD / SECRET / GITHUB_TOKEN

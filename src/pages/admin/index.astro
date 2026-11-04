@@ -1,0 +1,22 @@
+---
+// Inloggen voor de bewerkmodus. Na het inloggen ziet Bei haar eigen site met een balk bovenin en kan ze
+// artikelen en foto's toevoegen op de pagina's zelf (public/beheer/bewerk.js). Niet voor bezoekers.
+import Base from '../../layouts/Base.astro';
+import Merk from '../../components/Merk.astro';
+import { url, site } from '../../data/site';
+---
+<Base title="Inloggen op de bewerkmodus" description="Inloggen om de site van Bei Couture te bewerken." noindex>
+  <main id="inhoud" class="flex min-h-dvh flex-col items-center justify-center bg-inkt px-5 py-16 text-wit">
+    <Merk prioriteit />
+    <form class="mt-10 w-full max-w-sm" data-b-login>
+      <h1 class="text-[2rem] text-wit">Bewerk je <span class="text-strik">site.</span></h1>
+      <p class="mt-3 text-mist">Log in, dan zie je je eigen site met een balk bovenin. Daar kun je artikelen schrijven en foto's toevoegen.</p>
+      <label class="mt-8 block text-sm font-medium text-wit/90" for="wachtwoord">Wachtwoord</label>
+      <input id="wachtwoord" name="wachtwoord" type="password" autocomplete="current-password" required class="mt-2 w-full border border-lijn bg-inkt-2 px-4 py-3 text-wit outline-none focus:border-strik" />
+      <p class="mt-3 hidden text-sm text-strik" data-b-fout role="alert"></p>
+      <button type="submit" class="knop knop-merk mt-5 w-full">Inloggen</button>
+      <p class="mt-6 text-sm text-mist">Wachtwoord kwijt? App Michael van Sitefront.</p>
+    </form>
+    <p class="mt-10 text-sm text-mist"><a href={url('')} class="link">Terug naar {site.naam}</a></p>
+  </main>
+</Base>

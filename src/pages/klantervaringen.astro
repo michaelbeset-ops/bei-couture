@@ -10,7 +10,7 @@ import { url, site, waMet } from '../data/site';
 import { ervaringen, atelierStrook } from '../data/ervaringen';
 import { galerijFotos } from '../lib/beheer';
 // Foto's die Bei zelf toevoegt (beheer, zie .pages.yml) komen vooraan in de strook.
-const strook: { foto: ImageMetadata; alt: string; pos?: string }[] = [...galerijFotos(), ...atelierStrook];
+const strook: { foto: ImageMetadata; alt: string; pos?: string; bestand?: string }[] = [...galerijFotos(), ...atelierStrook];
 import { dienstOp } from '../data/diensten';
 import vermakenTule from '../assets/vermaken-tule.jpg';
 
@@ -105,9 +105,9 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
                 </div>
               </div>
             </div>
-            <ul class="rij mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 md:px-[max(1.25rem,calc((100vw-75rem)/2))]" data-rij tabindex="0" aria-label="Foto's uit het atelier, horizontaal te scrollen">
+            <ul class="rij mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 md:px-[max(1.25rem,calc((100vw-75rem)/2))]" data-rij data-b-galerij tabindex="0" aria-label="Foto's uit het atelier, horizontaal te scrollen">
               {strook.map((f) => (
-                <li class="w-[62vw] flex-none snap-start sm:w-[36vw] lg:w-[15rem]">
+                <li class="w-[62vw] flex-none snap-start sm:w-[36vw] lg:w-[15rem]" data-b-foto={'bestand' in f ? f.bestand : undefined}>
                   <Picture src={f.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={70} widths={[320, 480, 640]} sizes="(min-width: 1024px) 240px, 62vw" alt={f.alt} class="foto aspect-[3/4] w-full object-cover" style={`object-position:${f.pos ?? '50% 50%'}`} />
                 </li>
               ))}

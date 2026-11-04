@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 // Pagina's die niet in Google horen en dus ook niet in de sitemap (zie src/layouts/Base.astro).
-const geenIndex = ['/privacy/', '/404/', '/admin/'];
+const geenIndex = ['/privacy/', '/404/', '/admin/', '/admin/sjabloon/'];
 
 // Waar de site draait. Standaard de voorstel-URL; bij oplevering op het eigen domein:
 //   PUBLIC_SITE=https://www.beicouture.nl PUBLIC_BASE= npm run build
@@ -25,11 +25,10 @@ const oudeUrls = {
   '/bruidsjurk-laten-maken/jurk-maken-tule-stof/': '/bruidsjurk-op-maat/',
   '/bruidsjurk-laten-maken/jurk-maken-stap-5/': '/bruidsjurk-op-maat/',
 };
-const redirects = {
-  ...Object.fromEntries(Object.entries(oudeUrls).map(([van, naar]) => [van, `${basis}${naar}`])),
-  // Beheer: Bei onthoudt alleen www.beicouture.nl/admin/; dat stuurt door naar haar omgeving in Pages CMS (zie .pages.yml).
-  '/admin/': 'https://app.pagescms.org/michaelbeset-ops/bei-couture/main',
-};
+const redirects = Object.fromEntries(Object.entries(oudeUrls).map(([van, naar]) => [van, `${basis}${naar}`]));
+
+// De brug voor de bewerkmodus (Cloudflare Worker, zie beheer/); de site mag daar verbinding mee maken.
+const beheerApi = process.env.PUBLIC_BEHEER_API ?? '';
 
 // Voorstel draait op voorstel.sitefront.nl/bei-couture/ (map in de Sitefront-verzamelrepo).
 export default defineConfig({
@@ -48,11 +47,13 @@ export default defineConfig({
     csp: {
       algorithm: 'SHA-256',
       styleDirective: { resources: ["'self'", "'unsafe-inline'"] },
+      // 'self' naast de hashes: de bewerkmodus (public/beheer/bewerk.js) wordt pas geladen na inloggen.
+      scriptDirective: { resources: ["'self'"] },
       directives: [
         "default-src 'self'",
-        "img-src 'self' data:",
+        "img-src 'self' data: blob:",
         "font-src 'self'",
-        "connect-src 'self'",
+        `connect-src 'self'${beheerApi ? ` ${new URL(beheerApi).origin}` : ''}`,
         "object-src 'none'",
         "base-uri 'self'",
         "form-action 'none'",
