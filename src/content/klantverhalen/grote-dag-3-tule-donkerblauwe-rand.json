@@ -1,0 +1,22 @@
+{
+  "label": "Foto's van de grote dag",
+  "kop": "Laagjes tule met een donkerblauwe rand",
+  "citaat": "",
+  "tekst": "Een kanten top, een rok van laagjes tule met een donkerblauwe rand en een bolero in dezelfde blauwe zijde. Op de rode loper met haar ouders, en binnen proosten bij de grote spiegel.",
+  "naam": "",
+  "sterren": 0,
+  "bron": "",
+  "datum": "2026-11-05",
+  "dienst": "bruidsjurk-op-maat",
+  "fotos": [
+    {
+      "foto": "../../assets/upload/k-blauw-ouders.jpg",
+      "alt": "Bruid in witte tule jurk met donkerblauwe rand en blauwe bolero, met haar ouders op een rode loper voor een groene deur"
+    },
+    {
+      "foto": "../../assets/upload/k-blauw-proost.jpg",
+      "alt": "Bruidspaar proost met champagne bij een grote vergulde spiegel"
+    }
+  ],
+  "online": true
+}

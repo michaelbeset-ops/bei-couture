@@ -1,0 +1,26 @@
+{
+  "label": "Foto's van de grote dag",
+  "kop": "Een jawoord onder de olijfbomen",
+  "citaat": "",
+  "tekst": "Een lichte jurk met een zachte tule rok en een lange sleep. Het jawoord in een tuin met olijftakken aan de stoelen, en in de avond de taart onder lichtjes in de boom, met vonkenfonteinen en een wolk van bellen.",
+  "naam": "",
+  "sterren": 0,
+  "bron": "",
+  "datum": "2026-11-05",
+  "dienst": "bruidsjurk-op-maat",
+  "fotos": [
+    {
+      "foto": "../../assets/upload/k-italie-jawoord.jpg",
+      "alt": "Bruidspaar hand in hand bij de ceremonie in een tuin, witte stoelen met tule en olijftakken"
+    },
+    {
+      "foto": "../../assets/upload/k-italie-taart-vuur.jpg",
+      "alt": "Bruidspaar snijdt de taart aan onder een boom met lichtjes en vonkenfonteinen"
+    },
+    {
+      "foto": "../../assets/upload/k-italie-bellen.jpg",
+      "alt": "Bruidspaar naast de taart op een wijnvat, met een wolk van zeepbellen in het avondlicht"
+    }
+  ],
+  "online": true
+}

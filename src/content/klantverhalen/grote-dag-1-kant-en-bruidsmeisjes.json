@@ -1,0 +1,22 @@
+{
+  "label": "Foto's van de grote dag",
+  "kop": "Kant met lange mouwen, en bruidsmeisjes in oudroze",
+  "citaat": "",
+  "tekst": "Een lijfje van kant met bloemen en pailletten, lange doorschijnende mouwen en een gladde witte rok. De bruidsmeisjes in lange oudroze jurkjes met een strik en bloemenkransen in het haar, de bruidsjonker in bretels en vlinderdas.\n\nBij het tekenen van het trouwboek mochten de meisjes de pen vasthouden.",
+  "naam": "",
+  "sterren": 0,
+  "bron": "",
+  "datum": "2026-11-05",
+  "dienst": "bruidsmeisjes-en-bruidsjonkers",
+  "fotos": [
+    {
+      "foto": "../../assets/upload/k-kant-trouwboek.jpg",
+      "alt": "Bruid in kanten jurk met lange mouwen kijkt toe terwijl twee bruidsmeisjes het trouwboek tekenen"
+    },
+    {
+      "foto": "../../assets/upload/k-bruidsmeisjes-jonker.jpg",
+      "alt": "Drie bruidsmeisjes in lange roze jurkjes en een bruidsjonker met bretels en vlinderdas in een feestzaal"
+    }
+  ],
+  "online": true
+}
