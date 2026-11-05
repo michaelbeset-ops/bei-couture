@@ -47,3 +47,5 @@ e-kant-mouwen.jpg (reviews/review-02, a1-008), e-zeemeermin.jpg (overig-06, a2-0
 e-roosje.jpg (atelier-04, a2-041), e-sleep-kant.jpg (hero-01, a1-079), e-tule-rok.jpg (overig-04, a2-038),
 e-chiffon.jpg (overig-01, a1-080), e-v-rug.jpg (overig-03, a2-043), e-corset.jpg (overig-08, a2-030),
 e-hanger.jpg (atelier-05, a2-042), e-bolero.jpg (diensten/kleding-op-maat-01, a1-053), e-grijs-jasje.jpg (diensten/kleding-op-maat-02, a2-028).
+
+# 05-11-2026: k-*.jpg zijn foto's van klanten, door hen aan Bei gestuurd voor de site (WhatsApp 4 en 5 nov). Omgezet uit webp/jpg, kwaliteit 90, niet verkleind.

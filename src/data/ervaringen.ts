@@ -176,3 +176,66 @@ export const atelierStrook: { foto: ImageMetadata; alt: string; pos?: string }[]
   { foto: grijsJasje, alt: 'Grijs kanten jasje met wijde mouwen op een paspop', pos: '50% 40%' },
   { foto: kant, alt: 'Detail van een kanten jurk met stoffen knoopjes', pos: '55% 50%' },
 ];
+
+// Foto's van de grote dag, door klanten zelf aan Bei gestuurd (via WhatsApp, 4 en 5 november 2026) met de vraag
+// ze op de site te zetten. De teksten beschrijven alleen wat op de foto's te zien is; er is van deze klanten geen
+// review of verhaal, dus niets aangevuld over wie wat gemaakt heeft.
+import kKantTrouwboek from '../assets/k-kant-trouwboek.jpg';
+import kBruidsmeisjesJonker from '../assets/k-bruidsmeisjes-jonker.jpg';
+import kLilaTuin from '../assets/k-lila-tuin.jpg';
+import kLilaPortret from '../assets/k-lila-portret.jpg';
+import kWitPaar from '../assets/k-wit-paar.jpg';
+import kBlauwOuders from '../assets/k-blauw-ouders.jpg';
+import kBlauwProost from '../assets/k-blauw-proost.jpg';
+import kItalieTaartVuur from '../assets/k-italie-taart-vuur.jpg';
+import kItalieJawoord from '../assets/k-italie-jawoord.jpg';
+import kItalieBellen from '../assets/k-italie-bellen.jpg';
+
+export interface Klantfoto { foto: ImageMetadata; alt: string; pos?: string }
+export interface KlantVerhaal { kop: string; accent: string; tekst: string; fotos: Klantfoto[] }
+
+export const klantVerhalen: KlantVerhaal[] = [
+  {
+    kop: 'Kant met lange mouwen, en bruidsmeisjes in',
+    accent: 'oudroze.',
+    tekst: 'Een lijfje van kant met bloemen en pailletten, lange doorschijnende mouwen en een gladde witte rok. De bruidsmeisjes in lange oudroze jurkjes met een strik en bloemenkransen in het haar, de bruidsjonker in bretels en vlinderdas. Bij het tekenen van het trouwboek mochten de meisjes de pen vasthouden.',
+    fotos: [
+      { foto: kKantTrouwboek, alt: 'Bruid in kanten jurk met lange mouwen kijkt toe terwijl twee bruidsmeisjes het trouwboek tekenen', pos: '50% 30%' },
+      { foto: kBruidsmeisjesJonker, alt: 'Drie bruidsmeisjes in lange roze jurkjes en een bruidsjonker met bretels en vlinderdas in een feestzaal', pos: '50% 50%' },
+    ],
+  },
+  {
+    kop: 'Geen wit, maar zacht',
+    accent: 'lila.',
+    tekst: 'Een lijfje van geborduurde tule met lange mouwen en een wijde rok van laagjes tule in zacht lila, gefotografeerd tussen de herfstbloemen bij de kassen van een botanische tuin. De bruidegom in mintgroen, en allebei vooral aan het lachen.',
+    fotos: [
+      { foto: kLilaTuin, alt: 'Lachend bruidspaar in een botanische tuin, de bruid in een lila tule jurk, de bruidegom in een mintgroen pak', pos: '50% 50%' },
+      { foto: kLilaPortret, alt: 'Bruid in lila jurk met geborduurde doorschijnende mouwen kijkt om, hand in hand met de bruidegom', pos: '50% 30%' },
+    ],
+  },
+  {
+    kop: 'Laagjes tule met een',
+    accent: 'donkerblauwe rand.',
+    tekst: 'Een kanten top, een rok van laagjes tule met een donkerblauwe rand en een bolero in dezelfde blauwe zijde. Op de rode loper met haar ouders, en binnen proosten bij de grote spiegel.',
+    fotos: [
+      { foto: kBlauwOuders, alt: 'Bruid in witte tule jurk met donkerblauwe rand en blauwe bolero, met haar ouders op een rode loper voor een groene deur', pos: '50% 40%' },
+      { foto: kBlauwProost, alt: 'Bruidspaar proost met champagne bij een grote vergulde spiegel', pos: '40% 50%' },
+    ],
+  },
+  {
+    kop: 'Een jawoord onder de',
+    accent: 'olijfbomen.',
+    tekst: 'Een lichte jurk met een zachte tule rok en een lange sleep. Het jawoord in een tuin met olijftakken aan de stoelen, en in de avond de taart onder lichtjes in de boom, met vonkenfonteinen en een wolk van bellen.',
+    fotos: [
+      { foto: kItalieJawoord, alt: 'Bruidspaar hand in hand bij de ceremonie in een tuin, witte stoelen met tule en olijftakken', pos: '50% 40%' },
+      { foto: kItalieTaartVuur, alt: 'Bruidspaar snijdt de taart aan onder een boom met lichtjes en vonkenfonteinen', pos: '50% 60%' },
+      { foto: kItalieBellen, alt: 'Bruidspaar naast de taart op een wijnvat, met een wolk van zeepbellen in het avondlicht', pos: '60% 50%' },
+    ],
+  },
+  {
+    kop: 'Helemaal in het',
+    accent: 'wit.',
+    tekst: 'Een jurk met geplooid lijfje, kanten bloemen op de schouders en een soepel vallende rok tot op de grond. De bruidegom in een wit pak met witte das, zelfs de sneakers wit.',
+    fotos: [{ foto: kWitPaar, alt: 'Bruidspaar helemaal in het wit, de bruid in een jurk met geplooid lijfje en kanten bloemen op de schouders', pos: '50% 40%' }],
+  },
+];

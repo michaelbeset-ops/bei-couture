@@ -7,7 +7,7 @@ import Icoon from '../components/Icoon.astro';
 import PaginaKop from '../components/PaginaKop.astro';
 import Cta from '../components/Cta.astro';
 import { url, site, waMet } from '../data/site';
-import { ervaringen, atelierStrook } from '../data/ervaringen';
+import { ervaringen, atelierStrook, klantVerhalen } from '../data/ervaringen';
 import { galerijFotos } from '../lib/beheer';
 // Foto's die Bei zelf toevoegt (beheer, zie .pages.yml) komen vooraan in de strook.
 const strook: { foto: ImageMetadata; alt: string; pos?: string; bestand?: string }[] = [...galerijFotos(), ...atelierStrook];
@@ -116,6 +116,35 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
         )}
       </>
     ))}
+
+    <!-- FOTO'S VAN DE GROTE DAG: door klanten gestuurd, per verhaal een tekst en een tot drie foto's naast elkaar
+         (even hoog; breedte naar verhouding van de foto). -->
+    <section class="bg-inkt py-16 text-wit md:py-24" aria-labelledby="grote-dag-kop">
+      <div class="wrap">
+        <div class="max-w-2xl">
+          <p class="eyebrow eyebrow-licht">Van klanten</p>
+          <h2 id="grote-dag-kop" class="mt-5 text-[2.2rem] md:text-[2.8rem]">Foto's van de <span class="text-strik">grote dag.</span></h2>
+          <p class="mt-5 text-lg text-wit/80">Bruiden sturen Bei na hun dag vaak een foto. Deze mochten op de site.</p>
+        </div>
+        <ul class="mt-12 space-y-14 md:mt-16 md:space-y-20">
+          {klantVerhalen.map((v, i) => (
+            <li class="grid gap-6 lg:grid-cols-12 lg:gap-12">
+              <div class={`lg:col-span-4 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+                <h3 class="text-[1.6rem] leading-[1.15] md:text-[1.9rem]">{v.kop} <span class="text-strik">{v.accent}</span></h3>
+                <p class="mt-4 text-wit/80">{v.tekst}</p>
+              </div>
+              <div class={`flex gap-3 md:gap-4 lg:col-span-8 ${v.fotos.length === 1 ? 'lg:max-w-md' : ''}`}>
+                {v.fotos.map((f) => (
+                  <div class="min-w-0" style={`flex:${(f.foto.width / f.foto.height).toFixed(3)} 1 0`}>
+                    <Picture src={f.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={76} widths={[480, 720, 960, 1200]} sizes={v.fotos.length === 1 ? '(min-width: 1024px) 448px, 100vw' : '(min-width: 1024px) 480px, 60vw'} alt={f.alt} class="foto h-full w-full object-cover" style={`object-position:${f.pos ?? '50% 50%'}`} />
+                  </div>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
 
     <!-- ZELF VERTELLEN -->
     <section class="bg-merk py-16 text-wit md:py-24">
