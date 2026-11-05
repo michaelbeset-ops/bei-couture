@@ -1,12 +1,15 @@
 // Test van de bewerkmodus van begin tot eind, tegen de preview (4536) en de nepbrug (4537).
 // Vooraf: PUBLIC_BEHEER_API=http://127.0.0.1:4537 npm run build; npm run preview; node tools/beheer-mock.mjs
+// Let op: de nepbrug schrijft echt in src/content en src/assets/upload. Ruim de testbestanden daarna op.
 import { chromium } from 'playwright';
 import fs from 'node:fs';
 import path from 'node:path';
 
 const B = 'http://127.0.0.1:4536/bei-couture/';
 const WORTEL = path.resolve(new URL('..', import.meta.url).pathname);
-const FOTO = path.join(WORTEL, 'src/assets/e-kant-mouwen.jpg');
+const FOTOS = ['e-kant-mouwen', 'e-roosje', 'e-sluier'].map((f) => path.join(WORTEL, `src/assets/${f}.jpg`));
+const SHOTS = process.env.SHOTS || path.join(WORTEL, 'shots');
+fs.mkdirSync(SHOTS, { recursive: true });
 const fouten = [];
 const b = await chromium.launch();
 
@@ -27,50 +30,67 @@ for (const [w, h, naam] of [[1440, 900, 'desktop'], [390, 844, 'mobiel']]) {
   await p.waitForSelector('.b-balk');
   console.log(naam, 'ingelogd, balk zichtbaar');
 
-  // Nieuw artikel met foto, live in de pagina
-  await p.click('text=Artikel schrijven');
+  // Vanaf de homepage: "Klantervaring toevoegen" gaat naar Klantervaringen en opent het paneel
+  await p.click('.b-balk button.b-vol >> nth=0'); // tekst verschilt per scherm ("Klantervaring toevoegen" of "+ Ervaring")
+  await p.waitForURL(`${B}klantervaringen/`);
   await p.waitForSelector('.b-paneel');
-  await p.fill('#b-titel', 'Testartikel uit de bewerkmodus');
-  await p.fill('#b-intro', 'Een korte inleiding om te testen.');
-  await p.fill('#b-tekst', 'Eerste alinea van de test.\n\n## Een tussenkop\n\n- punt een\n- punt twee\n\n> Een citaat');
-  const [fc] = await Promise.all([p.waitForEvent('filechooser'), p.click('.b-foto-veld button')]);
-  await fc.setFiles(FOTO);
-  await p.fill('#b-fotoalt', 'Kanten mouwen op een paspop');
-  await p.waitForSelector('[data-b="foto"] img');
-  const h1 = await p.textContent('[data-b="titel"]');
-  const kop = await p.textContent('[data-b="tekst"] h2');
-  const lijst = await p.$$eval('[data-b="tekst"] li', (ls) => ls.length);
-  console.log(naam, 'voorbeeld:', JSON.stringify(h1), JSON.stringify(kop), 'lijstpunten', lijst);
-  if (h1 !== 'Testartikel uit de bewerkmodus' || kop !== 'Een tussenkop' || lijst !== 2) fouten.push(`${naam}: voorbeeld klopt niet`);
-  await p.screenshot({ path: `shots/bewerk-artikel-${w}.png`, fullPage: false });
-  await p.click('text=Op de site zetten');
-  await p.waitForSelector('.b-status:has-text("Opgeslagen")', { timeout: 10000 });
-  await p.waitForSelector('.b-status:has-text("Staat live")', { timeout: 30000 });
-  const md = path.join(WORTEL, 'src/content/artikelen/testartikel-uit-de-bewerkmodus.md');
-  if (!fs.existsSync(md)) fouten.push(`${naam}: markdown niet geschreven`);
+  const titel = `Testervaring ${naam}`;
+  await p.fill('#b-kop', titel);
+  await p.fill('#b-label', 'Trouwjurk vermaakt');
+  await p.fill('#b-citaat', '"Bei heeft mijn jurk prachtig gemaakt."');
+  await p.fill('#b-tekst', 'Eerste alinea.\n\nTweede alinea.');
+  await p.fill('#b-naam', 'Test K.');
+  await p.selectOption('#b-sterren', '4');
+  await p.selectOption('#b-bron', 'Google');
+  await p.selectOption('#b-dienst', 'trouwjurk-vermaken');
+  const [fc] = await Promise.all([p.waitForEvent('filechooser'), p.click('.b-paneel >> text=Foto\'s kiezen')]);
+  await fc.setFiles(FOTOS);
+  await p.waitForSelector('.b-fotoitem >> nth=2');
+  await p.waitForFunction(() => document.querySelectorAll('section.b-bewerkbaar [data-b-plek] img[src^="data:"]').length === 3);
+  const vb = await p.evaluate(() => {
+    const s = document.querySelector('section.b-bewerkbaar');
+    const t = (n) => s.querySelector(`[data-b="${n}"]`);
+    return {
+      kop: t('kop').textContent, citaat: t('citaat').textContent, alineas: t('tekst').querySelectorAll('p').length,
+      sterren: [...s.querySelectorAll('[data-b-ster]')].filter((x) => !x.hidden).length,
+      bron: t('bron').textContent, knop: t('knop').textContent, google: !t('google').hidden, fotos: s.dataset.bN,
+    };
+  });
+  console.log(naam, 'voorbeeld:', JSON.stringify(vb));
+  if (vb.kop !== titel || vb.citaat !== '“Bei heeft mijn jurk prachtig gemaakt.”' || vb.alineas !== 2 || vb.sterren !== 4 || !vb.bron.startsWith('· Google, ') || vb.knop !== 'Trouwjurk vermaken' || !vb.google || vb.fotos !== '3')
+    fouten.push(`${naam}: voorbeeld klopt niet`);
+  // Volgorde wisselen: foto 2 groot maken
+  await p.click('.b-fotoitem >> nth=1 >> text=Maak groot');
+  await p.screenshot({ path: `${SHOTS}/bewerk-ervaring-${w}.png` });
+  await p.click('.b-paneel >> text=Op de site zetten');
+  await p.waitForSelector('.b-status:has-text("Staat live")', { timeout: 40000 });
+  const bestanden = fs.readdirSync(path.join(WORTEL, 'src/content/klantverhalen')).filter((f) => f.includes(`testervaring-${naam}`));
+  if (bestanden.length !== 1) fouten.push(`${naam}: json niet geschreven (${bestanden})`);
   else {
-    const inhoud = fs.readFileSync(md, 'utf8');
-    const foto = /foto: (\S+)/.exec(inhoud)?.[1];
-    const jpg = foto && path.join(WORTEL, 'src/content/artikelen', foto);
-    if (!jpg || !fs.existsSync(jpg)) fouten.push(`${naam}: foto niet geschreven (${foto})`);
-    else console.log(naam, 'opgeslagen:', path.basename(md), path.basename(jpg), Math.round(fs.statSync(jpg).size / 1024), 'kB');
-    if (naam === 'desktop') console.log(inhoud.split('\n').slice(0, 8).join('\n'));
+    const v = JSON.parse(fs.readFileSync(path.join(WORTEL, 'src/content/klantverhalen', bestanden[0]), 'utf8'));
+    const ontbreekt = v.fotos.filter((f) => !fs.existsSync(path.join(WORTEL, 'src/content/klantverhalen', f.foto)));
+    if (v.fotos.length !== 3 || ontbreekt.length) fouten.push(`${naam}: foto's niet goed geschreven`);
+    if (v.citaat !== 'Bei heeft mijn jurk prachtig gemaakt.' || v.sterren !== 4 || v.bron !== 'Google' || v.dienst !== 'trouwjurk-vermaken') fouten.push(`${naam}: velden kloppen niet ${JSON.stringify(v)}`);
+    console.log(naam, 'opgeslagen:', bestanden[0], v.fotos.map((f) => path.basename(f.foto)).join(' '));
   }
 
-  // Klantfoto toevoegen op Klantervaringen
-  await p.goto(`${B}klantervaringen/`);
-  await p.waitForSelector('.b-balk');
-  p.once('dialog', (d) => d.accept('Testfoto: kanten mouwen'));
-  const [fc2] = await Promise.all([p.waitForEvent('filechooser'), p.click('.b-balk >> text=Foto toevoegen')]);
-  await fc2.setFiles(FOTO);
-  await p.waitForSelector('[data-b-galerij] li.b-nieuw img');
-  await p.waitForSelector('.b-balk >> text=Foto\'s opslaan (1)');
-  await p.screenshot({ path: `shots/bewerk-galerij-${w}.png`, fullPage: false });
-  await p.click('.b-balk >> text=Foto\'s opslaan');
-  await p.waitForSelector('.b-status:has-text("Staat live")', { timeout: 30000 });
-  const galerij = JSON.parse(fs.readFileSync(path.join(WORTEL, 'src/content/galerij/fotos.json'), 'utf8'));
-  console.log(naam, "galerij:", galerij.fotos.length, 'foto(s)');
-  if (!galerij.fotos.length) fouten.push(`${naam}: galerij niet geschreven`);
+  // Bestaande (testdata) ervaring bewerken: foto weghalen
+  await p.reload();
+  await p.waitForSelector('.b-verhaal-knop');
+  const offline = await p.$$eval('section.b-offline', (s) => s.length);
+  console.log(naam, 'offline zichtbaar in bewerkmodus:', offline);
+  const knop = p.locator('section[data-b-verhaal="2026-10-20-drie-fotos"] .b-verhaal-knop');
+  if (await knop.count()) {
+    await knop.click();
+    await p.waitForSelector('.b-paneel .b-fotoitem');
+    await p.click('.b-fotoitem >> nth=2 >> text=Weghalen');
+    await p.waitForFunction(() => document.querySelector('section.b-bewerkbaar')?.dataset.bN === '2');
+    const n = await p.$$eval('section.b-bewerkbaar [data-b-plek] img', (i) => i.filter((x) => x.getAttribute('src')).length);
+    if (n !== 2) fouten.push(`${naam}: na weghalen ${n} foto's in voorbeeld`);
+    await p.screenshot({ path: `${SHOTS}/bewerk-bestaand-${w}.png` });
+    await p.click('.b-paneel >> text=Annuleren');
+    await p.waitForLoadState('load');
+  } else fouten.push(`${naam}: geen bewerkknop bij testdata`);
 
   // Uitloggen
   await p.click('.b-balk >> text=Uitloggen');

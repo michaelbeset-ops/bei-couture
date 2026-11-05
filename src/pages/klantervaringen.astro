@@ -8,14 +8,19 @@ import PaginaKop from '../components/PaginaKop.astro';
 import Cta from '../components/Cta.astro';
 import { url, site, waMet } from '../data/site';
 import { ervaringen, atelierStrook } from '../data/ervaringen';
-import { galerijFotos } from '../lib/beheer';
-// Foto's die Bei zelf toevoegt (beheer, zie .pages.yml) komen vooraan in de strook.
+import Verhaal from '../components/Verhaal.astro';
+import { galerijFotos, klantverhalen } from '../lib/beheer';
+// Foto's die Bei zelf toevoegt (bewerkmodus) komen vooraan in de strook.
 const strook: { foto: ImageMetadata; alt: string; pos?: string; bestand?: string }[] = [...galerijFotos(), ...atelierStrook];
-import { dienstOp } from '../data/diensten';
 import vermakenTule from '../assets/vermaken-tule.jpg';
 
 const basis = new URL(url(''), Astro.site).href;
 const hier = new URL(Astro.url.pathname, Astro.site).href;
+// Klantervaringen die Bei zelf toevoegt (src/content/klantverhalen). Offline gezette staan verborgen op de pagina.
+const eigen = klantverhalen();
+const aantal = ervaringen.length + eigen.filter((v) => v.online).length;
+const getal = ['nul', 'een', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht', 'negen', 'tien', 'elf', 'twaalf'][aantal] ?? String(aantal);
+const getalHoofd = getal.charAt(0).toUpperCase() + getal.slice(1);
 ---
 <Base
   title="Klantervaringen van bruiden | Bei Couture Rotterdam"
@@ -39,7 +44,9 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
     <!-- INTRO -->
     <section class="bg-ivoor py-12 md:py-16">
       <div class="wrap flex flex-wrap items-center justify-between gap-x-10 gap-y-5">
-        <p class="max-w-2xl text-lg text-steen">Vijf verhalen van bruiden en klanten, in hun eigen woorden. Elk citaat staat letterlijk op het Google-profiel van het atelier. De foto's erbij komen uit het atelier van Bei en laten zien wat er door haar handen gaat.</p>
+        {aantal === ervaringen.length
+          ? <p class="max-w-2xl text-lg text-steen">Vijf verhalen van bruiden en klanten, in hun eigen woorden. Elk citaat staat letterlijk op het Google-profiel van het atelier. De foto's erbij komen uit het atelier van Bei en laten zien wat er door haar handen gaat.</p>
+          : <p class="max-w-2xl text-lg text-steen">{getalHoofd} verhalen van bruiden en klanten, in hun eigen woorden. De eerste vijf citaten staan letterlijk op het Google-profiel van het atelier, daaronder volgen de nieuwste ervaringen. De foto's laten zien wat er door Bei's handen gaat.</p>}
         <a href={site.reviews} target="_blank" rel="noopener" class="flex items-center gap-3 border border-merk/20 bg-wit px-4 py-2.5 no-underline">
           <Icoon naam="g" class="h-5 w-5" />
           <span class="leading-tight">
@@ -50,41 +57,24 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
       </div>
     </section>
 
-    <!-- VERHALEN: om en om wit en roze, foto's links of rechts, twee foto's per verhaal -->
+    <!-- VERHALEN: om en om wit en roze, foto's links of rechts. Eerst de vaste Google-reviews, daarna de
+         ervaringen die Bei zelf toevoegt in de bewerkmodus (nieuwste eerst). -->
     {ervaringen.map((e, i) => (
       <>
-        <section class={`${i % 2 === 0 ? 'bg-strik-zacht' : 'bg-ivoor'} py-12 md:py-20`} aria-labelledby={`verhaal-${i}`}>
-          <div class="wrap grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
-            <div class={`relative lg:col-span-6 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
-              <div class="grid grid-cols-12">
-                <div class={`col-span-9 ${i % 2 === 1 ? 'col-start-4' : ''}`}>
-                  <Picture src={e.foto} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[480, 720, 960]} sizes="(min-width: 1024px) 440px, 75vw" alt={e.fotoAlt} class="foto aspect-[4/5] w-full object-cover" style={`object-position:${e.pos ?? '50% 50%'}`} />
-                </div>
-                <div class={`col-span-5 -mt-[28%] ${i % 2 === 1 ? 'col-start-1' : 'col-start-8'}`}>
-                  <Picture src={e.foto2} formats={['avif', 'webp']} fallbackFormat="webp" quality={78} widths={[320, 480, 640]} sizes="(min-width: 1024px) 240px, 40vw" alt={e.foto2Alt} class={`foto aspect-[3/4] w-full object-cover ${i % 2 === 0 ? 'border-l-[6px]' : 'border-r-[6px]'} border-t-[6px] ${i % 2 === 0 ? 'border-strik-zacht' : 'border-ivoor'}`} style={`object-position:${e.pos2 ?? '50% 50%'}`} />
-                </div>
-              </div>
-            </div>
-
-            <div class={`lg:col-span-6 ${i % 2 === 1 ? 'lg:order-1 lg:pr-6' : 'lg:pl-6'}`}>
-              <p class="eyebrow">{e.dienst}</p>
-              <h2 id={`verhaal-${i}`} class="mt-4 text-[2rem] md:text-[2.5rem]">{e.kern}</h2>
-              <blockquote class="mt-6 border-l-2 border-merk pl-5">
-                <p class="text-[1.05rem] leading-relaxed text-inkt-2 md:text-[1.1rem]">“{e.citaat}”</p>
-              </blockquote>
-              <p class="mt-6 max-w-xl text-steen">{e.samenvatting}</p>
-              <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
-                <span class="flex gap-0.5 text-merk">{[1,2,3,4,5].map(() => <Icoon naam="ster" class="h-3.5 w-3.5" />)}</span>
-                <span class="text-[.8rem] font-medium uppercase tracking-[.2em] text-merk-diep">{e.naam}</span>
-                <span class="text-sm text-steen">{`· Google, ${e.wanneer}`}</span>
-              </div>
-              <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <a href={url(`${e.slug}/`)} class="knop knop-rand bg-wit">{dienstOp(e.slug).kaartTitel}</a>
-                <a href={site.reviews} target="_blank" rel="noopener" class="inline-flex items-center gap-2 py-2 text-sm text-steen no-underline hover:text-merk"><Icoon naam="g" class="h-4 w-4" />Lees op Google<span class="sr-only"> (opent in een nieuw tabblad)</span></a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Verhaal
+          i={i}
+          kopId={`verhaal-${i}`}
+          label={e.dienst}
+          kop={e.kern}
+          citaat={e.citaat}
+          tekst={[e.samenvatting]}
+          naam={e.naam}
+          sterren={5}
+          bron={`Google, ${e.wanneer}`}
+          google
+          dienst={e.slug}
+          fotos={[{ foto: e.foto, alt: e.fotoAlt, pos: e.pos }, { foto: e.foto2, alt: e.foto2Alt, pos: e.pos2 }]}
+        />
 
         {i === 1 && (
           <section class="bg-inkt py-12 text-wit md:py-16" aria-labelledby="strook-kop">
@@ -115,6 +105,26 @@ const hier = new URL(Astro.url.pathname, Astro.site).href;
           </section>
         )}
       </>
+    ))}
+
+    <div hidden data-b-nieuw-hier data-b-p={ervaringen.length % 2}></div>
+    {eigen.map((v, j) => (
+      <Verhaal
+        i={ervaringen.length + j}
+        kopId={`verhaal-${v.id}`}
+        label={v.label}
+        kop={v.kop}
+        citaat={v.citaat}
+        tekst={v.tekst}
+        naam={v.naam}
+        sterren={v.sterren}
+        bron={v.bron}
+        google={v.google}
+        dienst={v.dienst}
+        fotos={v.fotos}
+        beheer={v.id}
+        online={v.online}
+      />
     ))}
 
     <!-- ZELF VERTELLEN -->
