@@ -165,9 +165,10 @@
   ],
   "ignorePaths": [
     "/privacy/",
-    "/404.html"
+    "/404.html",
+    "/admin/"
   ],
-  "gscProperty": "",
+  "gscProperty": "sc-domain:beicouture.nl",
   "psiUrls": [
     "/",
     "/bruidsjurk-op-maat/",
